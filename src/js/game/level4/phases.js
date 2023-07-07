@@ -959,7 +959,7 @@ phaseGeneration.push(
     }
 );
 
-function removeObjects(crystals, walls)
+function removeObjects(crystals, walls, traps, lasers, doors)
 {
     if(crystals != undefined)
     {
@@ -978,10 +978,38 @@ function removeObjects(crystals, walls)
         gridMapHelper.clearObstacles();   
     }
 
+    if(traps != undefined)
+    {
+        for(let i = 0; i < traps.length; i++)
+        {
+            scene.remove(traps[i]);
+        }   
+        gridMapHelper.clearTraps();
+    }
+
+    if(lasers != undefined)
+    {
+        for(let i = 0; i < lasers.length; i++)
+        {
+            scene.remove(lasers[i]);
+        }   
+        gridMapHelper.clearLasers();   
+    }
+
+    if(doors != undefined)
+    {
+        for(let i = 0; i < doors.length; i++)
+        {
+            scene.remove(doors[i]);
+        }   
+        gridMapHelper.clearDoors();   
+    }
+
     crystals = undefined;
     walls = undefined;
     traps = undefined;
     lasers = undefined;
+    doors = undefined;
 }
 
 function animate()
@@ -1033,7 +1061,12 @@ advanceBtn.addEventListener('click',(e) => {
     sceneProperties.phase++;
     if(sceneProperties.phase < phaseGeneration.length)
     {
-        removeObjects(objectives,walls);
+        if(setLaserStatesInterval)
+        {
+            clearInterval(setLaserStatesInterval);
+            setLaserStatesInterval = undefined;
+        }
+        removeObjects(objectives,walls,traps,laserFences, doors);
         phaseGeneration[sceneProperties.phase]();
         editor.setState(editState);
         consoleElement.innerText = null;
@@ -1050,6 +1083,6 @@ advanceBtn.addEventListener('click',(e) => {
 });
 
 resizeCanvasToDisplaySize(renderer,camera);
-//phaseGeneration[sceneProperties.phase]();
-phaseGeneration[1]();
+phaseGeneration[sceneProperties.phase]();
+//phaseGeneration[1]();
 animate();
