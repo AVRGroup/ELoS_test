@@ -475,7 +475,9 @@ phaseGeneration.push(
             actor.rotation.set(0,degreeToRadians(90),0);
             actor.getObjectByName('eve').rotation.set(0,0,0);
             objectives[0].visible = true;
-            openDoors.forEach(door => door = false)
+            for(let i = 0; i < openDoors.length; i++){
+                openDoors[i] = false;
+            }
             doors.forEach(door => door.resetPos());
             gridMapHelper.obstacles[0].active = true;
             gridMapHelper.obstacles[1].active = true;
