@@ -20,30 +20,30 @@ function setMaterial(color, file = null, repeatU = 1, repeatV = 1){
     }
     return mat;
   }
-  const stonePath = new URL('../../../../assets/textures/metal.png',import.meta.url).toString();
+  const stonePath = new URL('../../../../assets/textures/door2.jpg',import.meta.url).toString();
   let cubeMaterials = [
-    setMaterial('lightgray',stonePath, 2, 1), //x+
+    setMaterial('lightgray',stonePath), //x+
     setMaterial('lightgray',stonePath), //x-
-    setMaterial('lightgray', stonePath, 0, 1), //y+
+    setMaterial('gray'), //y+
     setMaterial('lightgray'), //y-
     setMaterial('lightgray'), //z+
     setMaterial('lightgray') //z-
 ];
 
 class Fence extends THREE.Mesh {
-    constructor(width = 0.5, height = 2, depth = 0.15) { 
-        super(new THREE.BoxGeometry(width, height, depth), new THREE.MeshPhongMaterial({color:"white"}));
+    constructor(width = 0.5, height = 2, depth = 0.15, color = "white") { 
+        super(new THREE.BoxGeometry(width, height, depth), new THREE.MeshPhongMaterial({color:color}));
     }
 };
 
 class CranckTorus extends THREE.Mesh {
     constructor() { 
-        super(new THREE.TorusGeometry(0.22, 0.05 , 10, 20), new THREE.MeshPhongMaterial({color:"red"})); 
+        super(new THREE.TorusGeometry(0.35, 0.05 , 10, 20), new THREE.MeshPhongMaterial({color:"red"})); 
     }
 };
 
 class CranckCylinder extends THREE.Mesh {
-    constructor(radTop = 0.02, radBot = 0.02, height = 0.2, radSeg = 12, HeigSeg = 12, color = "red") { 
+    constructor(radTop = 0.03, radBot = 0.03, height = 0.4, radSeg = 12, HeigSeg = 12, color = "red") { 
         super(new THREE.CylinderGeometry(radTop, radBot, height, radSeg, HeigSeg), new THREE.MeshPhongMaterial({color:color})); 
     }
 };
@@ -78,20 +78,20 @@ class Cranck extends THREE.Object3D {
 
          // cranck cylinders
          let CranckCylinder1 = new CranckCylinder;
-         CranckCylinder1.position.set(0,0.08,0)
+         CranckCylinder1.position.set(0,0.17,0)
          let CranckCylinder2 = new CranckCylinder;
          CranckCylinder2.rotateZ(Math.PI/3.5)
-         CranckCylinder2.position.set(0.08,-0.05,0)
+         CranckCylinder2.position.set(0.15,-0.12,0)
          let CranckCylinder3 = new CranckCylinder;
          CranckCylinder3.rotateZ(Math.PI/-3.5)
-         CranckCylinder3.position.set(-0.08,-0.05,0)
-         let CranckCylinder4 = new CranckCylinder(0.05,0.05, 0.06, 12, 12, "red");
+         CranckCylinder3.position.set(-0.14,-0.11,0)
+         let CranckCylinder4 = new CranckCylinder(0.08,0.08, 0.06, 12, 12, "red");
          CranckCylinder4.rotateX(Math.PI/2)
          CranckCylinder4.position.set(0,0,0)
-         let CranckCylinder5 = new CranckCylinder(0.035,0.035, 0.061, 12, 12, "lightgray");
+         let CranckCylinder5 = new CranckCylinder(0.065,0.065, 0.061, 12, 12, "lightgray");
          CranckCylinder5.rotateX(Math.PI/2)
          CranckCylinder5.position.set(0,0,0)
-         let CranckCylinder6 = new CranckCylinder(0.028,0.028, 0.075, 6, 12, "gray");
+         let CranckCylinder6 = new CranckCylinder(0.045,0.045, 0.075, 6, 12, "gray");
          CranckCylinder6.rotateX(Math.PI/2)
          CranckCylinder6.position.set(0,0,0)
          let CranckCylinder7 = new CranckCylinder(0.02,0.035, 0.2, 12, 12, "gray");
@@ -164,8 +164,11 @@ class CranckDoor extends THREE.Object3D {
         doorFence6.position.set(-0.175, 0, -0.92)
 
         // cranck torus
+        let cranckFence = new Fence(0.5, 0.5, 0.05, "lightgray");
+        cranckFence.position.set(-2, 0, -0.995)
+
         let cranck = new Cranck;
-        cranck.position.set(-2, 0, -0.8)
+        cranck.position.set(-2, 0, -0.75)
         this.crancks = [cranck]
 
 
@@ -179,6 +182,7 @@ class CranckDoor extends THREE.Object3D {
         this.add(doorFence4);
         this.add(doorFence5);
         this.add(doorFence6);
+        this.add(cranckFence);
         this.add(cranck);
 
         return this;
