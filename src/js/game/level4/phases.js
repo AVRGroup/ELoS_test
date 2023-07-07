@@ -803,6 +803,10 @@ phaseGeneration.push(
             {
                 return !openDoors[0];
             }
+            else if(checkCollision(actor.getObjectByName("interactionReference"),doorInteractionReference2,gridMapHelper))
+            {
+                return !openDoors[1];
+            }
             else
             {
                 consoleElement.innerText += "É preciso estar de frente de uma manivela para usar este comando.\n";
@@ -856,6 +860,18 @@ phaseGeneration.push(
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado com sucesso.\n";
                 gridMapHelper.obstacles[0].active = false;
+            }
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
+            {
+                objectives[1].visible = false;
+                consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                gridMapHelper.obstacles[1].active = false;
+            }
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[2],gridMapHelper))
+            {
+                objectives[2].visible = false;
+                consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                gridMapHelper.obstacles[2].active = false;
             }
             else
             {
