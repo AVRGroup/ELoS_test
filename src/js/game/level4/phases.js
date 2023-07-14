@@ -332,7 +332,7 @@ let walls;
 let openDoors;
 let crancks;
 let cranckBases;
-let interactiveObjets;
+let cranckInteractionReferences;
 let doors;
 let traps;
 let laserFences
@@ -544,20 +544,17 @@ phaseGeneration.push(
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(5));
         gridMapHelper.addObstacle(9,9,5,5);
         scene.add(objectives[0]);
-
-        //const doorCrank = new THREE.Mesh(new THREE.BoxGeometry(0.5,0.5,1),new THREE.MeshLambertMaterial({color: "rgb(255,0,255)"}));
-        //doorCrank.position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(4.6));
-        const cranckInteractionReference = new THREE.Object3D();
-        //doorInteractionReference.position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(4));
-        //doorCrank.add(doorInteractionReference);
-        //scene.add(doorCrank);
         
         openDoors = [];
         doors = [];
+        cranckBases = [];
         crancks = [];
+        cranckInteractionReferences = [];
+        cranckBases.push(new CranckBase())
         crancks.push(new Cranck());
+        cranckInteractionReferences.push(new THREE.Object3D())
         crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(5));
-        crancks[0].correctPos('right', cranckInteractionReference)
+        crancks[0].correctPos('right', cranckInteractionReferences[0], cranckBases[0])
         doors.push(new CranckDoor(crancks[0]));
         doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(5));
         gridMapHelper.addObstacle(5,5,5,5);
@@ -583,7 +580,7 @@ phaseGeneration.push(
                 return false;
             }
 
-            if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReference,gridMapHelper))
+            if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[0],gridMapHelper))
             {
                 return !openDoors[0];
             }
@@ -602,7 +599,7 @@ phaseGeneration.push(
                 {
                     resolve();
                 }
-                if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReference,gridMapHelper))
+                if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[0],gridMapHelper))
                 {
                     function translateDoor()
                     {
@@ -699,13 +696,13 @@ phaseGeneration.push(
         doors = [];
         crancks = [];
         cranckBases = [];
-        interactiveObjets = [];
+        cranckInteractionReferences = [];
         crancks.push(new Cranck());
         crancks.push(new Cranck());
         cranckBases.push(new CranckBase())
         cranckBases.push(new CranckBase())
-        interactiveObjets.push(new THREE.Object3D())
-        interactiveObjets.push(new THREE.Object3D())
+        cranckInteractionReferences.push(new THREE.Object3D())
+        cranckInteractionReferences.push(new THREE.Object3D())
         doors.push(new CranckDoor(crancks[0]));
         doors.push(new CranckDoor(crancks[1]));
         crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(6));
@@ -714,8 +711,8 @@ phaseGeneration.push(
         scene.add(cranckBases[1]);
         scene.add(crancks[0]);
         scene.add(crancks[1]);
-        crancks[0].correctPos("up", interactiveObjets[0], cranckBases[0])
-        crancks[1].correctPos("down", interactiveObjets[1], cranckBases[1])
+        crancks[0].correctPos("up", cranckInteractionReferences[0], cranckBases[0])
+        crancks[1].correctPos("down", cranckInteractionReferences[1], cranckBases[1])
         doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(7));
         doors[0].rotateY(-Math.PI / 2)
         doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(3));
@@ -827,11 +824,11 @@ phaseGeneration.push(
                 return false;
             }
 
-            if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[0],gridMapHelper))
             {
                 return !openDoors[0];
             }
-            else if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[1],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper))
             {
                 return !openDoors[1];
             }
@@ -850,7 +847,7 @@ phaseGeneration.push(
                 {
                     resolve();
                 }
-                if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[0],gridMapHelper))
+                if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[0],gridMapHelper))
                 {
                     function translateDoor()
                     {
@@ -869,7 +866,7 @@ phaseGeneration.push(
                         requestAnimationFrame(translateDoor);
                     } 
                 }
-                else if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[1],gridMapHelper)){
+                else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
                     function translateDoor()
                     {
                         doors[1].lerpDoor(0, -2)
@@ -1031,16 +1028,16 @@ phaseGeneration.push(
         doors = [];
         crancks = [];
         cranckBases = [];
-        interactiveObjets = [];
+        cranckInteractionReferences = [];
         crancks.push(new Cranck());
         crancks.push(new Cranck());
         crancks.push(new Cranck());
         cranckBases.push(new CranckBase())
         cranckBases.push(new CranckBase())
         cranckBases.push(new CranckBase())
-        interactiveObjets.push(new THREE.Object3D())
-        interactiveObjets.push(new THREE.Object3D())
-        interactiveObjets.push(new THREE.Object3D())
+        cranckInteractionReferences.push(new THREE.Object3D())
+        cranckInteractionReferences.push(new THREE.Object3D())
+        cranckInteractionReferences.push(new THREE.Object3D())
         doors.push(new CranckDoor(crancks[0]));
         doors.push(new CranckDoor(crancks[1]));
         doors.push(new CranckDoor(crancks[2]));
@@ -1053,9 +1050,9 @@ phaseGeneration.push(
         scene.add(crancks[0]);
         scene.add(crancks[1]);
         scene.add(crancks[2]);
-        crancks[0].correctPos("down", interactiveObjets[0], cranckBases[0])
-        crancks[1].correctPos("right", interactiveObjets[1], cranckBases[1])
-        crancks[2].correctPos("up", interactiveObjets[2], cranckBases[2])
+        crancks[0].correctPos("down", cranckInteractionReferences[0], cranckBases[0])
+        crancks[1].correctPos("right", cranckInteractionReferences[1], cranckBases[1])
+        crancks[2].correctPos("up", cranckInteractionReferences[2], cranckBases[2])
         doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(9));
         doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(7));
         doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),1,gridMapHelper.getGlobalZPositionFromCoord(1));
@@ -1073,8 +1070,8 @@ phaseGeneration.push(
         laserFences = [];
         laserFences.push(new LaserFence("red"));
         laserFences.push(new LaserFence("blue"));
-        laserFences.push(new LaserFence("multicolor"));
-        laserFences.push(new LaserFence("multicolor"));
+        laserFences.push(new LaserFence("multiColor"));
+        laserFences.push(new LaserFence("multiColor"));
         laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
         laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
         laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
@@ -1173,15 +1170,15 @@ phaseGeneration.push(
                 return false;
             }
 
-            if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[0],gridMapHelper))
             {
                 return !openDoors[0];
             }
-            else if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[1],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper))
             {
                 return !openDoors[1];
             }
-            else if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[2],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper))
             {
                 return !openDoors[2];
             }
@@ -1200,7 +1197,7 @@ phaseGeneration.push(
                 {
                     resolve();
                 }
-                if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[0],gridMapHelper))
+                if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[0],gridMapHelper))
                 {
                     function translateDoor()
                     {
@@ -1219,7 +1216,7 @@ phaseGeneration.push(
                         requestAnimationFrame(translateDoor);
                     } 
                 }
-                else if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[1],gridMapHelper)){
+                else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
                     function translateDoor()
                     {
                         doors[1].lerpDoor(0, -2)
@@ -1237,7 +1234,7 @@ phaseGeneration.push(
                         requestAnimationFrame(translateDoor);
                     } 
                 }
-                else if(checkCollision(actor.getObjectByName("interactionReference"),interactiveObjets[2],gridMapHelper)){
+                else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper)){
                     function translateDoor()
                     {
                         doors[2].lerpDoor(0, -2)
@@ -1370,7 +1367,7 @@ phaseGeneration.push(
     }
 );
 
-function removeObjects(crystals, walls, traps, lasers, doors, crancks, cranckBases, interactiveObjets)
+function removeObjects(crystals, walls, traps, lasers, doors, crancks, cranckBases, cranckInteractionReferences)
 {
     if(crystals != undefined)
     {
@@ -1434,11 +1431,11 @@ function removeObjects(crystals, walls, traps, lasers, doors, crancks, cranckBas
         gridMapHelper.clearDoors();   
     }
 
-    if(interactiveObjets != undefined)
+    if(cranckInteractionReferences != undefined)
     {
-        for(let i = 0; i < interactiveObjets.length; i++)
+        for(let i = 0; i < cranckInteractionReferences.length; i++)
         {
-            scene.remove(interactiveObjets[i]);
+            scene.remove(cranckInteractionReferences[i]);
         }   
         gridMapHelper.clearDoors();   
     }
@@ -1450,7 +1447,7 @@ function removeObjects(crystals, walls, traps, lasers, doors, crancks, cranckBas
     doors = undefined;
     crancks = undefined;
     cranckBases = undefined;
-    interactiveObjets = undefined;
+    cranckInteractionReferences = undefined;
 }
 
 function animate()
@@ -1507,7 +1504,7 @@ advanceBtn.addEventListener('click',(e) => {
             clearInterval(setLaserStatesInterval);
             setLaserStatesInterval = undefined;
         }
-        removeObjects(objectives,walls,traps,laserFences, doors);
+        removeObjects(objectives,walls,traps,laserFences, doors, crancks, cranckBases, cranckInteractionReferences);
         phaseGeneration[sceneProperties.phase]();
         editor.setState(editState);
         consoleElement.innerText = null;
@@ -1524,5 +1521,6 @@ advanceBtn.addEventListener('click',(e) => {
 });
 
 resizeCanvasToDisplaySize(renderer,camera);
-phaseGeneration[sceneProperties.phase]();
+//phaseGeneration[sceneProperties.phase]();
+phaseGeneration[1]();
 animate();
