@@ -1,5 +1,5 @@
-
 import * as THREE from 'three';
+import {Cranck} from './cranck';
 
 let loader = new THREE.TextureLoader();
 
@@ -60,70 +60,14 @@ class Door extends THREE.Mesh {
     }
 };
 
-
-
-class Cranck extends THREE.Object3D {  
-    constructor(type){
-         super();
-         this.index = 0
-         this.x = 0
-         this.z = 0
-         this.state = type
-         this.active = true
-         this.type = type;
- 
-         // cranck torus
-         let cranckTorus = new CranckTorus;
-         cranckTorus.position.set(0,0,0)
-
-         // cranck cylinders
-         let CranckCylinder1 = new CranckCylinder;
-         CranckCylinder1.position.set(0,0.17,0)
-         let CranckCylinder2 = new CranckCylinder;
-         CranckCylinder2.rotateZ(Math.PI/3.5)
-         CranckCylinder2.position.set(0.15,-0.12,0)
-         let CranckCylinder3 = new CranckCylinder;
-         CranckCylinder3.rotateZ(Math.PI/-3.5)
-         CranckCylinder3.position.set(-0.14,-0.11,0)
-         let CranckCylinder4 = new CranckCylinder(0.08,0.08, 0.06, 12, 12, "red");
-         CranckCylinder4.rotateX(Math.PI/2)
-         CranckCylinder4.position.set(0,0,0)
-         let CranckCylinder5 = new CranckCylinder(0.065,0.065, 0.061, 12, 12, "lightgray");
-         CranckCylinder5.rotateX(Math.PI/2)
-         CranckCylinder5.position.set(0,0,0)
-         let CranckCylinder6 = new CranckCylinder(0.045,0.045, 0.075, 6, 12, "gray");
-         CranckCylinder6.rotateX(Math.PI/2)
-         CranckCylinder6.position.set(0,0,0)
-         let CranckCylinder7 = new CranckCylinder(0.02,0.035, 0.2, 12, 12, "gray");
-         CranckCylinder7.rotateX(Math.PI/2)
-         CranckCylinder7.position.set(0,0,-0.1)
-         let CranckCylinder8 = new CranckCylinder(0.05,0.05, 0.07, 6, 12, "gray");
-         CranckCylinder8.rotateX(Math.PI/2)
-         CranckCylinder8.position.set(0,0,-0.2)
- 
-         this.add(cranckTorus);
-         this.add(CranckCylinder1);
-         this.add(CranckCylinder2);
-         this.add(CranckCylinder3);
-         this.add(CranckCylinder4);
-         this.add(CranckCylinder5);
-         this.add(CranckCylinder6);
-         this.add(CranckCylinder7);
-         this.add(CranckCylinder8);
- 
-         return this;
-    }
- }
-
 class CranckDoor extends THREE.Object3D {  
-   constructor(type){
+   constructor(cranck){
         super();
         this.index = 0
         this.x = 0
         this.z = 0
-        this.state = type
         this.active = true
-        this.type = type;
+        this.cranck = cranck
 
         // door base
         let doorBase1 = new DoorBase;
@@ -167,9 +111,9 @@ class CranckDoor extends THREE.Object3D {
         let cranckFence = new Fence(0.5, 0.5, 0.05, "lightgray");
         cranckFence.position.set(-2, 0, -0.995)
 
-        let cranck = new Cranck;
-        cranck.position.set(-2, 0, -0.75)
-        this.crancks = [cranck]
+        //let cranck = new Cranck;
+        //this.cranck.position.set(-2, 0, -0.75)
+        this.crancks = [this.cranck]
 
 
         this.add(doorBase1);
@@ -182,8 +126,7 @@ class CranckDoor extends THREE.Object3D {
         this.add(doorFence4);
         this.add(doorFence5);
         this.add(doorFence6);
-        this.add(cranckFence);
-        this.add(cranck);
+        //this.add(cranck);
 
         return this;
    }
@@ -212,6 +155,10 @@ class CranckDoor extends THREE.Object3D {
    }
    resetPos(){
         this.doors.forEach(door => door.position.y = 0)
+   }
+   cranckPosition(x, z){
+        this.cranck.position.x =  x
+        this.cranck.position.z =  z
    }
 }
 
