@@ -20,7 +20,8 @@ import parseCode from "./parser";
 
 const sceneProperties = {
     cancelExecution: false,
-    phase: 0
+    phase: 0,
+    executing: false
 }
 
 let laserState;
@@ -532,7 +533,7 @@ const phaseGeneration = [];
 // Phase 1
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 4 - Fase 2 de 8";
+        document.getElementById('phaseTitle').innerText = "Nível 4 - Fase 1 de 8";
         document.getElementById('phaseObjective').innerText = "Abra a porta, faça o robô chegar ao cristal, após isso, o colete.";
         
         camera.position.set(0,15,30);
@@ -1466,11 +1467,13 @@ execBtn.addEventListener("click",async function() {
     const codeParsed = parseCode(editor.state.doc.toString());
     console.log(codeParsed);
     sceneProperties.cancelExecution = false;
-
+    if(traps != null)
+        trapsDeactivation(traps)
     if(codeParsed != null)
     {
         resetLevel();
         this.disabled = true;
+        sceneProperties.executing = true;
         await eval(codeParsed);
         if(winCondition())
         {
