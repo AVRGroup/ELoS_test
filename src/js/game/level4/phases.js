@@ -1521,6 +1521,5 @@ advanceBtn.addEventListener('click',(e) => {
 });
 
 resizeCanvasToDisplaySize(renderer,camera);
-//phaseGeneration[sceneProperties.phase]();
-phaseGeneration[1]();
+phaseGeneration[sceneProperties.phase]();
 animate();
