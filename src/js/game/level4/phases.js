@@ -20,7 +20,7 @@ import parseCode from "./parser";
 
 const sceneProperties = {
     cancelExecution: false,
-    phase: 0,
+    phase: 3,
     executing: false
 }
 
@@ -560,6 +560,7 @@ phaseGeneration.push(
         doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(5));
         gridMapHelper.addObstacle(5,5,5,5);
         scene.add(crancks[0]);
+        scene.add(cranckBases[0]);
         scene.add(doors[0]);
         openDoors.push(false);
 
@@ -1330,6 +1331,465 @@ phaseGeneration.push(
                 changeLaserStateStatus(0, 'red');
                 changeLaserActiveStatus(0,false);
                 changeLaserActiveStatus(1,true);
+            }
+        }
+
+        setLaserStatesInterval = setInterval(() => {
+            if(sceneProperties.executing)
+            {
+                return;
+            }
+
+            laserState = (laserState + 1) % 2;
+            setLaserStates();
+        },1000);
+
+        spikeTrapState = 0;
+        setSpikeTrapState = () => {
+            if(spikeTrapState == 0)
+            {
+                trapsDeactivation(traps)
+            }
+            else
+            {
+                trapsActivation(traps)
+
+            }
+        }
+
+        setSpikeTrapStateInterval = setInterval(() => {
+            if(sceneProperties.executing)
+            {
+                return;
+            }
+
+            spikeTrapState = (spikeTrapState + 1) % 2;
+            setSpikeTrapState();
+        },1000);
+    },
+);
+
+//Phase 4
+phaseGeneration.push(
+    () => {
+        document.getElementById('phaseTitle').innerText = "Nível 4 - Fase 4 de 8";
+        document.getElementById('phaseObjective').innerText = "Abra a porta, faça o robô chegar ao cristal, após isso, o colete.";
+    
+        sceneProperties.executing = false;
+        camera.position.set(0,15,30);
+
+        actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1.0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        actor.rotation.set(0,degreeToRadians(90),0);
+
+        objectives = loadDefaultObjectives(3);
+        objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.0,gridMapHelper.getGlobalZPositionFromCoord(9));
+        objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.0,gridMapHelper.getGlobalZPositionFromCoord(4));
+        objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(9));
+        gridMapHelper.addObstacle(6,6,9,9);
+        gridMapHelper.addObstacle(6,6,4,4);
+        gridMapHelper.addObstacle(9,9,9,9);
+        scene.add(objectives[0]);
+        scene.add(objectives[1]);
+        scene.add(objectives[2]);
+
+        openDoors = [];
+        doors = [];
+        crancks = [];
+        cranckBases = [];
+        cranckInteractionReferences = [];
+        crancks.push(new Cranck());
+        crancks.push(new Cranck());
+        crancks.push(new Cranck());
+        crancks.push(new Cranck());
+        cranckBases.push(new CranckBase());
+        cranckBases.push(new CranckBase());
+        cranckBases.push(new CranckBase());
+        cranckBases.push(new CranckBase());
+        cranckInteractionReferences.push(new THREE.Object3D());
+        cranckInteractionReferences.push(new THREE.Object3D());
+        cranckInteractionReferences.push(new THREE.Object3D());
+        cranckInteractionReferences.push(new THREE.Object3D());
+        doors.push(new CranckDoor(crancks[0]));
+        doors.push(new CranckDoor(crancks[1]));
+        doors.push(new CranckDoor(crancks[2]));
+        doors.push(new CranckDoor(crancks[3]));
+        crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(8));
+        crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(0));
+        crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(1));
+        crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),1,gridMapHelper.getGlobalZPositionFromCoord(7));
+        crancks[0].correctPos("up", cranckInteractionReferences[0], cranckBases[0]);
+        crancks[1].correctPos("down", cranckInteractionReferences[1], cranckBases[1]);
+        crancks[2].correctPos("down", cranckInteractionReferences[2], cranckBases[2]);
+        crancks[3].correctPos("up", cranckInteractionReferences[3], cranckBases[3]);
+        scene.add(cranckBases[0]);
+        scene.add(cranckBases[1]);
+        scene.add(cranckBases[2]);
+        scene.add(cranckBases[3]);
+        scene.add(crancks[0]);
+        scene.add(crancks[1]);
+        scene.add(crancks[2]);
+        scene.add(crancks[3]);
+        doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(7));
+        doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(1));
+        doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),1,gridMapHelper.getGlobalZPositionFromCoord(1));
+        doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),1,gridMapHelper.getGlobalZPositionFromCoord(8));
+        doors[0].rotateY(Math.PI / 2);
+        doors[1].rotateY(Math.PI / 2);
+        doors[2].rotateY(Math.PI / 2);
+        doors[3].rotateY(Math.PI / 2);
+        gridMapHelper.addObstacle(2,2,7,7);
+        gridMapHelper.addObstacle(2,2,1,1);
+        gridMapHelper.addObstacle(6,6,1,1);
+        gridMapHelper.addObstacle(6,6,8,8);
+        scene.add(doors[0]);
+        scene.add(doors[1]);
+        scene.add(doors[2]);
+        scene.add(doors[3]);
+        openDoors.push(false);
+        openDoors.push(false);
+        openDoors.push(false);
+        openDoors.push(false);
+
+        laserFences = [];
+        laserFences.push(new LaserFence("blue"));
+        laserFences.push(new LaserFence("red"));
+        laserFences.push(new LaserFence("multiColor"));
+        laserFences.push(new LaserFence("multiColor"));
+        laserFences.push(new LaserFence("red"));
+        laserFences.push(new LaserFence("multiColor"));
+        laserFences.push(new LaserFence("red"));
+        laserFences.push(new LaserFence("multiColor"));
+        laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+        laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+        laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+        laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+        laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
+        laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+        laserFences[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
+        laserFences[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+        laserFences[4].rotateY(Math.PI / 2);
+        laserFences[5].rotateY(Math.PI / 2);
+        laserFences[6].rotateY(Math.PI / 2);
+        laserFences[7].rotateY(Math.PI / 2);
+        gridMapHelper.addLaser(1,9, laserFences[0]);
+        gridMapHelper.addLaser(1,0, laserFences[1]);
+        gridMapHelper.addLaser(3,6, laserFences[2]);
+        gridMapHelper.addLaser(3,2, laserFences[3]);
+        gridMapHelper.addLaser(6,3, laserFences[4]);
+        gridMapHelper.addLaser(8,7, laserFences[5]);
+        gridMapHelper.addLaser(9,5, laserFences[6]);
+        gridMapHelper.addLaser(9,1, laserFences[7]);
+        scene.add(laserFences[0]);
+        scene.add(laserFences[1]);
+        scene.add(laserFences[2]);
+        scene.add(laserFences[3]);
+        scene.add(laserFences[4]);
+        scene.add(laserFences[5]);
+        scene.add(laserFences[6]);
+        scene.add(laserFences[7]);
+
+        traps = [];
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),0,gridMapHelper.getGlobalZPositionFromCoord(6));
+        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),0,gridMapHelper.getGlobalZPositionFromCoord(4));
+        traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),0,gridMapHelper.getGlobalZPositionFromCoord(3));
+        traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),0,gridMapHelper.getGlobalZPositionFromCoord(4));
+        traps[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0,gridMapHelper.getGlobalZPositionFromCoord(9));
+        traps[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0,gridMapHelper.getGlobalZPositionFromCoord(4));
+        traps[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0,gridMapHelper.getGlobalZPositionFromCoord(9));
+        traps[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0,gridMapHelper.getGlobalZPositionFromCoord(6));
+        traps[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0,gridMapHelper.getGlobalZPositionFromCoord(4));
+        traps[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(3));
+        gridMapHelper.addTrap(1,6, traps[0]);
+        gridMapHelper.addTrap(1,5, traps[1]);
+        gridMapHelper.addTrap(1,4, traps[2]);
+        gridMapHelper.addTrap(1,3, traps[3]);
+        gridMapHelper.addTrap(3,4, traps[4]);
+        gridMapHelper.addTrap(5,9, traps[5]);
+        gridMapHelper.addTrap(5,4, traps[6]);
+        gridMapHelper.addTrap(7,9, traps[7]);
+        gridMapHelper.addTrap(7,6, traps[8]);
+        gridMapHelper.addTrap(7,4, traps[9]);
+        gridMapHelper.addTrap(9,3, traps[10]);
+        scene.add(traps[0]);
+        scene.add(traps[1]);
+        scene.add(traps[2]);
+        scene.add(traps[3]);
+        scene.add(traps[4]);
+        scene.add(traps[5]);
+        scene.add(traps[6]);
+        scene.add(traps[7]);
+        scene.add(traps[8]);
+        scene.add(traps[9]);
+        scene.add(traps[10]);
+
+        walls = [];
+        const boxGeometry1 = new THREE.BoxGeometry(2,2,2);
+        const boxGeometry2 = new THREE.BoxGeometry(2,2,4);
+        const boxGeometry3 = new THREE.BoxGeometry(2,2,6);
+        const boxGeometry4 = new THREE.BoxGeometry(8,2,2);
+        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(7.5));
+        walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(1.5));
+        walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),1,gridMapHelper.getGlobalZPositionFromCoord(7.5));
+        walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),1,gridMapHelper.getGlobalZPositionFromCoord(5));
+        walls[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),1,gridMapHelper.getGlobalZPositionFromCoord(3));
+        walls[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),1,gridMapHelper.getGlobalZPositionFromCoord(0.5));
+        walls[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(7));
+        walls[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(7.5));
+        walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(6.5),1,gridMapHelper.getGlobalZPositionFromCoord(5));
+        walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(2));
+        walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(7.5));
+        walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(2));
+        walls[12].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(1));
+        walls[13].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),1,gridMapHelper.getGlobalZPositionFromCoord(7.5));
+        gridMapHelper.addObstacle(1,1,7,8);
+        gridMapHelper.addObstacle(1,1,1,2);
+        gridMapHelper.addObstacle(3,3,7,8);
+        gridMapHelper.addObstacle(3,3,5,5);
+        gridMapHelper.addObstacle(3,3,3,3);
+        gridMapHelper.addObstacle(3,3,0,1);
+        gridMapHelper.addObstacle(4,4,4,4);
+        gridMapHelper.addObstacle(5,5,7,8);
+        gridMapHelper.addObstacle(5,8,5,5);
+        gridMapHelper.addObstacle(5,5,1,3);
+        gridMapHelper.addObstacle(7,7,7,8);
+        gridMapHelper.addObstacle(7,7,1,3);
+        gridMapHelper.addObstacle(8,8,1,1);
+        gridMapHelper.addObstacle(9,9,7,8);
+        scene.add(walls[0]);
+        scene.add(walls[1]);
+        scene.add(walls[2]);
+        scene.add(walls[3]);
+        scene.add(walls[4]);
+        scene.add(walls[5]);
+        scene.add(walls[6]);
+        scene.add(walls[7]);
+        scene.add(walls[8]);
+        scene.add(walls[9]);
+        scene.add(walls[10]);
+        scene.add(walls[11]);
+        scene.add(walls[12]);
+        scene.add(walls[13]);
+
+        portaFechada = () => {
+            if(sceneProperties.cancelExecution)
+            {
+                return false;
+            }
+
+            if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[0],gridMapHelper))
+            {
+                return !openDoors[0];
+            }
+            else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper))
+            {
+                return !openDoors[1];
+            }
+            else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper))
+            {
+                return !openDoors[2];
+            }
+            else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[3],gridMapHelper))
+            {
+                return !openDoors[3];
+            }
+            else
+            {
+                consoleElement.innerText += "É preciso estar de frente de uma manivela para usar este comando.\n";
+                return false;
+            }
+        }
+
+        girarManivela = () => {
+            
+            return new Promise((resolve) =>{
+
+                if(sceneProperties.cancelExecution)
+                {
+                    resolve();
+                }
+                if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[0],gridMapHelper))
+                {
+                    function translateDoor()
+                    {
+                        doors[0].lerpDoor(0, -2)
+                        doors[0].rotateCranckZ(degreeToRadians(-5));
+                        resolve();
+                    }
+                    if(doors[0].getDoorY().toFixed(1) == -2)
+                    {
+                        openDoors[0] = true;
+                        gridMapHelper.obstacles[3].active = false;
+                        resolve();
+                    }
+                    else
+                    {
+                        requestAnimationFrame(translateDoor);
+                    } 
+                }
+                else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
+                    function translateDoor()
+                    {
+                        doors[1].lerpDoor(0, -2)
+                        doors[1].rotateCranckZ(degreeToRadians(-5));
+                        resolve();
+                    }
+                    if(doors[1].getDoorY().toFixed(1) == -2)
+                    {
+                        openDoors[1] = true;
+                        gridMapHelper.obstacles[4].active = false;
+                        resolve();
+                    }
+                    else
+                    {
+                        requestAnimationFrame(translateDoor);
+                    } 
+                }
+                else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper)){
+                    function translateDoor()
+                    {
+                        doors[2].lerpDoor(0, -2)
+                        doors[2].rotateCranckZ(degreeToRadians(-5));
+                        resolve();
+                    }
+                    if(doors[2].getDoorY().toFixed(1) == -2)
+                    {
+                        openDoors[2] = true;
+                        gridMapHelper.obstacles[5].active = false;
+                        resolve();
+                    }
+                    else
+                    {
+                        requestAnimationFrame(translateDoor);
+                    } 
+                }
+                else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[3],gridMapHelper)){
+                    function translateDoor()
+                    {
+                        doors[3].lerpDoor(0, -2)
+                        doors[3].rotateCranckZ(degreeToRadians(-5));
+                        resolve();
+                    }
+                    if(doors[3].getDoorY().toFixed(1) == -2)
+                    {
+                        openDoors[3] = true;
+                        gridMapHelper.obstacles[6].active = false;
+                        resolve();
+                    }
+                    else
+                    {
+                        requestAnimationFrame(translateDoor);
+                    } 
+                }
+                else
+                {
+                    consoleElement.innerText += "É preciso estar de frente de uma manivela para usar este comando.\n";
+                    resolve();   
+                }
+            });
+        }
+
+        coletarCristal = () => {
+            if(sceneProperties.cancelExecution)
+            {
+                return;
+            }
+
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
+            {
+                objectives[0].visible = false;
+                consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                gridMapHelper.obstacles[0].active = false;
+            }
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
+            {
+                objectives[1].visible = false;
+                consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                gridMapHelper.obstacles[1].active = false;
+            }
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[2],gridMapHelper))
+            {
+                objectives[2].visible = false;
+                consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                gridMapHelper.obstacles[2].active = false;
+            }
+            else
+            {
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+            }
+        }
+
+        resetLevel = () =>{
+            actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1.0,gridMapHelper.getGlobalZPositionFromCoord(5));
+            actor.rotation.set(0,degreeToRadians(90),0);
+            actor.getObjectByName('eve').rotation.set(0,0,0);
+            objectives[0].visible = true;
+            objectives[1].visible = true;
+            objectives[2].visible = true;
+            for(let i = 0; i < openDoors.length; i++){
+                openDoors[i] = false;
+            }
+            doors.forEach(door => door.resetPos());
+            gridMapHelper.obstacles.forEach(obstacle => obstacle.active = true);
+            gridMapHelper.restartLasers();
+            lasersVisualRestart();
+            setLaserStates();
+        }
+
+        winCondition = () =>{
+            if(!objectives[0].visible && !objectives[1].visible && !objectives[2].visible)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        laserState = 0;
+        setLaserStates = () => {
+            if(laserState == 0)
+            {
+                changeLaserStateStatus(0, 'blue');
+                changeLaserActiveStatus(0,true);
+                changeLaserActiveStatus(1,false);
+                changeLaserActiveStatus(4,true);
+                changeLaserActiveStatus(6,false);
+            }
+            else
+            {
+                changeLaserStateStatus(0, 'red');
+                changeLaserActiveStatus(0,false);
+                changeLaserActiveStatus(1,true);
+                changeLaserActiveStatus(4,false);
+                changeLaserActiveStatus(6,true);
             }
         }
 
