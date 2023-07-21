@@ -957,8 +957,8 @@ phaseGeneration.push(()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
         actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
-        objectives[0].visible = true;
-        for(let i = 0; i < openDoors.length; i++)openDoors[i] = false;
+        for(let i = 0; i < objectives.length; i++)objectives[i].visible = true;
+        for(let i1 = 0; i1 < openDoors.length; i1++)openDoors[i1] = false;
         doors.forEach((door)=>door.resetPos());
         gridMapHelper.obstacles.forEach((obstacle)=>obstacle.active = true);
         gridMapHelper.restartLasers();
@@ -1465,7 +1465,7 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(3, 3, 5, 5);
     gridMapHelper.addObstacle(3, 3, 3, 3);
     gridMapHelper.addObstacle(3, 3, 0, 1);
-    gridMapHelper.addObstacle(4, 4, 4, 4);
+    gridMapHelper.addObstacle(4, 4, 7, 7);
     gridMapHelper.addObstacle(5, 5, 7, 8);
     gridMapHelper.addObstacle(5, 8, 5, 5);
     gridMapHelper.addObstacle(5, 5, 1, 3);
@@ -1949,7 +1949,7 @@ phaseGeneration.push(()=>{
             objectives[3].visible = false;
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[3].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
+        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[4], gridMapHelper)) {
             objectives[4].visible = false;
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[4].active = false;
@@ -2306,18 +2306,6 @@ phaseGeneration.push(()=>{
             objectives[1].visible = false;
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[1].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
-            objectives[2].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[2].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[3], gridMapHelper)) {
-            objectives[3].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[3].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
-            objectives[4].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[4].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
     };
     resetLevel = ()=>{
@@ -2798,7 +2786,7 @@ phaseGeneration.push(()=>{
     crancks[0].correctPos("up", cranckInteractionReferences[0], cranckBases[0]);
     crancks[1].correctPos("right", cranckInteractionReferences[1], cranckBases[1]);
     crancks[2].correctPos("up", cranckInteractionReferences[2], cranckBases[2]);
-    crancks[3].correctPos("left", cranckInteractionReferences[3], cranckBases[3]);
+    crancks[3].correctPos("right", cranckInteractionReferences[3], cranckBases[3]);
     crancks[4].correctPos("down", cranckInteractionReferences[4], cranckBases[4]);
     scene.add(cranckBases[0]);
     scene.add(cranckBases[1]);
@@ -2821,8 +2809,8 @@ phaseGeneration.push(()=>{
     //doors[3].rotateY(Math.PI / 2);
     gridMapHelper.addObstacle(2, 2, 9, 9);
     gridMapHelper.addObstacle(1, 1, 1, 1);
-    gridMapHelper.addObstacle(4, 4, 6, 6);
-    gridMapHelper.addObstacle(8, 8, 5, 5);
+    gridMapHelper.addObstacle(3, 3, 6, 6);
+    gridMapHelper.addObstacle(5, 5, 5, 5);
     gridMapHelper.addObstacle(8, 8, 0, 0);
     scene.add(doors[0]);
     scene.add(doors[1]);
@@ -3068,7 +3056,7 @@ phaseGeneration.push(()=>{
         setLaserStates();
     };
     winCondition = ()=>{
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible && !objectives[4].visible) return true;
+        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible) return true;
         else return false;
     };
     laserState = 0;
@@ -4056,7 +4044,7 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
 
 var $0db8bcdf209a2965$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.ae7c40db.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.fde38ccc.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
