@@ -62,7 +62,7 @@ var $gSwgq = parcelRequire("gSwgq");
 var $8vOEa = parcelRequire("8vOEa");
 const sceneProperties = {
     cancelExecution: false,
-    phase: 5,
+    phase: 0,
     executing: false
 };
 let laserState;
@@ -4056,7 +4056,7 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
 
 var $0db8bcdf209a2965$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.e7abd4a9.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.ae7c40db.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
