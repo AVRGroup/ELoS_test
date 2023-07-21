@@ -79,7 +79,7 @@ class Cranck extends THREE.Object3D {
         else if(dir == 'left'){
             this.rotateY(Math.PI)
             this.position.set(this.position.x, this.position.y, this.position.z+0.72)
-            reference.position.set(this.position.x, this.position.y, this.position.z+2)
+            reference.position.set(this.position.x, this.position.y, this.position.z+1)
             base.position.set(this.position.x, this.position.y, this.position.z+0.25)
         }
         else if(dir == 'down'){
