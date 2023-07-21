@@ -51,10 +51,6 @@ var $2Y9dv = parcelRequire("2Y9dv");
 
 var $6dfM7 = parcelRequire("6dfM7");
 
-var $9JB7Y = parcelRequire("9JB7Y");
-
-var $dUbLs = parcelRequire("dUbLs");
-
 var $3tzMw = parcelRequire("3tzMw");
 
 var $gSwgq = parcelRequire("gSwgq");
@@ -62,8 +58,7 @@ var $gSwgq = parcelRequire("gSwgq");
 var $8vOEa = parcelRequire("8vOEa");
 const sceneProperties = {
     cancelExecution: false,
-    phase: 0,
-    executing: false
+    phase: 0
 };
 let laserState;
 let setLaserStates;
@@ -556,9 +551,6 @@ const actor = (0, $6mhZf.loadDefaultActor)();
 let objectives;
 let walls;
 let openDoors;
-let crancks;
-let cranckBases;
-let cranckInteractionReferences;
 let doors;
 let traps;
 let laserFences;
@@ -667,7 +659,7 @@ let winCondition;
 const phaseGeneration = [];
 // Phase 1
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 4 - Fase 1 de 8";
+    document.getElementById("phaseTitle").innerText = "N\xedvel 4 - Fase 2 de 8";
     document.getElementById("phaseObjective").innerText = "Abra a porta, fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.";
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -676,20 +668,17 @@ phaseGeneration.push(()=>{
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     gridMapHelper.addObstacle(9, 9, 5, 5);
     scene.add(objectives[0]);
+    //const doorCrank = new THREE.Mesh(new THREE.BoxGeometry(0.5,0.5,1),new THREE.MeshLambertMaterial({color: "rgb(255,0,255)"}));
+    //doorCrank.position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(4.6));
+    const doorInteractionReference = new $49pUz.Object3D();
+    doorInteractionReference.position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    //doorCrank.add(doorInteractionReference);
+    //scene.add(doorCrank);
     openDoors = [];
     doors = [];
-    cranckBases = [];
-    crancks = [];
-    cranckInteractionReferences = [];
-    cranckBases.push(new (0, $dUbLs.default)());
-    crancks.push(new (0, $9JB7Y.default)());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    crancks[0].correctPos("right", cranckInteractionReferences[0], cranckBases[0]);
-    doors.push(new (0, $6dfM7.default)(crancks[0]));
+    doors.push(new (0, $6dfM7.default)());
     doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
     gridMapHelper.addObstacle(5, 5, 5, 5);
-    scene.add(crancks[0]);
     scene.add(doors[0]);
     openDoors.push(false);
     walls = [];
@@ -707,7 +696,7 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(1, 9, 6, 6);
     portaFechada = ()=>{
         if (sceneProperties.cancelExecution) return false;
-        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), doorInteractionReference, gridMapHelper)) return !openDoors[0];
         else {
             consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
             return false;
@@ -716,7 +705,7 @@ phaseGeneration.push(()=>{
     girarManivela = ()=>{
         return new Promise((resolve)=>{
             if (sceneProperties.cancelExecution) resolve();
-            if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) {
+            if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), doorInteractionReference, gridMapHelper)) {
                 function translateDoor() {
                     doors[0].lerpDoor(0, -2);
                     doors[0].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
@@ -773,27 +762,14 @@ phaseGeneration.push(()=>{
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     scene.add(objectives[2]);
+    const doorInteractionReference1 = new $49pUz.Object3D();
+    const doorInteractionReference2 = new $49pUz.Object3D();
+    doorInteractionReference1.position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    doorInteractionReference2.position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
     openDoors = [];
     doors = [];
-    crancks = [];
-    cranckBases = [];
-    cranckInteractionReferences = [];
-    crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    doors.push(new (0, $6dfM7.default)(crancks[0]));
-    doors.push(new (0, $6dfM7.default)(crancks[1]));
-    crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    scene.add(cranckBases[0]);
-    scene.add(cranckBases[1]);
-    scene.add(crancks[0]);
-    scene.add(crancks[1]);
-    crancks[0].correctPos("up", cranckInteractionReferences[0], cranckBases[0]);
-    crancks[1].correctPos("down", cranckInteractionReferences[1], cranckBases[1]);
+    doors.push(new (0, $6dfM7.default)());
+    doors.push(new (0, $6dfM7.default)());
     doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     doors[0].rotateY(-Math.PI / 2);
     doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
@@ -817,8 +793,8 @@ phaseGeneration.push(()=>{
     laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     gridMapHelper.addLaser(7, 9, laserFences[0]);
     gridMapHelper.addLaser(9, 2, laserFences[1]);
-    gridMapHelper.addLaser(9, 7, laserFences[2]);
-    gridMapHelper.addLaser(7, 0, laserFences[3]);
+    gridMapHelper.addLaser(9, 2, laserFences[2]);
+    gridMapHelper.addLaser(9, 2, laserFences[3]);
     scene.add(laserFences[0]);
     scene.add(laserFences[1]);
     scene.add(laserFences[2]);
@@ -841,34 +817,31 @@ phaseGeneration.push(()=>{
         color: "rgb(0,255,0)"
     });
     walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2.5), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+    walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(6.5));
-    walls[3].rotateY(Math.PI / 2);
+    walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     walls[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     walls[4].rotateY(Math.PI / 2);
     walls[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     walls[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(2.5));
     walls[6].rotateY(Math.PI / 2);
     walls[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(1.5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(3.5));
-    walls[8].rotateY(Math.PI / 2);
+    walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
     walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(2.5));
     walls[9].rotateY(Math.PI / 2);
-    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(3.5));
-    walls[10].rotateY(Math.PI / 2);
+    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
     walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
     scene.add(walls[0]);
     scene.add(walls[1]);
@@ -894,12 +867,10 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(7, 7, 1, 4);
     gridMapHelper.addObstacle(6, 6, 4, 4);
     gridMapHelper.addObstacle(8, 8, 2, 2);
-    const doorInteractionReference = new $49pUz.Object3D();
-    doorInteractionReference.position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
     portaFechada = ()=>{
         if (sceneProperties.cancelExecution) return false;
-        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) return !openDoors[1];
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), doorInteractionReference1, gridMapHelper)) return !openDoors[0];
+        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), doorInteractionReference2, gridMapHelper)) return !openDoors[1];
         else {
             consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
             return false;
@@ -908,7 +879,7 @@ phaseGeneration.push(()=>{
     girarManivela = ()=>{
         return new Promise((resolve)=>{
             if (sceneProperties.cancelExecution) resolve();
-            if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) {
+            if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), doorInteractionReference1, gridMapHelper)) {
                 function translateDoor() {
                     doors[0].lerpDoor(0, -2);
                     doors[0].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
@@ -916,18 +887,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[0].getDoorY().toFixed(1) == -2) {
                     openDoors[0] = true;
-                    gridMapHelper.obstacles[3].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) {
-                function translateDoor() {
-                    doors[1].lerpDoor(0, -2);
-                    doors[1].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[1].getDoorY().toFixed(1) == -2) {
-                    openDoors[1] = true;
-                    gridMapHelper.obstacles[4].active = false;
+                    gridMapHelper.obstacles[1].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else {
@@ -959,13 +919,14 @@ phaseGeneration.push(()=>{
         objectives[0].visible = true;
         for(let i = 0; i < openDoors.length; i++)openDoors[i] = false;
         doors.forEach((door)=>door.resetPos());
-        gridMapHelper.obstacles.forEach((obstacle)=>obstacle.active = true);
+        gridMapHelper.obstacles[0].active = true;
+        gridMapHelper.obstacles[1].active = true;
         gridMapHelper.restartLasers();
         lasersVisualRestart();
         setLaserStates();
     };
     winCondition = ()=>{
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) return true;
+        if (!objectives[0].visible) return true;
         else return false;
     };
     laserState = 0;
@@ -998,274 +959,7 @@ phaseGeneration.push(()=>{
         setSpikeTrapState();
     }, 1000);
 });
-// Phase 3
-phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 4 - Fase 3 de 8";
-    document.getElementById("phaseObjective").innerText = "Abra a porta, fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.";
-    sceneProperties.executing = false;
-    camera.position.set(0, 15, 30);
-    actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
-    objectives = (0, $6mhZf.loadDefaultObjectives)(3);
-    objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
-    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
-    objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
-    gridMapHelper.addObstacle(0, 0, 0, 0);
-    gridMapHelper.addObstacle(9, 9, 9, 9);
-    gridMapHelper.addObstacle(9, 9, 0, 0);
-    scene.add(objectives[0]);
-    scene.add(objectives[1]);
-    scene.add(objectives[2]);
-    openDoors = [];
-    doors = [];
-    crancks = [];
-    cranckBases = [];
-    cranckInteractionReferences = [];
-    crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    doors.push(new (0, $6dfM7.default)(crancks[0]));
-    doors.push(new (0, $6dfM7.default)(crancks[1]));
-    doors.push(new (0, $6dfM7.default)(crancks[2]));
-    crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    scene.add(cranckBases[0]);
-    scene.add(cranckBases[1]);
-    scene.add(cranckBases[2]);
-    scene.add(crancks[0]);
-    scene.add(crancks[1]);
-    scene.add(crancks[2]);
-    crancks[0].correctPos("down", cranckInteractionReferences[0], cranckBases[0]);
-    crancks[1].correctPos("right", cranckInteractionReferences[1], cranckBases[1]);
-    crancks[2].correctPos("up", cranckInteractionReferences[2], cranckBases[2]);
-    doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    doors[2].rotateY(Math.PI / 2);
-    gridMapHelper.addObstacle(1, 1, 9, 9);
-    gridMapHelper.addObstacle(8, 8, 7, 7);
-    gridMapHelper.addObstacle(9, 9, 1, 1);
-    scene.add(doors[0]);
-    scene.add(doors[1]);
-    scene.add(doors[2]);
-    openDoors.push(false);
-    openDoors.push(false);
-    openDoors.push(false);
-    laserFences = [];
-    laserFences.push(new (0, $3tzMw.default)("red"));
-    laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    gridMapHelper.addLaser(5, 9, laserFences[0]);
-    gridMapHelper.addLaser(5, 5, laserFences[1]);
-    gridMapHelper.addLaser(9, 6, laserFences[2]);
-    gridMapHelper.addLaser(6, 2, laserFences[3]);
-    laserFences[2].rotateY(Math.PI / 2);
-    laserFences[3].rotateY(Math.PI / 2);
-    scene.add(laserFences[0]);
-    scene.add(laserFences[1]);
-    scene.add(laserFences[2]);
-    scene.add(laserFences[3]);
-    traps = [];
-    traps.push(new (0, $gSwgq.SpikeTrap)());
-    traps.push(new (0, $gSwgq.SpikeTrap)());
-    traps.push(new (0, $gSwgq.SpikeTrap)());
-    traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0, gridMapHelper.getGlobalZPositionFromCoord(1));
-    traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0, gridMapHelper.getGlobalZPositionFromCoord(8));
-    gridMapHelper.addTrap(0, 1, traps[0]);
-    gridMapHelper.addTrap(3, 5, traps[1]);
-    gridMapHelper.addTrap(9, 8, traps[2]);
-    scene.add(traps[0]);
-    scene.add(traps[1]);
-    scene.add(traps[2]);
-    walls = [];
-    const boxGeometry1 = new $49pUz.BoxGeometry(2, 2, 2);
-    const boxGeometry2 = new $49pUz.BoxGeometry(4, 2, 2);
-    const boxGeometry3 = new $49pUz.BoxGeometry(6, 2, 2);
-    const boxGeometry4 = new $49pUz.BoxGeometry(8, 2, 2);
-    const boxGeometry5 = new $49pUz.BoxGeometry(10, 2, 2);
-    const boxGeometry6 = new $49pUz.BoxGeometry(12, 2, 2);
-    const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
-    });
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    walls[0].rotateY(Math.PI / 2);
-    walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(2.5));
-    walls[1].rotateY(Math.PI / 2);
-    walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2.5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(2.5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    walls[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    walls[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(6.5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    walls[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(6.5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    walls[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(2.5));
-    walls[7].rotateY(Math.PI / 2);
-    walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(3.5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    walls[10].rotateY(Math.PI / 2);
-    walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
-    walls[11].rotateY(Math.PI / 2);
-    scene.add(walls[0]);
-    scene.add(walls[1]);
-    scene.add(walls[2]);
-    scene.add(walls[3]);
-    scene.add(walls[4]);
-    scene.add(walls[5]);
-    scene.add(walls[6]);
-    scene.add(walls[7]);
-    scene.add(walls[8]);
-    scene.add(walls[9]);
-    scene.add(walls[10]);
-    scene.add(walls[11]);
-    gridMapHelper.addObstacle(1, 1, 6, 8);
-    gridMapHelper.addObstacle(1, 1, 1, 4);
-    gridMapHelper.addObstacle(2, 3, 6, 6);
-    gridMapHelper.addObstacle(2, 3, 4, 4);
-    gridMapHelper.addObstacle(3, 8, 8, 8);
-    gridMapHelper.addObstacle(5, 8, 6, 6);
-    gridMapHelper.addObstacle(5, 8, 4, 4);
-    gridMapHelper.addObstacle(5, 5, 2, 3);
-    gridMapHelper.addObstacle(3, 4, 3, 3);
-    gridMapHelper.addObstacle(3, 3, 1, 1);
-    gridMapHelper.addObstacle(7, 7, 0, 2);
-    gridMapHelper.addObstacle(8, 8, 1, 2);
-    portaFechada = ()=>{
-        if (sceneProperties.cancelExecution) return false;
-        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) return !openDoors[1];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) return !openDoors[2];
-        else {
-            consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
-            return false;
-        }
-    };
-    girarManivela = ()=>{
-        return new Promise((resolve)=>{
-            if (sceneProperties.cancelExecution) resolve();
-            if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) {
-                function translateDoor() {
-                    doors[0].lerpDoor(0, -2);
-                    doors[0].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[0].getDoorY().toFixed(1) == -2) {
-                    openDoors[0] = true;
-                    gridMapHelper.obstacles[3].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) {
-                function translateDoor() {
-                    doors[1].lerpDoor(0, -2);
-                    doors[1].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[1].getDoorY().toFixed(1) == -2) {
-                    openDoors[1] = true;
-                    gridMapHelper.obstacles[4].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) {
-                function translateDoor() {
-                    doors[2].lerpDoor(0, -2);
-                    doors[2].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[2].getDoorY().toFixed(1) == -2) {
-                    openDoors[2] = true;
-                    gridMapHelper.obstacles[5].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else {
-                consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
-                resolve();
-            }
-        });
-    };
-    coletarCristal = ()=>{
-        if (sceneProperties.cancelExecution) return;
-        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
-            objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[0].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
-            objectives[1].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[1].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
-            objectives[2].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[2].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
-    };
-    resetLevel = ()=>{
-        actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
-        actor.getObjectByName("eve").rotation.set(0, 0, 0);
-        objectives[0].visible = true;
-        for(let i = 0; i < openDoors.length; i++)openDoors[i] = false;
-        doors.forEach((door)=>door.resetPos());
-        gridMapHelper.obstacles.forEach((obstacle)=>obstacle.active = true);
-        gridMapHelper.restartLasers();
-        lasersVisualRestart();
-        setLaserStates();
-    };
-    winCondition = ()=>{
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) return true;
-        else return false;
-    };
-    laserState = 0;
-    setLaserStates = ()=>{
-        if (laserState == 0) {
-            changeLaserStateStatus(0, "blue");
-            changeLaserActiveStatus(0, true);
-            changeLaserActiveStatus(1, false);
-        } else {
-            changeLaserStateStatus(0, "red");
-            changeLaserActiveStatus(0, false);
-            changeLaserActiveStatus(1, true);
-        }
-    };
-    setLaserStatesInterval = setInterval(()=>{
-        if (sceneProperties.executing) return;
-        laserState = (laserState + 1) % 2;
-        setLaserStates();
-    }, 1000);
-    spikeTrapState = 0;
-    setSpikeTrapState = ()=>{
-        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
-        else (0, $gSwgq.trapsActivation)(traps);
-    };
-    setSpikeTrapStateInterval = setInterval(()=>{
-        if (sceneProperties.executing) return;
-        spikeTrapState = (spikeTrapState + 1) % 2;
-        setSpikeTrapState();
-    }, 1000);
-});
-function removeObjects(crystals, walls, traps, lasers, doors, crancks, cranckBases, cranckInteractionReferences) {
+function removeObjects(crystals, walls, traps, lasers, doors) {
     if (crystals != undefined) for(let i = 0; i < crystals.length; i++)scene.remove(crystals[i]);
     if (walls != undefined) {
         for(let i1 = 0; i1 < walls.length; i1++)scene.remove(walls[i1]);
@@ -1283,26 +977,11 @@ function removeObjects(crystals, walls, traps, lasers, doors, crancks, cranckBas
         for(let i4 = 0; i4 < doors.length; i4++)scene.remove(doors[i4]);
         gridMapHelper.clearDoors();
     }
-    if (crancks != undefined) {
-        for(let i5 = 0; i5 < crancks.length; i5++)scene.remove(crancks[i5]);
-        gridMapHelper.clearDoors();
-    }
-    if (cranckBases != undefined) {
-        for(let i6 = 0; i6 < cranckBases.length; i6++)scene.remove(cranckBases[i6]);
-        gridMapHelper.clearDoors();
-    }
-    if (cranckInteractionReferences != undefined) {
-        for(let i7 = 0; i7 < cranckInteractionReferences.length; i7++)scene.remove(cranckInteractionReferences[i7]);
-        gridMapHelper.clearDoors();
-    }
     crystals = undefined;
     walls = undefined;
     traps = undefined;
     lasers = undefined;
     doors = undefined;
-    crancks = undefined;
-    cranckBases = undefined;
-    cranckInteractionReferences = undefined;
 }
 function animate() {
     renderer.render(scene, camera);
@@ -1317,11 +996,9 @@ execBtn.addEventListener("click", async function() {
     const codeParsed = (0, $8vOEa.default)(editor.state.doc.toString());
     console.log(codeParsed);
     sceneProperties.cancelExecution = false;
-    if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     if (codeParsed != null) {
         resetLevel();
         this.disabled = true;
-        sceneProperties.executing = true;
         await eval(codeParsed);
         if (winCondition()) {
             (0, $jgsti.readOnlyState).doc = editor.state.doc;
@@ -1348,7 +1025,7 @@ advanceBtn.addEventListener("click", (e)=>{
             clearInterval(setLaserStatesInterval);
             setLaserStatesInterval = undefined;
         }
-        removeObjects(objectives, walls, traps, laserFences, doors, crancks, cranckBases, cranckInteractionReferences);
+        removeObjects(objectives, walls, traps, laserFences, doors);
         phaseGeneration[sceneProperties.phase]();
         editor.setState((0, $jgsti.editState));
         consoleElement.innerText = null;
@@ -1363,6 +1040,7 @@ advanceBtn.addEventListener("click", (e)=>{
 });
 (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
 phaseGeneration[sceneProperties.phase]();
+//phaseGeneration[1]();
 animate();
 
 });
@@ -1371,7 +1049,6 @@ parcelRequire.register("6dfM7", function(module, exports) {
 $parcel$export(module.exports, "default", () => $486031900c58675e$export$2e2bcd8739ae039);
 
 var $49pUz = parcelRequire("49pUz");
-parcelRequire("9JB7Y");
 let $486031900c58675e$var$loader = new $49pUz.TextureLoader();
 // Function to set basic material or textures
 // You can set just a color, just a texture or both
@@ -1435,14 +1112,63 @@ class $486031900c58675e$var$Door extends $49pUz.Mesh {
         super(new $49pUz.BoxGeometry(0.2, 1.9, 2), $486031900c58675e$var$cubeMaterials);
     }
 }
-class $486031900c58675e$var$CranckDoor extends $49pUz.Object3D {
-    constructor(cranck){
+class $486031900c58675e$var$Cranck extends $49pUz.Object3D {
+    constructor(type){
         super();
         this.index = 0;
         this.x = 0;
         this.z = 0;
+        this.state = type;
         this.active = true;
-        this.cranck = cranck;
+        this.type = type;
+        // cranck torus
+        let cranckTorus = new $486031900c58675e$var$CranckTorus;
+        cranckTorus.position.set(0, 0, 0);
+        // cranck cylinders
+        let CranckCylinder1 = new $486031900c58675e$var$CranckCylinder;
+        CranckCylinder1.position.set(0, 0.17, 0);
+        let CranckCylinder2 = new $486031900c58675e$var$CranckCylinder;
+        CranckCylinder2.rotateZ(Math.PI / 3.5);
+        CranckCylinder2.position.set(0.15, -0.12, 0);
+        let CranckCylinder3 = new $486031900c58675e$var$CranckCylinder;
+        CranckCylinder3.rotateZ(Math.PI / -3.5);
+        CranckCylinder3.position.set(-0.14, -0.11, 0);
+        let CranckCylinder4 = new $486031900c58675e$var$CranckCylinder(0.08, 0.08, 0.06, 12, 12, "red");
+        CranckCylinder4.rotateX(Math.PI / 2);
+        CranckCylinder4.position.set(0, 0, 0);
+        let CranckCylinder5 = new $486031900c58675e$var$CranckCylinder(0.065, 0.065, 0.061, 12, 12, "lightgray");
+        CranckCylinder5.rotateX(Math.PI / 2);
+        CranckCylinder5.position.set(0, 0, 0);
+        let CranckCylinder6 = new $486031900c58675e$var$CranckCylinder(0.045, 0.045, 0.075, 6, 12, "gray");
+        CranckCylinder6.rotateX(Math.PI / 2);
+        CranckCylinder6.position.set(0, 0, 0);
+        let CranckCylinder7 = new $486031900c58675e$var$CranckCylinder(0.02, 0.035, 0.2, 12, 12, "gray");
+        CranckCylinder7.rotateX(Math.PI / 2);
+        CranckCylinder7.position.set(0, 0, -0.1);
+        let CranckCylinder8 = new $486031900c58675e$var$CranckCylinder(0.05, 0.05, 0.07, 6, 12, "gray");
+        CranckCylinder8.rotateX(Math.PI / 2);
+        CranckCylinder8.position.set(0, 0, -0.2);
+        this.add(cranckTorus);
+        this.add(CranckCylinder1);
+        this.add(CranckCylinder2);
+        this.add(CranckCylinder3);
+        this.add(CranckCylinder4);
+        this.add(CranckCylinder5);
+        this.add(CranckCylinder6);
+        this.add(CranckCylinder7);
+        this.add(CranckCylinder8);
+        return this;
+    }
+}
+class $486031900c58675e$var$CranckDoor extends $49pUz.Object3D {
+    constructor(type){
+        super();
+        this.index = 0;
+        this.x = 0;
+        this.z = 0;
+        this.state = type;
+        this.active = true;
+        this.type = type;
         // door base
         let doorBase1 = new $486031900c58675e$var$DoorBase;
         doorBase1.rotateX(-Math.PI / 2);
@@ -1476,10 +1202,10 @@ class $486031900c58675e$var$CranckDoor extends $49pUz.Object3D {
         // cranck torus
         let cranckFence = new $486031900c58675e$var$Fence(0.5, 0.5, 0.05, "lightgray");
         cranckFence.position.set(-2, 0, -0.995);
-        //let cranck = new Cranck;
-        //this.cranck.position.set(-2, 0, -0.75)
+        let cranck = new $486031900c58675e$var$Cranck;
+        cranck.position.set(-2, 0, -0.75);
         this.crancks = [
-            this.cranck
+            cranck
         ];
         this.add(doorBase1);
         this.add(doorBase2);
@@ -1491,7 +1217,8 @@ class $486031900c58675e$var$CranckDoor extends $49pUz.Object3D {
         this.add(doorFence4);
         this.add(doorFence5);
         this.add(doorFence6);
-        //this.add(cranck);
+        this.add(cranckFence);
+        this.add(cranck);
         return this;
     }
     setVisible() {
@@ -1515,152 +1242,16 @@ class $486031900c58675e$var$CranckDoor extends $49pUz.Object3D {
     resetPos() {
         this.doors.forEach((door)=>door.position.y = 0);
     }
-    cranckPosition(x, z) {
-        this.cranck.position.x = x;
-        this.cranck.position.z = z;
-    }
 }
 var $486031900c58675e$export$2e2bcd8739ae039 = $486031900c58675e$var$CranckDoor;
 
 });
-parcelRequire.register("9JB7Y", function(module, exports) {
-
-$parcel$export(module.exports, "default", () => $71651dcf84f1904a$export$2e2bcd8739ae039);
-
-var $49pUz = parcelRequire("49pUz");
-class $71651dcf84f1904a$var$CranckTorus extends $49pUz.Mesh {
-    constructor(){
-        super(new $49pUz.TorusGeometry(0.35, 0.05, 10, 20), new $49pUz.MeshPhongMaterial({
-            color: "red"
-        }));
-    }
-}
-class $71651dcf84f1904a$var$CranckCylinder extends $49pUz.Mesh {
-    constructor(radTop = 0.03, radBot = 0.03, height = 0.4, radSeg = 12, HeigSeg = 12, color = "red"){
-        super(new $49pUz.CylinderGeometry(radTop, radBot, height, radSeg, HeigSeg), new $49pUz.MeshPhongMaterial({
-            color: color
-        }));
-    }
-}
-class $71651dcf84f1904a$var$Fence extends $49pUz.Mesh {
-    constructor(width = 0.5, height = 2, depth = 0.15, color = "white"){
-        super(new $49pUz.BoxGeometry(width, height, depth), new $49pUz.MeshPhongMaterial({
-            color: color
-        }));
-    }
-}
-class $71651dcf84f1904a$var$Cranck extends $49pUz.Object3D {
-    constructor(){
-        super();
-        this.index = 0;
-        this.x = 0;
-        this.z = 0;
-        this.active = true;
-        // cranck torus
-        let cranckTorus = new $71651dcf84f1904a$var$CranckTorus;
-        cranckTorus.position.set(0, 0, 0);
-        // cranck cylinders
-        let CranckCylinder1 = new $71651dcf84f1904a$var$CranckCylinder;
-        CranckCylinder1.position.set(0, 0.17, 0);
-        let CranckCylinder2 = new $71651dcf84f1904a$var$CranckCylinder;
-        CranckCylinder2.rotateZ(Math.PI / 3.5);
-        CranckCylinder2.position.set(0.15, -0.12, 0);
-        let CranckCylinder3 = new $71651dcf84f1904a$var$CranckCylinder;
-        CranckCylinder3.rotateZ(Math.PI / -3.5);
-        CranckCylinder3.position.set(-0.14, -0.11, 0);
-        let CranckCylinder4 = new $71651dcf84f1904a$var$CranckCylinder(0.08, 0.08, 0.06, 12, 12, "red");
-        CranckCylinder4.rotateX(Math.PI / 2);
-        CranckCylinder4.position.set(0, 0, 0);
-        let CranckCylinder5 = new $71651dcf84f1904a$var$CranckCylinder(0.065, 0.065, 0.061, 12, 12, "lightgray");
-        CranckCylinder5.rotateX(Math.PI / 2);
-        CranckCylinder5.position.set(0, 0, 0);
-        let CranckCylinder6 = new $71651dcf84f1904a$var$CranckCylinder(0.045, 0.045, 0.075, 6, 12, "gray");
-        CranckCylinder6.rotateX(Math.PI / 2);
-        CranckCylinder6.position.set(0, 0, 0);
-        let CranckCylinder7 = new $71651dcf84f1904a$var$CranckCylinder(0.02, 0.035, 0.2, 12, 12, "gray");
-        CranckCylinder7.rotateX(Math.PI / 2);
-        CranckCylinder7.position.set(0, 0, -0.1);
-        let CranckCylinder8 = new $71651dcf84f1904a$var$CranckCylinder(0.05, 0.05, 0.07, 6, 12, "gray");
-        CranckCylinder8.rotateX(Math.PI / 2);
-        CranckCylinder8.position.set(0, 0, -0.2);
-        let cranckFence = new $71651dcf84f1904a$var$Fence(0.5, 0.5, 0.05, "lightgray");
-        cranckFence.position.set(0, 0, -0.25);
-        this.add(cranckTorus);
-        this.add(CranckCylinder1);
-        this.add(CranckCylinder2);
-        this.add(CranckCylinder3);
-        this.add(CranckCylinder4);
-        this.add(CranckCylinder5);
-        this.add(CranckCylinder6);
-        this.add(CranckCylinder7);
-        this.add(CranckCylinder8);
-        //this.add(cranckFence);
-        return this;
-    }
-    correctPos(dir, reference, base) {
-        if (dir == "right") {
-            this.position.set(this.position.x, this.position.y, this.position.z - 0.72);
-            reference.position.set(this.position.x, this.position.y, this.position.z - 2);
-            base.position.set(this.position.x, this.position.y, this.position.z - 0.25);
-        } else if (dir == "left") {
-            this.rotateY(Math.PI);
-            this.position.set(this.position.x, this.position.y, this.position.z + 0.72);
-            reference.position.set(this.position.x, this.position.y, this.position.z + 2);
-            base.position.set(this.position.x, this.position.y, this.position.z + 0.25);
-        } else if (dir == "down") {
-            this.rotateY(-Math.PI / 2);
-            this.position.set(this.position.x + 0.72, this.position.y, this.position.z);
-            reference.position.set(this.position.x + 1, this.position.y, this.position.z);
-            base.position.set(this.position.x + 0.25, this.position.y, this.position.z);
-            base.rotateY(Math.PI / 2);
-        } else if (dir == "up") {
-            this.rotateY(Math.PI / 2);
-            this.position.set(this.position.x - 0.72, this.position.y, this.position.z);
-            reference.position.set(this.position.x - 2, this.position.y, this.position.z);
-            base.position.set(this.position.x - 0.25, this.position.y, this.position.z);
-            base.rotateY(Math.PI / 2);
-        }
-    }
-}
-var $71651dcf84f1904a$export$2e2bcd8739ae039 = $71651dcf84f1904a$var$Cranck;
-
-});
-
 parcelRequire.register("6K46K", function(module, exports) {
 
 module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("cWmqK"), import.meta.url).toString();
 
 });
 
-
-parcelRequire.register("dUbLs", function(module, exports) {
-
-$parcel$export(module.exports, "default", () => $a1f9a1829dff046e$export$2e2bcd8739ae039);
-
-var $49pUz = parcelRequire("49pUz");
-class $a1f9a1829dff046e$var$Fence extends $49pUz.Mesh {
-    constructor(width = 0.5, height = 2, depth = 0.15, color = "white"){
-        super(new $49pUz.BoxGeometry(width, height, depth), new $49pUz.MeshPhongMaterial({
-            color: color
-        }));
-    }
-}
-class $a1f9a1829dff046e$var$CranckBase extends $49pUz.Object3D {
-    constructor(){
-        super();
-        this.index = 0;
-        this.x = 0;
-        this.z = 0;
-        // cranck base
-        let cranckFence = new $a1f9a1829dff046e$var$Fence(0.5, 0.5, 0.05, "lightgray");
-        //cranckFence.position.set(0, 0, -0.25)
-        this.add(cranckFence);
-        return this;
-    }
-}
-var $a1f9a1829dff046e$export$2e2bcd8739ae039 = $a1f9a1829dff046e$var$CranckBase;
-
-});
 
 parcelRequire.register("3tzMw", function(module, exports) {
 
@@ -2212,9 +1803,9 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
 });
 
 
-var $0db8bcdf209a2965$exports = {};
+var $c06ec81197c38ada$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.e4738a6a.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.6e281ad1.js","cWmqK":"door2.e849dc7b.jpg","02a5t":"index.849b76a8.js","kxE8s":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");

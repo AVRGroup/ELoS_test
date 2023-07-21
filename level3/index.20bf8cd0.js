@@ -445,10 +445,6 @@ const { renderer , scene , camera , controls  } = (0, $6mhZf.generateDefaultScen
 const gridMapHelper = new (0, $2Y9dv.default)();
 const plane = gridMapHelper.createGridPlane();
 const actor = (0, $6mhZf.loadDefaultActor)();
-
-const wallTexture = new $49pUz.TextureLoader().load(new URL((parcelRequire("g2SY0"))).toString());
-wallTexture.wrapS = $49pUz.RepeatWrapping;
-wallTexture.wrapT = $49pUz.RepeatWrapping;
 let objectives;
 let walls;
 let traps;
@@ -568,30 +564,9 @@ phaseGeneration.push(()=>{
     scene.add(objectives[0]);
     walls = [];
     const boxGeometry = new $49pUz.BoxGeometry(18, 2, 2);
-    const boxMaterial = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial[2].map.repeat.set(9, 1);
-    boxMaterial[3].map.repeat.set(9, 1);
-    boxMaterial[4].map.repeat.set(9, 1);
-    boxMaterial[5].map.repeat.set(9, 1);
+    const boxMaterial = new $49pUz.MeshLambertMaterial({
+        color: "rgb(0,255,0)"
+    });
     walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
@@ -669,30 +644,9 @@ phaseGeneration.push(()=>{
     (0, $gSwgq.trapsActivation)(traps);
     walls = [];
     const boxGeometry1 = new $49pUz.BoxGeometry(6, 2, 2);
-    const boxMaterial = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial[2].map.repeat.set(3, 1);
-    boxMaterial[3].map.repeat.set(3, 1);
-    boxMaterial[4].map.repeat.set(3, 1);
-    boxMaterial[5].map.repeat.set(3, 1);
+    const boxMaterial = new $49pUz.MeshLambertMaterial({
+        color: "rgb(0,255,0)"
+    });
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
@@ -853,115 +807,19 @@ phaseGeneration.push(()=>{
     const boxGeometry3 = new $49pUz.BoxGeometry(4, 2, 2);
     const boxGeometry4 = new $49pUz.BoxGeometry(6, 2, 2);
     const boxGeometry5 = new $49pUz.BoxGeometry(2, 2, 2);
-    const boxMaterial = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial[2].map.repeat.set(5, 1);
-    boxMaterial[3].map.repeat.set(5, 1);
-    boxMaterial[4].map.repeat.set(5, 1);
-    boxMaterial[5].map.repeat.set(5, 1);
-    const boxMaterial2 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial2[2].map.repeat.set(6, 1);
-    boxMaterial2[3].map.repeat.set(6, 1);
-    boxMaterial2[4].map.repeat.set(6, 1);
-    boxMaterial2[5].map.repeat.set(6, 1);
-    const boxMaterial3 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial3[2].map.repeat.set(2, 1);
-    boxMaterial3[3].map.repeat.set(2, 1);
-    boxMaterial3[4].map.repeat.set(2, 1);
-    boxMaterial3[5].map.repeat.set(2, 1);
-    const boxMaterial4 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial4[2].map.repeat.set(3, 1);
-    boxMaterial4[3].map.repeat.set(3, 1);
-    boxMaterial4[4].map.repeat.set(3, 1);
-    boxMaterial4[5].map.repeat.set(3, 1);
-    const boxMaterial5 = new $49pUz.MeshLambertMaterial({
-        map: wallTexture.clone()
+    const boxMaterial = new $49pUz.MeshLambertMaterial({
+        color: "rgb(0,255,0)"
     });
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(4.5));
@@ -1115,136 +973,19 @@ phaseGeneration.push(()=>{
     const boxGeometry3 = new $49pUz.BoxGeometry(10, 2, 2);
     const boxGeometry4 = new $49pUz.BoxGeometry(8, 2, 2);
     const boxGeometry5 = new $49pUz.BoxGeometry(20, 2, 2);
-    const boxMaterial = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial[2].map.repeat.set(6, 1);
-    boxMaterial[3].map.repeat.set(6, 1);
-    boxMaterial[4].map.repeat.set(6, 1);
-    boxMaterial[5].map.repeat.set(6, 1);
-    const boxMaterial2 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial2[2].map.repeat.set(3, 1);
-    boxMaterial2[3].map.repeat.set(3, 1);
-    boxMaterial2[4].map.repeat.set(3, 1);
-    boxMaterial2[5].map.repeat.set(3, 1);
-    const boxMaterial3 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial3[2].map.repeat.set(5, 1);
-    boxMaterial3[3].map.repeat.set(5, 1);
-    boxMaterial3[4].map.repeat.set(5, 1);
-    boxMaterial3[5].map.repeat.set(5, 1);
-    const boxMaterial4 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial4[2].map.repeat.set(4, 1);
-    boxMaterial4[3].map.repeat.set(4, 1);
-    boxMaterial4[4].map.repeat.set(4, 1);
-    boxMaterial4[5].map.repeat.set(4, 1);
-    const boxMaterial5 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial5[2].map.repeat.set(10, 1);
-    boxMaterial5[3].map.repeat.set(10, 1);
-    boxMaterial5[4].map.repeat.set(10, 1);
-    boxMaterial5[5].map.repeat.set(10, 1);
+    const boxMaterial = new $49pUz.MeshLambertMaterial({
+        color: "rgb(0,255,0)"
+    });
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2.5), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -1378,116 +1119,20 @@ phaseGeneration.push(()=>{
     const boxGeometry4 = new $49pUz.BoxGeometry(10, 2, 2);
     const boxGeometry5 = new $49pUz.BoxGeometry(4, 2, 2);
     const boxGeometry6 = new $49pUz.BoxGeometry(12, 2, 2);
-    const boxMaterial = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial[2].map.repeat.set(3, 1);
-    boxMaterial[3].map.repeat.set(3, 1);
-    boxMaterial[4].map.repeat.set(3, 1);
-    boxMaterial[5].map.repeat.set(3, 1);
-    const boxMaterial2 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial2[2].map.repeat.set(7, 1);
-    boxMaterial2[3].map.repeat.set(7, 1);
-    boxMaterial2[4].map.repeat.set(7, 1);
-    boxMaterial2[5].map.repeat.set(7, 1);
-    const boxMaterial3 = new $49pUz.MeshLambertMaterial({
-        map: wallTexture.clone()
+    const boxMaterial = new $49pUz.MeshLambertMaterial({
+        color: "rgb(0,255,0)"
     });
-    const boxMaterial5 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial5[2].map.repeat.set(2, 1);
-    boxMaterial5[3].map.repeat.set(2, 1);
-    boxMaterial5[4].map.repeat.set(2, 1);
-    boxMaterial5[5].map.repeat.set(2, 1);
-    const boxMaterial6 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial6[2].map.repeat.set(6, 1);
-    boxMaterial6[3].map.repeat.set(6, 1);
-    boxMaterial6[4].map.repeat.set(6, 1);
-    boxMaterial6[5].map.repeat.set(6, 1);
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial6));
+    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial6));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
@@ -1646,145 +1291,25 @@ phaseGeneration.push(()=>{
     const boxGeometry4 = new $49pUz.BoxGeometry(6, 2, 2);
     const boxGeometry5 = new $49pUz.BoxGeometry(12, 2, 2);
     const boxGeometry6 = new $49pUz.BoxGeometry(14, 2, 2);
-    const boxMaterial = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial[2].map.repeat.set(5, 1);
-    boxMaterial[3].map.repeat.set(5, 1);
-    boxMaterial[4].map.repeat.set(5, 1);
-    boxMaterial[5].map.repeat.set(5, 1);
-    const boxMaterial2 = new $49pUz.MeshLambertMaterial({
-        map: wallTexture.clone()
+    const boxMaterial = new $49pUz.MeshLambertMaterial({
+        color: "rgb(0,255,0)"
     });
-    const boxMaterial3 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial3[2].map.repeat.set(2, 1);
-    boxMaterial3[3].map.repeat.set(2, 1);
-    boxMaterial3[4].map.repeat.set(2, 1);
-    boxMaterial3[5].map.repeat.set(2, 1);
-    const boxMaterial4 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial4[2].map.repeat.set(3, 1);
-    boxMaterial4[3].map.repeat.set(3, 1);
-    boxMaterial4[4].map.repeat.set(3, 1);
-    boxMaterial4[5].map.repeat.set(3, 1);
-    const boxMaterial5 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial5[2].map.repeat.set(6, 1);
-    boxMaterial5[3].map.repeat.set(6, 1);
-    boxMaterial5[4].map.repeat.set(6, 1);
-    boxMaterial5[5].map.repeat.set(6, 1);
-    const boxMaterial6 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial6[2].map.repeat.set(7, 1);
-    boxMaterial6[3].map.repeat.set(7, 1);
-    boxMaterial6[4].map.repeat.set(7, 1);
-    boxMaterial6[5].map.repeat.set(7, 1);
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial6));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
@@ -1955,118 +1480,22 @@ phaseGeneration.push(()=>{
     const boxGeometry3 = new $49pUz.BoxGeometry(4, 2, 2);
     const boxGeometry4 = new $49pUz.BoxGeometry(2, 2, 2);
     const boxGeometry5 = new $49pUz.BoxGeometry(8, 2, 2);
-    const boxMaterial = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial[2].map.repeat.set(3, 1);
-    boxMaterial[3].map.repeat.set(3, 1);
-    boxMaterial[4].map.repeat.set(3, 1);
-    boxMaterial[5].map.repeat.set(3, 1);
-    const boxMaterial2 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial2[2].map.repeat.set(6, 1);
-    boxMaterial2[3].map.repeat.set(6, 1);
-    boxMaterial2[4].map.repeat.set(6, 1);
-    boxMaterial2[5].map.repeat.set(6, 1);
-    const boxMaterial3 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial3[2].map.repeat.set(2, 1);
-    boxMaterial3[3].map.repeat.set(2, 1);
-    boxMaterial3[4].map.repeat.set(2, 1);
-    boxMaterial3[5].map.repeat.set(2, 1);
-    const boxMaterial4 = new $49pUz.MeshLambertMaterial({
-        map: wallTexture.clone()
+    const boxMaterial = new $49pUz.MeshLambertMaterial({
+        color: "rgb(0,255,0)"
     });
-    const boxMaterial5 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial5[2].map.repeat.set(4, 1);
-    boxMaterial5[3].map.repeat.set(4, 1);
-    boxMaterial5[4].map.repeat.set(4, 1);
-    boxMaterial5[5].map.repeat.set(4, 1);
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -2231,115 +1660,19 @@ phaseGeneration.push(()=>{
     const boxGeometry3 = new $49pUz.BoxGeometry(6, 2, 2);
     const boxGeometry4 = new $49pUz.BoxGeometry(4, 2, 2);
     const boxGeometry5 = new $49pUz.BoxGeometry(2, 2, 2);
-    const boxMaterial = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial[2].map.repeat.set(7, 1);
-    boxMaterial[3].map.repeat.set(7, 1);
-    boxMaterial[4].map.repeat.set(7, 1);
-    boxMaterial[5].map.repeat.set(7, 1);
-    const boxMaterial2 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial2[2].map.repeat.set(5, 1);
-    boxMaterial2[3].map.repeat.set(5, 1);
-    boxMaterial2[4].map.repeat.set(5, 1);
-    boxMaterial2[5].map.repeat.set(5, 1);
-    const boxMaterial3 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial3[2].map.repeat.set(3, 1);
-    boxMaterial3[3].map.repeat.set(3, 1);
-    boxMaterial3[4].map.repeat.set(3, 1);
-    boxMaterial3[5].map.repeat.set(3, 1);
-    const boxMaterial4 = [
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        }),
-        new $49pUz.MeshLambertMaterial({
-            map: wallTexture.clone()
-        })
-    ];
-    boxMaterial4[2].map.repeat.set(2, 1);
-    boxMaterial4[3].map.repeat.set(2, 1);
-    boxMaterial4[4].map.repeat.set(2, 1);
-    boxMaterial4[5].map.repeat.set(2, 1);
-    const boxMaterial5 = new $49pUz.MeshLambertMaterial({
-        map: wallTexture.clone()
+    const boxMaterial = new $49pUz.MeshLambertMaterial({
+        color: "rgb(0,255,0)"
     });
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -3062,16 +2395,6 @@ var $287fd608de0fa8e7$export$2e2bcd8739ae039 = $287fd608de0fa8e7$var$LaserFence;
 
 });
 
-parcelRequire.register("g2SY0", function(module, exports) {
-
-module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), import.meta.url).toString();
-
-});
-
-
-var $66b075b5e15981bd$exports = {};
-
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.bb95b428.js","hEG10":"metalWallLvl3.c6e3c749.png","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");
