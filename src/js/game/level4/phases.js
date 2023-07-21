@@ -20,7 +20,7 @@ import parseCode from "./parser";
 
 const sceneProperties = {
     cancelExecution: false,
-    phase: 5,
+    phase: 0,
     executing: false
 }
 
