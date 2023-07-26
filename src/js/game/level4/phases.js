@@ -2478,20 +2478,20 @@ phaseGeneration.push(
         traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),0,gridMapHelper.getGlobalZPositionFromCoord(5));
         traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),0,gridMapHelper.getGlobalZPositionFromCoord(3));
         traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0,gridMapHelper.getGlobalZPositionFromCoord(2));
-        traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(8));
-        traps[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(4));
+        //traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(8));
+        //traps[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(4));
         gridMapHelper.addTrap(0,2, traps[0]);
         gridMapHelper.addTrap(3,5, traps[1]);
         gridMapHelper.addTrap(3,3, traps[2]);
         gridMapHelper.addTrap(7,2, traps[3]);
-        gridMapHelper.addTrap(9,8, traps[4]);
-        gridMapHelper.addTrap(9,4, traps[5]);
+        //gridMapHelper.addTrap(9,8, traps[4]);
+        //gridMapHelper.addTrap(9,4, traps[5]);
         scene.add(traps[0]);
         scene.add(traps[1]);
         scene.add(traps[2]);
         scene.add(traps[3]);
-        scene.add(traps[4]);
-        scene.add(traps[5]);
+        //scene.add(traps[4]);
+        //scene.add(traps[5]);
 
         walls = [];
         const boxGeometry1 = new THREE.BoxGeometry(2,2,2);
