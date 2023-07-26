@@ -1021,7 +1021,7 @@ phaseGeneration.push(
         //objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0),0.0,gridMapHelper.getGlobalZPositionFromCoord(0));
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(9));
         objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(0));
-        gridMapHelper.addObstacle(0,0,0,0);
+        //gridMapHelper.addObstacle(0,0,0,0);
         gridMapHelper.addObstacle(9,9,9,9);
         gridMapHelper.addObstacle(9,9,0,0);
         scene.add(objectives[0]);
