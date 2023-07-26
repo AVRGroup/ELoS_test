@@ -764,16 +764,16 @@ phaseGeneration.push(()=>{
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
-    objectives = (0, $6mhZf.loadDefaultObjectives)(3);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(2);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
-    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
-    objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
+    //objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(9));
+    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     gridMapHelper.addObstacle(0, 0, 9, 9);
-    gridMapHelper.addObstacle(9, 9, 9, 9);
+    //gridMapHelper.addObstacle(9,9,9,9);
     gridMapHelper.addObstacle(9, 9, 0, 0);
     scene.add(objectives[0]);
     scene.add(objectives[1]);
-    scene.add(objectives[2]);
+    //scene.add(objectives[2]);
     openDoors = [];
     doors = [];
     crancks = [];
@@ -807,23 +807,23 @@ phaseGeneration.push(()=>{
     openDoors.push(false);
     laserFences = [];
     laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
+    //laserFences.push(new LaserFence("blue"));
+    //laserFences.push(new LaserFence("red"));
     laserFences.push(new (0, $3tzMw.default)("red"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    laserFences[1].rotateY(Math.PI / 2);
-    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    laserFences[2].rotateY(Math.PI / 2);
-    laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+    //laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    //laserFences[1].rotateY(Math.PI / 2);
+    //laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+    //laserFences[2].rotateY(Math.PI / 2);
+    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     gridMapHelper.addLaser(7, 9, laserFences[0]);
-    gridMapHelper.addLaser(9, 2, laserFences[1]);
-    gridMapHelper.addLaser(9, 7, laserFences[2]);
-    gridMapHelper.addLaser(7, 0, laserFences[3]);
+    //gridMapHelper.addLaser(9,2, laserFences[1]);
+    //gridMapHelper.addLaser(9,7, laserFences[2]);
+    gridMapHelper.addLaser(7, 0, laserFences[1]);
     scene.add(laserFences[0]);
     scene.add(laserFences[1]);
-    scene.add(laserFences[2]);
-    scene.add(laserFences[3]);
+    //scene.add(laserFences[2]);
+    //scene.add(laserFences[3]);
     traps = [];
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
@@ -917,7 +917,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[0].getDoorY().toFixed(1) == -2) {
                     openDoors[0] = true;
-                    gridMapHelper.obstacles[3].active = false;
+                    gridMapHelper.obstacles[2].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) {
@@ -928,7 +928,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[1].getDoorY().toFixed(1) == -2) {
                     openDoors[1] = true;
-                    gridMapHelper.obstacles[4].active = false;
+                    gridMapHelper.obstacles[3].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else {
@@ -947,10 +947,6 @@ phaseGeneration.push(()=>{
             objectives[1].visible = false;
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[1].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
-            objectives[2].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[2].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
     };
     resetLevel = ()=>{
@@ -966,7 +962,7 @@ phaseGeneration.push(()=>{
         setLaserStates();
     };
     winCondition = ()=>{
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) return true;
+        if (!objectives[0].visible && !objectives[1].visible) return true;
         else return false;
     };
     laserState = 0;
@@ -974,13 +970,13 @@ phaseGeneration.push(()=>{
         if (laserState == 0) {
             changeLaserActiveStatus(0, true);
             changeLaserActiveStatus(1, false);
-            changeLaserActiveStatus(2, true);
-            changeLaserActiveStatus(3, false);
+        //changeLaserActiveStatus(2,true);
+        //changeLaserActiveStatus(3,false);
         } else {
             changeLaserActiveStatus(0, false);
             changeLaserActiveStatus(1, true);
-            changeLaserActiveStatus(2, false);
-            changeLaserActiveStatus(3, true);
+        //changeLaserActiveStatus(2,false);
+        //changeLaserActiveStatus(3,true);
         }
     };
     setLaserStatesInterval = setInterval(()=>{
@@ -1007,16 +1003,16 @@ phaseGeneration.push(()=>{
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
-    objectives = (0, $6mhZf.loadDefaultObjectives)(3);
-    objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
-    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
-    objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
+    objectives = (0, $6mhZf.loadDefaultObjectives)(2);
+    //objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0),0.0,gridMapHelper.getGlobalZPositionFromCoord(0));
+    objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
+    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     gridMapHelper.addObstacle(0, 0, 0, 0);
     gridMapHelper.addObstacle(9, 9, 9, 9);
     gridMapHelper.addObstacle(9, 9, 0, 0);
     scene.add(objectives[0]);
     scene.add(objectives[1]);
-    scene.add(objectives[2]);
+    //scene.add(objectives[2]);
     openDoors = [];
     doors = [];
     crancks = [];
@@ -1060,24 +1056,24 @@ phaseGeneration.push(()=>{
     openDoors.push(false);
     openDoors.push(false);
     laserFences = [];
-    laserFences.push(new (0, $3tzMw.default)("red"));
+    //laserFences.push(new LaserFence("red"));
     laserFences.push(new (0, $3tzMw.default)("blue"));
     laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    gridMapHelper.addLaser(5, 9, laserFences[0]);
-    gridMapHelper.addLaser(5, 5, laserFences[1]);
-    gridMapHelper.addLaser(9, 6, laserFences[2]);
-    gridMapHelper.addLaser(6, 2, laserFences[3]);
-    laserFences[2].rotateY(Math.PI / 2);
-    laserFences[3].rotateY(Math.PI / 2);
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
+    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    //laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    //gridMapHelper.addLaser(5,9, laserFences[0]);
+    gridMapHelper.addLaser(5, 5, laserFences[0]);
+    gridMapHelper.addLaser(9, 6, laserFences[1]);
+    //gridMapHelper.addLaser(6,2, laserFences[3]);
+    //laserFences[0].rotateY(Math.PI / 2);
+    laserFences[1].rotateY(Math.PI / 2);
     scene.add(laserFences[0]);
     scene.add(laserFences[1]);
-    scene.add(laserFences[2]);
-    scene.add(laserFences[3]);
+    //scene.add(laserFences[2]);
+    //scene.add(laserFences[3]);
     traps = [];
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
@@ -1175,7 +1171,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[0].getDoorY().toFixed(1) == -2) {
                     openDoors[0] = true;
-                    gridMapHelper.obstacles[3].active = false;
+                    gridMapHelper.obstacles[2].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) {
@@ -1186,7 +1182,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[1].getDoorY().toFixed(1) == -2) {
                     openDoors[1] = true;
-                    gridMapHelper.obstacles[4].active = false;
+                    gridMapHelper.obstacles[3].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) {
@@ -1197,7 +1193,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[2].getDoorY().toFixed(1) == -2) {
                     openDoors[2] = true;
-                    gridMapHelper.obstacles[5].active = false;
+                    gridMapHelper.obstacles[4].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else {
@@ -1216,10 +1212,6 @@ phaseGeneration.push(()=>{
             objectives[1].visible = false;
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[1].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
-            objectives[2].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[2].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
     };
     resetLevel = ()=>{
@@ -1227,6 +1219,7 @@ phaseGeneration.push(()=>{
         actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
+        objectives[1].visible = true;
         for(let i = 0; i < openDoors.length; i++)openDoors[i] = false;
         doors.forEach((door)=>door.resetPos());
         gridMapHelper.obstacles.forEach((obstacle)=>obstacle.active = true);
@@ -1235,7 +1228,7 @@ phaseGeneration.push(()=>{
         setLaserStates();
     };
     winCondition = ()=>{
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) return true;
+        if (!objectives[0].visible && !objectives[1].visible) return true;
         else return false;
     };
     laserState = 0;
@@ -1243,11 +1236,11 @@ phaseGeneration.push(()=>{
         if (laserState == 0) {
             changeLaserStateStatus(0, "blue");
             changeLaserActiveStatus(0, true);
-            changeLaserActiveStatus(1, false);
+        //changeLaserActiveStatus(1,false);
         } else {
             changeLaserStateStatus(0, "red");
             changeLaserActiveStatus(0, false);
-            changeLaserActiveStatus(1, true);
+        //changeLaserActiveStatus(1,true);
         }
     };
     setLaserStatesInterval = setInterval(()=>{
@@ -1274,16 +1267,16 @@ phaseGeneration.push(()=>{
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
-    objectives = (0, $6mhZf.loadDefaultObjectives)(3);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(2);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
-    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 0.0, gridMapHelper.getGlobalZPositionFromCoord(4));
-    objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
+    //objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.0,gridMapHelper.getGlobalZPositionFromCoord(4));
+    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
     gridMapHelper.addObstacle(6, 6, 9, 9);
-    gridMapHelper.addObstacle(6, 6, 4, 4);
+    //gridMapHelper.addObstacle(6,6,4,4);
     gridMapHelper.addObstacle(9, 9, 9, 9);
     scene.add(objectives[0]);
     scene.add(objectives[1]);
-    scene.add(objectives[2]);
+    //scene.add(objectives[2]);
     openDoors = [];
     doors = [];
     crancks = [];
@@ -1292,92 +1285,92 @@ phaseGeneration.push(()=>{
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
+    //crancks.push(new Cranck());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
+    //cranckBases.push(new CranckBase());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
+    //cranckInteractionReferences.push(new THREE.Object3D());
     doors.push(new (0, $6dfM7.default)(crancks[0]));
     doors.push(new (0, $6dfM7.default)(crancks[1]));
     doors.push(new (0, $6dfM7.default)(crancks[2]));
-    doors.push(new (0, $6dfM7.default)(crancks[3]));
+    //doors.push(new CranckDoor(crancks[3]));
     crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+    //crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(1));
+    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     crancks[0].correctPos("up", cranckInteractionReferences[0], cranckBases[0]);
     crancks[1].correctPos("down", cranckInteractionReferences[1], cranckBases[1]);
-    crancks[2].correctPos("down", cranckInteractionReferences[2], cranckBases[2]);
-    crancks[3].correctPos("up", cranckInteractionReferences[3], cranckBases[3]);
+    //crancks[2].correctPos("down", cranckInteractionReferences[2], cranckBases[2]);
+    crancks[2].correctPos("up", cranckInteractionReferences[2], cranckBases[2]);
     scene.add(cranckBases[0]);
     scene.add(cranckBases[1]);
     scene.add(cranckBases[2]);
-    scene.add(cranckBases[3]);
+    //scene.add(cranckBases[3]);
     scene.add(crancks[0]);
     scene.add(crancks[1]);
     scene.add(crancks[2]);
-    scene.add(crancks[3]);
+    //scene.add(crancks[3]);
     doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
+    //doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),1,gridMapHelper.getGlobalZPositionFromCoord(1));
+    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     doors[0].rotateY(Math.PI / 2);
     doors[1].rotateY(Math.PI / 2);
     doors[2].rotateY(Math.PI / 2);
-    doors[3].rotateY(Math.PI / 2);
+    //doors[3].rotateY(Math.PI / 2);
     gridMapHelper.addObstacle(2, 2, 7, 7);
     gridMapHelper.addObstacle(2, 2, 1, 1);
-    gridMapHelper.addObstacle(6, 6, 1, 1);
+    //gridMapHelper.addObstacle(6,6,1,1);
     gridMapHelper.addObstacle(6, 6, 8, 8);
     scene.add(doors[0]);
     scene.add(doors[1]);
     scene.add(doors[2]);
-    scene.add(doors[3]);
+    //scene.add(doors[3]);
     openDoors.push(false);
     openDoors.push(false);
     openDoors.push(false);
-    openDoors.push(false);
+    //openDoors.push(false);
     laserFences = [];
-    laserFences.push(new (0, $3tzMw.default)("blue"));
+    //laserFences.push(new LaserFence("blue"));
     laserFences.push(new (0, $3tzMw.default)("red"));
+    //laserFences.push(new LaserFence("multiColor"));
     laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
-    laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    laserFences[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    laserFences[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    laserFences[4].rotateY(Math.PI / 2);
-    laserFences[5].rotateY(Math.PI / 2);
-    laserFences[6].rotateY(Math.PI / 2);
-    laserFences[7].rotateY(Math.PI / 2);
-    gridMapHelper.addLaser(1, 9, laserFences[0]);
-    gridMapHelper.addLaser(1, 0, laserFences[1]);
-    gridMapHelper.addLaser(3, 6, laserFences[2]);
-    gridMapHelper.addLaser(3, 2, laserFences[3]);
-    gridMapHelper.addLaser(6, 3, laserFences[4]);
-    gridMapHelper.addLaser(8, 7, laserFences[5]);
-    gridMapHelper.addLaser(9, 5, laserFences[6]);
-    gridMapHelper.addLaser(9, 1, laserFences[7]);
+    //laserFences.push(new LaserFence("red"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences.push(new LaserFence("red"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+    //laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    //laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
+    //laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+    //laserFences[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
+    //laserFences[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    //laserFences[4].rotateY(Math.PI / 2);
+    //laserFences[5].rotateY(Math.PI / 2);
+    //laserFences[6].rotateY(Math.PI / 2);
+    //laserFences[7].rotateY(Math.PI / 2);
+    //gridMapHelper.addLaser(1,9, laserFences[0]);
+    gridMapHelper.addLaser(1, 0, laserFences[0]);
+    //gridMapHelper.addLaser(3,6, laserFences[2]);
+    gridMapHelper.addLaser(3, 2, laserFences[1]);
+    //gridMapHelper.addLaser(6,3, laserFences[4]);
+    //gridMapHelper.addLaser(8,7, laserFences[5]);
+    //gridMapHelper.addLaser(9,5, laserFences[6]);
+    //gridMapHelper.addLaser(9,1, laserFences[7]);
     scene.add(laserFences[0]);
     scene.add(laserFences[1]);
-    scene.add(laserFences[2]);
-    scene.add(laserFences[3]);
-    scene.add(laserFences[4]);
-    scene.add(laserFences[5]);
-    scene.add(laserFences[6]);
-    scene.add(laserFences[7]);
+    //scene.add(laserFences[2]);
+    //scene.add(laserFences[3]);
+    //scene.add(laserFences[4]);
+    //scene.add(laserFences[5]);
+    //scene.add(laserFences[6]);
+    //scene.add(laserFences[7]);
     traps = [];
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
@@ -1444,7 +1437,7 @@ phaseGeneration.push(()=>{
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    //walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(7.5));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(7.5));
@@ -1458,7 +1451,7 @@ phaseGeneration.push(()=>{
     walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(7.5));
     walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
     walls[12].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    walls[13].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(7.5));
+    //walls[13].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),1,gridMapHelper.getGlobalZPositionFromCoord(7.5));
     gridMapHelper.addObstacle(1, 1, 7, 8);
     gridMapHelper.addObstacle(1, 1, 1, 2);
     gridMapHelper.addObstacle(3, 3, 7, 8);
@@ -1472,7 +1465,7 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(7, 7, 7, 8);
     gridMapHelper.addObstacle(7, 7, 1, 3);
     gridMapHelper.addObstacle(8, 8, 1, 1);
-    gridMapHelper.addObstacle(9, 9, 7, 8);
+    //gridMapHelper.addObstacle(9,9,7,8);
     scene.add(walls[0]);
     scene.add(walls[1]);
     scene.add(walls[2]);
@@ -1486,13 +1479,12 @@ phaseGeneration.push(()=>{
     scene.add(walls[10]);
     scene.add(walls[11]);
     scene.add(walls[12]);
-    scene.add(walls[13]);
+    //scene.add(walls[13]);
     portaFechada = ()=>{
         if (sceneProperties.cancelExecution) return false;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) return !openDoors[1];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) return !openDoors[2];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) return !openDoors[3];
         else {
             consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
             return false;
@@ -1509,7 +1501,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[0].getDoorY().toFixed(1) == -2) {
                     openDoors[0] = true;
-                    gridMapHelper.obstacles[3].active = false;
+                    gridMapHelper.obstacles[2].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) {
@@ -1520,7 +1512,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[1].getDoorY().toFixed(1) == -2) {
                     openDoors[1] = true;
-                    gridMapHelper.obstacles[4].active = false;
+                    gridMapHelper.obstacles[3].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) {
@@ -1531,18 +1523,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[2].getDoorY().toFixed(1) == -2) {
                     openDoors[2] = true;
-                    gridMapHelper.obstacles[5].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) {
-                function translateDoor() {
-                    doors[3].lerpDoor(0, -2);
-                    doors[3].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[3].getDoorY().toFixed(1) == -2) {
-                    openDoors[3] = true;
-                    gridMapHelper.obstacles[6].active = false;
+                    gridMapHelper.obstacles[4].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else {
@@ -1561,10 +1542,6 @@ phaseGeneration.push(()=>{
             objectives[1].visible = false;
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[1].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
-            objectives[2].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[2].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
     };
     resetLevel = ()=>{
@@ -1573,7 +1550,7 @@ phaseGeneration.push(()=>{
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         objectives[1].visible = true;
-        objectives[2].visible = true;
+        //objectives[2].visible = true;
         for(let i = 0; i < openDoors.length; i++)openDoors[i] = false;
         doors.forEach((door)=>door.resetPos());
         gridMapHelper.obstacles.forEach((obstacle)=>obstacle.active = true);
@@ -1582,7 +1559,7 @@ phaseGeneration.push(()=>{
         setLaserStates();
     };
     winCondition = ()=>{
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) return true;
+        if (!objectives[0].visible && !objectives[1].visible) return true;
         else return false;
     };
     laserState = 0;
@@ -1590,15 +1567,15 @@ phaseGeneration.push(()=>{
         if (laserState == 0) {
             changeLaserStateStatus(0, "blue");
             changeLaserActiveStatus(0, true);
-            changeLaserActiveStatus(1, false);
-            changeLaserActiveStatus(4, true);
-            changeLaserActiveStatus(6, false);
+        //changeLaserActiveStatus(1,false);
+        //changeLaserActiveStatus(4,true);
+        //changeLaserActiveStatus(6,false);
         } else {
             changeLaserStateStatus(0, "red");
             changeLaserActiveStatus(0, false);
-            changeLaserActiveStatus(1, true);
-            changeLaserActiveStatus(4, false);
-            changeLaserActiveStatus(6, true);
+        //changeLaserActiveStatus(1,true);
+        //changeLaserActiveStatus(4,false);
+        //changeLaserActiveStatus(6,true);
         }
     };
     setLaserStatesInterval = setInterval(()=>{
@@ -1625,22 +1602,22 @@ phaseGeneration.push(()=>{
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
-    objectives = (0, $6mhZf.loadDefaultObjectives)(5);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(3);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 0.0, gridMapHelper.getGlobalZPositionFromCoord(7));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 0.0, gridMapHelper.getGlobalZPositionFromCoord(3));
-    objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 0.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    objectives[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(7));
-    objectives[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(3));
+    objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 0.0, gridMapHelper.getGlobalZPositionFromCoord(5));
+    //objectives[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(7));
+    //objectives[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(3));
     gridMapHelper.addObstacle(2, 2, 7, 7);
     gridMapHelper.addObstacle(2, 2, 3, 3);
-    gridMapHelper.addObstacle(5, 5, 5, 5);
-    gridMapHelper.addObstacle(9, 9, 7, 7);
-    gridMapHelper.addObstacle(9, 9, 3, 3);
+    gridMapHelper.addObstacle(8, 8, 5, 5);
+    //gridMapHelper.addObstacle(9,9,7,7);
+    //gridMapHelper.addObstacle(9,9,3,3);
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     scene.add(objectives[2]);
-    scene.add(objectives[3]);
-    scene.add(objectives[4]);
+    //scene.add(objectives[3]);
+    //scene.add(objectives[4]);
     openDoors = [];
     doors = [];
     crancks = [];
@@ -1649,112 +1626,112 @@ phaseGeneration.push(()=>{
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
+    //crancks.push(new Cranck());
+    //crancks.push(new Cranck());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
+    //cranckBases.push(new CranckBase());
+    //cranckBases.push(new CranckBase());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
+    //cranckInteractionReferences.push(new THREE.Object3D());
+    //cranckInteractionReferences.push(new THREE.Object3D());
     doors.push(new (0, $6dfM7.default)(crancks[0]));
     doors.push(new (0, $6dfM7.default)(crancks[1]));
     doors.push(new (0, $6dfM7.default)(crancks[2]));
-    doors.push(new (0, $6dfM7.default)(crancks[3]));
-    doors.push(new (0, $6dfM7.default)(crancks[4]));
+    //doors.push(new CranckDoor(crancks[3]));
+    //doors.push(new CranckDoor(crancks[4]));
     crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    crancks[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    //crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(5));
+    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    //crancks[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),1,gridMapHelper.getGlobalZPositionFromCoord(2));
     crancks[0].correctPos("down", cranckInteractionReferences[0], cranckBases[0]);
     crancks[1].correctPos("right", cranckInteractionReferences[1], cranckBases[1]);
+    //crancks[2].correctPos("right", cranckInteractionReferences[2], cranckBases[2]);
     crancks[2].correctPos("right", cranckInteractionReferences[2], cranckBases[2]);
-    crancks[3].correctPos("right", cranckInteractionReferences[3], cranckBases[3]);
-    crancks[4].correctPos("up", cranckInteractionReferences[4], cranckBases[4]);
+    //crancks[4].correctPos("up", cranckInteractionReferences[4], cranckBases[4]);
     scene.add(cranckBases[0]);
     scene.add(cranckBases[1]);
     scene.add(cranckBases[2]);
-    scene.add(cranckBases[3]);
-    scene.add(cranckBases[4]);
+    //scene.add(cranckBases[3]);
+    //scene.add(cranckBases[4]);
     scene.add(crancks[0]);
     scene.add(crancks[1]);
     scene.add(crancks[2]);
-    scene.add(crancks[3]);
-    scene.add(crancks[4]);
+    //scene.add(crancks[3]);
+    //scene.add(crancks[4]);
     doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    //doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),1,gridMapHelper.getGlobalZPositionFromCoord(5));
+    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
+    //doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),1,gridMapHelper.getGlobalZPositionFromCoord(1));
     doors[0].rotateY(Math.PI / 2);
     doors[1].rotateY(Math.PI / 2);
-    doors[3].rotateY(Math.PI / 2);
-    doors[4].rotateY(Math.PI / 2);
+    doors[2].rotateY(Math.PI / 2);
+    //doors[4].rotateY(Math.PI / 2);
     gridMapHelper.addObstacle(2, 2, 8, 8);
     gridMapHelper.addObstacle(2, 2, 2, 2);
-    gridMapHelper.addObstacle(6, 6, 5, 5);
+    //gridMapHelper.addObstacle(6,6,5,5);
     gridMapHelper.addObstacle(9, 9, 8, 8);
-    gridMapHelper.addObstacle(9, 9, 1, 1);
+    //gridMapHelper.addObstacle(9,9,1,1);
     scene.add(doors[0]);
     scene.add(doors[1]);
     scene.add(doors[2]);
-    scene.add(doors[3]);
-    scene.add(doors[4]);
+    //scene.add(doors[3]);
+    //scene.add(doors[4]);
     openDoors.push(false);
     openDoors.push(false);
     openDoors.push(false);
-    openDoors.push(false);
-    openDoors.push(false);
+    //openDoors.push(false);
+    //openDoors.push(false);
     laserFences = [];
+    //laserFences.push(new LaserFence("multiColor"));
     laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    //laserFences.push(new LaserFence("red"));
+    //laserFences.push(new LaserFence("red"));
+    //laserFences.push(new LaserFence("blue"));
+    //laserFences.push(new LaserFence("blue"));
     laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
-    laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-    laserFences[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-    laserFences[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    laserFences[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    //laserFences.push(new LaserFence("red"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    //laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    //laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    //laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    //laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    //laserFences[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+    //laserFences[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    //laserFences[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    //laserFences[0].rotateY(Math.PI / 2);
     laserFences[0].rotateY(Math.PI / 2);
-    laserFences[1].rotateY(Math.PI / 2);
-    laserFences[8].rotateY(Math.PI / 2);
-    laserFences[9].rotateY(Math.PI / 2);
-    gridMapHelper.addLaser(0, 7, laserFences[0]);
-    gridMapHelper.addLaser(0, 2, laserFences[1]);
-    gridMapHelper.addLaser(3, 9, laserFences[2]);
-    gridMapHelper.addLaser(3, 1, laserFences[3]);
-    gridMapHelper.addLaser(5, 9, laserFences[4]);
-    gridMapHelper.addLaser(5, 0, laserFences[5]);
-    gridMapHelper.addLaser(7, 9, laserFences[6]);
-    gridMapHelper.addLaser(7, 0, laserFences[7]);
-    gridMapHelper.addLaser(8, 6, laserFences[8]);
-    gridMapHelper.addLaser(8, 4, laserFences[9]);
+    //laserFences[8].rotateY(Math.PI / 2);
+    //laserFences[9].rotateY(Math.PI / 2);
+    //gridMapHelper.addLaser(0,7, laserFences[0]);
+    gridMapHelper.addLaser(0, 2, laserFences[0]);
+    //gridMapHelper.addLaser(3,9, laserFences[2]);
+    //gridMapHelper.addLaser(3,1, laserFences[3]);
+    //gridMapHelper.addLaser(5,9, laserFences[4]);
+    //gridMapHelper.addLaser(5,0, laserFences[5]);
+    gridMapHelper.addLaser(7, 9, laserFences[1]);
+    //gridMapHelper.addLaser(7,0, laserFences[7]);
+    //gridMapHelper.addLaser(8,6, laserFences[8]);
+    //gridMapHelper.addLaser(8,4, laserFences[9]);
     scene.add(laserFences[0]);
     scene.add(laserFences[1]);
-    scene.add(laserFences[2]);
-    scene.add(laserFences[3]);
-    scene.add(laserFences[4]);
-    scene.add(laserFences[5]);
-    scene.add(laserFences[6]);
-    scene.add(laserFences[7]);
-    scene.add(laserFences[8]);
-    scene.add(laserFences[9]);
+    //scene.add(laserFences[2]);
+    //scene.add(laserFences[3]);
+    //scene.add(laserFences[4]);
+    //scene.add(laserFences[5]);
+    //scene.add(laserFences[6]);
+    //scene.add(laserFences[7]);
+    //scene.add(laserFences[8]);
+    //scene.add(laserFences[9]);
     traps = [];
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
@@ -1860,8 +1837,6 @@ phaseGeneration.push(()=>{
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) return !openDoors[1];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) return !openDoors[2];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) return !openDoors[3];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) return !openDoors[4];
         else {
             consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
             return false;
@@ -1878,7 +1853,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[0].getDoorY().toFixed(1) == -2) {
                     openDoors[0] = true;
-                    gridMapHelper.obstacles[5].active = false;
+                    gridMapHelper.obstacles[3].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) {
@@ -1889,7 +1864,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[1].getDoorY().toFixed(1) == -2) {
                     openDoors[1] = true;
-                    gridMapHelper.obstacles[6].active = false;
+                    gridMapHelper.obstacles[4].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) {
@@ -1900,29 +1875,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[2].getDoorY().toFixed(1) == -2) {
                     openDoors[2] = true;
-                    gridMapHelper.obstacles[7].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) {
-                function translateDoor() {
-                    doors[3].lerpDoor(0, -2);
-                    doors[3].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[3].getDoorY().toFixed(1) == -2) {
-                    openDoors[3] = true;
-                    gridMapHelper.obstacles[8].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) {
-                function translateDoor() {
-                    doors[4].lerpDoor(0, -2);
-                    doors[4].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[4].getDoorY().toFixed(1) == -2) {
-                    openDoors[4] = true;
-                    gridMapHelper.obstacles[9].active = false;
+                    gridMapHelper.obstacles[5].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else {
@@ -1945,14 +1898,6 @@ phaseGeneration.push(()=>{
             objectives[2].visible = false;
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[2].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[3], gridMapHelper)) {
-            objectives[3].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[3].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[4], gridMapHelper)) {
-            objectives[4].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[4].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
     };
     resetLevel = ()=>{
@@ -1962,8 +1907,8 @@ phaseGeneration.push(()=>{
         objectives[0].visible = true;
         objectives[1].visible = true;
         objectives[2].visible = true;
-        objectives[3].visible = true;
-        objectives[4].visible = true;
+        //objectives[3].visible = true;
+        //objectives[4].visible = true;
         for(let i = 0; i < openDoors.length; i++)openDoors[i] = false;
         doors.forEach((door)=>door.resetPos());
         gridMapHelper.obstacles.forEach((obstacle)=>obstacle.active = true);
@@ -1972,26 +1917,13 @@ phaseGeneration.push(()=>{
         setLaserStates();
     };
     winCondition = ()=>{
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible && !objectives[4].visible) return true;
+        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) return true;
         else return false;
     };
     laserState = 0;
     setLaserStates = ()=>{
-        if (laserState == 0) {
-            changeLaserStateStatus(0, "blue");
-            changeLaserActiveStatus(2, true);
-            changeLaserActiveStatus(3, true);
-            changeLaserActiveStatus(4, false);
-            changeLaserActiveStatus(5, false);
-            changeLaserActiveStatus(7, true);
-        } else {
-            changeLaserStateStatus(0, "red");
-            changeLaserActiveStatus(2, false);
-            changeLaserActiveStatus(3, false);
-            changeLaserActiveStatus(4, true);
-            changeLaserActiveStatus(5, true);
-            changeLaserActiveStatus(7, false);
-        }
+        if (laserState == 0) changeLaserStateStatus(0, "blue");
+        else changeLaserStateStatus(0, "red");
     };
     setLaserStatesInterval = setInterval(()=>{
         if (sceneProperties.executing) return;
@@ -2019,9 +1951,9 @@ phaseGeneration.push(()=>{
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
     objectives = (0, $6mhZf.loadDefaultObjectives)(2);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
-    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
+    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
     gridMapHelper.addObstacle(0, 0, 0, 0);
-    gridMapHelper.addObstacle(9, 9, 9, 9);
+    gridMapHelper.addObstacle(7, 7, 9, 9);
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     openDoors = [];
@@ -2032,97 +1964,97 @@ phaseGeneration.push(()=>{
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
+    //crancks.push(new Cranck());
+    //crancks.push(new Cranck());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
+    //cranckBases.push(new CranckBase());
+    //cranckBases.push(new CranckBase());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
+    //cranckInteractionReferences.push(new THREE.Object3D());
+    //cranckInteractionReferences.push(new THREE.Object3D());
     doors.push(new (0, $6dfM7.default)(crancks[0]));
     doors.push(new (0, $6dfM7.default)(crancks[1]));
     doors.push(new (0, $6dfM7.default)(crancks[2]));
-    doors.push(new (0, $6dfM7.default)(crancks[3]));
-    doors.push(new (0, $6dfM7.default)(crancks[4]));
+    //doors.push(new CranckDoor(crancks[3]));
+    //doors.push(new CranckDoor(crancks[4]));
     crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    crancks[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    //crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(9));
+    //crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(6));
+    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
     crancks[0].correctPos("down", cranckInteractionReferences[0], cranckBases[0]);
     crancks[1].correctPos("down", cranckInteractionReferences[1], cranckBases[1]);
+    //crancks[2].correctPos("down", cranckInteractionReferences[2], cranckBases[2]);
+    //crancks[3].correctPos("up", cranckInteractionReferences[3], cranckBases[3]);
     crancks[2].correctPos("down", cranckInteractionReferences[2], cranckBases[2]);
-    crancks[3].correctPos("up", cranckInteractionReferences[3], cranckBases[3]);
-    crancks[4].correctPos("down", cranckInteractionReferences[4], cranckBases[4]);
     scene.add(cranckBases[0]);
     scene.add(cranckBases[1]);
     scene.add(cranckBases[2]);
-    scene.add(cranckBases[3]);
-    scene.add(cranckBases[4]);
+    //scene.add(cranckBases[3]);
+    //scene.add(cranckBases[4]);
     scene.add(crancks[0]);
     scene.add(crancks[1]);
     scene.add(crancks[2]);
-    scene.add(crancks[3]);
-    scene.add(crancks[4]);
+    //scene.add(crancks[3]);
+    //scene.add(crancks[4]);
     doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-    doors[2].rotateY(Math.PI / 2);
-    doors[3].rotateY(Math.PI / 2);
+    //doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(8));
+    //doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(7));
+    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+    //doors[2].rotateY(Math.PI / 2);
+    //doors[3].rotateY(Math.PI / 2);
     gridMapHelper.addObstacle(1, 1, 8, 8);
     gridMapHelper.addObstacle(3, 3, 0, 0);
-    gridMapHelper.addObstacle(5, 5, 8, 8);
-    gridMapHelper.addObstacle(7, 7, 7, 7);
+    //gridMapHelper.addObstacle(5,5,8,8);
+    //gridMapHelper.addObstacle(7,7,7,7);
     gridMapHelper.addObstacle(8, 8, 0, 0);
     scene.add(doors[0]);
     scene.add(doors[1]);
     scene.add(doors[2]);
-    scene.add(doors[3]);
-    scene.add(doors[4]);
+    //scene.add(doors[3]);
+    //scene.add(doors[4]);
     openDoors.push(false);
     openDoors.push(false);
     openDoors.push(false);
-    openDoors.push(false);
-    openDoors.push(false);
+    //openDoors.push(false);
+    //openDoors.push(false);
     laserFences = [];
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences.push(new LaserFence("multiColor"));
     laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
+    //laserFences.push(new LaserFence("red"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences.push(new LaserFence("multiColor"));
     laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
-    laserFences[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    laserFences[2].rotateY(Math.PI / 2);
-    laserFences[3].rotateY(Math.PI / 2);
-    laserFences[6].rotateY(Math.PI / 2);
-    gridMapHelper.addLaser(1, 1, laserFences[0]);
-    gridMapHelper.addLaser(3, 9, laserFences[1]);
-    gridMapHelper.addLaser(4, 6, laserFences[2]);
-    gridMapHelper.addLaser(5, 4, laserFences[3]);
-    gridMapHelper.addLaser(6, 1, laserFences[4]);
-    gridMapHelper.addLaser(8, 3, laserFences[5]);
-    gridMapHelper.addLaser(9, 6, laserFences[6]);
+    //laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    //laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    //laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    //laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    //laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
+    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    laserFences[0].rotateY(Math.PI / 2);
+    //laserFences[3].rotateY(Math.PI / 2);
+    laserFences[1].rotateY(Math.PI / 2);
+    //gridMapHelper.addLaser(1,1, laserFences[0]);
+    //gridMapHelper.addLaser(3,9, laserFences[1]);
+    gridMapHelper.addLaser(4, 6, laserFences[0]);
+    //gridMapHelper.addLaser(5,4, laserFences[3]);
+    //gridMapHelper.addLaser(6,1, laserFences[4]);
+    //gridMapHelper.addLaser(8,3, laserFences[5]);
+    gridMapHelper.addLaser(9, 6, laserFences[1]);
     scene.add(laserFences[0]);
     scene.add(laserFences[1]);
-    scene.add(laserFences[2]);
-    scene.add(laserFences[3]);
-    scene.add(laserFences[4]);
-    scene.add(laserFences[5]);
-    scene.add(laserFences[6]);
+    //scene.add(laserFences[2]);
+    //scene.add(laserFences[3]);
+    //scene.add(laserFences[4]);
+    //scene.add(laserFences[5]);
+    //scene.add(laserFences[6]);
     traps = [];
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
@@ -2225,8 +2157,6 @@ phaseGeneration.push(()=>{
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) return !openDoors[1];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) return !openDoors[2];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) return !openDoors[3];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) return !openDoors[4];
         else {
             consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
             return false;
@@ -2268,28 +2198,6 @@ phaseGeneration.push(()=>{
                     gridMapHelper.obstacles[4].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) {
-                function translateDoor() {
-                    doors[3].lerpDoor(0, -2);
-                    doors[3].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[3].getDoorY().toFixed(1) == -2) {
-                    openDoors[3] = true;
-                    gridMapHelper.obstacles[5].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) {
-                function translateDoor() {
-                    doors[4].lerpDoor(0, -2);
-                    doors[4].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[4].getDoorY().toFixed(1) == -2) {
-                    openDoors[4] = true;
-                    gridMapHelper.obstacles[6].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
             } else {
                 consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
                 resolve();
@@ -2329,12 +2237,12 @@ phaseGeneration.push(()=>{
     setLaserStates = ()=>{
         if (laserState == 0) {
             changeLaserStateStatus(0, "blue");
-            changeLaserActiveStatus(2, true);
-            changeLaserActiveStatus(3, true);
+            changeLaserActiveStatus(0, true);
+        //changeLaserActiveStatus(3,true);
         } else {
             changeLaserStateStatus(0, "red");
-            changeLaserActiveStatus(2, false);
-            changeLaserActiveStatus(3, false);
+            changeLaserActiveStatus(0, false);
+        //changeLaserActiveStatus(3,false);
         }
     };
     setLaserStatesInterval = setInterval(()=>{
@@ -2361,43 +2269,43 @@ phaseGeneration.push(()=>{
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
-    objectives = (0, $6mhZf.loadDefaultObjectives)(5);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(4);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(8));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
-    objectives[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(4));
-    objectives[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
+    //objectives[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(4));
+    objectives[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     gridMapHelper.addObstacle(0, 0, 8, 8);
     gridMapHelper.addObstacle(0, 0, 0, 0);
     gridMapHelper.addObstacle(7, 7, 9, 9);
-    gridMapHelper.addObstacle(9, 9, 4, 4);
+    //gridMapHelper.addObstacle(9,9,4,4);
     gridMapHelper.addObstacle(9, 9, 0, 0);
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     scene.add(objectives[2]);
     scene.add(objectives[3]);
-    scene.add(objectives[4]);
+    //scene.add(objectives[4]);
     traps = [];
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
-    traps.push(new (0, $gSwgq.SpikeTrap)());
+    //traps.push(new SpikeTrap());
     traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0, gridMapHelper.getGlobalZPositionFromCoord(7));
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0, gridMapHelper.getGlobalZPositionFromCoord(2));
     traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 0, gridMapHelper.getGlobalZPositionFromCoord(8));
     traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0, gridMapHelper.getGlobalZPositionFromCoord(3));
+    //traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(3));
     gridMapHelper.addTrap(0, 2, traps[0]);
     gridMapHelper.addTrap(0, 7, traps[1]);
     gridMapHelper.addTrap(6, 8, traps[2]);
     gridMapHelper.addTrap(8, 5, traps[3]);
-    gridMapHelper.addTrap(9, 3, traps[4]);
+    //gridMapHelper.addTrap(9,3, traps[4]);
     scene.add(traps[0]);
     scene.add(traps[1]);
     scene.add(traps[2]);
     scene.add(traps[3]);
-    scene.add(traps[4]);
+    //scene.add(traps[4]);
     openDoors = [];
     doors = [];
     crancks = [];
@@ -2407,84 +2315,84 @@ phaseGeneration.push(()=>{
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
+    //crancks.push(new Cranck());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
+    //cranckBases.push(new CranckBase());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
+    //cranckInteractionReferences.push(new THREE.Object3D());
     doors.push(new (0, $6dfM7.default)(crancks[0]));
     doors.push(new (0, $6dfM7.default)(crancks[1]));
     doors.push(new (0, $6dfM7.default)(crancks[2]));
     doors.push(new (0, $6dfM7.default)(crancks[3]));
-    doors.push(new (0, $6dfM7.default)(crancks[4]));
+    //doors.push(new CranckDoor(crancks[4]));
     crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
     crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    crancks[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
+    //crancks[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(3));
     crancks[0].correctPos("left", cranckInteractionReferences[0], cranckBases[0]);
     crancks[1].correctPos("right", cranckInteractionReferences[1], cranckBases[1]);
     crancks[2].correctPos("down", cranckInteractionReferences[2], cranckBases[2]);
     crancks[3].correctPos("right", cranckInteractionReferences[3], cranckBases[3]);
-    crancks[4].correctPos("down", cranckInteractionReferences[4], cranckBases[4]);
+    //crancks[4].correctPos("down", cranckInteractionReferences[4], cranckBases[4]);
     scene.add(cranckBases[0]);
     scene.add(cranckBases[1]);
     scene.add(cranckBases[2]);
     scene.add(cranckBases[3]);
-    scene.add(cranckBases[4]);
+    //scene.add(cranckBases[4]);
     scene.add(crancks[0]);
     scene.add(crancks[1]);
     scene.add(crancks[2]);
     scene.add(crancks[3]);
-    scene.add(crancks[4]);
+    //scene.add(crancks[4]);
     doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
     doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    //doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(2));
     doors[2].rotateY(Math.PI / 2);
     //doors[3].rotateY(Math.PI / 2);
     gridMapHelper.addObstacle(1, 1, 9, 9);
     gridMapHelper.addObstacle(1, 1, 1, 1);
     gridMapHelper.addObstacle(4, 4, 8, 8);
     gridMapHelper.addObstacle(8, 8, 7, 7);
-    gridMapHelper.addObstacle(8, 8, 2, 2);
+    //gridMapHelper.addObstacle(8,8,2,2);
     scene.add(doors[0]);
     scene.add(doors[1]);
     scene.add(doors[2]);
     scene.add(doors[3]);
-    scene.add(doors[4]);
+    //scene.add(doors[4]);
     openDoors.push(false);
     openDoors.push(false);
     openDoors.push(false);
     openDoors.push(false);
-    openDoors.push(false);
+    //openDoors.push(false);
     laserFences = [];
     laserFences.push(new (0, $3tzMw.default)("multiColor"));
     laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences.push(new LaserFence("multiColor"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    //laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    //laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
     laserFences[1].rotateY(Math.PI / 2);
-    laserFences[2].rotateY(Math.PI / 2);
-    laserFences[3].rotateY(Math.PI / 2);
+    //laserFences[2].rotateY(Math.PI / 2);
+    //laserFences[3].rotateY(Math.PI / 2);
     gridMapHelper.addLaser(5, 9, laserFences[0]);
     gridMapHelper.addLaser(6, 6, laserFences[1]);
-    gridMapHelper.addLaser(9, 6, laserFences[2]);
-    gridMapHelper.addLaser(9, 1, laserFences[3]);
+    //gridMapHelper.addLaser(9,6, laserFences[2]);
+    //gridMapHelper.addLaser(9,1, laserFences[3]);
     scene.add(laserFences[0]);
     scene.add(laserFences[1]);
-    scene.add(laserFences[2]);
-    scene.add(laserFences[3]);
+    //scene.add(laserFences[2]);
+    //scene.add(laserFences[3]);
     walls = [];
     const boxGeometry1 = new $49pUz.BoxGeometry(2, 2, 2);
     const boxGeometry2 = new $49pUz.BoxGeometry(4, 2, 2);
@@ -2575,7 +2483,6 @@ phaseGeneration.push(()=>{
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) return !openDoors[1];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) return !openDoors[2];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) return !openDoors[3];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) return !openDoors[4];
         else {
             consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
             return false;
@@ -2592,7 +2499,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[0].getDoorY().toFixed(1) == -2) {
                     openDoors[0] = true;
-                    gridMapHelper.obstacles[5].active = false;
+                    gridMapHelper.obstacles[4].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) {
@@ -2603,7 +2510,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[1].getDoorY().toFixed(1) == -2) {
                     openDoors[1] = true;
-                    gridMapHelper.obstacles[6].active = false;
+                    gridMapHelper.obstacles[5].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) {
@@ -2614,7 +2521,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[2].getDoorY().toFixed(1) == -2) {
                     openDoors[2] = true;
-                    gridMapHelper.obstacles[7].active = false;
+                    gridMapHelper.obstacles[6].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) {
@@ -2625,18 +2532,7 @@ phaseGeneration.push(()=>{
                 }
                 if (doors[3].getDoorY().toFixed(1) == -2) {
                     openDoors[3] = true;
-                    gridMapHelper.obstacles[8].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) {
-                function translateDoor() {
-                    doors[4].lerpDoor(0, -2);
-                    doors[4].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[4].getDoorY().toFixed(1) == -2) {
-                    openDoors[4] = true;
-                    gridMapHelper.obstacles[9].active = false;
+                    gridMapHelper.obstacles[7].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else {
@@ -2663,10 +2559,6 @@ phaseGeneration.push(()=>{
             objectives[3].visible = false;
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[3].active = false;
-        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[4], gridMapHelper)) {
-            objectives[4].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
-            gridMapHelper.obstacles[4].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
     };
     resetLevel = ()=>{
@@ -2682,7 +2574,7 @@ phaseGeneration.push(()=>{
         setLaserStates();
     };
     winCondition = ()=>{
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible && !objectives[4].visible) return true;
+        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible) return true;
         else return false;
     };
     laserState = 0;
@@ -2761,115 +2653,115 @@ phaseGeneration.push(()=>{
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
     crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
-    crancks.push(new (0, $9JB7Y.default)());
+    //crancks.push(new Cranck());
+    //crancks.push(new Cranck());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
     cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
-    cranckBases.push(new (0, $dUbLs.default)());
+    //cranckBases.push(new CranckBase());
+    //cranckBases.push(new CranckBase());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
     cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
-    cranckInteractionReferences.push(new $49pUz.Object3D());
+    //cranckInteractionReferences.push(new THREE.Object3D());
+    //cranckInteractionReferences.push(new THREE.Object3D());
     doors.push(new (0, $6dfM7.default)(crancks[0]));
     doors.push(new (0, $6dfM7.default)(crancks[1]));
     doors.push(new (0, $6dfM7.default)(crancks[2]));
-    doors.push(new (0, $6dfM7.default)(crancks[3]));
-    doors.push(new (0, $6dfM7.default)(crancks[4]));
+    //doors.push(new CranckDoor(crancks[3]));
+    //doors.push(new CranckDoor(crancks[4]));
     crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    crancks[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    //crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),1,gridMapHelper.getGlobalZPositionFromCoord(7));
+    crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    //crancks[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(1));
     crancks[0].correctPos("up", cranckInteractionReferences[0], cranckBases[0]);
     crancks[1].correctPos("right", cranckInteractionReferences[1], cranckBases[1]);
-    crancks[2].correctPos("up", cranckInteractionReferences[2], cranckBases[2]);
-    crancks[3].correctPos("right", cranckInteractionReferences[3], cranckBases[3]);
-    crancks[4].correctPos("down", cranckInteractionReferences[4], cranckBases[4]);
+    //crancks[2].correctPos("up", cranckInteractionReferences[2], cranckBases[2]);
+    crancks[2].correctPos("right", cranckInteractionReferences[2], cranckBases[2]);
+    //crancks[4].correctPos("down", cranckInteractionReferences[4], cranckBases[4]);
     scene.add(cranckBases[0]);
     scene.add(cranckBases[1]);
     scene.add(cranckBases[2]);
-    scene.add(cranckBases[3]);
-    scene.add(cranckBases[4]);
+    //scene.add(cranckBases[3]);
+    //scene.add(cranckBases[4]);
     scene.add(crancks[0]);
     scene.add(crancks[1]);
     scene.add(crancks[2]);
-    scene.add(crancks[3]);
-    scene.add(crancks[4]);
+    //scene.add(crancks[3]);
+    //scene.add(crancks[4]);
     doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+    //doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),1,gridMapHelper.getGlobalZPositionFromCoord(6));
+    doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
+    //doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(0));
     doors[1].rotateY(Math.PI / 2);
+    //doors[2].rotateY(Math.PI / 2);
     doors[2].rotateY(Math.PI / 2);
-    doors[3].rotateY(Math.PI / 2);
     //doors[3].rotateY(Math.PI / 2);
     gridMapHelper.addObstacle(2, 2, 9, 9);
     gridMapHelper.addObstacle(1, 1, 1, 1);
-    gridMapHelper.addObstacle(3, 3, 6, 6);
+    //gridMapHelper.addObstacle(3,3,6,6);
     gridMapHelper.addObstacle(5, 5, 5, 5);
-    gridMapHelper.addObstacle(8, 8, 0, 0);
+    //gridMapHelper.addObstacle(8,8,0,0);
     scene.add(doors[0]);
     scene.add(doors[1]);
     scene.add(doors[2]);
-    scene.add(doors[3]);
-    scene.add(doors[4]);
+    //scene.add(doors[3]);
+    //scene.add(doors[4]);
     openDoors.push(false);
     openDoors.push(false);
     openDoors.push(false);
-    openDoors.push(false);
-    openDoors.push(false);
+    //openDoors.push(false);
+    //openDoors.push(false);
     laserFences = [];
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences.push(new LaserFence("blue"));
+    //laserFences.push(new LaserFence("blue"));
     laserFences.push(new (0, $3tzMw.default)("multiColor"));
     laserFences.push(new (0, $3tzMw.default)("red"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences.push(new LaserFence("red"));
     laserFences.push(new (0, $3tzMw.default)("blue"));
-    laserFences.push(new (0, $3tzMw.default)("red"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
-    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    laserFences[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    laserFences[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    laserFences[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
-    laserFences[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    laserFences[0].rotateY(Math.PI / 2);
+    //laserFences.push(new LaserFence("red"));
+    //laserFences.push(new LaserFence("multiColor"));
+    //laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+    //laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
+    //laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    //laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
+    //laserFences[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
+    laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
+    //laserFences[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
+    //laserFences[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    //laserFences[0].rotateY(Math.PI / 2);
+    //laserFences[1].rotateY(Math.PI / 2);
+    //laserFences[2].rotateY(Math.PI / 2);
     laserFences[1].rotateY(Math.PI / 2);
+    //laserFences[5].rotateY(Math.PI / 2);
     laserFences[2].rotateY(Math.PI / 2);
-    laserFences[4].rotateY(Math.PI / 2);
-    laserFences[5].rotateY(Math.PI / 2);
-    laserFences[7].rotateY(Math.PI / 2);
-    laserFences[8].rotateY(Math.PI / 2);
-    gridMapHelper.addLaser(1, 7, laserFences[0]);
-    gridMapHelper.addLaser(3, 8, laserFences[1]);
-    gridMapHelper.addLaser(3, 1, laserFences[2]);
-    gridMapHelper.addLaser(4, 9, laserFences[3]);
-    gridMapHelper.addLaser(5, 2, laserFences[4]);
-    gridMapHelper.addLaser(7, 5, laserFences[5]);
-    gridMapHelper.addLaser(8, 8, laserFences[6]);
-    gridMapHelper.addLaser(9, 5, laserFences[7]);
-    gridMapHelper.addLaser(9, 3, laserFences[8]);
-    gridMapHelper.addLaser(8, 2, laserFences[9]);
+    //laserFences[8].rotateY(Math.PI / 2);
+    //gridMapHelper.addLaser(1,7, laserFences[0]);
+    //gridMapHelper.addLaser(3,8, laserFences[1]);
+    //gridMapHelper.addLaser(3,1, laserFences[2]);
+    gridMapHelper.addLaser(4, 9, laserFences[0]);
+    gridMapHelper.addLaser(5, 2, laserFences[1]);
+    //gridMapHelper.addLaser(7,5, laserFences[5]);
+    //gridMapHelper.addLaser(8,8, laserFences[6]);
+    gridMapHelper.addLaser(9, 5, laserFences[2]);
+    //gridMapHelper.addLaser(9,3, laserFences[8]);
+    //gridMapHelper.addLaser(8,2, laserFences[9]);
     scene.add(laserFences[0]);
     scene.add(laserFences[1]);
     scene.add(laserFences[2]);
-    scene.add(laserFences[3]);
-    scene.add(laserFences[4]);
-    scene.add(laserFences[5]);
-    scene.add(laserFences[6]);
-    scene.add(laserFences[7]);
-    scene.add(laserFences[8]);
-    scene.add(laserFences[9]);
+    //scene.add(laserFences[3]);
+    //scene.add(laserFences[4]);
+    //scene.add(laserFences[5]);
+    //scene.add(laserFences[6]);
+    //scene.add(laserFences[7]);
+    //scene.add(laserFences[8]);
+    //scene.add(laserFences[9]);
     walls = [];
     const boxGeometry1 = new $49pUz.BoxGeometry(2, 2, 2);
     const boxGeometry2 = new $49pUz.BoxGeometry(4, 2, 2);
@@ -2952,8 +2844,6 @@ phaseGeneration.push(()=>{
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) return !openDoors[1];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) return !openDoors[2];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) return !openDoors[3];
-        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) return !openDoors[4];
         else {
             consoleElement.innerText += "\xc9 preciso estar de frente de uma manivela para usar este comando.\n";
             return false;
@@ -2993,28 +2883,6 @@ phaseGeneration.push(()=>{
                 if (doors[2].getDoorY().toFixed(1) == -2) {
                     openDoors[2] = true;
                     gridMapHelper.obstacles[6].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) {
-                function translateDoor() {
-                    doors[3].lerpDoor(0, -2);
-                    doors[3].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[3].getDoorY().toFixed(1) == -2) {
-                    openDoors[3] = true;
-                    gridMapHelper.obstacles[7].active = false;
-                    resolve();
-                } else requestAnimationFrame(translateDoor);
-            } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) {
-                function translateDoor() {
-                    doors[4].lerpDoor(0, -2);
-                    doors[4].rotateCranckZ((0, $6mhZf.degreeToRadians)(-5));
-                    resolve();
-                }
-                if (doors[4].getDoorY().toFixed(1) == -2) {
-                    openDoors[4] = true;
-                    gridMapHelper.obstacles[8].active = false;
                     resolve();
                 } else requestAnimationFrame(translateDoor);
             } else {
@@ -3063,20 +2931,20 @@ phaseGeneration.push(()=>{
     setLaserStates = ()=>{
         if (laserState == 0) {
             changeLaserStateStatus(0, "blue");
+            //changeLaserActiveStatus(1,true);
+            //changeLaserActiveStatus(2,true);
             changeLaserActiveStatus(1, true);
+            //changeLaserActiveStatus(6,true);
             changeLaserActiveStatus(2, true);
-            changeLaserActiveStatus(4, true);
-            changeLaserActiveStatus(6, true);
-            changeLaserActiveStatus(7, true);
-            changeLaserActiveStatus(8, true);
+        //changeLaserActiveStatus(8,true);
         } else {
             changeLaserStateStatus(0, "red");
+            //changeLaserActiveStatus(1,false);
+            //changeLaserActiveStatus(2,false);
             changeLaserActiveStatus(1, false);
+            //changeLaserActiveStatus(6,false);
             changeLaserActiveStatus(2, false);
-            changeLaserActiveStatus(4, false);
-            changeLaserActiveStatus(6, false);
-            changeLaserActiveStatus(7, false);
-            changeLaserActiveStatus(8, false);
+        //changeLaserActiveStatus(8,false);
         }
     };
     setLaserStatesInterval = setInterval(()=>{
@@ -4044,7 +3912,7 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
 
 var $0db8bcdf209a2965$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.fde38ccc.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.23a44c19.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
