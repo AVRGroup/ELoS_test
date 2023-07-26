@@ -1007,7 +1007,7 @@ phaseGeneration.push(()=>{
     //objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0),0.0,gridMapHelper.getGlobalZPositionFromCoord(0));
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
-    gridMapHelper.addObstacle(0, 0, 0, 0);
+    //gridMapHelper.addObstacle(0,0,0,0);
     gridMapHelper.addObstacle(9, 9, 9, 9);
     gridMapHelper.addObstacle(9, 9, 0, 0);
     scene.add(objectives[0]);
@@ -3912,7 +3912,7 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
 
 var $0db8bcdf209a2965$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.23a44c19.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.eb3ba8e2.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
