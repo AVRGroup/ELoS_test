@@ -2066,20 +2066,20 @@ phaseGeneration.push(()=>{
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 0, gridMapHelper.getGlobalZPositionFromCoord(5));
     traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 0, gridMapHelper.getGlobalZPositionFromCoord(3));
     traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 0, gridMapHelper.getGlobalZPositionFromCoord(2));
-    traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0, gridMapHelper.getGlobalZPositionFromCoord(8));
-    traps[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0, gridMapHelper.getGlobalZPositionFromCoord(4));
+    //traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(8));
+    //traps[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(4));
     gridMapHelper.addTrap(0, 2, traps[0]);
     gridMapHelper.addTrap(3, 5, traps[1]);
     gridMapHelper.addTrap(3, 3, traps[2]);
     gridMapHelper.addTrap(7, 2, traps[3]);
-    gridMapHelper.addTrap(9, 8, traps[4]);
-    gridMapHelper.addTrap(9, 4, traps[5]);
+    //gridMapHelper.addTrap(9,8, traps[4]);
+    //gridMapHelper.addTrap(9,4, traps[5]);
     scene.add(traps[0]);
     scene.add(traps[1]);
     scene.add(traps[2]);
     scene.add(traps[3]);
-    scene.add(traps[4]);
-    scene.add(traps[5]);
+    //scene.add(traps[4]);
+    //scene.add(traps[5]);
     walls = [];
     const boxGeometry1 = new $49pUz.BoxGeometry(2, 2, 2);
     const boxGeometry2 = new $49pUz.BoxGeometry(4, 2, 2);
@@ -3912,7 +3912,7 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
 
 var $0db8bcdf209a2965$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.eb3ba8e2.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.735622b9.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
