@@ -2134,7 +2134,7 @@ finishEarlierButton.addEventListener('click', (e) => {
     if(confirm("Deseja realmente finalizar a prática?"))
     {
         clearInterval(timerUpadate);
-        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 1/Fase ${sceneProperties.phase + 1}`);
+        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 2/Fase ${sceneProperties.phase + 1}`);
         logModal.show();
     }
 });
