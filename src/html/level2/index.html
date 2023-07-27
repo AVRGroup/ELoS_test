@@ -26,6 +26,7 @@
                             <img src="../../img/game/fire-extinguisher.png" alt="Extintor de Incêndio" width="40" height="40">
                             <h2 id="extinguisherUses" class="text-light">xN</h2>
                         </div>
+                        <h3 id="timer" class="text-white">Tempo:</h3>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
@@ -104,6 +105,43 @@
                                     <button id="clsConsole" type="button" class="btn btn-secondary">Limpar Console</button>
                                 </div>
                             </div>
+                            <button id="finishEarlier" type="button" class="btn btn-danger ms-3 my-2">Finalizar Atividade</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="logModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 2, informe:</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form id="dataLog">
+                                <div class="mb-2">
+                                    <label for="name" class="form-label"><b>Nome:</b></label>
+                                    <input type="text" name="name" id="name" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="age" class="form-label"><b>Idade:</b></label>
+                                    <input type="number" name="age" id="age" class="form-control" min="1" step="1">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="gender" class="form-label"><b>Gênero:</b></label><br>
+                                    <input type="radio" name="gender" value="Feminino" class="form-check-input"> Feminino
+                                    <input type="radio" name="gender" value="Masculino" class="form-check-input"> Masculino
+                                </div>
+                                <div class="mb-2">
+                                    <label for="prog-exp" class="form-label"><b>Qual sua experiência com programação?</b></label><br>
+                                    <input type="radio" name="prog-exp" value="Este foi meu primeiro contato." class="form-check-input"> Este foi meu primeiro contato.<br>
+                                    <input type="radio" name="prog-exp" value="Tive uma pequena experiência no colégio." class="form-check-input"> Tive uma pequena experiência no colégio.<br>
+                                    <input type="radio" name="prog-exp" value="Já programei pequenos projetos." class="form-check-input"> Já programei pequenos projetos.<br>
+                                    <input type="radio" name="prog-exp" value="Sou um programador experiente." class="form-check-input"> Sou um programador experiente.
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="subBtn" type="button" class="btn btn-primary">Avançar</button>
                         </div>
                     </div>
                 </div>

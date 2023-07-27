@@ -14,13 +14,25 @@ import GridMapHelper from "../three/GridMapHelper";
 import FireBase from "../three/FireBase";
 import {SpikeTrap, trapsActivation, trapsDeactivation} from "../three/SpikeTrap";
 import parseCode from "./parser";
+import { displayTime, configureDataAndUpload } from "../timer";
+import { Modal } from "bootstrap";
 
 //Defining Level 2 Scene's Properties
 
 const sceneProperties = {
     cancelExecution: false,
+    timer: 0,
     phase: 0,
     executing: false
+}
+
+const logModal = new Modal(document.getElementById("logModal"));
+
+let timerUpadate;
+
+function updateTime()
+{
+    sceneProperties.timer++;
 }
 
 let extinguisherUses;
@@ -428,6 +440,7 @@ phaseGeneration.push(
                 return false;
             }
         }
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -612,6 +625,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -778,6 +792,7 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -951,6 +966,7 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -1190,6 +1206,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 //Phase 6
@@ -1435,6 +1452,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 //Phase 7
@@ -1695,6 +1713,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 //Phase 8
@@ -1974,6 +1993,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -2034,11 +2054,14 @@ function animate()
     renderer.render(scene,camera);
     controls.update();
     requestAnimationFrame(animate);
+    displayTime(sceneProperties.timer,document.getElementById("timer"));
 }
 
 window.addEventListener('resize',() => {
     resizeCanvasToDisplaySize(renderer,camera);
 });
+
+const finishEarlierButton = document.getElementById('finishEarlier');
 
 const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
@@ -2059,6 +2082,12 @@ execBtn.addEventListener("click",async function() {
             document.getElementById('winMessage').classList.remove('invisible');
             document.getElementById('advanceBtn').classList.remove('invisible');
             document.getElementById("resetBtn").disabled = true;
+            finishEarlierButton.disabled = true;
+            clearInterval(timerUpadate);
+            if(sceneProperties.phase == phaseGeneration.length - 1)
+            {
+                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 2/Completo');
+            }
         }
         else
         {
@@ -2092,11 +2121,21 @@ advanceBtn.addEventListener('click',(e) => {
         document.getElementById('advanceBtn').classList.add('invisible');
         execBtn.disabled = false;
         resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
     }
     else
     {
         sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
-        window.location.href = "../";
+        logModal.show();
+    }
+});
+
+finishEarlierButton.addEventListener('click', (e) => {
+    if(confirm("Deseja realmente finalizar a prática?"))
+    {
+        clearInterval(timerUpadate);
+        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 1/Fase ${sceneProperties.phase + 1}`);
+        logModal.show();
     }
 });
 
