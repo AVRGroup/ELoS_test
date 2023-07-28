@@ -60147,6 +60147,84 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
 
 });
 
+parcelRequire.register("c6e6z", function(module, exports) {
+
+$parcel$export(module.exports, "displayTime", () => $8cf0fc8944b9cdfc$export$cbae8a5783c0845c);
+$parcel$export(module.exports, "configureDataAndUpload", () => $8cf0fc8944b9cdfc$export$ce33b877b675017a);
+const $8cf0fc8944b9cdfc$var$FORM_ACCESS = "https://docs.google.com/forms/d/e/1FAIpQLSeTbA3iFSmgcNeCaFKuXEKQ0mOBg74mow2ISXzESXOI4afhOQ/formResponse";
+function $8cf0fc8944b9cdfc$export$cbae8a5783c0845c(time, timerElement) {
+    let hour = Math.floor(time / 3600);
+    let min = Math.floor(time / 60) % 60;
+    let seg = Math.floor(time % 60);
+    timerElement.innerText = `Tempo: ${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`;
+}
+async function $8cf0fc8944b9cdfc$var$uploadLog(data) {
+    return new Promise((resolve, reject)=>{
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", $8cf0fc8944b9cdfc$var$FORM_ACCESS, true);
+        let formData = new FormData();
+        for(let i = 0; i < data.length; i++)formData.append(data[i][0], data[i][1]);
+        xhr.onreadystatechange = ()=>{
+            if (xhr.readyState === XMLHttpRequest.DONE) resolve(true);
+        };
+        xhr.send(formData);
+    });
+}
+async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, genderRadioName, progExpRadioName, subBtn, time, redirectPath, level) {
+    subBtn.addEventListener("click", async ()=>{
+        let genderInput = document.querySelector(`input[name="${genderRadioName}"]:checked`);
+        let progExpInput = document.querySelector(`input[name="${progExpRadioName}"]:checked`);
+        let hour = Math.floor(time / 3600);
+        let min = Math.floor(time / 60) % 60;
+        let seg = Math.floor(time % 60);
+        let name = nameInput.value;
+        let age = ageInput.value;
+        let gender = genderInput != null ? genderInput.value : null;
+        let progExp = progExpInput != null ? progExpInput.value : null;
+        if (name != null && name != "" && age != null && age != "" && gender != null && gender != "" && progExp != null && progExp != "") {
+            if (parseFloat(age) >= 1) {
+                subBtn.disabled = true;
+                let data = [
+                    [
+                        "entry.1867777838",
+                        level
+                    ],
+                    [
+                        "entry.746491928",
+                        name
+                    ],
+                    [
+                        "entry.1029337756",
+                        age
+                    ],
+                    [
+                        "entry.1806882852",
+                        gender
+                    ],
+                    [
+                        "entry.1585862028",
+                        progExp
+                    ],
+                    [
+                        "entry.2140863999",
+                        `${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`
+                    ]
+                ];
+                let success = await $8cf0fc8944b9cdfc$var$uploadLog(data);
+                if (success) {
+                    console.log(data);
+                    window.location.href = redirectPath;
+                } else {
+                    alert("Ops! Algo deu errado!");
+                    subBtn.disabled = false;
+                }
+            } else alert("Valor da idade incorreto.");
+        } else alert("\xc9 necess\xe1rio preencher o formul\xe1rio para avan\xe7ar.");
+    });
+}
+
+});
+
 parcelRequire.register("gSwgq", function(module, exports) {
 
 $parcel$export(module.exports, "SpikeTrap", () => $c49ab76c1c184985$export$95ed74868703b797);
@@ -60312,86 +60390,8 @@ function $c49ab76c1c184985$export$5d4bb8012760247a(traps) {
 
 });
 
-parcelRequire.register("c6e6z", function(module, exports) {
+var $b7dd0a3c89a86fa3$exports = {};
 
-$parcel$export(module.exports, "displayTime", () => $8cf0fc8944b9cdfc$export$cbae8a5783c0845c);
-$parcel$export(module.exports, "configureDataAndUpload", () => $8cf0fc8944b9cdfc$export$ce33b877b675017a);
-const $8cf0fc8944b9cdfc$var$FORM_ACCESS = "https://docs.google.com/forms/d/e/1FAIpQLSeTbA3iFSmgcNeCaFKuXEKQ0mOBg74mow2ISXzESXOI4afhOQ/formResponse";
-function $8cf0fc8944b9cdfc$export$cbae8a5783c0845c(time, timerElement) {
-    let hour = Math.floor(time / 3600);
-    let min = Math.floor(time / 60) % 60;
-    let seg = Math.floor(time % 60);
-    timerElement.innerText = `Tempo: ${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`;
-}
-async function $8cf0fc8944b9cdfc$var$uploadLog(data) {
-    return new Promise((resolve, reject)=>{
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", $8cf0fc8944b9cdfc$var$FORM_ACCESS, true);
-        let formData = new FormData();
-        for(let i = 0; i < data.length; i++)formData.append(data[i][0], data[i][1]);
-        xhr.onreadystatechange = ()=>{
-            if (xhr.readyState === XMLHttpRequest.DONE) resolve(true);
-        };
-        xhr.send(formData);
-    });
-}
-async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, genderRadioName, progExpRadioName, subBtn, time, redirectPath, level) {
-    subBtn.addEventListener("click", async ()=>{
-        let genderInput = document.querySelector(`input[name="${genderRadioName}"]:checked`);
-        let progExpInput = document.querySelector(`input[name="${progExpRadioName}"]:checked`);
-        let hour = Math.floor(time / 3600);
-        let min = Math.floor(time / 60) % 60;
-        let seg = Math.floor(time % 60);
-        let name = nameInput.value;
-        let age = ageInput.value;
-        let gender = genderInput != null ? genderInput.value : null;
-        let progExp = progExpInput != null ? progExpInput.value : null;
-        if (name != null && name != "" && age != null && age != "" && gender != null && gender != "" && progExp != null && progExp != "") {
-            if (parseFloat(age) >= 1) {
-                subBtn.disabled = true;
-                let data = [
-                    [
-                        "entry.1867777838",
-                        level
-                    ],
-                    [
-                        "entry.746491928",
-                        name
-                    ],
-                    [
-                        "entry.1029337756",
-                        age
-                    ],
-                    [
-                        "entry.1806882852",
-                        gender
-                    ],
-                    [
-                        "entry.1585862028",
-                        progExp
-                    ],
-                    [
-                        "entry.2140863999",
-                        `${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`
-                    ]
-                ];
-                let success = await $8cf0fc8944b9cdfc$var$uploadLog(data);
-                if (success) {
-                    console.log(data);
-                    window.location.href = redirectPath;
-                } else {
-                    alert("Ops! Algo deu errado!");
-                    subBtn.disabled = false;
-                }
-            } else alert("Valor da idade incorreto.");
-        } else alert("\xc9 necess\xe1rio preencher o formul\xe1rio para avan\xe7ar.");
-    });
-}
-
-});
-
-var $ddc7ec73b209d3a9$exports = {};
-
-(parcelRequire("2JpsI")).register(JSON.parse('{"XyxrU":"index.c8a8fc48.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"1kNgI":"index.021088d0.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
