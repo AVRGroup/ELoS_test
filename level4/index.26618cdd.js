@@ -60,11 +60,21 @@ var $3tzMw = parcelRequire("3tzMw");
 var $gSwgq = parcelRequire("gSwgq");
 
 var $8vOEa = parcelRequire("8vOEa");
+
+var $c6e6z = parcelRequire("c6e6z");
+
+var $1CqPx = parcelRequire("1CqPx");
 const sceneProperties = {
     cancelExecution: false,
+    timer: 0,
     phase: 0,
     executing: false
 };
+const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
+let timerUpadate;
+function updateTime() {
+    sceneProperties.timer++;
+}
 let laserState;
 let setLaserStates;
 let setLaserStatesInterval;
@@ -553,6 +563,10 @@ const { renderer , scene , camera , controls  } = (0, $6mhZf.generateDefaultScen
 const gridMapHelper = new (0, $2Y9dv.default)();
 const plane = gridMapHelper.createGridPlane();
 const actor = (0, $6mhZf.loadDefaultActor)();
+
+const wallTexture = new $49pUz.TextureLoader().load(new URL((parcelRequire("9uuME"))).toString());
+wallTexture.wrapS = $49pUz.RepeatWrapping;
+wallTexture.wrapT = $49pUz.RepeatWrapping;
 let objectives;
 let walls;
 let openDoors;
@@ -695,9 +709,30 @@ phaseGeneration.push(()=>{
     openDoors.push(false);
     walls = [];
     const boxGeometry = new $49pUz.BoxGeometry(18, 2, 2);
-    const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
-    });
+    const boxMaterial = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial[2].map.repeat.set(9, 1);
+    boxMaterial[3].map.repeat.set(9, 1);
+    boxMaterial[4].map.repeat.set(9, 1);
+    boxMaterial[5].map.repeat.set(9, 1);
     walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
@@ -756,6 +791,7 @@ phaseGeneration.push(()=>{
         if (!objectives[0].visible) return true;
         else return false;
     };
+    timerUpadate = setInterval(updateTime, 1000);
 });
 // Phase 2
 phaseGeneration.push(()=>{
@@ -838,21 +874,93 @@ phaseGeneration.push(()=>{
     const boxGeometry1 = new $49pUz.BoxGeometry(2, 2, 2);
     const boxGeometry2 = new $49pUz.BoxGeometry(8, 2, 2);
     const boxGeometry3 = new $49pUz.BoxGeometry(4, 2, 2);
-    const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
+    const boxMaterial = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial[2].map.repeat.set(3, 1);
+    boxMaterial[3].map.repeat.set(3, 1);
+    boxMaterial[4].map.repeat.set(3, 1);
+    boxMaterial[5].map.repeat.set(3, 1);
+    const boxMaterial1 = new $49pUz.MeshLambertMaterial({
+        map: wallTexture.clone()
     });
+    const boxMaterial2 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial2[2].map.repeat.set(4, 1);
+    boxMaterial2[3].map.repeat.set(4, 1);
+    boxMaterial2[4].map.repeat.set(4, 1);
+    boxMaterial2[5].map.repeat.set(4, 1);
+    const boxMaterial3 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial3[2].map.repeat.set(2, 1);
+    boxMaterial3[3].map.repeat.set(2, 1);
+    boxMaterial3[4].map.repeat.set(2, 1);
+    boxMaterial3[5].map.repeat.set(2, 1);
     walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial1));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial1));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial1));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2.5), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
@@ -994,6 +1102,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 // Phase 3
 phaseGeneration.push(()=>{
@@ -1095,20 +1204,116 @@ phaseGeneration.push(()=>{
     const boxGeometry5 = new $49pUz.BoxGeometry(10, 2, 2);
     const boxGeometry6 = new $49pUz.BoxGeometry(12, 2, 2);
     const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
+        map: wallTexture.clone()
     });
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    const boxMaterial2 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial2[2].map.repeat.set(2, 1);
+    boxMaterial2[3].map.repeat.set(2, 1);
+    boxMaterial2[4].map.repeat.set(2, 1);
+    boxMaterial2[5].map.repeat.set(2, 1);
+    const boxMaterial3 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial3[2].map.repeat.set(3, 1);
+    boxMaterial3[3].map.repeat.set(3, 1);
+    boxMaterial3[4].map.repeat.set(3, 1);
+    boxMaterial3[5].map.repeat.set(3, 1);
+    const boxMaterial4 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial4[2].map.repeat.set(4, 1);
+    boxMaterial4[3].map.repeat.set(4, 1);
+    boxMaterial4[4].map.repeat.set(4, 1);
+    boxMaterial4[5].map.repeat.set(4, 1);
+    const boxMaterial6 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial6[2].map.repeat.set(6, 1);
+    boxMaterial6[3].map.repeat.set(6, 1);
+    boxMaterial6[4].map.repeat.set(6, 1);
+    boxMaterial6[5].map.repeat.set(6, 1);
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial6));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     walls[0].rotateY(Math.PI / 2);
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(2.5));
@@ -1258,6 +1463,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 4
 phaseGeneration.push(()=>{
@@ -1422,20 +1628,92 @@ phaseGeneration.push(()=>{
     const boxGeometry3 = new $49pUz.BoxGeometry(2, 2, 6);
     const boxGeometry4 = new $49pUz.BoxGeometry(8, 2, 2);
     const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
+        map: wallTexture.clone()
     });
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    const boxMaterial2 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial2[0].map.repeat.set(2, 1);
+    boxMaterial2[1].map.repeat.set(2, 1);
+    boxMaterial2[2].map.rotation = (0, $6mhZf.degreeToRadians)(90);
+    boxMaterial2[3].map.rotation = (0, $6mhZf.degreeToRadians)(90);
+    const boxMaterial3 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial3[0].map.repeat.set(3, 1);
+    boxMaterial3[1].map.repeat.set(3, 1);
+    boxMaterial3[2].map.rotation = (0, $6mhZf.degreeToRadians)(90);
+    boxMaterial3[3].map.rotation = (0, $6mhZf.degreeToRadians)(90);
+    const boxMaterial4 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial4[2].map.repeat.set(4, 1);
+    boxMaterial4[3].map.repeat.set(4, 1);
+    boxMaterial4[4].map.repeat.set(4, 1);
+    boxMaterial4[5].map.repeat.set(4, 1);
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     //walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(7.5));
@@ -1593,6 +1871,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 5
 phaseGeneration.push(()=>{
@@ -1758,22 +2037,72 @@ phaseGeneration.push(()=>{
     const boxGeometry2 = new $49pUz.BoxGeometry(4, 2, 2);
     const boxGeometry3 = new $49pUz.BoxGeometry(6, 2, 6);
     const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
+        map: wallTexture.clone()
     });
+    const boxMaterial2 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial2[2].map.repeat.set(2, 1);
+    boxMaterial2[3].map.repeat.set(2, 1);
+    boxMaterial2[4].map.repeat.set(2, 1);
+    boxMaterial2[5].map.repeat.set(2, 1);
+    const boxMaterial3 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial3[0].map.repeat.set(3, 1);
+    boxMaterial3[1].map.repeat.set(3, 1);
+    boxMaterial3[2].map.repeat.set(3, 3);
+    boxMaterial3[3].map.repeat.set(3, 3);
+    boxMaterial3[4].map.repeat.set(3, 1);
+    boxMaterial3[5].map.repeat.set(3, 1);
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
@@ -1940,6 +2269,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 6
 phaseGeneration.push(()=>{
@@ -2086,24 +2416,96 @@ phaseGeneration.push(()=>{
     const boxGeometry3 = new $49pUz.BoxGeometry(2, 2, 6);
     const boxGeometry4 = new $49pUz.BoxGeometry(2, 2, 4);
     const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
+        map: wallTexture.clone()
     });
+    const boxMaterial2 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial2[2].map.repeat.set(2, 1);
+    boxMaterial2[3].map.repeat.set(2, 1);
+    boxMaterial2[4].map.repeat.set(2, 1);
+    boxMaterial2[5].map.repeat.set(2, 1);
+    const boxMaterial3 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial3[0].map.repeat.set(3, 1);
+    boxMaterial3[1].map.repeat.set(3, 1);
+    boxMaterial3[2].map.rotation = (0, $6mhZf.degreeToRadians)(90);
+    boxMaterial3[3].map.rotation = (0, $6mhZf.degreeToRadians)(90);
+    const boxMaterial4 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial4[0].map.repeat.set(2, 1);
+    boxMaterial4[1].map.repeat.set(2, 1);
+    boxMaterial4[2].map.rotation = (0, $6mhZf.degreeToRadians)(90);
+    boxMaterial4[3].map.rotation = (0, $6mhZf.degreeToRadians)(90);
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1.5), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(1.5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -2260,6 +2662,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 7
 phaseGeneration.push(()=>{
@@ -2398,26 +2801,74 @@ phaseGeneration.push(()=>{
     const boxGeometry2 = new $49pUz.BoxGeometry(4, 2, 2);
     const boxGeometry3 = new $49pUz.BoxGeometry(6, 2, 2);
     const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
+        map: wallTexture.clone()
     });
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    const boxMaterial2 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial2[2].map.repeat.set(2, 1);
+    boxMaterial2[3].map.repeat.set(2, 1);
+    boxMaterial2[4].map.repeat.set(2, 1);
+    boxMaterial2[5].map.repeat.set(2, 1);
+    const boxMaterial3 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial3[2].map.repeat.set(3, 1);
+    boxMaterial3[3].map.repeat.set(3, 1);
+    boxMaterial3[4].map.repeat.set(3, 1);
+    boxMaterial3[5].map.repeat.set(3, 1);
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(7.5));
     walls[0].rotateY(Math.PI / 2);
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(8.5));
@@ -2602,6 +3053,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 8
 phaseGeneration.push(()=>{
@@ -2769,23 +3221,119 @@ phaseGeneration.push(()=>{
     const boxGeometry4 = new $49pUz.BoxGeometry(8, 2, 2);
     const boxGeometry5 = new $49pUz.BoxGeometry(10, 2, 2);
     const boxMaterial = new $49pUz.MeshLambertMaterial({
-        color: "rgb(0,255,0)"
+        map: wallTexture.clone()
     });
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    const boxMaterial2 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial2[2].map.repeat.set(2, 1);
+    boxMaterial2[3].map.repeat.set(2, 1);
+    boxMaterial2[4].map.repeat.set(2, 1);
+    boxMaterial2[5].map.repeat.set(2, 1);
+    const boxMaterial3 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial3[2].map.repeat.set(3, 1);
+    boxMaterial3[3].map.repeat.set(3, 1);
+    boxMaterial3[4].map.repeat.set(3, 1);
+    boxMaterial3[5].map.repeat.set(3, 1);
+    const boxMaterial4 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial4[2].map.repeat.set(4, 1);
+    boxMaterial4[3].map.repeat.set(4, 1);
+    boxMaterial4[4].map.repeat.set(4, 1);
+    boxMaterial4[5].map.repeat.set(4, 1);
+    const boxMaterial5 = [
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        }),
+        new $49pUz.MeshLambertMaterial({
+            map: wallTexture.clone()
+        })
+    ];
+    boxMaterial5[2].map.repeat.set(5, 1);
+    boxMaterial5[3].map.repeat.set(5, 1);
+    boxMaterial5[4].map.repeat.set(5, 1);
+    boxMaterial5[5].map.repeat.set(5, 1);
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     walls[0].rotateY(Math.PI / 2);
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -2962,6 +3510,9 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    document.getElementById("winMessage").innerText = "N\xedvel Conclu\xeddo";
+    document.getElementById("advanceBtn").innerText = "Finalizar";
+    timerUpadate = setInterval(updateTime, 1000);
 });
 function removeObjects(crystals, walls, traps, lasers, doors, crancks, cranckBases, cranckInteractionReferences) {
     if (crystals != undefined) for(let i = 0; i < crystals.length; i++)scene.remove(crystals[i]);
@@ -3006,10 +3557,12 @@ function animate() {
     renderer.render(scene, camera);
     controls.update();
     requestAnimationFrame(animate);
+    (0, $c6e6z.displayTime)(sceneProperties.timer, document.getElementById("timer"));
 }
 window.addEventListener("resize", ()=>{
     (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
 });
+const finishEarlierButton = document.getElementById("finishEarlier");
 const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
     const codeParsed = (0, $8vOEa.default)(editor.state.doc.toString());
@@ -3027,6 +3580,9 @@ execBtn.addEventListener("click", async function() {
             document.getElementById("winMessage").classList.remove("invisible");
             document.getElementById("advanceBtn").classList.remove("invisible");
             document.getElementById("resetBtn").disabled = true;
+            finishEarlierButton.disabled = true;
+            clearInterval(timerUpadate);
+            if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 4/Completo");
         } else {
             sceneProperties.executing = false;
             this.disabled = false;
@@ -3054,9 +3610,17 @@ advanceBtn.addEventListener("click", (e)=>{
         document.getElementById("advanceBtn").classList.add("invisible");
         execBtn.disabled = false;
         resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
     } else {
         sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
-        window.location.href = "../";
+        logModal.show();
+    }
+});
+finishEarlierButton.addEventListener("click", (e)=>{
+    if (confirm("Deseja realmente finalizar a pr\xe1tica?")) {
+        clearInterval(timerUpadate);
+        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 4/Fase ${sceneProperties.phase + 1}`);
+        logModal.show();
     }
 });
 (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
@@ -3909,10 +4473,16 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
 
 });
 
+parcelRequire.register("9uuME", function(module, exports) {
 
-var $0db8bcdf209a2965$exports = {};
+module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), import.meta.url).toString();
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.735622b9.js","cWmqK":"door2.e849dc7b.jpg","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+});
+
+
+var $89fbcd158353d5a3$exports = {};
+
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.26618cdd.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","gWXOO":"index.73765190.js","lVjIA":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");

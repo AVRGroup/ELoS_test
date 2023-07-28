@@ -1126,84 +1126,6 @@ function $39352400bed78e43$export$2e2bcd8739ae039(code) {
 
 });
 
-parcelRequire.register("c6e6z", function(module, exports) {
-
-$parcel$export(module.exports, "displayTime", () => $8cf0fc8944b9cdfc$export$cbae8a5783c0845c);
-$parcel$export(module.exports, "configureDataAndUpload", () => $8cf0fc8944b9cdfc$export$ce33b877b675017a);
-const $8cf0fc8944b9cdfc$var$FORM_ACCESS = "https://docs.google.com/forms/d/e/1FAIpQLSeTbA3iFSmgcNeCaFKuXEKQ0mOBg74mow2ISXzESXOI4afhOQ/formResponse";
-function $8cf0fc8944b9cdfc$export$cbae8a5783c0845c(time, timerElement) {
-    let hour = Math.floor(time / 3600);
-    let min = Math.floor(time / 60) % 60;
-    let seg = Math.floor(time % 60);
-    timerElement.innerText = `Tempo: ${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`;
-}
-async function $8cf0fc8944b9cdfc$var$uploadLog(data) {
-    return new Promise((resolve, reject)=>{
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", $8cf0fc8944b9cdfc$var$FORM_ACCESS, true);
-        let formData = new FormData();
-        for(let i = 0; i < data.length; i++)formData.append(data[i][0], data[i][1]);
-        xhr.onreadystatechange = ()=>{
-            if (xhr.readyState === XMLHttpRequest.DONE) resolve(true);
-        };
-        xhr.send(formData);
-    });
-}
-async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, genderRadioName, progExpRadioName, subBtn, time, redirectPath, level) {
-    subBtn.addEventListener("click", async ()=>{
-        let genderInput = document.querySelector(`input[name="${genderRadioName}"]:checked`);
-        let progExpInput = document.querySelector(`input[name="${progExpRadioName}"]:checked`);
-        let hour = Math.floor(time / 3600);
-        let min = Math.floor(time / 60) % 60;
-        let seg = Math.floor(time % 60);
-        let name = nameInput.value;
-        let age = ageInput.value;
-        let gender = genderInput != null ? genderInput.value : null;
-        let progExp = progExpInput != null ? progExpInput.value : null;
-        if (name != null && name != "" && age != null && age != "" && gender != null && gender != "" && progExp != null && progExp != "") {
-            if (parseFloat(age) >= 1) {
-                subBtn.disabled = true;
-                let data = [
-                    [
-                        "entry.1867777838",
-                        level
-                    ],
-                    [
-                        "entry.746491928",
-                        name
-                    ],
-                    [
-                        "entry.1029337756",
-                        age
-                    ],
-                    [
-                        "entry.1806882852",
-                        gender
-                    ],
-                    [
-                        "entry.1585862028",
-                        progExp
-                    ],
-                    [
-                        "entry.2140863999",
-                        `${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`
-                    ]
-                ];
-                let success = await $8cf0fc8944b9cdfc$var$uploadLog(data);
-                if (success) {
-                    console.log(data);
-                    window.location.href = redirectPath;
-                } else {
-                    alert("Ops! Algo deu errado!");
-                    subBtn.disabled = false;
-                }
-            } else alert("Valor da idade incorreto.");
-        } else alert("\xc9 necess\xe1rio preencher o formul\xe1rio para avan\xe7ar.");
-    });
-}
-
-});
-
 parcelRequire.register("l3p5S", function(module, exports) {
 
 module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), import.meta.url).toString();
@@ -1211,9 +1133,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $dde8c62cc2050926$exports = {};
+var $399d548001eb9955$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.744a1d0d.js","64GOt":"stone_wallLvl1.e00cd434.jpg","ixuYl":"index.af5b8061.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.6dd40ba8.js","64GOt":"stone_wallLvl1.e00cd434.jpg","gWXOO":"index.73765190.js"}'));
 
 
 parcelRequire("hO50i");

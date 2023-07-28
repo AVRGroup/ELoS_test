@@ -76,12 +76,22 @@ var $kLW5f = parcelRequire("kLW5f");
 var $gSwgq = parcelRequire("gSwgq");
 
 var $12kOc = parcelRequire("12kOc");
+
+var $c6e6z = parcelRequire("c6e6z");
+
+var $1CqPx = parcelRequire("1CqPx");
 //Defining Level 2 Scene's Properties
 const sceneProperties = {
     cancelExecution: false,
+    timer: 0,
     phase: 0,
     executing: false
 };
+const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
+let timerUpadate;
+function updateTime() {
+    sceneProperties.timer++;
+}
 let extinguisherUses;
 function displayExtinguisherUses() {
     document.getElementById("extinguisherUses").innerText = `x${extinguisherUses}`;
@@ -539,6 +549,7 @@ phaseGeneration.push(()=>{
         if (!objectives[0].visible) return true;
         else return false;
     };
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 2
 phaseGeneration.push(()=>{
@@ -684,6 +695,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 3
 phaseGeneration.push(()=>{
@@ -833,6 +845,7 @@ phaseGeneration.push(()=>{
         fireState = (fireState + 1) % 2;
         setFireStates();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 4
 phaseGeneration.push(()=>{
@@ -999,6 +1012,7 @@ phaseGeneration.push(()=>{
         fireState = (fireState + 1) % 2;
         setFireStates();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 5
 phaseGeneration.push(()=>{
@@ -1231,6 +1245,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 6
 phaseGeneration.push(()=>{
@@ -1458,6 +1473,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 7
 phaseGeneration.push(()=>{
@@ -1700,6 +1716,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 8
 phaseGeneration.push(()=>{
@@ -1948,6 +1965,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Defining function that remove objects, scene render and button's functions
 function removeObjects(crystals, walls, traps, fires) {
@@ -1974,10 +1992,12 @@ function animate() {
     renderer.render(scene, camera);
     controls.update();
     requestAnimationFrame(animate);
+    (0, $c6e6z.displayTime)(sceneProperties.timer, document.getElementById("timer"));
 }
 window.addEventListener("resize", ()=>{
     (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
 });
+const finishEarlierButton = document.getElementById("finishEarlier");
 const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
     const codeParsed = (0, $12kOc.default)(editor.state.doc.toString());
@@ -1994,6 +2014,9 @@ execBtn.addEventListener("click", async function() {
             document.getElementById("winMessage").classList.remove("invisible");
             document.getElementById("advanceBtn").classList.remove("invisible");
             document.getElementById("resetBtn").disabled = true;
+            finishEarlierButton.disabled = true;
+            clearInterval(timerUpadate);
+            if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 2/Completo");
         } else {
             sceneProperties.executing = false;
             this.disabled = false;
@@ -2021,9 +2044,17 @@ advanceBtn.addEventListener("click", (e)=>{
         document.getElementById("advanceBtn").classList.add("invisible");
         execBtn.disabled = false;
         resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
     } else {
         sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
-        window.location.href = "../";
+        logModal.show();
+    }
+});
+finishEarlierButton.addEventListener("click", (e)=>{
+    if (confirm("Deseja realmente finalizar a pr\xe1tica?")) {
+        clearInterval(timerUpadate);
+        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 2/Fase ${sceneProperties.phase + 1}`);
+        logModal.show();
     }
 });
 //Running level 2
@@ -2645,9 +2676,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hIuM1"), impo
 });
 
 
-var $4c50c882b8139865$exports = {};
+var $72657ce1adef9575$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.6a2f443c.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.394a62b3.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","gWXOO":"index.73765190.js","lVjIA":"index.8c12255d.js"}'));
 
 
 parcelRequire("apYFO");

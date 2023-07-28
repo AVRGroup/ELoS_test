@@ -54,11 +54,21 @@ var $3vWij = parcelRequire("3vWij");
 var $3tzMw = parcelRequire("3tzMw");
 
 var $gSwgq = parcelRequire("gSwgq");
+
+var $c6e6z = parcelRequire("c6e6z");
+
+var $1CqPx = parcelRequire("1CqPx");
 const sceneProperties = {
     cancelExecution: false,
+    timer: 0,
     phase: 0,
     executing: false
 };
+const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
+let timerUpadate;
+function updateTime() {
+    sceneProperties.timer++;
+}
 let laserState;
 let setLaserStates;
 let setLaserStatesInterval;
@@ -645,6 +655,7 @@ phaseGeneration.push(()=>{
         laserState = (laserState + 1) % 2;
         setLaserStates();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 2
 phaseGeneration.push(()=>{
@@ -802,6 +813,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 3
 phaseGeneration.push(()=>{
@@ -1079,6 +1091,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 4
 phaseGeneration.push(()=>{
@@ -1346,6 +1359,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 5
 phaseGeneration.push(()=>{
@@ -1602,6 +1616,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 6
 phaseGeneration.push(()=>{
@@ -1920,6 +1935,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 7
 phaseGeneration.push(()=>{
@@ -2193,6 +2209,7 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 8
 phaseGeneration.push(()=>{
@@ -2470,6 +2487,9 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
+    document.getElementById("winMessage").innerText = "N\xedvel Conclu\xeddo";
+    document.getElementById("advanceBtn").innerText = "Finalizar";
+    timerUpadate = setInterval(updateTime, 1000);
 });
 function removeObjects(crystals, walls, traps, lasers) {
     if (crystals != undefined) for(let i = 0; i < crystals.length; i++)scene.remove(crystals[i]);
@@ -2494,10 +2514,12 @@ function animate() {
     renderer.render(scene, camera);
     controls.update();
     requestAnimationFrame(animate);
+    (0, $c6e6z.displayTime)(sceneProperties.timer, document.getElementById("timer"));
 }
 window.addEventListener("resize", ()=>{
     (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
 });
+const finishEarlierButton = document.getElementById("finishEarlier");
 const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
     const codeParsed = (0, $3vWij.default)(editor.state.doc.toString());
@@ -2515,6 +2537,9 @@ execBtn.addEventListener("click", async function() {
             document.getElementById("winMessage").classList.remove("invisible");
             document.getElementById("advanceBtn").classList.remove("invisible");
             document.getElementById("resetBtn").disabled = true;
+            finishEarlierButton.disabled = true;
+            clearInterval(timerUpadate);
+            if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 3/Completo");
         } else {
             sceneProperties.executing = false;
             this.disabled = false;
@@ -2542,9 +2567,17 @@ advanceBtn.addEventListener("click", (e)=>{
         document.getElementById("advanceBtn").classList.add("invisible");
         execBtn.disabled = false;
         resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
     } else {
         sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
-        window.location.href = "../";
+        logModal.show();
+    }
+});
+finishEarlierButton.addEventListener("click", (e)=>{
+    if (confirm("Deseja realmente finalizar a pr\xe1tica?")) {
+        clearInterval(timerUpadate);
+        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 3/Fase ${sceneProperties.phase + 1}`);
+        logModal.show();
     }
 });
 (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
@@ -3069,9 +3102,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $66b075b5e15981bd$exports = {};
+var $f7c88b69414f8582$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.bb95b428.js","hEG10":"metalWallLvl3.c6e3c749.png","ixuYl":"index.af5b8061.js","dpbei":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.79dbe232.js","hEG10":"metalWallLvl3.c6e3c749.png","gWXOO":"index.73765190.js","lVjIA":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");
