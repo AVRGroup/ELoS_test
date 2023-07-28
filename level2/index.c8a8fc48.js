@@ -60390,8 +60390,8 @@ async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, ge
 
 });
 
-var $5c08bc5736d1f740$exports = {};
+var $ddc7ec73b209d3a9$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"fRNDk":"index.0502ae34.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"XyxrU":"index.c8a8fc48.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
