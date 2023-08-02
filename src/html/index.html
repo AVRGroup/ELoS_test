@@ -1,64 +1,112 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <title>Página Inicial - ELoS</title>
-        <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
-        <link rel="stylesheet" href="../scss/homepage/styles.scss">
-    </head>
-    <body>
-        <div class="page">
-            <img src="../img/homepage/page.png" alt="">
-        
-          <div class="robot">
-              <img src="../img/homepage/robo.gif">
-          </div>
-          <div id="lvl1btn" class="bottonlvl1">
-              <a href="./level1/index.html">
-                  <img src="../img/homepage/bottonlvl1.png">
-              </a>
-          </div>
-          <div class="bottonlvl2">
-              <a href="./level2/index.html">
-                  <img src="../img/homepage/bottonlvl2.png">
-              </a>
-          </div>
-          <div class="virtus">
-              <a href="https://avrgroup.github.io/virtus/">
-                  <img src="../img/homepage/virtus-brand.png" height="100px" wight="100px">
-              </a>
-          </div>
-          <button id="myBtn"></button>
-          <div id="myModal" class="modal">      
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <video id="myVideo" width="100%" controls>
-                <source src="../video/homepage/video.mp4" type="video/mp4">
-                Your browser does not support HTML video.
-              </video>
-            </div>
-          </div>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial - ELoS (Versão de Testes)</title>
 
-      <script>
-            var vid = document.getElementById("myVideo"); 
-            var modal = document.getElementById("myModal");
-            var btn = document.getElementById("myBtn");
-            var span = document.getElementsByClassName("close")[0];
-            btn.onclick = function() {
-              modal.style.display = "block";
-              vid.play(); 
-            }
-            span.onclick = function() {
-              modal.style.display = "none";
-              vid.pause();
-            }            
-            window.onclick = function(event) {
-              if (event.target == modal) 
-              {                
-                modal.style.display = "none";
-                vid.pause();
-              }
-            }
-      </script>
-    </body>
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../scss/homepage/styles.scss">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="controle">
+            <div class="container">
+                <div class="esquerda">
+                    <img src="../img/homepage/botoesx.png" alt="">
+                </div>
+                <div class="tela">
+                   <h1><span class="wave">ELoS</span></h1>
+                </div>
+                <div class="direita">
+                    <img src="../img/homepage/botoes2x.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="niveis">
+            <div class="titulo">
+                <h1>SELEÇÃO DE NÍVEIS</h1>
+            </div>
+            <div class="selecao">
+                <ul>
+                    <ul class="container_nivel">
+                        <li class="nivel">
+                            <div class="botao">
+                                <button onclick="window.location.href='./level1/'">1</button>
+                            </div>
+                            <h2>Sequência Simples</h2>
+                        </li>
+                        <li class="video">
+                            <div class="botao_video">
+                                <button onclick="openModal('hAzeEs8AnU0')"><h2>Veja mais!</h2><ion-icon name="play"></ion-icon></button>
+                            </div>
+                        </li>
+                    </ul>
+                    <li class="line"></li>
+                    <ul class="container_nivel">
+                        <li class="nivel">
+                            <div class="botao2">
+                                <button onclick="window.location.href='./level2/'">2</button>
+                            </div>
+                            <h2>Condicionais Simples</h2>
+                        </li>
+                        <li class="video">
+                            <div class="botao_video">
+                                <button onclick="openModal('9GRdXKzFdD8')"><h2>Veja mais!</h2><ion-icon name="play"></ion-icon></button>
+                            </div>
+                        </li>
+                    </ul>
+                    <li class="line"></li>
+                    <ul class="container_nivel">
+                        <li class="nivel">
+                            <div class="botao">
+                                <button onclick="window.location.href='./level3/'">3</button>
+                            </div>
+                            <h2>Condicionais Duplas</h2>
+                        </li>
+                        <li class="video">
+                            <div class="botao_video">
+                                <button onclick="openModal('OlImH_i9mFs')"><h2>Veja mais!</h2><ion-icon name="play"></ion-icon></button>
+                            </div>
+                        </li>
+                    </ul>
+                    <li class="line"></li>
+                    <ul class="container_nivel">
+                        <li class="nivel">
+                            <div class="botao2">
+                                <button onclick="window.location.href='./level4/'">4</button>
+                            </div>
+                            <h2>Repetições</h2>
+                        </li>
+                        <li class="video">
+                            <div class="botao_video">
+                                <button onclick="openModal('f3PnQYjyoP4')"><h2>Veja mais!</h2><ion-icon name="play"></ion-icon></button>
+                            </div>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="robo">
+            <img src="../img/homepage/robo.gif" alt="">
+        </div>    
+    </main>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <iframe id="videoFrame" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="../js/homepage/script.js"></script>
+</body>
 </html>

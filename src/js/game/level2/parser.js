@@ -1,10 +1,10 @@
 const functionFilter = [
     {
-        filter: new RegExp('^andarFrente(\\s+)?\\((\\s+)?\\d+(\\s+)?\\)(\\s+)?(;)?$'),
+        filter: new RegExp('^andarFrente(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$'),
         type: 'sequential'
     },
     {
-        filter: new RegExp('^andarTras(\\s+)?\\((\\s+)?\\d+(\\s+)?\\)(\\s+)?(;)?$'),
+        filter: new RegExp('^andarTras(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$'),
         type: 'sequential'
     },
     {
@@ -277,6 +277,15 @@ function predictFunction(lines,index)
         {
             continue;
         }
+    }
+
+    if(value == '+')
+    {
+        position[axis]++;
+    }
+    else
+    {
+        position[axis]--;
     }
 
     return position;

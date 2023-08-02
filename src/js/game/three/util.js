@@ -113,7 +113,11 @@ export function loadDefaultActor()
 {
     const path = new URL("../../../assets/models/eve.glb",import.meta.url).toString();
     const obj = loadGLBFile(path,"eve",2.0);
+    const interactionReference = new THREE.Object3D();
+    interactionReference.name = 'interactionReference';
+    interactionReference.translateZ(2);
     obj.rotateY(degreeToRadians(90));
+    obj.add(interactionReference);
     return obj;
 }
 
@@ -215,6 +219,25 @@ export function translateActor(actor, amount, gridMapHelper, sceneProperties, co
         }
     }
 
+    function correctPositionOnCancel(positionToStop)
+    {
+        let corrID;
+        function correct()
+        {
+            if(!positionAlmostEqual(actor.position,positionToStop))
+            {
+                actor.position.lerp(positionToStop,0.15);
+                corrID = requestAnimationFrame(correct);
+            }
+            else
+            {
+                cancelAnimationFrame(corrID);
+            }
+        }
+
+        corrID = requestAnimationFrame(correct);
+    }
+
     leanMovement(actor.getObjectByName('eve'),modeGo);
     return new Promise(function(resolve){
         function translate()
@@ -230,12 +253,14 @@ export function translateActor(actor, amount, gridMapHelper, sceneProperties, co
             {
                 consoleElement.innerText += "Aviso: Robô caiu na armadilha.\n";
                 sceneProperties.cancelExecution = true;
+                correctPositionOnCancel(gridMapHelper.trapCollision(actor.position));
             }
 
             if(gridMapHelper.fireCollision(actor.position))
             {
                 consoleElement.innerText += "Aviso: Robô foi queimado!\n";
                 sceneProperties.cancelExecution = true;
+                correctPositionOnCancel(gridMapHelper.fireCollision(actor.position));
             }
 
             if(gridMapHelper.laserCollision(actor.position))
@@ -291,7 +316,9 @@ export function rotateActor(actor, amount, sceneProperties, direction)
 
 export function checkCollision(objectA,objectB,gridMapHelper)
 {
-    if((Math.abs(gridMapHelper.getXCoordFromGlobalPosition(objectA.position.x) - gridMapHelper.getXCoordFromGlobalPosition(objectB.position.x)) == 1 && gridMapHelper.getXCoordFromGlobalPosition(objectA.position.z) == gridMapHelper.getXCoordFromGlobalPosition(objectB.position.z)) || (gridMapHelper.getXCoordFromGlobalPosition(objectA.position.x) == gridMapHelper.getXCoordFromGlobalPosition(objectB.position.x) && Math.abs(gridMapHelper.getXCoordFromGlobalPosition(objectA.position.z) - gridMapHelper.getXCoordFromGlobalPosition(objectB.position.z)) == 1))
+    const vec = new THREE.Vector3();
+    objectA.getWorldPosition(vec);
+    if(gridMapHelper.getXCoordFromGlobalPosition(vec.x) == gridMapHelper.getXCoordFromGlobalPosition(objectB.position.x) && gridMapHelper.getZCoordFromGlobalPosition(vec.z) == gridMapHelper.getZCoordFromGlobalPosition(objectB.position.z) && objectB.visible)
     {
         return true;
     }

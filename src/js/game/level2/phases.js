@@ -12,14 +12,27 @@ import {
 } from "../three/util";
 import GridMapHelper from "../three/GridMapHelper";
 import FireBase from "../three/FireBase";
+import {SpikeTrap, trapsActivation, trapsDeactivation} from "../three/SpikeTrap";
 import parseCode from "./parser";
+import { displayTime, configureDataAndUpload } from "../timer";
+import { Modal } from "bootstrap";
 
 //Defining Level 2 Scene's Properties
 
 const sceneProperties = {
     cancelExecution: false,
+    timer: 0,
     phase: 0,
     executing: false
+}
+
+const logModal = new Modal(document.getElementById("logModal"));
+
+let timerUpadate;
+
+function updateTime()
+{
+    sceneProperties.timer++;
 }
 
 let extinguisherUses;
@@ -34,7 +47,193 @@ let setFireStates;
 
 let setFireStatesInterval;
 
+let spikeTrapState;
+
+let setSpikeTrapState;
+
+let setSpikeTrapStateInterval;
+
 const editor = generateDefaultEditor(document.getElementById("editorArea"));
+
+const andarFrenteBtn = document.getElementById('andarFrente');
+andarFrenteBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "andarFrente(?)\n"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "andarFrente(?)\n"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const andarTrasBtn = document.getElementById('andarTras');
+andarTrasBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "andarTras(?)\n"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "andarTras(?)\n"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const girarEsquerdaBtn = document.getElementById('girarEsquerda');
+girarEsquerdaBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "girarEsquerda()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "girarEsquerda()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const girarDireitaBtn = document.getElementById('girarDireita');
+girarDireitaBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "girarDireita()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "girarDireita()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const darMeiaVoltaBtn = document.getElementById('darMeiaVolta');
+darMeiaVoltaBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "darMeiaVolta()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "darMeiaVolta()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const apagarFogoBtn = document.getElementById('apagarFogo');
+apagarFogoBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "apagarFogo()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "apagarFogo()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const coletarCristalBtn = document.getElementById('coletarCristal');
+coletarCristalBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "coletarCristal()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "coletarCristal()\n"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const pegandoFogoBtn = document.getElementById('pegandoFogo');
+pegandoFogoBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "pegandoFogo()"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "pegandoFogo()"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const condicaoBtn = document.getElementById('condicao');
+condicaoBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "se(?){\n\n}\n"}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "se(?){\n\n}\n"}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
 
 const consoleElement = document.getElementById('consoleArea');
 
@@ -45,6 +244,10 @@ const gridMapHelper = new GridMapHelper();
 const plane = gridMapHelper.createGridPlane();
 
 const actor = loadDefaultActor();
+
+const wallTexture = new THREE.TextureLoader().load(new URL('../../../assets/textures/stoneWallLvl2.png',import.meta.url).toString());
+wallTexture.wrapS = THREE.RepeatWrapping;
+wallTexture.wrapT = THREE.RepeatWrapping;
 
 let objectives;
 let walls;
@@ -69,12 +272,14 @@ scene.add(actor);
 
 async function andarFrente(amount)
 {
-    await translateActor(actor,amount,gridMapHelper,sceneProperties,consoleElement);
+    let correctedAmount = amount > 10 ? 10 : amount;
+    await translateActor(actor,correctedAmount,gridMapHelper,sceneProperties,consoleElement);
 }
 
 async function andarTras(amount)
 {
-    await translateActor(actor,-amount,gridMapHelper,sceneProperties,consoleElement);
+    let correctedAmount = amount > 10 ? 10 : amount;
+    await translateActor(actor,-correctedAmount,gridMapHelper,sceneProperties,consoleElement);
 }
 
 async function girarEsquerda()
@@ -94,7 +299,9 @@ async function darMeiaVolta()
 
 function pegandoFogo()
 {
-    if(gridMapHelper.detectFire(actor.position) != null)
+    const vec = new THREE.Vector3();
+    actor.getObjectByName('interactionReference').getWorldPosition(vec);
+    if(gridMapHelper.detectFire(vec) != null)
     {
         return true;
     }
@@ -108,7 +315,9 @@ function apagarFogo()
 {
     if(extinguisherUses > 0)
     {
-        let fireIndex = gridMapHelper.detectFire(actor.position);
+        const vec = new THREE.Vector3();
+        actor.getObjectByName('interactionReference').getWorldPosition(vec);
+        let fireIndex = gridMapHelper.detectFire(vec);
 
         if(fireIndex != null)
         {
@@ -159,11 +368,23 @@ phaseGeneration.push(
 
         objectives = loadDefaultObjectives(1);
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        gridMapHelper.addObstacle(9,9,5,5);
         scene.add(objectives[0]);
 
         walls = [];
         const boxGeometry = new THREE.BoxGeometry(18,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(9,1);
+        boxMaterial[3].map.repeat.set(9,1);
+        boxMaterial[4].map.repeat.set(9,1);
+        boxMaterial[5].map.repeat.set(9,1);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(4));
@@ -185,14 +406,15 @@ phaseGeneration.push(
                 return;
             }
 
-            if(checkCollision(actor,objectives[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                gridMapHelper.obstacles[0].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está sobre o cristal.\n";
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
         }
 
@@ -201,6 +423,7 @@ phaseGeneration.push(
             actor.rotation.set(0,degreeToRadians(90),0);
             actor.getObjectByName('eve').rotation.set(0,0,0);
             objectives[0].visible = true;
+            gridMapHelper.obstacles[0].active = true;
             gridMapHelper.restartFires();
             fires[0].setFireVisibility(true);
             extinguisherUses = 1;
@@ -217,6 +440,7 @@ phaseGeneration.push(
                 return false;
             }
         }
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -238,11 +462,23 @@ phaseGeneration.push(
 
         objectives = loadDefaultObjectives(1);
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        gridMapHelper.addObstacle(9,9,5,5);
         scene.add(objectives[0]);
 
         walls = [];
         const boxGeometry = new THREE.BoxGeometry(14,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(7,1);
+        boxMaterial[3].map.repeat.set(7,1);
+        boxMaterial[4].map.repeat.set(7,1);
+        boxMaterial[5].map.repeat.set(7,1);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
@@ -302,17 +538,15 @@ phaseGeneration.push(
         scene.add(fires[4]);
 
         traps = [];
-        const trapGeometry = new THREE.BoxGeometry(2,1,2);
-        const trapMaterial = new THREE.MeshLambertMaterial({color: "rgb(255,0,0)"});
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.5,gridMapHelper.getGlobalZPositionFromCoord(2));
-        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0.5,gridMapHelper.getGlobalZPositionFromCoord(5));
-        traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.5,gridMapHelper.getGlobalZPositionFromCoord(8));
-        gridMapHelper.addTrap(9,2);
-        gridMapHelper.addTrap(8,5);
-        gridMapHelper.addTrap(9,8);
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(2));
+        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(8));
+        gridMapHelper.addTrap(9,2,traps[0]);
+        gridMapHelper.addTrap(8,5,traps[1]);
+        gridMapHelper.addTrap(9,8,traps[2]);
         scene.add(traps[0]);
         scene.add(traps[1]);
         scene.add(traps[2]);
@@ -323,14 +557,15 @@ phaseGeneration.push(
                 return;
             }
 
-            if(checkCollision(actor,objectives[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                gridMapHelper.obstacles[0].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está sobre o cristal.\n";
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
         }
 
@@ -339,6 +574,7 @@ phaseGeneration.push(
             actor.rotation.set(0,degreeToRadians(90),0);
             actor.getObjectByName('eve').rotation.set(0,0,0);
             objectives[0].visible = true;
+            gridMapHelper.obstacles[0].active = true;
             gridMapHelper.restartFires();
             firesVisualRestart();
             setFireStates();
@@ -366,6 +602,30 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+
+        spikeTrapState = 0;
+        setSpikeTrapState = () => {
+            if(spikeTrapState == 0)
+            {
+                trapsDeactivation(traps)
+            }
+            else
+            {
+                trapsActivation(traps)
+
+            }
+        }
+
+        setSpikeTrapStateInterval = setInterval(() => {
+            if(sceneProperties.executing)
+            {
+                return;
+            }
+
+            spikeTrapState = (spikeTrapState + 1) % 2;
+            setSpikeTrapState();
+        },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -388,6 +648,8 @@ phaseGeneration.push(
         objectives = loadDefaultObjectives(2);
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0),0.0,gridMapHelper.getGlobalZPositionFromCoord(0));
         objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(9));
+        gridMapHelper.addObstacle(0,0,0,0);
+        gridMapHelper.addObstacle(9,9,9,9);
         scene.add(objectives[0]);
         scene.add(objectives[1]);
 
@@ -395,11 +657,35 @@ phaseGeneration.push(
         const boxGeometry = new THREE.BoxGeometry(12,2,2);
         const boxGeometry2 = new THREE.BoxGeometry(2,2,2);
         const boxGeometry3 = new THREE.BoxGeometry(2,2,14);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(6,1);
+        boxMaterial[3].map.repeat.set(6,1);
+        boxMaterial[4].map.repeat.set(6,1);
+        boxMaterial[5].map.repeat.set(6,1);
+        const boxMaterial2 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[0].map.repeat.set(7,1);
+        boxMaterial3[1].map.repeat.set(7,1);
+        boxMaterial3[2].map.repeat.set(1,7);
+        boxMaterial3[3].map.repeat.set(1,7);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(3.5),1,gridMapHelper.getGlobalZPositionFromCoord(2));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(1));
         walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(7));
@@ -448,19 +734,21 @@ phaseGeneration.push(
                 return;
             }
 
-            if(checkCollision(actor,objectives[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[0].active = false;
             }
-            else if(checkCollision(actor,objectives[1],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está sobre o cristal.\n";
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
@@ -475,6 +763,8 @@ phaseGeneration.push(
             actor.getObjectByName('eve').rotation.set(0,0,0);
             objectives[0].visible = true;
             objectives[1].visible = true;
+            gridMapHelper.obstacles[0].active = true;
+            gridMapHelper.obstacles[1].active = true;
             gridMapHelper.restartFires();
             firesVisualRestart();
             setFireStates();
@@ -502,6 +792,7 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -524,6 +815,8 @@ phaseGeneration.push(
         objectives = loadDefaultObjectives(2);
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(9));
         objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(0));
+        gridMapHelper.addObstacle(9,9,9,9);
+        gridMapHelper.addObstacle(9,9,0,0);
         scene.add(objectives[0]);
         scene.add(objectives[1]);
 
@@ -531,11 +824,46 @@ phaseGeneration.push(
         const boxGeometry = new THREE.BoxGeometry(16,2,2);
         const boxGeometry2 = new THREE.BoxGeometry(2,2,6);
         const boxGeometry3 = new THREE.BoxGeometry(2,2,8);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(8,1);
+        boxMaterial[3].map.repeat.set(8,1);
+        boxMaterial[4].map.repeat.set(8,1);
+        boxMaterial[5].map.repeat.set(8,1);
+        const boxMaterial2 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial2[0].map.repeat.set(3,1);
+        boxMaterial2[1].map.repeat.set(3,1);
+        boxMaterial2[2].map.repeat.set(1,3);
+        boxMaterial2[3].map.repeat.set(1,3);
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[0].map.repeat.set(4,1);
+        boxMaterial3[1].map.repeat.set(4,1);
+        boxMaterial3[2].map.repeat.set(1,4);
+        boxMaterial3[3].map.repeat.set(1,4);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4.5),1,gridMapHelper.getGlobalZPositionFromCoord(4));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(4.5),1,gridMapHelper.getGlobalZPositionFromCoord(6));
         walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(8));
@@ -580,19 +908,21 @@ phaseGeneration.push(
                 return;
             }
 
-            if(checkCollision(actor,objectives[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[0].active = false;
             }
-            else if(checkCollision(actor,objectives[1],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está sobre o cristal.\n";
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
@@ -607,6 +937,8 @@ phaseGeneration.push(
             actor.getObjectByName('eve').rotation.set(0,0,0);
             objectives[0].visible = true;
             objectives[1].visible = true;
+            gridMapHelper.obstacles[0].active = true;
+            gridMapHelper.obstacles[1].active = true;
             gridMapHelper.restartFires();
             firesVisualRestart();
             setFireStates();
@@ -634,6 +966,7 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -656,6 +989,8 @@ phaseGeneration.push(
         objectives = loadDefaultObjectives(2);
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0.0,gridMapHelper.getGlobalZPositionFromCoord(7));
         objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0.0,gridMapHelper.getGlobalZPositionFromCoord(3));
+        gridMapHelper.addObstacle(5,5,7,7);
+        gridMapHelper.addObstacle(5,5,3,3);
         scene.add(objectives[0]);
         scene.add(objectives[1]);
 
@@ -665,13 +1000,63 @@ phaseGeneration.push(
         const boxGeometry3 = new THREE.BoxGeometry(2,2,6);
         const boxGeometry4 = new THREE.BoxGeometry(4,2,6);
         const boxGeometry5 = new THREE.BoxGeometry(12,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(5,1);
+        boxMaterial[3].map.repeat.set(5,1);
+        boxMaterial[4].map.repeat.set(5,1);
+        boxMaterial[5].map.repeat.set(5,1);
+        const boxMaterial2 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[0].map.repeat.set(3,1);
+        boxMaterial3[1].map.repeat.set(3,1);
+        boxMaterial3[2].map.repeat.set(1,3);
+        boxMaterial3[3].map.repeat.set(1,3);
+        const boxMaterial4 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial4[0].map.repeat.set(3,1);
+        boxMaterial4[1].map.repeat.set(3,1);
+        boxMaterial4[2].map.repeat.set(2,3);
+        boxMaterial4[3].map.repeat.set(2,3);
+        boxMaterial4[4].map.repeat.set(2,1);
+        boxMaterial4[5].map.repeat.set(2,1);
+        const boxMaterial5 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial5[2].map.repeat.set(6,1);
+        boxMaterial5[3].map.repeat.set(6,1);
+        boxMaterial5[4].map.repeat.set(6,1);
+        boxMaterial5[5].map.repeat.set(6,1);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(8));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(6));
         walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3.5),1,gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -692,11 +1077,9 @@ phaseGeneration.push(
         scene.add(walls[5]);
 
         traps = [];
-        const trapGeometry = new THREE.BoxGeometry(2,1,2);
-        const trapMaterial = new THREE.MeshLambertMaterial({color: "rgb(255,0,0)"});
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0.5,gridMapHelper.getGlobalZPositionFromCoord(5));
-        gridMapHelper.addTrap(5,5);
+        traps.push(new SpikeTrap());
+        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        gridMapHelper.addTrap(5,5,traps[0]);
         scene.add(traps[0]);
 
         fires = [];
@@ -742,19 +1125,21 @@ phaseGeneration.push(
                 return;
             }
 
-            if(checkCollision(actor,objectives[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[0].active = false;
             }
-            else if(checkCollision(actor,objectives[1],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está sobre o cristal.\n";
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
@@ -769,6 +1154,8 @@ phaseGeneration.push(
             actor.getObjectByName('eve').rotation.set(0,0,0);
             objectives[0].visible = true;
             objectives[1].visible = true;
+            gridMapHelper.obstacles[0].active = true;
+            gridMapHelper.obstacles[1].active = true;
             gridMapHelper.restartFires();
             firesVisualRestart();
             setFireStates();
@@ -796,6 +1183,30 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+
+        spikeTrapState = 0;
+        setSpikeTrapState = () => {
+            if(spikeTrapState == 0)
+            {
+                trapsDeactivation(traps)
+            }
+            else
+            {
+                trapsActivation(traps)
+
+            }
+        }
+
+        setSpikeTrapStateInterval = setInterval(() => {
+            if(sceneProperties.executing)
+            {
+                return;
+            }
+
+            spikeTrapState = (spikeTrapState + 1) % 2;
+            setSpikeTrapState();
+        },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 //Phase 6
@@ -817,6 +1228,8 @@ phaseGeneration.push(
         objectives = loadDefaultObjectives(2);
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0.0,gridMapHelper.getGlobalZPositionFromCoord(7));
         objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0.0,gridMapHelper.getGlobalZPositionFromCoord(0));
+        gridMapHelper.addObstacle(5,5,7,7);
+        gridMapHelper.addObstacle(7,7,0,0);
         scene.add(objectives[0]);
         scene.add(objectives[1]);
 
@@ -825,15 +1238,51 @@ phaseGeneration.push(
         const boxGeometry2 = new THREE.BoxGeometry(2,2,2);
         const boxGeometry3 = new THREE.BoxGeometry(2,2,6);
         const boxGeometry4 = new THREE.BoxGeometry(4,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(7,1);
+        boxMaterial[3].map.repeat.set(7,1);
+        boxMaterial[4].map.repeat.set(7,1);
+        boxMaterial[5].map.repeat.set(7,1);
+        const boxMaterial2 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[0].map.repeat.set(3,1);
+        boxMaterial3[1].map.repeat.set(3,1);
+        boxMaterial3[2].map.repeat.set(1,3);
+        boxMaterial3[3].map.repeat.set(1,3);
+        const boxMaterial4 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial4[2].map.repeat.set(2,1);
+        boxMaterial4[3].map.repeat.set(2,1);
+        boxMaterial4[4].map.repeat.set(2,1);
+        boxMaterial4[5].map.repeat.set(2,1);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(8));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(6));
         walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(6));
@@ -862,23 +1311,21 @@ phaseGeneration.push(
         scene.add(walls[7]);
 
         traps = [];
-        const trapGeometry = new THREE.BoxGeometry(2,1,2);
-        const trapMaterial = new THREE.MeshLambertMaterial({color: "rgb(255,0,0)"});
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0.5,gridMapHelper.getGlobalZPositionFromCoord(5));
-        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0.5,gridMapHelper.getGlobalZPositionFromCoord(3));
-        traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0.5,gridMapHelper.getGlobalZPositionFromCoord(7));
-        traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.5,gridMapHelper.getGlobalZPositionFromCoord(6));
-        traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0.5,gridMapHelper.getGlobalZPositionFromCoord(3));
-        gridMapHelper.addTrap(2,5);
-        gridMapHelper.addTrap(2,3);
-        gridMapHelper.addTrap(2,7);
-        gridMapHelper.addTrap(6,6);
-        gridMapHelper.addTrap(5,3);
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0,gridMapHelper.getGlobalZPositionFromCoord(3));
+        traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0,gridMapHelper.getGlobalZPositionFromCoord(7));
+        traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0,gridMapHelper.getGlobalZPositionFromCoord(6));
+        traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0,gridMapHelper.getGlobalZPositionFromCoord(3));
+        gridMapHelper.addTrap(2,5,traps[0]);
+        gridMapHelper.addTrap(2,3,traps[1]);
+        gridMapHelper.addTrap(2,7,traps[2]);
+        gridMapHelper.addTrap(6,6,traps[3]);
+        gridMapHelper.addTrap(5,3,traps[4]);
         scene.add(traps[0]);
         scene.add(traps[1]);
         scene.add(traps[2]);
@@ -924,19 +1371,21 @@ phaseGeneration.push(
                 return;
             }
 
-            if(checkCollision(actor,objectives[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[0].active = false;
             }
-            else if(checkCollision(actor,objectives[1],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está sobre o cristal.\n";
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
@@ -951,6 +1400,8 @@ phaseGeneration.push(
             actor.getObjectByName('eve').rotation.set(0,0,0);
             objectives[0].visible = true;
             objectives[1].visible = true;
+            gridMapHelper.obstacles[0].active = true;
+            gridMapHelper.obstacles[1].active = true;
             gridMapHelper.restartFires();
             firesVisualRestart();
             setFireStates();
@@ -978,6 +1429,30 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+
+        spikeTrapState = 0;
+        setSpikeTrapState = () => {
+            if(spikeTrapState == 0)
+            {
+                trapsDeactivation(traps)
+            }
+            else
+            {
+                trapsActivation(traps)
+
+            }
+        }
+
+        setSpikeTrapStateInterval = setInterval(() => {
+            if(sceneProperties.executing)
+            {
+                return;
+            }
+
+            spikeTrapState = (spikeTrapState + 1) % 2;
+            setSpikeTrapState();
+        },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 //Phase 7
@@ -999,6 +1474,8 @@ phaseGeneration.push(
         objectives = loadDefaultObjectives(2);
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),0.0,gridMapHelper.getGlobalZPositionFromCoord(5));
         objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0.0,gridMapHelper.getGlobalZPositionFromCoord(3));
+        gridMapHelper.addObstacle(3,3,5,5);
+        gridMapHelper.addObstacle(7,7,3,3);
         scene.add(objectives[0]);
         scene.add(objectives[1]);
 
@@ -1007,18 +1484,54 @@ phaseGeneration.push(
         const boxGeometry2 = new THREE.BoxGeometry(2,2,2);
         const boxGeometry3 = new THREE.BoxGeometry(2,2,6);
         const boxGeometry4 = new THREE.BoxGeometry(4,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(7,1);
+        boxMaterial[3].map.repeat.set(7,1);
+        boxMaterial[4].map.repeat.set(7,1);
+        boxMaterial[5].map.repeat.set(7,1);
+        const boxMaterial2 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[0].map.repeat.set(3,1);
+        boxMaterial3[1].map.repeat.set(3,1);
+        boxMaterial3[2].map.repeat.set(1,3);
+        boxMaterial3[3].map.repeat.set(1,3);
+        const boxMaterial4 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial4[2].map.repeat.set(2,1);
+        boxMaterial4[3].map.repeat.set(2,1);
+        boxMaterial4[4].map.repeat.set(2,1);
+        boxMaterial4[5].map.repeat.set(2,1);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(8));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(7));
         walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(3));
@@ -1055,14 +1568,12 @@ phaseGeneration.push(
         scene.add(walls[10]);
 
         traps = [];
-        const trapGeometry = new THREE.BoxGeometry(2,1,2);
-        const trapMaterial = new THREE.MeshLambertMaterial({color: "rgb(255,0,0)"});
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial));
-        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0.5,gridMapHelper.getGlobalZPositionFromCoord(5));
-        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0.5,gridMapHelper.getGlobalZPositionFromCoord(3));
-        gridMapHelper.addTrap(2,5);
-        gridMapHelper.addTrap(5,3);
+        traps.push(new SpikeTrap());
+        traps.push(new SpikeTrap());
+        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0,gridMapHelper.getGlobalZPositionFromCoord(3));
+        gridMapHelper.addTrap(2,5,traps[0]);
+        gridMapHelper.addTrap(5,3,traps[1]);
         scene.add(traps[0]);
         scene.add(traps[1]);
 
@@ -1121,19 +1632,21 @@ phaseGeneration.push(
                 return;
             }
 
-            if(checkCollision(actor,objectives[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[0].active = false;
             }
-            else if(checkCollision(actor,objectives[1],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está sobre o cristal.\n";
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
@@ -1148,6 +1661,8 @@ phaseGeneration.push(
             actor.getObjectByName('eve').rotation.set(0,0,0);
             objectives[0].visible = true;
             objectives[1].visible = true;
+            gridMapHelper.obstacles[0].active = true;
+            gridMapHelper.obstacles[1].active = true;
             gridMapHelper.restartFires();
             firesVisualRestart();
             setFireStates();
@@ -1175,6 +1690,30 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+
+        spikeTrapState = 0;
+        setSpikeTrapState = () => {
+            if(spikeTrapState == 0)
+            {
+                trapsDeactivation(traps)
+            }
+            else
+            {
+                trapsActivation(traps)
+
+            }
+        }
+
+        setSpikeTrapStateInterval = setInterval(() => {
+            if(sceneProperties.executing)
+            {
+                return;
+            }
+
+            spikeTrapState = (spikeTrapState + 1) % 2;
+            setSpikeTrapState();
+        },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 //Phase 8
@@ -1197,6 +1736,9 @@ phaseGeneration.push(
         objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),0.0,gridMapHelper.getGlobalZPositionFromCoord(5));
         objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),0.0,gridMapHelper.getGlobalZPositionFromCoord(5));
         objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0.0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        gridMapHelper.addObstacle(3,3,5,5);
+        gridMapHelper.addObstacle(5,5,5,5);
+        gridMapHelper.addObstacle(7,7,5,5);
         scene.add(objectives[0]);
         scene.add(objectives[1]);
         scene.add(objectives[2]);
@@ -1205,17 +1747,41 @@ phaseGeneration.push(
         const boxGeometry = new THREE.BoxGeometry(2,2,4);
         const boxGeometry2 = new THREE.BoxGeometry(2,2,2);
         const boxGeometry3 = new THREE.BoxGeometry(2,2,6);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[0].map.repeat.set(2,1);
+        boxMaterial[1].map.repeat.set(2,1);
+        boxMaterial[2].map.repeat.set(1,2);
+        boxMaterial[3].map.repeat.set(1,2);
+        const boxMaterial2 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[0].map.repeat.set(3,1);
+        boxMaterial3[1].map.repeat.set(3,1);
+        boxMaterial3[2].map.repeat.set(1,3);
+        boxMaterial3[3].map.repeat.set(1,3);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(6.5));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(3.5));
         walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(0.5));
@@ -1251,27 +1817,27 @@ phaseGeneration.push(
         traps = [];
         const trapGeometry = new THREE.BoxGeometry(2,1,2)
         const trapMaterial = new THREE.MeshLambertMaterial({color: "rgb(255,0,0)"})
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial))
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial))
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial))
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial))
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial))
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial))
-        traps.push(new THREE.Mesh(trapGeometry,trapMaterial))
-        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),0.5,gridMapHelper.getGlobalZPositionFromCoord(7));
-        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.5,gridMapHelper.getGlobalZPositionFromCoord(7));
-        traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0.5,gridMapHelper.getGlobalZPositionFromCoord(5));
-        traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),0.5,gridMapHelper.getGlobalZPositionFromCoord(5));
-        traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.5,gridMapHelper.getGlobalZPositionFromCoord(5));
-        traps[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0.5,gridMapHelper.getGlobalZPositionFromCoord(5));
-        traps[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.5,gridMapHelper.getGlobalZPositionFromCoord(0));
-        gridMapHelper.addTrap(4,7);
-        gridMapHelper.addTrap(6,7);
-        gridMapHelper.addTrap(2,5);
-        gridMapHelper.addTrap(4,5);
-        gridMapHelper.addTrap(6,5);
-        gridMapHelper.addTrap(8,5);
-        gridMapHelper.addTrap(6,0);
+        traps.push(new SpikeTrap())
+        traps.push(new SpikeTrap())
+        traps.push(new SpikeTrap())
+        traps.push(new SpikeTrap())
+        traps.push(new SpikeTrap())
+        traps.push(new SpikeTrap())
+        traps.push(new SpikeTrap())
+        traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),0,gridMapHelper.getGlobalZPositionFromCoord(7));
+        traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0,gridMapHelper.getGlobalZPositionFromCoord(7));
+        traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        traps[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0,gridMapHelper.getGlobalZPositionFromCoord(5));
+        traps[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0,gridMapHelper.getGlobalZPositionFromCoord(0));
+        gridMapHelper.addTrap(4,7,traps[0]);
+        gridMapHelper.addTrap(6,7,traps[1]);
+        gridMapHelper.addTrap(2,5,traps[2]);
+        gridMapHelper.addTrap(4,5,traps[3]);
+        gridMapHelper.addTrap(6,5,traps[4]);
+        gridMapHelper.addTrap(8,5,traps[5]);
+        gridMapHelper.addTrap(6,0,traps[6]);
         scene.add(traps[0]);
         scene.add(traps[1]);
         scene.add(traps[2]);
@@ -1335,24 +1901,27 @@ phaseGeneration.push(
                 return;
             }
 
-            if(checkCollision(actor,objectives[0],gridMapHelper))
+            if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[0].active = false;
             }
-            else if(checkCollision(actor,objectives[1],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[1].active = false;
             }
-            else if(checkCollision(actor,objectives[2],gridMapHelper))
+            else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[2],gridMapHelper))
             {
                 objectives[2].visible = false;
                 consoleElement.innerText += "Cristal coletado.\n";
+                gridMapHelper.obstacles[2].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está sobre o cristal.\n";
+                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
 
             if(!objectives[0].visible && !objectives[1].visible && !objectives[2].visible)
@@ -1368,6 +1937,9 @@ phaseGeneration.push(
             objectives[0].visible = true;
             objectives[1].visible = true;
             objectives[2].visible = true;
+            gridMapHelper.obstacles[0].active = true;
+            gridMapHelper.obstacles[1].active = true;
+            gridMapHelper.obstacles[2].active = true;
             gridMapHelper.restartFires();
             firesVisualRestart();
             setFireStates();
@@ -1398,6 +1970,30 @@ phaseGeneration.push(
             fireState = (fireState + 1) % 2;
             setFireStates();
         },1000);
+
+        spikeTrapState = 0;
+        setSpikeTrapState = () => {
+            if(spikeTrapState == 0)
+            {
+                trapsDeactivation(traps)
+            }
+            else
+            {
+                trapsActivation(traps)
+
+            }
+        }
+
+        setSpikeTrapStateInterval = setInterval(() => {
+            if(sceneProperties.executing)
+            {
+                return;
+            }
+
+            spikeTrapState = (spikeTrapState + 1) % 2;
+            setSpikeTrapState();
+        },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -1458,15 +2054,20 @@ function animate()
     renderer.render(scene,camera);
     controls.update();
     requestAnimationFrame(animate);
+    displayTime(sceneProperties.timer,document.getElementById("timer"));
 }
 
 window.addEventListener('resize',() => {
     resizeCanvasToDisplaySize(renderer,camera);
 });
 
+const finishEarlierButton = document.getElementById('finishEarlier');
+
 const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
     const codeParsed = parseCode(editor.state.doc.toString());
+    if(traps != null)
+        trapsDeactivation(traps)
     sceneProperties.cancelExecution = false;
     if(codeParsed != null)
     {
@@ -1481,6 +2082,12 @@ execBtn.addEventListener("click",async function() {
             document.getElementById('winMessage').classList.remove('invisible');
             document.getElementById('advanceBtn').classList.remove('invisible');
             document.getElementById("resetBtn").disabled = true;
+            finishEarlierButton.disabled = true;
+            clearInterval(timerUpadate);
+            if(sceneProperties.phase == phaseGeneration.length - 1)
+            {
+                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 2/Completo');
+            }
         }
         else
         {
@@ -1514,11 +2121,21 @@ advanceBtn.addEventListener('click',(e) => {
         document.getElementById('advanceBtn').classList.add('invisible');
         execBtn.disabled = false;
         resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
     }
     else
     {
         sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
-        window.location.href = "../";
+        logModal.show();
+    }
+});
+
+finishEarlierButton.addEventListener('click', (e) => {
+    if(confirm("Deseja realmente finalizar a prática?"))
+    {
+        clearInterval(timerUpadate);
+        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 2/Fase ${sceneProperties.phase + 1}`);
+        logModal.show();
     }
 });
 

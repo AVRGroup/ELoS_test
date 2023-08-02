@@ -16,6 +16,8 @@ export default class GridMapHelper
         this.traps = [];
         this.fires = [];
         this.lasers = [];
+        this.crystals = [];
+        this.doors = [];
     }
 
     createGridPlane()
@@ -120,7 +122,8 @@ export default class GridMapHelper
                 minX: minX,
                 maxX: maxX,
                 minZ: minZ,
-                maxZ: maxZ
+                maxZ: maxZ,
+                active: true
             }
         );
     }
@@ -177,11 +180,12 @@ export default class GridMapHelper
 
     collisionTests(position,newPosition)
     {
+        let activeObstacles = this.obstacles.filter(obstacle => obstacle.active == true);
         if(!this.borderMapCollision(position,newPosition))
         {
-            for(let i = 0;i < this.obstacles.length;i++)
+            for(let i = 0;i < activeObstacles.length;i++)
             {
-                if(this.obstacleCollision(position,newPosition,this.obstacles[i]))
+                if(this.obstacleCollision(position,newPosition,activeObstacles[i]))
                 {
                     const newPositionUpdate = new THREE.Vector3(this.getGlobalXPositionFromCoord(this.getXCoordFromGlobalPosition(position.x)),newPosition.y,this.getGlobalZPositionFromCoord(this.getZCoordFromGlobalPosition(position.z)));
                     return newPositionUpdate;
@@ -201,11 +205,12 @@ export default class GridMapHelper
         }
     }
 
-    addTrap(x,z)
+    addTrap(x,z,obj)
     {
         this.traps.push({
             x:x,
-            z:z
+            z:z,
+            obj:obj
         });
     }
     
@@ -220,7 +225,24 @@ export default class GridMapHelper
         {
             if(this.getXCoordFromGlobalPosition(position.x) == this.traps[i].x && this.getZCoordFromGlobalPosition(position.z) == this.traps[i].z)
             {
-                return true
+                let requestID = null
+                let alpha2 = 0.1
+                let thisTrap = this.traps[i].obj
+                activateTrap()
+                function activateTrap(){
+                    if(thisTrap.spikes[4].position.y.toFixed(1) < 1)
+                    {
+                        alpha2 += 0.05;
+                        thisTrap.spikes.forEach(spike => spike.position.lerp(new THREE.Vector3(spike.position.x, 1, spike.position.z), alpha2))
+                        requestID = requestAnimationFrame(activateTrap);
+                    }
+                    else
+                    {
+                        cancelAnimationFrame(requestID);
+                        alpha2 = 0.1
+                    }
+                }
+                return new THREE.Vector3(this.getGlobalXPositionFromCoord(this.traps[i].x),position.y,this.getGlobalZPositionFromCoord(this.traps[i].z));
             }
             else
             {
@@ -251,7 +273,7 @@ export default class GridMapHelper
         {
             if(this.getXCoordFromGlobalPosition(position.x) == activeFires[i].x && this.getZCoordFromGlobalPosition(position.z) == activeFires[i].z)
             {
-                return true;
+                return new THREE.Vector3(this.getGlobalXPositionFromCoord(activeFires[i].x),position.y,this.getGlobalZPositionFromCoord(activeFires[i].z));
             }
             else
             {
@@ -268,7 +290,7 @@ export default class GridMapHelper
 
         for(let i = 0;i < fireFiltered.length;i++)
             {
-                if((Math.abs(this.getXCoordFromGlobalPosition(position.x) - fireFiltered[i].x) == 1 && this.getZCoordFromGlobalPosition(position.z) == fireFiltered[i].z) || (this.getXCoordFromGlobalPosition(position.x) == fireFiltered[i].x && Math.abs(this.getZCoordFromGlobalPosition(position.z) - fireFiltered[i].z) == 1))
+                if(this.getXCoordFromGlobalPosition(position.x) == fireFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == fireFiltered[i].z)
                 {
                     return fireFiltered[i].id;
                 }
@@ -294,17 +316,15 @@ export default class GridMapHelper
         this.fires = [];
     }
 
-    addLaser(x,z)
+    addLaser(x,z, laserFence)
     {
-        const laser = {
-            id: this.lasers.length,
-            x:x,
-            z:z,
-            active: true,
-            state: 'red'
-        };
+        laserFence.index = this.lasers.length
+        laserFence.x = x;
+        laserFence.z = z;
+        laserFence.active = true;
+        laserFence.state = laserFence.state;
 
-        this.lasers.push(laser);
+        this.lasers.push(laserFence);
     }
 
     laserCollision(position)
@@ -328,13 +348,13 @@ export default class GridMapHelper
 
     detectLaser(position, state)
     {
-        const laserFiltered = this.lasers.filter(laser => laser.state == state);
+        const laserFiltered = this.lasers.filter(laser => laser.state == state && laser.active == true);
 
         for(let i = 0;i < laserFiltered.length;i++)
         {
-            if((Math.abs(this.getXCoordFromGlobalPosition(position.x) - laserFiltered[i].x) == 1 && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z) || (this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && Math.abs(this.getZCoordFromGlobalPosition(position.z) - laserFiltered[i].z) == 1))
+            if(this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z)
             {
-                return laserFiltered[i].id;
+                return laserFiltered[i].index;
             }
             else
             {
@@ -350,12 +370,16 @@ export default class GridMapHelper
         for(let i = 0;i < this.lasers.length;i++)
         {
             this.lasers[i].active = true;
-            this.lasers[i].state = 'blue';
         }
     }
 
     clearLasers()
     {
         this.lasers = [];
+    }
+
+    clearDoors()
+    {
+        this.doors = [];
     }
 }

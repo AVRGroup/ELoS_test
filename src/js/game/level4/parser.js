@@ -54,14 +54,27 @@ const functionFilter = [
     {
         filter: new RegExp('^{$'),
         type: "blockValidation"
-    }
+    },
+    {
+        filter: new RegExp('^enquanto(\\s+)?\\((\\s+)?.+\\)$'),
+        type: 'loop'
+    },
+    {
+        filter: new RegExp('^enquanto(\\s+)?\\((\\s+)?.+\\)(\\s+)?{$'),
+        type: 'loop&&blockValidation'
+    },
+    {
+        filter: new RegExp('^girarManivela(\\s+)?\\((\\s+)?\\)(\\s+)?(;)?$'),
+        type: 'sequential'
+    },
 ];
 
 const conditionalParameters = [
     new RegExp('true'),
     new RegExp('false'),
     new RegExp('^laserAzulAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$'),
-    new RegExp('^laserVermelhoAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$')
+    new RegExp('^laserVermelhoAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$'),
+    new RegExp('^portaFechada(\\s+)?\\((\\s+)?\\)(\\s+)?$')
 ]
 
 function ifValidation(line)
@@ -534,6 +547,54 @@ export default function parseCode(code,limit = 0)
                         let lineParsed = `${lines[i].trim()}\n`;
                         codeParsed += lineParsed;
                         totalCommands++;
+                    }
+                }
+                else if(lineType === "loop")
+                {
+                    if(ifValidation(lines[i]))
+                    {
+                        let line = lines[i].trim();
+                        let lineParsed = `while${line.substring(line.indexOf('('))}\n`;
+                        codeParsed += lineParsed;         
+                        totalCommands++;
+                    }
+                    else
+                    {
+                        printError(`${lines[i]} (Condição inválida)`,i+1);
+                        valid = false;
+                        break;
+                    }
+                }
+                else if(lineType === "loop&&blockValidation")
+                {
+                    let validConditional = false;
+                    if(blockValidation(lines,i))
+                    {
+                        if(ifValidation(lines[i]))
+                        {
+                            validConditional = true;          
+                        }
+                        else
+                        {
+                            printError(`${lines[i]} (Condição inválida)`,i+1);
+                        }   
+                    }
+                    else
+                    {
+                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1);   
+                    }
+
+                    if(validConditional)
+                    {
+                        let line = lines[i].trim();
+                        let lineParsed = `while${line.substring(line.indexOf('('))}\n`;
+                        codeParsed += lineParsed;   
+                        totalCommands++;
+                    }
+                    else
+                    {
+                        valid = false;
+                        break;
                     }
                 }
                 else
