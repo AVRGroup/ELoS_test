@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../scss/game/styles.scss">
-        <title>ELoS (Versão de Teste) - Nível 2</title>
+        <title>ELoS (Versão de Teste) - Nível 4</title>
     </head>
     <body>
         <div class="container-fluid">
@@ -16,16 +16,12 @@
 
                     </canvas>
                     <div class="position-absolute top-0 start-0 ms-3">
-                        <h2 id="phaseTitle" class="bg-warning mb-0">Nível 2 - Fase x de X</h2>
+                        <h2 id="phaseTitle" class="bg-warning mb-0">Nível 4 - Fase x de X</h2>
                         <p id="phaseObjective" class="bg-info mt-0 mb-0">Faça algo</p>
                         <h2 id="winMessage" class="bg-success mt-0 invisible">Fase Concluída</h2>
                         <button id="advanceBtn" type="button" class="btn btn-primary invisible">Avançar</button>
                     </div>
                     <div class="position-absolute bottom-50 bottom-md-0 start-0 ms-3">
-                        <div class="d-flex">
-                            <img src="../../img/game/fire-extinguisher.png" alt="Extintor de Incêndio" width="40" height="40">
-                            <h2 id="extinguisherUses" class="text-light">xN</h2>
-                        </div>
                         <h3 id="timer" class="text-white">Tempo:</h3>
                     </div>
                 </div>
@@ -57,14 +53,24 @@
                                                     <p id="girarEsquerda" class="btn-txt">girarEsquerda()</p>
                                                     <p id="girarDireita" class="btn-txt">girarDireita()</p>
                                                     <p id="darMeiaVolta" class="btn-txt">darMeiaVolta()</p>
-                                                    <p id="apagarFogo" class="btn-txt">apagarFogo()</p>
+                                                    <p id="desativarLaserAzul" class="btn-txt">desativarLaserAzul()</p>
+                                                    <p id="desativarLaserVermelho" class="btn-txt">desativarLaserVermelho()</p>
+                                                    <p id="girarManivela" class="btn-txt">girarManivela()</p>
                                                     <p id="coletarCristal" class="btn-txt">coletarCristal()</p>
                                                 </div>
                                                 <div class="col-3 text-primary">
-                                                    <p id="pegandoFogo" class="btn-txt-verificator">pegandoFogo()</p>
+                                                    <p id="laserAzulAtivo" class="btn-txt-verificator">laserAzulAtivo()</p>
+                                                    <p id="laserVermelhoAtivo" class="btn-txt-verificator">laserVermelhoAtivo()</p>
+                                                    <p id="portaFechada" class="btn-txt-verificator">portaFechada()</p>
                                                 </div>
                                                 <div class="col-4 text-success">
-                                                    <p id="condicao" class="btn-txt-structure">se(condição){<br>&nbsp;ação()<br>}</p>
+                                                    <p id="condicaoFull" class="btn-txt-structure">
+                                                        se(condição){<br>&nbsp;ação()<br>}<br>
+                                                        senão{<br>&nbsp;ação()<br>}
+                                                    </p>
+                                                    <p id="enquanto" class="btn-txt-structure">
+                                                        enquanto(condição){<br>&nbsp;ação()<br>}<br>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </code>
@@ -114,7 +120,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 2, informe:</h5>
+                            <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 4, informe:</h5>
                         </div>
                         <div class="modal-body">
                             <form id="dataLog">
@@ -149,5 +155,5 @@
         </div>        
     </body>
     <script type="module" src="../../js/game/bootstrap.js"></script>
-    <script type="module" src="../../js/game/level2/phases.js"></script>
+    <script type="module" src="../../js/game/level4/phases.js"></script>
 </html>

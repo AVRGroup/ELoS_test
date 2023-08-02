@@ -14,11 +14,23 @@ import GridMapHelper from "../three/GridMapHelper";
 import parseCode from "./parser";
 import LaserFence from "../three/LaserFence";
 import {SpikeTrap, trapsActivation, trapsDeactivation} from "../three/SpikeTrap";
+import { displayTime, configureDataAndUpload } from "../timer";
+import { Modal } from "bootstrap";
 
 const sceneProperties = {
     cancelExecution: false,
+    timer: 0,
     phase: 0,
     executing: false
+}
+
+const logModal = new Modal(document.getElementById("logModal"));
+
+let timerUpadate;
+
+function updateTime()
+{
+    sceneProperties.timer++;
 }
 
 let laserState;
@@ -265,6 +277,10 @@ const plane = gridMapHelper.createGridPlane();
 
 const actor = loadDefaultActor();
 
+const wallTexture = new THREE.TextureLoader().load(new URL('../../../assets/textures/metalWallLvl3.png', import.meta.url).toString());
+wallTexture.wrapS = THREE.RepeatWrapping;
+wallTexture.wrapT = THREE.RepeatWrapping;
+
 let objectives;
 let walls;
 let traps;
@@ -476,7 +492,18 @@ phaseGeneration.push(
 
         walls = [];
         const boxGeometry = new THREE.BoxGeometry(18,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(9,1);
+        boxMaterial[3].map.repeat.set(9,1);
+        boxMaterial[4].map.repeat.set(9,1);
+        boxMaterial[5].map.repeat.set(9,1);
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry,boxMaterial));
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(4));
@@ -562,6 +589,7 @@ phaseGeneration.push(
             laserState = (laserState + 1) % 2;
             setLaserStates();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -595,7 +623,18 @@ phaseGeneration.push(
 
         walls = [];
         const boxGeometry1 = new THREE.BoxGeometry(6,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(3,1);
+        boxMaterial[3].map.repeat.set(3,1);
+        boxMaterial[4].map.repeat.set(3,1);
+        boxMaterial[5].map.repeat.set(3,1);
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));        
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
@@ -754,6 +793,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -812,17 +852,65 @@ phaseGeneration.push(
         const boxGeometry3 = new THREE.BoxGeometry(4,2,2);
         const boxGeometry4 = new THREE.BoxGeometry(6,2,2);
         const boxGeometry5 = new THREE.BoxGeometry(2,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(5,1);
+        boxMaterial[3].map.repeat.set(5,1);
+        boxMaterial[4].map.repeat.set(5,1);
+        boxMaterial[5].map.repeat.set(5,1);
+        const boxMaterial2 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial2[2].map.repeat.set(6,1);
+        boxMaterial2[3].map.repeat.set(6,1);
+        boxMaterial2[4].map.repeat.set(6,1);
+        boxMaterial2[5].map.repeat.set(6,1);
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[2].map.repeat.set(2,1);
+        boxMaterial3[3].map.repeat.set(2,1);
+        boxMaterial3[4].map.repeat.set(2,1);
+        boxMaterial3[5].map.repeat.set(2,1);
+        const boxMaterial4 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial4[2].map.repeat.set(3,1);
+        boxMaterial4[3].map.repeat.set(3,1);
+        boxMaterial4[4].map.repeat.set(3,1);
+        boxMaterial4[5].map.repeat.set(3,1);
+        const boxMaterial5 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
 
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(9));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1,gridMapHelper.getGlobalZPositionFromCoord(0));
@@ -993,6 +1081,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -1038,17 +1127,76 @@ phaseGeneration.push(
         const boxGeometry3 = new THREE.BoxGeometry(10,2,2);
         const boxGeometry4 = new THREE.BoxGeometry(8,2,2);
         const boxGeometry5 = new THREE.BoxGeometry(20,2,2);
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(6,1);
+        boxMaterial[3].map.repeat.set(6,1);
+        boxMaterial[4].map.repeat.set(6,1);
+        boxMaterial[5].map.repeat.set(6,1);
+        const boxMaterial2 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial2[2].map.repeat.set(3,1);
+        boxMaterial2[3].map.repeat.set(3,1);
+        boxMaterial2[4].map.repeat.set(3,1);
+        boxMaterial2[5].map.repeat.set(3,1);
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[2].map.repeat.set(5,1);
+        boxMaterial3[3].map.repeat.set(5,1);
+        boxMaterial3[4].map.repeat.set(5,1);
+        boxMaterial3[5].map.repeat.set(5,1);
+        const boxMaterial4 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial4[2].map.repeat.set(4,1);
+        boxMaterial4[3].map.repeat.set(4,1);
+        boxMaterial4[4].map.repeat.set(4,1);
+        boxMaterial4[5].map.repeat.set(4,1);
+        const boxMaterial5 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial5[2].map.repeat.set(10,1);
+        boxMaterial5[3].map.repeat.set(10,1);
+        boxMaterial5[4].map.repeat.set(10,1);
+        boxMaterial5[5].map.repeat.set(10,1);
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
 
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2.5),1,gridMapHelper.getGlobalZPositionFromCoord(0));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(6));
@@ -1194,6 +1342,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -1239,20 +1388,66 @@ phaseGeneration.push(
         const boxGeometry4 = new THREE.BoxGeometry(10,2,2);
         const boxGeometry5 = new THREE.BoxGeometry(4,2,2);
         const boxGeometry6 = new THREE.BoxGeometry(12,2,2);
- 
-
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(3,1);
+        boxMaterial[3].map.repeat.set(3,1);
+        boxMaterial[4].map.repeat.set(3,1);
+        boxMaterial[5].map.repeat.set(3,1);
+        const boxMaterial2 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial2[2].map.repeat.set(7,1);
+        boxMaterial2[3].map.repeat.set(7,1);
+        boxMaterial2[4].map.repeat.set(7,1);
+        boxMaterial2[5].map.repeat.set(7,1);
+        const boxMaterial3 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
+        const boxMaterial5 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial5[2].map.repeat.set(2,1);
+        boxMaterial5[3].map.repeat.set(2,1);
+        boxMaterial5[4].map.repeat.set(2,1);
+        boxMaterial5[5].map.repeat.set(2,1);
+        const boxMaterial6 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial6[2].map.repeat.set(6,1);
+        boxMaterial6[3].map.repeat.set(6,1);
+        boxMaterial6[4].map.repeat.set(6,1);
+        boxMaterial6[5].map.repeat.set(6,1);
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry6,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry6,boxMaterial6));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry6,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry6,boxMaterial6));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
 
 
 
@@ -1431,6 +1626,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -1488,24 +1684,84 @@ phaseGeneration.push(
         const boxGeometry4 = new THREE.BoxGeometry(6,2,2);
         const boxGeometry5 = new THREE.BoxGeometry(12,2,2);
         const boxGeometry6 = new THREE.BoxGeometry(14,2,2);
- 
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(5,1);
+        boxMaterial[3].map.repeat.set(5,1);
+        boxMaterial[4].map.repeat.set(5,1);
+        boxMaterial[5].map.repeat.set(5,1);
+        const boxMaterial2 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[2].map.repeat.set(2,1);
+        boxMaterial3[3].map.repeat.set(2,1);
+        boxMaterial3[4].map.repeat.set(2,1);
+        boxMaterial3[5].map.repeat.set(2,1);
+        const boxMaterial4 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial4[2].map.repeat.set(3,1);
+        boxMaterial4[3].map.repeat.set(3,1);
+        boxMaterial4[4].map.repeat.set(3,1);
+        boxMaterial4[5].map.repeat.set(3,1);
+        const boxMaterial5 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial5[2].map.repeat.set(6,1);
+        boxMaterial5[3].map.repeat.set(6,1);
+        boxMaterial5[4].map.repeat.set(6,1);
+        boxMaterial5[5].map.repeat.set(6,1);
+        const boxMaterial6 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial6[2].map.repeat.set(7,1);
+        boxMaterial6[3].map.repeat.set(7,1);
+        boxMaterial6[4].map.repeat.set(7,1);
+        boxMaterial6[5].map.repeat.set(7,1);
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry6,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry6,boxMaterial6));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
 
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(9));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1,gridMapHelper.getGlobalZPositionFromCoord(8));
@@ -1699,6 +1955,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -1745,21 +2002,69 @@ phaseGeneration.push(
         const boxGeometry3 = new THREE.BoxGeometry(4,2,2);
         const boxGeometry4 = new THREE.BoxGeometry(2,2,2);
         const boxGeometry5 = new THREE.BoxGeometry(8,2,2);
- 
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(3,1);
+        boxMaterial[3].map.repeat.set(3,1);
+        boxMaterial[4].map.repeat.set(3,1);
+        boxMaterial[5].map.repeat.set(3,1);
+        const boxMaterial2 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial2[2].map.repeat.set(6,1);
+        boxMaterial2[3].map.repeat.set(6,1);
+        boxMaterial2[4].map.repeat.set(6,1);
+        boxMaterial2[5].map.repeat.set(6,1);
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[2].map.repeat.set(2,1);
+        boxMaterial3[3].map.repeat.set(2,1);
+        boxMaterial3[4].map.repeat.set(2,1);
+        boxMaterial3[5].map.repeat.set(2,1);
+        const boxMaterial4 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
+        const boxMaterial5 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial5[2].map.repeat.set(4,1);
+        boxMaterial5[3].map.repeat.set(4,1);
+        boxMaterial5[4].map.repeat.set(4,1);
+        boxMaterial5[5].map.repeat.set(4,1);
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
 
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(2));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(8));
@@ -1942,6 +2247,7 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -1993,17 +2299,65 @@ phaseGeneration.push(
         const boxGeometry4 = new THREE.BoxGeometry(4,2,2);
         const boxGeometry5 = new THREE.BoxGeometry(2,2,2);
  
-        const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"});
+        const boxMaterial = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial[2].map.repeat.set(7,1);
+        boxMaterial[3].map.repeat.set(7,1);
+        boxMaterial[4].map.repeat.set(7,1);
+        boxMaterial[5].map.repeat.set(7,1);
+        const boxMaterial2 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial2[2].map.repeat.set(5,1);
+        boxMaterial2[3].map.repeat.set(5,1);
+        boxMaterial2[4].map.repeat.set(5,1);
+        boxMaterial2[5].map.repeat.set(5,1);
+        const boxMaterial3 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial3[2].map.repeat.set(3,1);
+        boxMaterial3[3].map.repeat.set(3,1);
+        boxMaterial3[4].map.repeat.set(3,1);
+        boxMaterial3[5].map.repeat.set(3,1);
+        const boxMaterial4 = [
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+            new THREE.MeshLambertMaterial({map:wallTexture.clone()}),
+        ];
+        boxMaterial4[2].map.repeat.set(2,1);
+        boxMaterial4[3].map.repeat.set(2,1);
+        boxMaterial4[4].map.repeat.set(2,1);
+        boxMaterial4[5].map.repeat.set(2,1);
+        const boxMaterial5 = new THREE.MeshLambertMaterial({map:wallTexture.clone()});
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
         walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
-        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial));
+        walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
+        walls.push(new THREE.Mesh(boxGeometry3,boxMaterial3));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry4,boxMaterial4));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
+        walls.push(new THREE.Mesh(boxGeometry5,boxMaterial5));
 
         walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(5));
         walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3),1,gridMapHelper.getGlobalZPositionFromCoord(6));
@@ -2192,6 +2546,9 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
+        document.getElementById('winMessage').innerText = "Nível Concluído";
+        document.getElementById('advanceBtn').innerText = "Finalizar";
+        timerUpadate = setInterval(updateTime,1000);
     }
 );
 
@@ -2243,11 +2600,14 @@ function animate()
     renderer.render(scene,camera);
     controls.update();
     requestAnimationFrame(animate);
+    displayTime(sceneProperties.timer,document.getElementById("timer"));
 }
 
 window.addEventListener('resize',() => {
     resizeCanvasToDisplaySize(renderer,camera);
 });
+
+const finishEarlierButton = document.getElementById('finishEarlier');
 
 const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
@@ -2269,6 +2629,12 @@ execBtn.addEventListener("click",async function() {
             document.getElementById('winMessage').classList.remove('invisible');
             document.getElementById('advanceBtn').classList.remove('invisible');
             document.getElementById("resetBtn").disabled = true;
+            finishEarlierButton.disabled = true;
+            clearInterval(timerUpadate);
+            if(sceneProperties.phase == phaseGeneration.length - 1)
+            {
+                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 3/Completo');
+            }
         }
         else
         {
@@ -2302,11 +2668,21 @@ advanceBtn.addEventListener('click',(e) => {
         document.getElementById('advanceBtn').classList.add('invisible');
         execBtn.disabled = false;
         resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
     }
     else
     {
         sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
-        window.location.href = "../";
+        logModal.show();
+    }
+});
+
+finishEarlierButton.addEventListener('click', (e) => {
+    if(confirm("Deseja realmente finalizar a prática?"))
+    {
+        clearInterval(timerUpadate);
+        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 3/Fase ${sceneProperties.phase + 1}`);
+        logModal.show();
     }
 });
 

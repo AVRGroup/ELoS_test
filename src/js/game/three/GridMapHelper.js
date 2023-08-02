@@ -17,6 +17,7 @@ export default class GridMapHelper
         this.fires = [];
         this.lasers = [];
         this.crystals = [];
+        this.doors = [];
     }
 
     createGridPlane()
@@ -375,5 +376,10 @@ export default class GridMapHelper
     clearLasers()
     {
         this.lasers = [];
+    }
+
+    clearDoors()
+    {
+        this.doors = [];
     }
 }

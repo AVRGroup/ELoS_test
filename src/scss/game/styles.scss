@@ -43,10 +43,26 @@ $utilities: (
 );
 
 .btn-txt{
-    color: #212529;
-
+    color:#d63384;
+    margin: 0%;
     &:hover{
-        color:#d63384;
+        color: #212529;
+        cursor: pointer;
+    }
+}
+.btn-txt-verificator{
+    color:#0d6efd;
+    margin: 0%;
+    &:hover{
+        color: #212529;
+        cursor: pointer;
+    }
+}
+.btn-txt-structure{
+    color:#198754;
+    margin: 0%;
+    &:hover{
+        color: #212529;
         cursor: pointer;
     }
 }
