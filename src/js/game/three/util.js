@@ -203,7 +203,7 @@ export function translateActor(actor, amount, gridMapHelper, sceneProperties, co
     objCopy.translateZ(amount * gridMapHelper.getMultiplier());
     let finalPosition = objCopy.position;
     let requestID;
-    let alpha = 0.01;
+    let alpha = sceneProperties.mult == 1 ? 0.01 : 0.1;
     let modeGo = amount > 0 ? 0 : 1;
     let modeBack = amount > 0 ? 1 : 0;
 
@@ -293,14 +293,15 @@ export function rotateActor(actor, amount, sceneProperties, direction)
     let requestID;
     const totalRotation = Math.abs(amount);
     const directionCorrected = direction > 0 ? 1 : -1;
+    const multOnCall = sceneProperties.mult;
 
     return new Promise(function(resolve){
         function rotate()
         {
             if(angleRotated < totalRotation && !sceneProperties.cancelExecution)
             {
-                actor.rotateY(degreeToRadians(1*directionCorrected));
-                angleRotated++;
+                actor.rotateY(degreeToRadians(1*directionCorrected*multOnCall));
+                angleRotated = angleRotated + 1*multOnCall;
                 requestID = requestAnimationFrame(rotate);
             }
             else
