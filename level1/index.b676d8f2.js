@@ -82,7 +82,8 @@ var $gSwgq = parcelRequire("gSwgq");
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 0
+    phase: 0,
+    mult: 1
 };
 //Generating default Level 1 Objects
 const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
@@ -1071,6 +1072,18 @@ finishEarlierButton.addEventListener("click", (e)=>{
         logModal.show();
     }
 });
+let normalSpeedBtn = document.getElementById("normalSpeed");
+let fastSpeedBtn = document.getElementById("fastSpeed");
+normalSpeedBtn.addEventListener("click", function() {
+    this.disabled = true;
+    fastSpeedBtn.disabled = false;
+    sceneProperties.mult = 1;
+});
+fastSpeedBtn.addEventListener("click", function() {
+    this.disabled = true;
+    normalSpeedBtn.disabled = false;
+    sceneProperties.mult = 6;
+});
 //Running level 1
 (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
 phaseGeneration[sceneProperties.phase]();
@@ -1155,9 +1168,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $e68b4dbd61587112$exports = {};
+var $3fb1fc08c80181e4$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.610162d3.js","64GOt":"stone_wallLvl1.e00cd434.jpg","1kNgI":"index.021088d0.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.b676d8f2.js","64GOt":"stone_wallLvl1.e00cd434.jpg","8yRrX":"index.dcd45879.js"}'));
 
 
 parcelRequire("hO50i");

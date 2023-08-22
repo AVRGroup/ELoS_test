@@ -55786,7 +55786,7 @@ function $4a12bffc769d698d$export$43ac269cfac29bfc(actor, amount, gridMapHelper,
     objCopy.translateZ(amount * gridMapHelper.getMultiplier());
     let finalPosition = objCopy.position;
     let requestID;
-    let alpha = 0.01;
+    let alpha = sceneProperties.mult == 1 ? 0.01 : 0.1;
     let modeGo = amount > 0 ? 0 : 1;
     let modeBack = amount > 0 ? 1 : 0;
     function positionAlmostEqual(positionA, positionB) {
@@ -55843,11 +55843,12 @@ function $4a12bffc769d698d$export$1f34b7ddb8582c2d(actor, amount, scenePropertie
     let requestID;
     const totalRotation = Math.abs(amount);
     const directionCorrected = direction > 0 ? 1 : -1;
+    const multOnCall = sceneProperties.mult;
     return new Promise(function(resolve) {
         function rotate() {
             if (angleRotated < totalRotation && !sceneProperties.cancelExecution) {
-                actor.rotateY($4a12bffc769d698d$export$b30a5dbc5cf297c2(1 * directionCorrected));
-                angleRotated++;
+                actor.rotateY($4a12bffc769d698d$export$b30a5dbc5cf297c2(1 * directionCorrected * multOnCall));
+                angleRotated = angleRotated + 1 * multOnCall;
                 requestID = requestAnimationFrame(rotate);
             } else {
                 cancelAnimationFrame(requestID);
@@ -60390,8 +60391,8 @@ function $c49ab76c1c184985$export$5d4bb8012760247a(traps) {
 
 });
 
-var $b7dd0a3c89a86fa3$exports = {};
+var $005be8ffcfcc2f78$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"1kNgI":"index.021088d0.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"8yRrX":"index.dcd45879.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
