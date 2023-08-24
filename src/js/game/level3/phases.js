@@ -21,7 +21,8 @@ const sceneProperties = {
     cancelExecution: false,
     timer: 0,
     phase: 0,
-    executing: false
+    executing: false,
+    mult: 1
 }
 
 const logModal = new Modal(document.getElementById("logModal"));
@@ -2684,6 +2685,20 @@ finishEarlierButton.addEventListener('click', (e) => {
         configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 3/Fase ${sceneProperties.phase + 1}`);
         logModal.show();
     }
+});
+
+let normalSpeedBtn = document.getElementById("normalSpeed");
+let fastSpeedBtn = document.getElementById("fastSpeed");
+normalSpeedBtn.addEventListener("click", function() {
+    this.disabled = true;
+    fastSpeedBtn.disabled = false;
+    sceneProperties.mult = 1; 
+});
+
+fastSpeedBtn.addEventListener("click", function() {
+    this.disabled = true;
+    normalSpeedBtn.disabled = false;
+    sceneProperties.mult = 6; 
 });
 
 resizeCanvasToDisplaySize(renderer,camera);
