@@ -68,7 +68,8 @@ const sceneProperties = {
     cancelExecution: false,
     timer: 0,
     phase: 0,
-    executing: false
+    executing: false,
+    mult: 1
 };
 const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
 let timerUpadate;
@@ -3623,6 +3624,18 @@ finishEarlierButton.addEventListener("click", (e)=>{
         logModal.show();
     }
 });
+let normalSpeedBtn = document.getElementById("normalSpeed");
+let fastSpeedBtn = document.getElementById("fastSpeed");
+normalSpeedBtn.addEventListener("click", function() {
+    this.disabled = true;
+    fastSpeedBtn.disabled = false;
+    sceneProperties.mult = 1;
+});
+fastSpeedBtn.addEventListener("click", function() {
+    this.disabled = true;
+    normalSpeedBtn.disabled = false;
+    sceneProperties.mult = 6;
+});
 (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
 phaseGeneration[sceneProperties.phase]();
 animate();
@@ -4482,7 +4495,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 
 var $ee85d10d071bacac$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.7c71fd2e.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","8yRrX":"index.dcd45879.js","h7xIL":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.b694024f.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","8yRrX":"index.dcd45879.js","h7xIL":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
