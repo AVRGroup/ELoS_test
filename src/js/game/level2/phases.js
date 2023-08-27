@@ -8,7 +8,12 @@ import {
     translateActor,
     rotateActor,
     checkCollision,
-    degreeToRadians
+    degreeToRadians,
+    resetRobotColor,
+    materialColor,
+    corrID,
+    requestID,
+    changColorID
 } from "../three/util";
 import GridMapHelper from "../three/GridMapHelper";
 import FireBase from "../three/FireBase";
@@ -2065,7 +2070,12 @@ const finishEarlierButton = document.getElementById('finishEarlier');
 
 const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
+    cancelAnimationFrame(corrID);    
+    cancelAnimationFrame(requestID);
     const codeParsed = parseCode(editor.state.doc.toString());
+    actor.getObjectByName('eve').position.y = 0;
+    if(materialColor.length != 0)
+        resetRobotColor(actor);
     if(traps != null)
         trapsDeactivation(traps)
     sceneProperties.cancelExecution = false;
@@ -2099,7 +2109,13 @@ execBtn.addEventListener("click",async function() {
 
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click",() => {
+    cancelAnimationFrame(corrID);
+    cancelAnimationFrame(requestID);
+    cancelAnimationFrame(changColorID);
     sceneProperties.cancelExecution = true;
+    actor.getObjectByName('eve').position.y = 0;
+    if(materialColor.length != 0)
+        resetRobotColor(actor);
     resetLevel();
 });
 
