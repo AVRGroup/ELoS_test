@@ -55,12 +55,16 @@ export default function parseCode(code)
             {
                 if(lineType === "sequential")
                 {
-                    let lineParsed = "await " + lines[i].trim() + "\n";
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                    lineParsed += "await " + lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                 }
                 else
                 {
-                    let lineParsed = lines[i].trim() + "\n";
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                    lineParsed += lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                 }
             }
