@@ -54,6 +54,7 @@ var $3vWij = parcelRequire("3vWij");
 var $3tzMw = parcelRequire("3tzMw");
 
 var $gSwgq = parcelRequire("gSwgq");
+parcelRequire("7qmAS");
 
 var $c6e6z = parcelRequire("c6e6z");
 
@@ -2525,7 +2526,13 @@ const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
     const codeParsed = (0, $3vWij.default)(editor.state.doc.toString());
     console.log(codeParsed);
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
+    cancelAnimationFrame((0, $6mhZf.changColorID));
+    cancelAnimationFrame((0, $6mhZf.smokeAnimationFrame));
+    (0, $6mhZf.smoke).deactiveSmokes();
     sceneProperties.cancelExecution = false;
+    actor.getObjectByName("eve").position.y = 0;
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     if (codeParsed != null) {
         resetLevel();
@@ -2549,7 +2556,14 @@ execBtn.addEventListener("click", async function() {
 });
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click", ()=>{
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
+    cancelAnimationFrame((0, $6mhZf.changColorID));
+    cancelAnimationFrame((0, $6mhZf.smokeAnimationFrame));
+    (0, $6mhZf.smoke).deactiveSmokes();
     sceneProperties.cancelExecution = true;
+    actor.getObjectByName("eve").position.y = 0;
+    if ((0, $6mhZf.materialColor).length != 0) (0, $6mhZf.resetRobotColor)(actor);
     resetLevel();
 });
 const advanceBtn = document.getElementById("advanceBtn");
@@ -3115,9 +3129,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $63ce0e6f3737c0f4$exports = {};
+var $2406cf9a1643d2b1$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.799649d9.js","hEG10":"metalWallLvl3.c6e3c749.png","8yRrX":"index.dcd45879.js","h7xIL":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.44bcfbcb.js","hEG10":"metalWallLvl3.c6e3c749.png","fHz1b":"index.a69fe58d.js","h7xIL":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");

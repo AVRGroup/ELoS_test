@@ -58,6 +58,7 @@ var $dUbLs = parcelRequire("dUbLs");
 var $3tzMw = parcelRequire("3tzMw");
 
 var $gSwgq = parcelRequire("gSwgq");
+parcelRequire("7qmAS");
 
 var $8vOEa = parcelRequire("8vOEa");
 
@@ -1057,6 +1058,7 @@ phaseGeneration.push(()=>{
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[1].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        if (!objectives[0].visible && !objectives[1].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -1419,6 +1421,7 @@ phaseGeneration.push(()=>{
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[1].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        if (!objectives[0].visible && !objectives[1].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -1822,6 +1825,7 @@ phaseGeneration.push(()=>{
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[1].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        if (!objectives[0].visible && !objectives[1].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -2229,6 +2233,7 @@ phaseGeneration.push(()=>{
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[2].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -2618,6 +2623,7 @@ phaseGeneration.push(()=>{
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[1].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        if (!objectives[0].visible && !objectives[1].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -3012,6 +3018,7 @@ phaseGeneration.push(()=>{
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[3].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -3459,6 +3466,7 @@ phaseGeneration.push(()=>{
             consoleElement.innerText += "Cristal coletado com sucesso.\n";
             gridMapHelper.obstacles[3].active = false;
         } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -3568,7 +3576,13 @@ const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
     const codeParsed = (0, $8vOEa.default)(editor.state.doc.toString());
     console.log(codeParsed);
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
+    cancelAnimationFrame((0, $6mhZf.changColorID));
+    cancelAnimationFrame((0, $6mhZf.smokeAnimationFrame));
+    (0, $6mhZf.smoke).deactiveSmokes();
     sceneProperties.cancelExecution = false;
+    actor.getObjectByName("eve").position.y = 0;
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     if (codeParsed != null) {
         resetLevel();
@@ -3592,7 +3606,14 @@ execBtn.addEventListener("click", async function() {
 });
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click", ()=>{
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
+    cancelAnimationFrame((0, $6mhZf.changColorID));
+    cancelAnimationFrame((0, $6mhZf.smokeAnimationFrame));
+    (0, $6mhZf.smoke).deactiveSmokes();
     sceneProperties.cancelExecution = true;
+    actor.getObjectByName("eve").position.y = 0;
+    if ((0, $6mhZf.materialColor).length != 0) (0, $6mhZf.resetRobotColor)(actor);
     resetLevel();
 });
 const advanceBtn = document.getElementById("advanceBtn");
@@ -4493,9 +4514,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $ee85d10d071bacac$exports = {};
+var $4db0d9915ed13f2a$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.b694024f.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","8yRrX":"index.dcd45879.js","h7xIL":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.6f571ab7.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","fHz1b":"index.a69fe58d.js","h7xIL":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");

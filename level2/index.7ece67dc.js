@@ -1979,7 +1979,11 @@ window.addEventListener("resize", ()=>{
 const finishEarlierButton = document.getElementById("finishEarlier");
 const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
     const codeParsed = (0, $12kOc.default)(editor.state.doc.toString());
+    actor.getObjectByName("eve").position.y = 0;
+    if ((0, $6mhZf.materialColor).length != 0) (0, $6mhZf.resetRobotColor)(actor);
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     sceneProperties.cancelExecution = false;
     if (codeParsed != null) {
@@ -2004,7 +2008,12 @@ execBtn.addEventListener("click", async function() {
 });
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click", ()=>{
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
+    cancelAnimationFrame((0, $6mhZf.changColorID));
     sceneProperties.cancelExecution = true;
+    actor.getObjectByName("eve").position.y = 0;
+    if ((0, $6mhZf.materialColor).length != 0) (0, $6mhZf.resetRobotColor)(actor);
     resetLevel();
 });
 const advanceBtn = document.getElementById("advanceBtn");
@@ -2667,9 +2676,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hIuM1"), impo
 });
 
 
-var $ca97385ef3dd5ca8$exports = {};
+var $3ad2ae53597d0d1d$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.1df7b583.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","8yRrX":"index.dcd45879.js","h7xIL":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.7ece67dc.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","fHz1b":"index.a69fe58d.js","h7xIL":"index.8c12255d.js"}'));
 
 
 parcelRequire("apYFO");

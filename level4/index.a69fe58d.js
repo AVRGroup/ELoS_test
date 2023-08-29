@@ -125,6 +125,7 @@ $parcel$export(module.exports, "Points", () => $305c1a2873b5da70$export$1c787534
 $parcel$export(module.exports, "CylinderGeometry", () => $305c1a2873b5da70$export$68f745719dbe5198);
 $parcel$export(module.exports, "ConeGeometry", () => $305c1a2873b5da70$export$a7a48974f285c9b3);
 $parcel$export(module.exports, "RingGeometry", () => $305c1a2873b5da70$export$68cb731f50f614af);
+$parcel$export(module.exports, "SphereGeometry", () => $305c1a2873b5da70$export$1b417fc3b307a251);
 $parcel$export(module.exports, "TorusGeometry", () => $305c1a2873b5da70$export$a2312a2a1fa56495);
 $parcel$export(module.exports, "MeshStandardMaterial", () => $305c1a2873b5da70$export$f2980790215acccd);
 $parcel$export(module.exports, "MeshPhysicalMaterial", () => $305c1a2873b5da70$export$28d04986c4269c9f);
@@ -55638,11 +55639,18 @@ arguments hold the diagnostic's current position.
 
 parcelRequire.register("6mhZf", function(module, exports) {
 
+$parcel$export(module.exports, "materialColor", () => $4a12bffc769d698d$export$852ee2194711a41a);
+$parcel$export(module.exports, "corrID", () => $4a12bffc769d698d$export$36c4e0d46fbc9ffc);
+$parcel$export(module.exports, "requestID", () => $4a12bffc769d698d$export$31ae9cc990f78cf0);
+$parcel$export(module.exports, "changColorID", () => $4a12bffc769d698d$export$f20b70be6ba07510);
+$parcel$export(module.exports, "smokeAnimationFrame", () => $4a12bffc769d698d$export$95d8d71e661ec5f1);
+$parcel$export(module.exports, "smoke", () => $4a12bffc769d698d$export$16878d158c6858af);
 $parcel$export(module.exports, "degreeToRadians", () => $4a12bffc769d698d$export$b30a5dbc5cf297c2);
 $parcel$export(module.exports, "generateDefaultSceneObjects", () => $4a12bffc769d698d$export$60a12f379215d615);
 $parcel$export(module.exports, "resizeCanvasToDisplaySize", () => $4a12bffc769d698d$export$4d986a341d0b1b6c);
 $parcel$export(module.exports, "loadDefaultActor", () => $4a12bffc769d698d$export$e8d5e11e24d927eb);
 $parcel$export(module.exports, "loadDefaultObjectives", () => $4a12bffc769d698d$export$f593298639a0ebd2);
+$parcel$export(module.exports, "resetRobotColor", () => $4a12bffc769d698d$export$1078180d411965ac);
 $parcel$export(module.exports, "translateActor", () => $4a12bffc769d698d$export$43ac269cfac29bfc);
 $parcel$export(module.exports, "rotateActor", () => $4a12bffc769d698d$export$1f34b7ddb8582c2d);
 $parcel$export(module.exports, "checkCollision", () => $4a12bffc769d698d$export$65cbfae5bde8bfd2);
@@ -55654,6 +55662,16 @@ var $776mU = parcelRequire("776mU");
 var $9gwv8 = parcelRequire("9gwv8");
 
 var $biXAX = parcelRequire("biXAX");
+
+var $7qmAS = parcelRequire("7qmAS");
+let $4a12bffc769d698d$export$852ee2194711a41a = [];
+let $4a12bffc769d698d$export$36c4e0d46fbc9ffc;
+let $4a12bffc769d698d$export$31ae9cc990f78cf0;
+let $4a12bffc769d698d$export$f20b70be6ba07510;
+let $4a12bffc769d698d$export$95d8d71e661ec5f1;
+let $4a12bffc769d698d$export$db5d148e2e8b931;
+let $4a12bffc769d698d$export$16878d158c6858af = new (0, $7qmAS.Smoke)();
+let $4a12bffc769d698d$export$390055dc35742ffb = new (0, $7qmAS.Smoke)();
 function $4a12bffc769d698d$export$b30a5dbc5cf297c2(angle) {
     return angle * (Math.PI / 180);
 }
@@ -55781,6 +55799,61 @@ function $4a12bffc769d698d$var$leanMovement(actor, mode) {
     }
     requestID = requestAnimationFrame(rotate);
 }
+function $4a12bffc769d698d$var$DeathMovement(actor, mode, direction) {
+    let angleRotated = 0;
+    let totalRotation = 90;
+    function rotate() {
+        if (angleRotated < totalRotation) {
+            if (mode == 0) {
+                if (direction == "X") actor.rotateX($4a12bffc769d698d$export$b30a5dbc5cf297c2(3));
+                else if (direction == "Z") actor.rotateZ($4a12bffc769d698d$export$b30a5dbc5cf297c2(3));
+            } else {
+                if (direction == "X") actor.rotateX($4a12bffc769d698d$export$b30a5dbc5cf297c2(-3));
+                else if (direction == "Z") actor.rotateZ($4a12bffc769d698d$export$b30a5dbc5cf297c2(-3));
+            }
+            angleRotated += 3;
+            $4a12bffc769d698d$export$31ae9cc990f78cf0 = requestAnimationFrame(rotate);
+        } else cancelAnimationFrame($4a12bffc769d698d$export$31ae9cc990f78cf0);
+    }
+    $4a12bffc769d698d$export$31ae9cc990f78cf0 = requestAnimationFrame(rotate);
+    actor.position.y = -0.5;
+}
+function $4a12bffc769d698d$export$13bf0edab42ca2ed(actor) {
+    actor.getObjectByName("eve").traverse((child)=>{
+        if (child.material) $4a12bffc769d698d$export$852ee2194711a41a.push(child.material.color.getHex());
+    });
+}
+function $4a12bffc769d698d$var$changeRobotColor(actor, hex) {
+    let red = 200;
+    let c1 = new $49pUz.Color("white");
+    let c2 = new $49pUz.Color(0xff4547);
+    let alpha3 = 0.0005;
+    actor.getObjectByName("eve").traverse((child)=>{
+        if (child.material) {
+            function correct() {
+                if (!alpha3 < 0.5) {
+                    child.material.color.lerpColors(c1, c2, alpha3);
+                    alpha3 = alpha3 + 0.0003;
+                    if (alpha3 > 0.8) return;
+                    $4a12bffc769d698d$export$f20b70be6ba07510 = requestAnimationFrame(correct);
+                } else cancelAnimationFrame($4a12bffc769d698d$export$f20b70be6ba07510);
+            }
+            $4a12bffc769d698d$export$f20b70be6ba07510 = requestAnimationFrame(correct);
+        }
+    });
+}
+function $4a12bffc769d698d$export$1078180d411965ac(actor) {
+    let count = 0;
+    actor.getObjectByName("eve").traverse((child)=>{
+        if (child.material) {
+            child.material.color.setHex($4a12bffc769d698d$export$852ee2194711a41a[count]);
+            count++;
+        }
+    });
+}
+function $4a12bffc769d698d$var$getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
 function $4a12bffc769d698d$export$43ac269cfac29bfc(actor, amount, gridMapHelper, sceneProperties, consoleElement) {
     const objCopy = actor.clone(false);
     objCopy.translateZ(amount * gridMapHelper.getMultiplier());
@@ -55803,6 +55876,72 @@ function $4a12bffc769d698d$export$43ac269cfac29bfc(actor, amount, gridMapHelper,
         }
         corrID = requestAnimationFrame(correct);
     }
+    function correctPositionOnDeath(positionToStop, type) {
+        if (type == "fire") {
+            function correct() {
+                if (!positionAlmostEqual(actor.position, positionToStop)) {
+                    actor.position.lerp(positionToStop, 0.15);
+                    $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(correct);
+                } else cancelAnimationFrame($4a12bffc769d698d$export$36c4e0d46fbc9ffc);
+            }
+            $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(correct);
+            $4a12bffc769d698d$var$DeathMovement(actor.getObjectByName("eve"), modeGo, "X");
+            if ($4a12bffc769d698d$export$852ee2194711a41a.length == 0) $4a12bffc769d698d$export$13bf0edab42ca2ed(actor);
+            $4a12bffc769d698d$var$changeRobotColor(actor, 0xff6242);
+        } else if (type == "trap") {
+            function correct() {
+                if (!positionAlmostEqual(actor.position, positionToStop)) {
+                    actor.position.lerp(positionToStop, 0.15);
+                    $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(correct);
+                } else cancelAnimationFrame($4a12bffc769d698d$export$36c4e0d46fbc9ffc);
+            }
+            $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(correct);
+            $4a12bffc769d698d$var$DeathMovement(actor.getObjectByName("eve"), modeGo, "Z");
+        } else if (type == "laser") {
+            actor.add($4a12bffc769d698d$export$16878d158c6858af);
+            actor.add($4a12bffc769d698d$export$390055dc35742ffb);
+            $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(correct);
+            let rightPos = false;
+            function correct() {
+                if (!positionAlmostEqual(actor.position, positionToStop)) {
+                    actor.position.lerp(positionToStop, 0.15);
+                    $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(correct);
+                } else {
+                    let actorX = actor.position.x;
+                    let actorY = actor.position.y;
+                    let actorZ = actor.position.z;
+                    cancelAnimationFrame($4a12bffc769d698d$export$36c4e0d46fbc9ffc);
+                    function robotShake() {
+                        let rngX = actorX + $4a12bffc769d698d$var$getRandom(-0.25, 0.25);
+                        let rngY = actorY + $4a12bffc769d698d$var$getRandom(-0.25, 0.25);
+                        let rngZ = actorZ + $4a12bffc769d698d$var$getRandom(-0.25, 0.25);
+                        actor.position.lerp(new $49pUz.Vector3(rngX, rngY, rngZ), 0.1);
+                        $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(robotShake);
+                    }
+                    $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(robotShake);
+                }
+            }
+            $4a12bffc769d698d$export$36c4e0d46fbc9ffc = requestAnimationFrame(correct);
+            //DeathMovement(actor.getObjectByName('eve'),modeGo,"X")
+            let k = 0;
+            function animateSmoke() {
+                if ($4a12bffc769d698d$export$16878d158c6858af.smokes[k].position.y.toFixed(1) < 5) {
+                    $4a12bffc769d698d$export$16878d158c6858af.smokes[k].visible = true;
+                    $4a12bffc769d698d$export$16878d158c6858af.smokes[k].material.opacity = $4a12bffc769d698d$export$16878d158c6858af.smokes[k].material.opacity - 0.02;
+                    $4a12bffc769d698d$export$16878d158c6858af.smokes[k].position.lerp(new $49pUz.Vector3($4a12bffc769d698d$var$getRandom(-3, 3), 5, $4a12bffc769d698d$var$getRandom(-3, 3)), 0.02);
+                    if ($4a12bffc769d698d$export$16878d158c6858af.smokes[k].position.y.toFixed(1) > 4) {
+                        $4a12bffc769d698d$export$16878d158c6858af.smokes[k].position.y = 0;
+                        $4a12bffc769d698d$export$16878d158c6858af.smokes[k].material.opacity = 0.7;
+                        $4a12bffc769d698d$export$16878d158c6858af.smokes[k].visible = false;
+                        $4a12bffc769d698d$export$16878d158c6858af.smokes.push($4a12bffc769d698d$export$16878d158c6858af.smokes[k]);
+                        k++;
+                    }
+                    $4a12bffc769d698d$export$95d8d71e661ec5f1 = requestAnimationFrame(animateSmoke);
+                } else cancelAnimationFrame($4a12bffc769d698d$export$95d8d71e661ec5f1);
+            }
+            $4a12bffc769d698d$export$95d8d71e661ec5f1 = requestAnimationFrame(animateSmoke);
+        }
+    }
     $4a12bffc769d698d$var$leanMovement(actor.getObjectByName("eve"), modeGo);
     return new Promise(function(resolve) {
         function translate() {
@@ -55814,16 +55953,19 @@ function $4a12bffc769d698d$export$43ac269cfac29bfc(actor, amount, gridMapHelper,
             if (gridMapHelper.trapCollision(actor.position)) {
                 consoleElement.innerText += "Aviso: Rob\xf4 caiu na armadilha.\n";
                 sceneProperties.cancelExecution = true;
-                correctPositionOnCancel(gridMapHelper.trapCollision(actor.position));
+                correctPositionOnDeath(gridMapHelper.trapCollision(actor.position), "trap");
+            //correctPositionOnCancel(gridMapHelper.trapCollision(actor.position));
             }
             if (gridMapHelper.fireCollision(actor.position)) {
                 consoleElement.innerText += "Aviso: Rob\xf4 foi queimado!\n";
                 sceneProperties.cancelExecution = true;
-                correctPositionOnCancel(gridMapHelper.fireCollision(actor.position));
+                correctPositionOnDeath(gridMapHelper.fireCollision(actor.position), "fire");
+            ///correctPositionOnCancel(gridMapHelper.fireCollision(actor.position));
             }
             if (gridMapHelper.laserCollision(actor.position)) {
                 consoleElement.innerText += "Aviso: Rob\xf4 foi queimado pelo laser!\n";
                 sceneProperties.cancelExecution = true;
+                correctPositionOnDeath(gridMapHelper.laserCollision(actor.position), "laser");
             }
             if (!positionAlmostEqual(actor.position, finalPosition) && !sceneProperties.cancelExecution) {
                 actor.position.lerp(finalPosition, alpha);
@@ -59912,6 +60054,85 @@ class $83af9a793720d502$export$7ae31604ad04b4a7 extends (0, $49pUz.Loader) {
 
 });
 
+parcelRequire.register("7qmAS", function(module, exports) {
+
+$parcel$export(module.exports, "Smoke", () => $567c7cc470e4ad8b$export$13e9736c0be16271);
+
+var $49pUz = parcelRequire("49pUz");
+let $567c7cc470e4ad8b$var$alpha2 = 0.1;
+class $567c7cc470e4ad8b$var$Spheres extends $49pUz.Mesh {
+    constructor(radius, color, opacity){
+        super(new $49pUz.SphereGeometry(radius, 16, 16), new $49pUz.MeshLambertMaterial({
+            color: color,
+            transparent: true,
+            opacity: opacity
+        }));
+    }
+}
+function $567c7cc470e4ad8b$var$getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
+function $567c7cc470e4ad8b$var$degreesToRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
+class $567c7cc470e4ad8b$export$13e9736c0be16271 extends $49pUz.Object3D {
+    constructor(){
+        super();
+        this.index = 0;
+        this.x = 0;
+        this.z = 0;
+        this.smokes;
+        this.alpha = 0.01;
+        let color = "gray";
+        let radius = 0.65;
+        let opacity = $567c7cc470e4ad8b$var$getRandom(0.90, 0.97);
+        let rotation = $567c7cc470e4ad8b$var$getRandom(1, 25);
+        // Smokes
+        let smoke1 = new $567c7cc470e4ad8b$var$Spheres(radius, color, opacity);
+        //smoke1.position.set(0, 3, 0)
+        //smoke1.rotateX(degreesToRadians(40))
+        //smoke1.rotateOnAxis(degreesToRadians(0))
+        smoke1.visible = false;
+        let smoke2 = new $567c7cc470e4ad8b$var$Spheres($567c7cc470e4ad8b$var$getRandom(0.25, 0.45), color, $567c7cc470e4ad8b$var$getRandom(0.85, 0.95));
+        //smoke2.position.set(0, 4, 0)
+        smoke2.visible = false;
+        let smoke3 = new $567c7cc470e4ad8b$var$Spheres($567c7cc470e4ad8b$var$getRandom(0.25, 0.45), color, $567c7cc470e4ad8b$var$getRandom(0.85, 0.95));
+        //smoke3.position.set(0, 5, 0)
+        smoke3.visible = false;
+        let smoke4 = new $567c7cc470e4ad8b$var$Spheres($567c7cc470e4ad8b$var$getRandom(0.25, 0.45), color, $567c7cc470e4ad8b$var$getRandom(0.85, 0.95));
+        //smoke4.position.set(0, 6, 0)
+        smoke4.visible = false;
+        this.smokes = [
+            smoke1,
+            smoke2,
+            smoke3,
+            smoke4
+        ];
+        //this.smokes.forEach(smoke => this.visible = false)
+        //this.deactiveSmokes()
+        //this.smokesAnimation()
+        this.add(smoke1);
+        this.add(smoke2);
+        this.add(smoke3);
+        this.add(smoke4);
+        return this;
+    }
+    deactiveSmokes(smokes = this.smokes) {
+        smokes.forEach((smoke)=>smoke.visible = false);
+    }
+    activeSmokes(smokes = this.smokes) {
+        smokes.forEach((smoke)=>smoke.visible = true);
+    }
+    deactiveThisSmoke(k) {
+        this.smokes[k].visible = false;
+    }
+    activeThisSmoke(k) {
+        this.smokes[k].visible = true;
+    }
+}
+
+});
+
 parcelRequire.register("2JD2i", function(module, exports) {
 
 module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("gkOf2"), import.meta.url).toString();
@@ -60122,7 +60343,7 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
     laserCollision(position) {
         const laserFiltered = this.lasers.filter((laser)=>laser.active == true);
         for(let i = 0; i < laserFiltered.length; i++){
-            if (this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z) return true;
+            if (this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z) return new $49pUz.Vector3(this.getGlobalXPositionFromCoord(laserFiltered[i].x), position.y, this.getGlobalZPositionFromCoord(laserFiltered[i].z));
             else continue;
         }
         return false;
@@ -60391,8 +60612,8 @@ function $c49ab76c1c184985$export$5d4bb8012760247a(traps) {
 
 });
 
-var $005be8ffcfcc2f78$exports = {};
+var $59a57bb662302b2e$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"8yRrX":"index.dcd45879.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"fHz1b":"index.a69fe58d.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 

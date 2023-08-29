@@ -1019,8 +1019,11 @@ window.addEventListener("resize", ()=>{
 const finishEarlierButton = document.getElementById("finishEarlier");
 const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
     const codeParsed = (0, $4UvU9.default)(editor.state.doc.toString());
     sceneProperties.cancelExecution = false;
+    actor.getObjectByName("eve").position.y = 0;
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     if (codeParsed != null) {
         resetLevel();
@@ -1044,6 +1047,8 @@ execBtn.addEventListener("click", async function() {
 });
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click", ()=>{
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
     sceneProperties.cancelExecution = true;
     resetLevel();
 });
@@ -1140,10 +1145,14 @@ function $39352400bed78e43$export$2e2bcd8739ae039(code) {
             }
             if (validLine) {
                 if (lineType === "sequential") {
-                    let lineParsed = "await " + lines[i].trim() + "\n";
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                    lineParsed += "await " + lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                 } else {
-                    let lineParsed1 = lines[i].trim() + "\n";
+                    let lineParsed1 = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                    lineParsed1 += lines[i].trim() + "\n";
                     codeParsed += lineParsed1;
                 }
             } else {
@@ -1168,9 +1177,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $3fb1fc08c80181e4$exports = {};
+var $dc86f39140d48694$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.b676d8f2.js","64GOt":"stone_wallLvl1.e00cd434.jpg","8yRrX":"index.dcd45879.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.47f674c3.js","64GOt":"stone_wallLvl1.e00cd434.jpg","fHz1b":"index.a69fe58d.js"}'));
 
 
 parcelRequire("hO50i");
