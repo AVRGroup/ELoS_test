@@ -8,7 +8,14 @@ import {
     translateActor,
     rotateActor,
     checkCollision,
-    degreeToRadians
+    degreeToRadians,
+    resetRobotColor,
+    materialColor,
+    corrID,
+    requestID,
+    changColorID,
+    smokeAnimationFrame,
+    smoke
 } from "../three/util";
 import GridMapHelper from "../three/GridMapHelper";
 import CranckDoor from "../three/CranckDoor";
@@ -16,6 +23,7 @@ import Cranck from "../three/CranckDoor/cranck";
 import CranckBase from "../three/CranckDoor/cranckBase";
 import LaserFence from "../three/LaserFence";
 import {SpikeTrap, trapsActivation, trapsDeactivation} from "../three/SpikeTrap";
+import {Smoke} from "../three/Smoke";
 import parseCode from "./parser";
 import { displayTime, configureDataAndUpload } from "../timer";
 import { Modal } from "bootstrap";
@@ -992,6 +1000,11 @@ phaseGeneration.push(
             {
                 consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
+
+            if(!objectives[0].visible && !objectives[1].visible)
+            {
+                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+            }
         }
 
         resetLevel = () =>{
@@ -1416,6 +1429,11 @@ phaseGeneration.push(
             else
             {
                 consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+            }
+
+            if(!objectives[0].visible && !objectives[1].visible)
+            {
+                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
             }
         }
 
@@ -1912,6 +1930,11 @@ phaseGeneration.push(
             else
             {
                 consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+            }
+
+            if(!objectives[0].visible && !objectives[1].visible)
+            {
+                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
             }
         }
 
@@ -2454,6 +2477,11 @@ phaseGeneration.push(
             {
                 consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
+
+            if(!objectives[0].visible && !objectives[1].visible && !objectives[2].visible)
+            {
+                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+            }
         }
 
         resetLevel = () =>{
@@ -2965,6 +2993,11 @@ phaseGeneration.push(
             else
             {
                 consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+            }
+
+            if(!objectives[0].visible && !objectives[1].visible)
+            {
+                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
             }
         }
 
@@ -3481,6 +3514,11 @@ phaseGeneration.push(
             else
             {
                 consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+            }
+
+            if(!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible)
+            {
+                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
             }
         }
 
@@ -4040,6 +4078,11 @@ phaseGeneration.push(
             {
                 consoleElement.innerText += "Robô não está em frente ao cristal.\n";
             }
+
+            if(!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible)
+            {
+                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+            }
         }
 
         resetLevel = () =>{
@@ -4233,7 +4276,13 @@ const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
     const codeParsed = parseCode(editor.state.doc.toString());
     console.log(codeParsed);
+    cancelAnimationFrame(corrID);    
+    cancelAnimationFrame(requestID);
+    cancelAnimationFrame(changColorID);
+    cancelAnimationFrame(smokeAnimationFrame);
+    smoke.deactiveSmokes();
     sceneProperties.cancelExecution = false;
+    actor.getObjectByName('eve').position.y = 0;
     if(traps != null)
         trapsDeactivation(traps)
     if(codeParsed != null)
@@ -4266,7 +4315,15 @@ execBtn.addEventListener("click",async function() {
 
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click",() => {
+    cancelAnimationFrame(corrID);
+    cancelAnimationFrame(requestID);
+    cancelAnimationFrame(changColorID);
+    cancelAnimationFrame(smokeAnimationFrame);
+    smoke.deactiveSmokes();
     sceneProperties.cancelExecution = true;
+    actor.getObjectByName('eve').position.y = 0
+    if(materialColor.length != 0)
+        resetRobotColor(actor);
     resetLevel();
 });
 

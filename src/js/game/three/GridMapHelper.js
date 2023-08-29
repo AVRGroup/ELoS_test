@@ -335,7 +335,7 @@ export default class GridMapHelper
         {
             if(this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z)
             {
-                return true;
+                return new THREE.Vector3(this.getGlobalXPositionFromCoord(laserFiltered[i].x),position.y,this.getGlobalZPositionFromCoord(laserFiltered[i].z));
             }
             else
             {

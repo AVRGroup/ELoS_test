@@ -8,7 +8,9 @@ import {
     translateActor,
     rotateActor,
     checkCollision,
-    degreeToRadians
+    degreeToRadians,
+    corrID,
+    requestID
 } from "../three/util";
 import GridMapHelper from "../three/GridMapHelper";
 import parseCode from "./parser";
@@ -1062,8 +1064,11 @@ const finishEarlierButton = document.getElementById('finishEarlier');
 
 const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
+    cancelAnimationFrame(corrID);
+    cancelAnimationFrame(requestID);
     const codeParsed = parseCode(editor.state.doc.toString());
     sceneProperties.cancelExecution = false;
+    actor.getObjectByName('eve').position.y = 0;
     if(traps != null)
         trapsDeactivation(traps)
     if(codeParsed != null)
@@ -1096,6 +1101,8 @@ execBtn.addEventListener("click",async function() {
 
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click",() => {
+    cancelAnimationFrame(corrID);
+    cancelAnimationFrame(requestID);
     sceneProperties.cancelExecution = true;
     resetLevel();
 });

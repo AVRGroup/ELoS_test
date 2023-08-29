@@ -8,12 +8,20 @@ import {
     translateActor,
     rotateActor,
     checkCollision,
-    degreeToRadians
+    degreeToRadians,
+    resetRobotColor,
+    materialColor,
+    corrID,
+    requestID,
+    changColorID,
+    smokeAnimationFrame,
+    smoke
 } from "../three/util";
 import GridMapHelper from "../three/GridMapHelper";
 import parseCode from "./parser";
 import LaserFence from "../three/LaserFence";
 import {SpikeTrap, trapsActivation, trapsDeactivation} from "../three/SpikeTrap";
+import {Smoke} from "../three/Smoke";
 import { displayTime, configureDataAndUpload } from "../timer";
 import { Modal } from "bootstrap";
 
@@ -2614,7 +2622,13 @@ const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
     const codeParsed = parseCode(editor.state.doc.toString());
     console.log(codeParsed);
+    cancelAnimationFrame(corrID);    
+    cancelAnimationFrame(requestID);
+    cancelAnimationFrame(changColorID);
+    cancelAnimationFrame(smokeAnimationFrame);
+    smoke.deactiveSmokes()
     sceneProperties.cancelExecution = false;
+    actor.getObjectByName('eve').position.y = 0;
     if(traps != null)
         trapsDeactivation(traps)
     if(codeParsed != null)
@@ -2647,7 +2661,15 @@ execBtn.addEventListener("click",async function() {
 
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click",() => {
+    cancelAnimationFrame(corrID);
+    cancelAnimationFrame(requestID);
+    cancelAnimationFrame(changColorID);
+    cancelAnimationFrame(smokeAnimationFrame);
+    smoke.deactiveSmokes();
     sceneProperties.cancelExecution = true;
+    actor.getObjectByName('eve').position.y = 0;
+    if(materialColor.length != 0)
+        resetRobotColor(actor);
     resetLevel();
 });
 
