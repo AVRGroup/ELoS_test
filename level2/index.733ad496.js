@@ -1987,6 +1987,7 @@ execBtn.addEventListener("click", async function() {
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     sceneProperties.cancelExecution = false;
     if (codeParsed != null) {
+        (0, $jgsti.updateTheme)(editor, 2);
         resetLevel();
         sceneProperties.executing = true;
         this.disabled = true;
@@ -2001,6 +2002,7 @@ execBtn.addEventListener("click", async function() {
             clearInterval(timerUpadate);
             if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 2/Completo");
         } else {
+            (0, $jgsti.updateTheme)(editor, 0);
             sceneProperties.executing = false;
             this.disabled = false;
         }
@@ -2011,6 +2013,7 @@ resetBtn.addEventListener("click", ()=>{
     cancelAnimationFrame((0, $6mhZf.corrID));
     cancelAnimationFrame((0, $6mhZf.requestID));
     cancelAnimationFrame((0, $6mhZf.changColorID));
+    (0, $jgsti.updateTheme)(editor, 0);
     sceneProperties.cancelExecution = true;
     actor.getObjectByName("eve").position.y = 0;
     if ((0, $6mhZf.materialColor).length != 0) (0, $6mhZf.resetRobotColor)(actor);
@@ -2583,7 +2586,9 @@ function $0c161e84c454184c$export$2e2bcd8739ae039(code, limit = 0) {
             }
             if (validLine) {
                 if (lineType === "sequential") {
-                    let lineParsed = `await ${lines[i].trim()}\n`;
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                    lineParsed += "await " + lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;
                 } else if (lineType === "conditional&&blockValidation") {
@@ -2594,7 +2599,9 @@ function $0c161e84c454184c$export$2e2bcd8739ae039(code, limit = 0) {
                     } else $0c161e84c454184c$var$printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`, i + 1);
                     if (validConditional) {
                         let line = lines[i].trim();
-                        let lineParsed1 = `if${line.substring(line.indexOf("("))}\n`;
+                        let lineParsed1 = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        lineParsed1 += `if${line.substring(line.indexOf("("))}\n`;
                         codeParsed += lineParsed1;
                         totalCommands++;
                     } else {
@@ -2604,7 +2611,9 @@ function $0c161e84c454184c$export$2e2bcd8739ae039(code, limit = 0) {
                 } else if (lineType === "conditional") {
                     if ($0c161e84c454184c$var$ifValidation(lines[i])) {
                         let line1 = lines[i].trim();
-                        let lineParsed2 = `if${line1.substring(line1.indexOf("("))}\n`;
+                        let lineParsed2 = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        lineParsed2 += `if${line1.substring(line1.indexOf("("))}\n`;
                         codeParsed += lineParsed2;
                         totalCommands++;
                     } else {
@@ -2634,18 +2643,24 @@ function $0c161e84c454184c$export$2e2bcd8739ae039(code, limit = 0) {
                     }
                 } else if (lineType === "mustCondition") {
                     if ($0c161e84c454184c$var$mustConditionValidation(lines, i)) {
-                        let lineParsed5 = `${lines[i].trim()}\n`;
+                        let lineParsed5 = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        lineParsed5 += lines[i].trim() + "\n";
                         codeParsed += lineParsed5;
                         totalCommands++;
                     } else {
                         let pos = $0c161e84c454184c$var$predictFunction(lines, i);
                         badLuckFunctions += `badLuck([${pos[0]},${pos[1]}])\n`;
-                        let lineParsed6 = `${lines[i].trim()}\n`;
+                        let lineParsed6 = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        lineParsed6 += lines[i].trim() + "\n";
                         codeParsed += lineParsed6;
                         totalCommands++;
                     }
                 } else {
-                    let lineParsed7 = `${lines[i].trim()}\n`;
+                    let lineParsed7 = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                    lineParsed7 += lines[i].trim() + "\n";
                     codeParsed += lineParsed7;
                     totalCommands++;
                 }
@@ -2678,7 +2693,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hIuM1"), impo
 
 var $3ad2ae53597d0d1d$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.7ece67dc.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","fHz1b":"index.a69fe58d.js","h7xIL":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.733ad496.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","fHz1b":"index.67a15891.js","h7xIL":"index.8c12255d.js"}'));
 
 
 parcelRequire("apYFO");

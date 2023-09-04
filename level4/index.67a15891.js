@@ -29010,6 +29010,7 @@ parcelRequire.register("jgsti", function(module, exports) {
 $parcel$export(module.exports, "generateDefaultEditor", () => $e06598c9ea9be43a$export$cd547c0fdfd4463c);
 $parcel$export(module.exports, "readOnlyState", () => $e06598c9ea9be43a$export$48dfcd81fee65a52);
 $parcel$export(module.exports, "editState", () => $e06598c9ea9be43a$export$f0629b245103c977);
+$parcel$export(module.exports, "updateTheme", () => $e06598c9ea9be43a$export$c663be6a18716c2);
 
 var $ajTr9 = parcelRequire("ajTr9");
 
@@ -29021,6 +29022,38 @@ var $fzliA = parcelRequire("fzliA");
 const $e06598c9ea9be43a$var$minHeightEditor = (0, $56N7t.EditorView).theme({
     ".cm-content, .cm-gutter": {
         minHeight: "18vh"
+    }
+});
+const $e06598c9ea9be43a$var$redHighlight = (0, $56N7t.EditorView).theme({
+    ".cm-content, .cm-gutter": {
+        minHeight: "18vh"
+    },
+    ".cm-activeLine": {
+        backgroundColor: "lightcoral"
+    }
+});
+const $e06598c9ea9be43a$var$greenHighlight = (0, $56N7t.EditorView).theme({
+    ".cm-content, .cm-gutter": {
+        minHeight: "18vh"
+    },
+    ".cm-activeLine": {
+        backgroundColor: "lightgreen"
+    }
+});
+const $e06598c9ea9be43a$var$blueHighlight = (0, $56N7t.EditorView).theme({
+    ".cm-content, .cm-gutter": {
+        minHeight: "18vh"
+    },
+    ".cm-activeLine": {
+        backgroundColor: "lightskyblue"
+    }
+});
+const $e06598c9ea9be43a$var$greenHighlight2 = (0, $56N7t.EditorView).theme({
+    ".cm-content, .cm-gutter": {
+        minHeight: "18vh"
+    },
+    ".cm-activeLine": {
+        backgroundColor: "lightseagreen"
     }
 });
 function $e06598c9ea9be43a$export$cd547c0fdfd4463c(refElement) {
@@ -29051,6 +29084,83 @@ const $e06598c9ea9be43a$export$f0629b245103c977 = (0, $idYVY.EditorState).create
         ])
     ]
 });
+function $e06598c9ea9be43a$export$c663be6a18716c2(view, theme) {
+    let newState;
+    let cursorPos;
+    switch(theme){
+        case 1:
+            newState = (0, $idYVY.EditorState).create({
+                extensions: [
+                    (0, $ajTr9.basicSetup),
+                    $e06598c9ea9be43a$var$redHighlight,
+                    (0, $56N7t.keymap).of([
+                        (0, $fzliA.indentWithTab)
+                    ])
+                ]
+            });
+            newState.doc = view.state.doc;
+            view.setState(newState);
+            break;
+        case 2:
+            newState = (0, $idYVY.EditorState).create({
+                extensions: [
+                    (0, $ajTr9.basicSetup),
+                    $e06598c9ea9be43a$var$greenHighlight,
+                    (0, $56N7t.keymap).of([
+                        (0, $fzliA.indentWithTab)
+                    ])
+                ]
+            });
+            newState.doc = view.state.doc;
+            view.setState(newState);
+            break;
+        case 3:
+            newState = (0, $idYVY.EditorState).create({
+                extensions: [
+                    (0, $ajTr9.basicSetup),
+                    $e06598c9ea9be43a$var$blueHighlight,
+                    (0, $56N7t.keymap).of([
+                        (0, $fzliA.indentWithTab)
+                    ])
+                ]
+            });
+            newState.doc = view.state.doc;
+            view.setState(newState);
+            break;
+        case 4:
+            newState = (0, $idYVY.EditorState).create({
+                extensions: [
+                    (0, $ajTr9.basicSetup),
+                    $e06598c9ea9be43a$var$greenHighlight2,
+                    (0, $56N7t.keymap).of([
+                        (0, $fzliA.indentWithTab)
+                    ])
+                ]
+            });
+            newState.doc = view.state.doc;
+            view.setState(newState);
+            break;
+        default:
+            newState = (0, $idYVY.EditorState).create({
+                extensions: [
+                    (0, $ajTr9.basicSetup),
+                    $e06598c9ea9be43a$var$minHeightEditor,
+                    (0, $56N7t.keymap).of([
+                        (0, $fzliA.indentWithTab)
+                    ])
+                ]
+            });
+            newState.doc = view.state.doc;
+            cursorPos = view.state.selection.main.head;
+            view.setState(newState);
+            view.dispatch({
+                selection: {
+                    anchor: cursorPos
+                }
+            });
+            break;
+    }
+}
 
 });
 parcelRequire.register("ajTr9", function(module, exports) {
@@ -60614,6 +60724,6 @@ function $c49ab76c1c184985$export$5d4bb8012760247a(traps) {
 
 var $59a57bb662302b2e$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"fHz1b":"index.a69fe58d.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"fHz1b":"index.67a15891.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 

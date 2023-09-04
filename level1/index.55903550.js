@@ -1026,6 +1026,7 @@ execBtn.addEventListener("click", async function() {
     actor.getObjectByName("eve").position.y = 0;
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     if (codeParsed != null) {
+        (0, $jgsti.updateTheme)(editor, 1);
         resetLevel();
         sceneProperties.executing = true;
         this.disabled = true;
@@ -1040,6 +1041,7 @@ execBtn.addEventListener("click", async function() {
             clearInterval(timerUpadate);
             if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 1/Completo");
         } else {
+            (0, $jgsti.updateTheme)(editor, 0);
             sceneProperties.executing = false;
             this.disabled = false;
         }
@@ -1049,6 +1051,7 @@ const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click", ()=>{
     cancelAnimationFrame((0, $6mhZf.corrID));
     cancelAnimationFrame((0, $6mhZf.requestID));
+    (0, $jgsti.updateTheme)(editor, 0);
     sceneProperties.cancelExecution = true;
     resetLevel();
 });
@@ -1179,7 +1182,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 
 var $dc86f39140d48694$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.47f674c3.js","64GOt":"stone_wallLvl1.e00cd434.jpg","fHz1b":"index.a69fe58d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.55903550.js","64GOt":"stone_wallLvl1.e00cd434.jpg","fHz1b":"index.67a15891.js"}'));
 
 
 parcelRequire("hO50i");
