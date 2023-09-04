@@ -403,7 +403,9 @@ export default function parseCode(code,limit = 0)
             {
                 if(lineType === "sequential")
                 {
-                    let lineParsed = `await ${lines[i].trim()}\n`;
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                    lineParsed += "await " + lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;
                 }
@@ -429,7 +431,9 @@ export default function parseCode(code,limit = 0)
                     if(validConditional)
                     {
                         let line = lines[i].trim();
-                        let lineParsed = `if${line.substring(line.indexOf('('))}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        lineParsed += `if${line.substring(line.indexOf('('))}\n`;
                         codeParsed += lineParsed;   
                         totalCommands++;
                     }
@@ -444,8 +448,10 @@ export default function parseCode(code,limit = 0)
                     if(ifValidation(lines[i]))
                     {
                         let line = lines[i].trim();
-                        let lineParsed = `if${line.substring(line.indexOf('('))}\n`;
-                        codeParsed += lineParsed;         
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        lineParsed += `if${line.substring(line.indexOf('('))}\n`;
+                        codeParsed += lineParsed;   
                         totalCommands++;
                     }
                     else
@@ -535,7 +541,9 @@ export default function parseCode(code,limit = 0)
                 {
                     if(mustConditionValidation(lines,i))
                     {
-                        let lineParsed = `${lines[i].trim()}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        lineParsed += lines[i].trim() + "\n";
                         codeParsed += lineParsed;
                         totalCommands++;
                     }
@@ -544,7 +552,9 @@ export default function parseCode(code,limit = 0)
                         let state = functionFilter[6].filter.test(lines[i].trim()) ? 'blue' : 'red';
                         let pos = predictFunction(lines,i);
                         badLuckFunctions += `badLuck([${pos[0]},${pos[1]}],'${state}')\n`;
-                        let lineParsed = `${lines[i].trim()}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        lineParsed += lines[i].trim() + "\n";
                         codeParsed += lineParsed;
                         totalCommands++;
                     }
@@ -554,7 +564,9 @@ export default function parseCode(code,limit = 0)
                     if(ifValidation(lines[i]))
                     {
                         let line = lines[i].trim();
-                        let lineParsed = `while${line.substring(line.indexOf('('))}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        lineParsed += `while${line.substring(line.indexOf('('))}\n`;
                         codeParsed += lineParsed;         
                         totalCommands++;
                     }
@@ -587,7 +599,9 @@ export default function parseCode(code,limit = 0)
                     if(validConditional)
                     {
                         let line = lines[i].trim();
-                        let lineParsed = `while${line.substring(line.indexOf('('))}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        lineParsed += `while${line.substring(line.indexOf('('))}\n`;
                         codeParsed += lineParsed;   
                         totalCommands++;
                     }
@@ -599,7 +613,9 @@ export default function parseCode(code,limit = 0)
                 }
                 else
                 {
-                    let lineParsed = `${lines[i].trim()}\n`;
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                    lineParsed += lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;
                 }

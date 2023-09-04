@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { generateDefaultEditor, readOnlyState, editState } from "../editor";
+import { generateDefaultEditor, readOnlyState, editState, updateTheme } from "../editor";
 import {
     generateDefaultSceneObjects,
     resizeCanvasToDisplaySize,
@@ -2633,6 +2633,7 @@ execBtn.addEventListener("click",async function() {
         trapsDeactivation(traps)
     if(codeParsed != null)
     {
+        updateTheme(editor,3);
         resetLevel();
         sceneProperties.executing = true;
         this.disabled = true;
@@ -2653,6 +2654,7 @@ execBtn.addEventListener("click",async function() {
         }
         else
         {
+            updateTheme(editor,0);
             sceneProperties.executing = false;
             this.disabled = false;
         }
@@ -2666,6 +2668,7 @@ resetBtn.addEventListener("click",() => {
     cancelAnimationFrame(changColorID);
     cancelAnimationFrame(smokeAnimationFrame);
     smoke.deactiveSmokes();
+    updateTheme(editor,0);
     sceneProperties.cancelExecution = true;
     actor.getObjectByName('eve').position.y = 0;
     if(materialColor.length != 0)
