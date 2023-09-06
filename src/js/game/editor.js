@@ -9,7 +9,7 @@ const minHeightEditor = EditorView.theme({
 
 const redHighlight = EditorView.theme({
     ".cm-content, .cm-gutter": {minHeight: "18vh"},
-    ".cm-activeLine": {backgroundColor: "lightcoral"},
+    ".cm-activeLine": {backgroundColor: "#ffc107"},
 });
 
 const greenHighlight = EditorView.theme({
