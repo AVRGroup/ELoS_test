@@ -29029,7 +29029,7 @@ const $e06598c9ea9be43a$var$redHighlight = (0, $56N7t.EditorView).theme({
         minHeight: "18vh"
     },
     ".cm-activeLine": {
-        backgroundColor: "lightcoral"
+        backgroundColor: "#ffc107"
     }
 });
 const $e06598c9ea9be43a$var$greenHighlight = (0, $56N7t.EditorView).theme({
@@ -60724,6 +60724,6 @@ function $c49ab76c1c184985$export$5d4bb8012760247a(traps) {
 
 var $59a57bb662302b2e$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"fHz1b":"index.67a15891.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"fHz1b":"index.14f26e5f.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 

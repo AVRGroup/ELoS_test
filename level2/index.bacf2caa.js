@@ -2693,7 +2693,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hIuM1"), impo
 
 var $3ad2ae53597d0d1d$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.733ad496.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","fHz1b":"index.67a15891.js","h7xIL":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.bacf2caa.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","fHz1b":"index.14f26e5f.js","h7xIL":"index.8c12255d.js"}'));
 
 
 parcelRequire("apYFO");

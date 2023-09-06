@@ -1182,7 +1182,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 
 var $dc86f39140d48694$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.55903550.js","64GOt":"stone_wallLvl1.e00cd434.jpg","fHz1b":"index.67a15891.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.70c78810.js","64GOt":"stone_wallLvl1.e00cd434.jpg","fHz1b":"index.14f26e5f.js"}'));
 
 
 parcelRequire("hO50i");
