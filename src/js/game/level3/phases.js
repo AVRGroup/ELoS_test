@@ -2633,7 +2633,7 @@ execBtn.addEventListener("click",async function() {
         trapsDeactivation(traps)
     if(codeParsed != null)
     {
-        updateTheme(editor,3);
+        updateTheme(editor,1);
         resetLevel();
         sceneProperties.executing = true;
         this.disabled = true;

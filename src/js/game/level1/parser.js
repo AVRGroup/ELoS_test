@@ -33,7 +33,7 @@ function printError(text,line)
 
 export default function parseCode(code)
 {
-    let codeParsed = "async function runCode(){\n";
+    let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
     const lines = code.split('\n');
     let valid = true;
     for(let i = 0;i < lines.length;i++)
@@ -63,7 +63,8 @@ export default function parseCode(code)
                 else
                 {
                     let lineParsed = `editor.focus();
-                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                    await delay(250);\n`
                     lineParsed += lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                 }

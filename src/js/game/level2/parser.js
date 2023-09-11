@@ -299,7 +299,7 @@ function printError(text,line)
 
 export default function parseCode(code,limit = 0)
 {
-    let codeParsed = "async function runCode(){\n";
+    let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
     let badLuckFunctions = "\n";
     let lines = code.split('\n');
     let valid = true;
@@ -357,7 +357,8 @@ export default function parseCode(code,limit = 0)
                     {
                         let line = lines[i].trim();
                         let lineParsed = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
                         lineParsed += `if${line.substring(line.indexOf('('))}\n`;
                         codeParsed += lineParsed;   
                         totalCommands++;
@@ -374,7 +375,8 @@ export default function parseCode(code,limit = 0)
                     {
                         let line = lines[i].trim();
                         let lineParsed = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
                         lineParsed += `if${line.substring(line.indexOf('('))}\n`;
                         codeParsed += lineParsed;         
                         totalCommands++;
@@ -421,7 +423,8 @@ export default function parseCode(code,limit = 0)
                     if(mustConditionValidation(lines,i))
                     {
                         let lineParsed = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
                         lineParsed += lines[i].trim() + "\n";
                         codeParsed += lineParsed;
                         totalCommands++;
@@ -431,7 +434,8 @@ export default function parseCode(code,limit = 0)
                         let pos = predictFunction(lines,i);
                         badLuckFunctions += `badLuck([${pos[0]},${pos[1]}])\n`;
                         let lineParsed = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
                         lineParsed += lines[i].trim() + "\n";
                         codeParsed += lineParsed;
                         totalCommands++;
@@ -440,7 +444,8 @@ export default function parseCode(code,limit = 0)
                 else
                 {
                     let lineParsed = `editor.focus();
-                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                    await delay(250);\n`
                     lineParsed += lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;

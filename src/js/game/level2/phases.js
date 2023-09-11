@@ -2082,7 +2082,7 @@ execBtn.addEventListener("click",async function() {
     sceneProperties.cancelExecution = false;
     if(codeParsed != null)
     {
-        updateTheme(editor,2);
+        updateTheme(editor,1);
         resetLevel();
         sceneProperties.executing = true;
         this.disabled = true;
