@@ -8,6 +8,7 @@
 
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../scss/homepage/styles.scss">
+    <link rel="stylesheet" href="../scss/homepage/customSelect.scss">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -30,8 +31,16 @@
     </div>
     <main>
         <div class="niveis">
-            <div class="titulo">
-                <h1>SELEÇÃO DE NÍVEIS</h1>
+            <div class="first-column">
+                <div class="titulo">
+                    <h1>SELEÇÃO DE NÍVEIS</h1>
+                </div>
+                <div class="custom-select" style="width:160px;">
+                    <select>
+                        <option value="1">Português</option>
+                        <option value="2">English</option>
+                    </select>
+                </div>
             </div>
             <div class="selecao">
                 <ul>
@@ -108,5 +117,6 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="../js/homepage/script.js"></script>
+    <script src="../js/homepage/customSelect.js"></script>
 </body>
 </html>
