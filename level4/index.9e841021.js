@@ -3585,7 +3585,7 @@ execBtn.addEventListener("click", async function() {
     actor.getObjectByName("eve").position.y = 0;
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     if (codeParsed != null) {
-        (0, $jgsti.updateTheme)(editor, 4);
+        (0, $jgsti.updateTheme)(editor, 1);
         resetLevel();
         this.disabled = true;
         sceneProperties.executing = true;
@@ -4355,7 +4355,7 @@ function $63288163d0e35ed8$var$printError(text, line) {
     consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
 }
 function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
-    let codeParsed = "async function runCode(){\n";
+    let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
     let badLuckFunctions = "\n";
     let lines = code.split("\n");
     let valid = true;
@@ -4387,7 +4387,8 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                     if (validConditional) {
                         let line = lines[i].trim();
                         let lineParsed1 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed1 += `if${line.substring(line.indexOf("("))}\n`;
                         codeParsed += lineParsed1;
                         totalCommands++;
@@ -4399,7 +4400,8 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                     if ($63288163d0e35ed8$var$ifValidation(lines[i])) {
                         let line1 = lines[i].trim();
                         let lineParsed2 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed2 += `if${line1.substring(line1.indexOf("("))}\n`;
                         codeParsed += lineParsed2;
                         totalCommands++;
@@ -4455,7 +4457,8 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                 } else if (lineType === "mustCondition") {
                     if ($63288163d0e35ed8$var$mustConditionValidation(lines, i)) {
                         let lineParsed7 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed7 += lines[i].trim() + "\n";
                         codeParsed += lineParsed7;
                         totalCommands++;
@@ -4464,7 +4467,8 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         let pos = $63288163d0e35ed8$var$predictFunction(lines, i);
                         badLuckFunctions += `badLuck([${pos[0]},${pos[1]}],'${state}')\n`;
                         let lineParsed8 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed8 += lines[i].trim() + "\n";
                         codeParsed += lineParsed8;
                         totalCommands++;
@@ -4473,7 +4477,8 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                     if ($63288163d0e35ed8$var$ifValidation(lines[i])) {
                         let line2 = lines[i].trim();
                         let lineParsed9 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed9 += `while${line2.substring(line2.indexOf("("))}\n`;
                         codeParsed += lineParsed9;
                         totalCommands++;
@@ -4491,7 +4496,8 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                     if (validConditional1) {
                         let line3 = lines[i].trim();
                         let lineParsed10 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed10 += `while${line3.substring(line3.indexOf("("))}\n`;
                         codeParsed += lineParsed10;
                         totalCommands++;
@@ -4501,7 +4507,8 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                     }
                 } else {
                     let lineParsed11 = `editor.focus();
-                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                    await delay(250);\n`;
                     lineParsed11 += lines[i].trim() + "\n";
                     codeParsed += lineParsed11;
                     totalCommands++;
@@ -4533,9 +4540,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $4db0d9915ed13f2a$exports = {};
+var $e6ce95b0705a8913$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.35843569.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","fHz1b":"index.14f26e5f.js","h7xIL":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.9e841021.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kcVwi":"index.e2bc487f.js","2OO9D":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");

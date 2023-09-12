@@ -1132,7 +1132,7 @@ function $39352400bed78e43$var$printError(text, line) {
     consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
 }
 function $39352400bed78e43$export$2e2bcd8739ae039(code) {
-    let codeParsed = "async function runCode(){\n";
+    let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
     const lines = code.split("\n");
     let valid = true;
     for(let i = 0; i < lines.length; i++){
@@ -1154,7 +1154,8 @@ function $39352400bed78e43$export$2e2bcd8739ae039(code) {
                     codeParsed += lineParsed;
                 } else {
                     let lineParsed1 = `editor.focus();
-                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                    await delay(250);\n`;
                     lineParsed1 += lines[i].trim() + "\n";
                     codeParsed += lineParsed1;
                 }
@@ -1180,9 +1181,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $dc86f39140d48694$exports = {};
+var $a069a52ab03b410b$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.70c78810.js","64GOt":"stone_wallLvl1.e00cd434.jpg","fHz1b":"index.14f26e5f.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.4f2537d4.js","64GOt":"stone_wallLvl1.e00cd434.jpg","kcVwi":"index.e2bc487f.js"}'));
 
 
 parcelRequire("hO50i");

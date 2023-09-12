@@ -2535,7 +2535,7 @@ execBtn.addEventListener("click", async function() {
     actor.getObjectByName("eve").position.y = 0;
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     if (codeParsed != null) {
-        (0, $jgsti.updateTheme)(editor, 3);
+        (0, $jgsti.updateTheme)(editor, 1);
         resetLevel();
         sceneProperties.executing = true;
         this.disabled = true;
@@ -2845,7 +2845,7 @@ function $28f17c62ce377190$var$printError(text, line) {
     consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
 }
 function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
-    let codeParsed = "async function runCode(){\n";
+    let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
     let badLuckFunctions = "\n";
     let lines = code.split("\n");
     let valid = true;
@@ -2877,7 +2877,8 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                     if (validConditional) {
                         let line = lines[i].trim();
                         let lineParsed1 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed1 += `if${line.substring(line.indexOf("("))}\n`;
                         codeParsed += lineParsed1;
                         totalCommands++;
@@ -2889,7 +2890,8 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                     if ($28f17c62ce377190$var$ifValidation(lines[i])) {
                         let line1 = lines[i].trim();
                         let lineParsed2 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed2 += `if${line1.substring(line1.indexOf("("))}\n`;
                         codeParsed += lineParsed2;
                         totalCommands++;
@@ -2945,7 +2947,8 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                 } else if (lineType === "mustCondition") {
                     if ($28f17c62ce377190$var$mustConditionValidation(lines, i)) {
                         let lineParsed7 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed7 += lines[i].trim() + "\n";
                         codeParsed += lineParsed7;
                         totalCommands++;
@@ -2954,14 +2957,16 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                         let pos = $28f17c62ce377190$var$predictFunction(lines, i);
                         badLuckFunctions += `badLuck([${pos[0]},${pos[1]}],'${state}')\n`;
                         let lineParsed8 = `editor.focus();
-                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                        await delay(250);\n`;
                         lineParsed8 += lines[i].trim() + "\n";
                         codeParsed += lineParsed8;
                         totalCommands++;
                     }
                 } else {
                     let lineParsed9 = `editor.focus();
-                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
+                    await delay(250);\n`;
                     lineParsed9 += lines[i].trim() + "\n";
                     codeParsed += lineParsed9;
                     totalCommands++;
@@ -3144,9 +3149,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $2406cf9a1643d2b1$exports = {};
+var $ccbcc4b303d9465a$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.4e6871b1.js","hEG10":"metalWallLvl3.c6e3c749.png","fHz1b":"index.14f26e5f.js","h7xIL":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.be8b7ead.js","hEG10":"metalWallLvl3.c6e3c749.png","kcVwi":"index.e2bc487f.js","2OO9D":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");
