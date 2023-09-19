@@ -60722,8 +60722,8 @@ function $c49ab76c1c184985$export$5d4bb8012760247a(traps) {
 
 });
 
-var $245ecda41899aa21$exports = {};
+var $d1ef74055882cd08$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"iDthA":"index.440f5a25.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"dI2nF":"index.64e1d101.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
