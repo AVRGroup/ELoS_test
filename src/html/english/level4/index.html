@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../img/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../../../scss/game/styles.scss">
+        <title>ELoS (Test Version) - Level 4</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 vh-50 vh-md-100">
+                    <canvas id="phaseView" style="width: 100%; height: 100%;">
+
+                    </canvas>
+                    <div class="position-absolute top-0 start-0 ms-3">
+                        <h2 id="phaseTitle" class="bg-warning mb-0">Level 4 - Round x of X</h2>
+                        <p id="phaseObjective" class="bg-info mt-0 mb-0">Do something</p>
+                        <h2 id="winMessage" class="bg-success mt-0 invisible">Round Completed</h2>
+                        <button id="advanceBtn" type="button" class="btn btn-primary invisible">Next</button>
+                    </div>
+                    <div class="position-absolute top-0 end-md-50 end-0 me-3">
+                        <button id="normalSpeed" type="button" class="btn btn-primary" disabled>&#10148;</button>
+                        <button id="fastSpeed" type="button" class="btn btn-primary">&#10148;&#10148;</button>
+                    </div>
+                    <div class="position-absolute bottom-50 bottom-md-0 start-0 ms-3">
+                        <h3 id="timer" class="text-white">Time:</h3>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="row">
+                        <div class="col-12 order-last order-md-first py-1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Available Functions:</h5>
+                                </div>
+                                <div class="collapse" id="collapseFunctions">
+                                    <div class="card-body">
+                                        <code>
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <span><b>Actions:</span>
+                                                </div>
+                                                <div class="col-3 text-primary">
+                                                    <span><b>Checkers:</span>
+                                                </div>
+                                                <div class="col-4 text-success">
+                                                    <span><b>Structures:</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <p id="andarFrente" class="btn-txt">moveForward(quantity)</p>
+                                                    <p id="andarTras" class="btn-txt">moveBackwards(quantity)</p>
+                                                    <p id="girarEsquerda" class="btn-txt">rotateLeft()</p>
+                                                    <p id="girarDireita" class="btn-txt">rotateRight()</p>
+                                                    <p id="darMeiaVolta" class="btn-txt">turnBack()</p>
+                                                    <p id="desativarLaserAzul" class="btn-txt">disableBlueLaser()</p>
+                                                    <p id="desativarLaserVermelho" class="btn-txt">disableRedLaser()</p>
+                                                    <p id="girarManivela" class="btn-txt">turnCrank()</p>
+                                                    <p id="coletarCristal" class="btn-txt">collectCrystal()</p>
+                                                </div>
+                                                <div class="col-3 text-primary">
+                                                    <p id="laserAzulAtivo" class="btn-txt-verificator">isBlueLaserActive()</p>
+                                                    <p id="laserVermelhoAtivo" class="btn-txt-verificator">isRedLaserActive()</p>
+                                                    <p id="portaFechada" class="btn-txt-verificator">isDoorClosed()</p>
+                                                </div>
+                                                <div class="col-4 text-success">
+                                                    <p id="condicaoFull" class="btn-txt-structure">
+                                                        if(condition){<br>&nbsp;action()<br>}<br>
+                                                        else{<br>&nbsp;action()<br>}
+                                                    </p>
+                                                    <p id="enquanto" class="btn-txt-structure">
+                                                        while(condition){<br>&nbsp;action()<br>}<br>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </code>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button id="collapseBtn" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFunctions" aria-expanded="false" aria-controls="collapseFunctions">
+                                        Open
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 order-first order-md-2 py-1">
+                            <div class="card min-vh-md-30 max-vh-25 max-vh-md-40">
+                                <div class="card-header">
+                                    <h5 class="card-title">Enter your code here:</h5>
+                                </div>
+                                <div id="editorArea" class="card-body overflow-auto">
+
+                                </div>
+                                <div class="card-footer">
+                                    <button id="execBtn" type="button" class="btn btn-primary">Run</button>
+                                    <button id="resetBtn" type="button" class="btn btn-secondary">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 order-2 order-md-last py-1">
+                            <div class="card max-vh-24 max-vh-md-40">
+                                <div class="card-header">
+                                    <h5 class="card-title">Console:</h5>
+                                </div>
+                                <div class="card-body overflow-auto">
+                                    <code id="consoleArea">
+
+                                    </code>
+                                </div>
+                                <div class="card-footer">
+                                    <button id="clsConsole" type="button" class="btn btn-secondary">Clear Console</button>
+                                </div>
+                            </div>
+                            <button id="finishEarlier" type="button" class="btn btn-danger ms-3 my-2">End Activity</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="logModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="logModalLabel">To complete Level 4, inform:</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form id="dataLog">
+                                <div class="mb-2">
+                                    <label for="name" class="form-label"><b>Name:</b></label>
+                                    <input type="text" name="name" id="name" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="age" class="form-label"><b>Age:</b></label>
+                                    <input type="number" name="age" id="age" class="form-control" min="1" step="1">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="gender" class="form-label"><b>Gender:</b></label><br>
+                                    <input type="radio" name="gender" value="Feminino" class="form-check-input"> Female
+                                    <input type="radio" name="gender" value="Masculino" class="form-check-input"> Male
+                                </div>
+                                <div class="mb-2">
+                                    <label for="prog-exp" class="form-label"><b>What is your experience with programming?</b></label><br>
+                                    <input type="radio" name="prog-exp" value="Este foi meu primeiro contato." class="form-check-input"> This was my first contact.<br>
+                                    <input type="radio" name="prog-exp" value="Tive uma pequena experiência no colégio." class="form-check-input"> I had a little experience in high school.<br>
+                                    <input type="radio" name="prog-exp" value="Já programei pequenos projetos." class="form-check-input"> I have already programmed small projects.<br>
+                                    <input type="radio" name="prog-exp" value="Sou um programador experiente." class="form-check-input"> I'm an experienced programmer.
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="subBtn" type="button" class="btn btn-primary">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </body>
+    <script type="module" src="../../../js/game/bootstrap.js"></script>
+    <script type="module" src="../../../js/game/level4/phases.js"></script>
+</html>
