@@ -4540,9 +4540,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $9f663b1babe0ddf2$exports = {};
+var $7f920e7e4765a650$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.bf93efc3.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","3RNHK":"index.407b392b.js","hUls3":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.370cadbb.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","19El7":"index.7813d165.js","jzc87":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");

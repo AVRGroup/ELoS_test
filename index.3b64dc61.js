@@ -2,6 +2,10 @@ var imgarr = [
     ' <img src="https://avrgroup.github.io/vrtools/img/flags/br-icon.png" width="20" height="20" style="vertical-align:middle;margin-bottom:3px">',
     ' <img src="https://avrgroup.github.io/vrtools/img/flags/us-icon.png" width="20" height="20" style="vertical-align:middle;margin-bottom:3px">'
 ];
+var hrefs = [
+    "./",
+    "./english"
+];
 var x, i, j, l, ll, selElmnt, a, b, c;
 /* Look for any elements with the class "custom-select": */ x = document.getElementsByClassName("custom-select");
 l = x.length;
@@ -18,6 +22,7 @@ for(i = 0; i < l; i++){
         /* For each option in the original select element,
     create a new DIV that will act as an option item: */ c = document.createElement("DIV");
         c.innerHTML = selElmnt.options[j].innerHTML + imgarr[j];
+        let cIndex = j;
         c.addEventListener("click", function(e) {
             /* When an item is clicked, update the original select box,
         and the selected item: */ var y, i, k, s, h, sl, yl;
@@ -33,6 +38,7 @@ for(i = 0; i < l; i++){
                 this.setAttribute("class", "same-as-selected");
                 break;
             }
+            window.location.href = hrefs[cIndex];
             h.click();
         });
         b.appendChild(c);

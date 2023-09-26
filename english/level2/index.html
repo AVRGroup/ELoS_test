@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-    <head><script type="module" src="https://avrgroup.github.io/ELoS_test/level4/index.7813d165.js"></script>
+<html lang="en">
+    <head><script type="module" src="https://avrgroup.github.io/ELoS_test/level4/index.7813d165.js"></script><script type="module" src="https://avrgroup.github.io/ELoS_test/level4/index.8c12255d.js"></script>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="https://avrgroup.github.io/ELoS_test/favicon.ae8f28de.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://avrgroup.github.io/ELoS_test/level1/index.6d852252.css">
-        <title>ELoS (Versão de Teste) - Nível 1</title>
+        <title>ELoS (Test Version) - Level 2</title>
     </head>
     <body>
         <div class="container-fluid">
@@ -16,17 +16,21 @@
 
                     </canvas>
                     <div class="position-absolute top-0 start-0 ms-3">
-                        <h2 id="phaseTitle" class="bg-warning mb-0">Nível 1 - Fase x de X</h2>
-                        <p id="phaseObjective" class="bg-info mt-0 mb-0">Faça algo</p>
-                        <h2 id="winMessage" class="bg-success mt-0 invisible">Fase Concluída</h2>
-                        <button id="advanceBtn" type="button" class="btn btn-primary invisible">Avançar</button>
+                        <h2 id="phaseTitle" class="bg-warning mb-0">Level 2 - Round x of X</h2>
+                        <p id="phaseObjective" class="bg-info mt-0 mb-0">Do something</p>
+                        <h2 id="winMessage" class="bg-success mt-0 invisible">Round Completed</h2>
+                        <button id="advanceBtn" type="button" class="btn btn-primary invisible">Next</button>
                     </div>
                     <div class="position-absolute top-0 end-md-50 end-0 me-3">
                         <button id="normalSpeed" type="button" class="btn btn-primary" disabled="">&#10148;</button>
                         <button id="fastSpeed" type="button" class="btn btn-primary">&#10148;&#10148;</button>
                     </div>
                     <div class="position-absolute bottom-50 bottom-md-0 start-0 ms-3">
-                        <h3 id="timer" class="text-white">Tempo:</h3>
+                        <div class="d-flex">
+                            <img src="https://avrgroup.github.io/ELoS_test/fire-extinguisher.a9d80553.png" alt="Fire Extinguisher" width="40" height="40">
+                            <h2 id="extinguisherUses" class="text-light">xN</h2>
+                        </div>
+                        <h3 id="timer" class="text-white">Time:</h3>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
@@ -34,28 +38,37 @@
                         <div class="col-12 order-last order-md-first py-1">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title">Funções Disponíveis:</h5>
+                                    <h5 class="card-title">Available Functions:</h5>
                                 </div>
                                 <div class="collapse" id="collapseFunctions">
                                     <div class="card-body">
                                         <code>
                                             <div class="row">
-                                                <div class="col-12">
-                                                    <span><b>Ações:</b></span>
+                                                <div class="col-5">
+                                                    <span><b>Actions:</b></span>
+                                                </div>
+                                                <div class="col-3 text-primary">
+                                                    <span><b>Checkers:</b></span>
+                                                </div>
+                                                <div class="col-4 text-success">
+                                                    <span><b>Structures:</b></span>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-4">
-                                                    <p id="andarFrente" class="btn-txt">andarFrente(quantidade)</p>
-                                                    <p id="andarTras" class="btn-txt">andarTras(quantidade)</p>
+                                                <div class="col-5">
+                                                    <p id="andarFrente" class="btn-txt">moveForward(quantity)</p>
+                                                    <p id="andarTras" class="btn-txt">moveBackwards(quantity)</p>
+                                                    <p id="girarEsquerda" class="btn-txt">rotateLeft()</p>
+                                                    <p id="girarDireita" class="btn-txt">rotateRight()</p>
+                                                    <p id="darMeiaVolta" class="btn-txt">turnBack()</p>
+                                                    <p id="apagarFogo" class="btn-txt">extinguishFire()</p>
+                                                    <p id="coletarCristal" class="btn-txt">collectCrystal()</p>
                                                 </div>
-                                                <div class="col-4">
-                                                    <p id="girarEsquerda" class="btn-txt">girarEsquerda()</p>
-                                                    <p id="girarDireita" class="btn-txt">girarDireita()</p>
+                                                <div class="col-3 text-primary">
+                                                    <p id="pegandoFogo" class="btn-txt-verificator">isOnFire()</p>
                                                 </div>
-                                                <div class="col-4">
-                                                    <p id="darMeiaVolta" class="btn-txt">darMeiaVolta()</p>
-                                                    <p id="coletarCristal" class="btn-txt">coletarCristal()</p>
+                                                <div class="col-4 text-success">
+                                                    <p id="condicao" class="btn-txt-structure">if(condition){<br>&nbsp;action()<br>}</p>
                                                 </div>
                                             </div>
                                         </code>
@@ -63,7 +76,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <button id="collapseBtn" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFunctions" aria-expanded="false" aria-controls="collapseFunctions">
-                                        Abrir
+                                        Open
                                     </button>
                                 </div>
                             </div>
@@ -71,13 +84,13 @@
                         <div class="col-12 order-first order-md-2 py-1">
                             <div class="card min-vh-md-30 max-vh-25 max-vh-md-40">
                                 <div class="card-header">
-                                    <h5 class="card-title">Digite seu código aqui:</h5>
+                                    <h5 class="card-title">Enter your code here:</h5>
                                 </div>
                                 <div id="editorArea" class="card-body overflow-auto">
 
                                 </div>
                                 <div class="card-footer">
-                                    <button id="execBtn" type="button" class="btn btn-primary">Executar</button>
+                                    <button id="execBtn" type="button" class="btn btn-primary">Run</button>
                                     <button id="resetBtn" type="button" class="btn btn-secondary">Reset</button>
                                 </div>
                             </div>
@@ -93,10 +106,10 @@
                                     </code>
                                 </div>
                                 <div class="card-footer">
-                                    <button id="clsConsole" type="button" class="btn btn-secondary">Limpar Console</button>
+                                    <button id="clsConsole" type="button" class="btn btn-secondary">Clear Console</button>
                                 </div>
                             </div>
-                            <button id="finishEarlier" type="button" class="btn btn-danger ms-3 my-2">Finalizar Atividade</button>
+                            <button id="finishEarlier" type="button" class="btn btn-danger ms-3 my-2">End Activity</button>
                         </div>
                     </div>
                 </div>
@@ -105,34 +118,34 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 1, informe:</h5>
+                            <h5 class="modal-title" id="logModalLabel">To complete Level 2, inform:</h5>
                         </div>
                         <div class="modal-body">
                             <form id="dataLog">
                                 <div class="mb-2">
-                                    <label for="name" class="form-label"><b>Nome:</b></label>
+                                    <label for="name" class="form-label"><b>Name:</b></label>
                                     <input type="text" name="name" id="name" class="form-control">
                                 </div>
                                 <div class="mb-2">
-                                    <label for="age" class="form-label"><b>Idade:</b></label>
+                                    <label for="age" class="form-label"><b>Age:</b></label>
                                     <input type="number" name="age" id="age" class="form-control" min="1" step="1">
                                 </div>
                                 <div class="mb-2">
-                                    <label for="gender" class="form-label"><b>Gênero:</b></label><br>
-                                    <input type="radio" name="gender" value="Feminino" class="form-check-input"> Feminino
-                                    <input type="radio" name="gender" value="Masculino" class="form-check-input"> Masculino
+                                    <label for="gender" class="form-label"><b>Gender:</b></label><br>
+                                    <input type="radio" name="gender" value="Feminino" class="form-check-input"> Female
+                                    <input type="radio" name="gender" value="Masculino" class="form-check-input"> Male
                                 </div>
                                 <div class="mb-2">
-                                    <label for="prog-exp" class="form-label"><b>Qual sua experiência com programação?</b></label><br>
-                                    <input type="radio" name="prog-exp" value="Este foi meu primeiro contato." class="form-check-input"> Este foi meu primeiro contato.<br>
-                                    <input type="radio" name="prog-exp" value="Tive uma pequena experiência no colégio." class="form-check-input"> Tive uma pequena experiência no colégio.<br>
-                                    <input type="radio" name="prog-exp" value="Já programei pequenos projetos." class="form-check-input"> Já programei pequenos projetos.<br>
-                                    <input type="radio" name="prog-exp" value="Sou um programador experiente." class="form-check-input"> Sou um programador experiente.
+                                    <label for="prog-exp" class="form-label"><b>What is your experience with programming?</b></label><br>
+                                    <input type="radio" name="prog-exp" value="Este foi meu primeiro contato." class="form-check-input"> This was my first contact.<br>
+                                    <input type="radio" name="prog-exp" value="Tive uma pequena experiência no colégio." class="form-check-input"> I had a little experience in high school.<br>
+                                    <input type="radio" name="prog-exp" value="Já programei pequenos projetos." class="form-check-input"> I have already programmed small projects.<br>
+                                    <input type="radio" name="prog-exp" value="Sou um programador experiente." class="form-check-input"> I'm an experienced programmer.
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button id="subBtn" type="button" class="btn btn-primary">Avançar</button>
+                            <button id="subBtn" type="button" class="btn btn-primary">Next</button>
                         </div>
                     </div>
                 </div>
@@ -140,5 +153,5 @@
         </div>        
     </body>
     <script type="module" src="https://avrgroup.github.io/ELoS_test/level1/index.b73fbb5b.js"></script>
-    <script type="module" src="https://avrgroup.github.io/ELoS_test/level1/index.d637c833.js"></script>
+    <script type="module" src="https://avrgroup.github.io/ELoS_test/level2/index.7c6183bf.js"></script>
 </html>
