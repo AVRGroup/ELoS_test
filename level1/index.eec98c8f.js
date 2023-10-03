@@ -83,8 +83,43 @@ const sceneProperties = {
     cancelExecution: false,
     timer: 0,
     phase: 0,
-    mult: 1
+    mult: 1,
+    lang: window.location.href.includes("english") ? 1 : 0
 };
+function generatePhaseTitle() {
+    switch(sceneProperties.lang){
+        case 1:
+            return `Level 1 - Round ${sceneProperties.phase + 1} of 8`;
+        default:
+            return `Nível 1 - Fase ${sceneProperties.phase + 1} de 8`;
+    }
+}
+const textVariations = [
+    [
+        generatePhaseTitle,
+        "Fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.",
+        "Fa\xe7a o rob\xf4 chegar aos cristais, ap\xf3s isso, os colete.",
+        "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n",
+        "Cristal coletado.",
+        "Cristal coletado com sucesso.\n",
+        "Todos os cristais coletados com sucesso!\n",
+        "N\xedvel Conclu\xeddo",
+        "Finalizar",
+        "Deseja realmente finalizar a pr\xe1tica?"
+    ],
+    [
+        generatePhaseTitle,
+        "Make the robot reach the crystal and collect it.",
+        "Make the robot reach the crystals and collect them.",
+        "Robot is not in front of the crystal.\n",
+        "Crystal collected.\n",
+        "Crystal successfully collected.\n",
+        "All crystals collected successfully!\n",
+        "Level Completed",
+        "Finish",
+        "Do you really want to finish the practice?"
+    ]
+];
 //Generating default Level 1 Objects
 const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
 let timerUpadate;
@@ -339,8 +374,8 @@ const phaseGeneration = [];
 //Functions to create the phases
 //Phase 1
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 1 - Fase 1 de 8";
-    document.getElementById("phaseObjective").innerText = "Fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.";
+    document.getElementById("phaseTitle").innerText = textVariations[sceneProperties.lang][0]();
+    document.getElementById("phaseObjective").innerText = textVariations[sceneProperties.lang][1];
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
@@ -352,9 +387,9 @@ phaseGeneration.push(()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        } else consoleElement.innerText += textVariations[sceneProperties.lang][3];
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -371,8 +406,8 @@ phaseGeneration.push(()=>{
 });
 //Phase 2
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 1 - Fase 2 de 8";
-    document.getElementById("phaseObjective").innerText = "Fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.";
+    document.getElementById("phaseTitle").innerText = textVariations[sceneProperties.lang][0]();
+    document.getElementById("phaseObjective").innerText = textVariations[sceneProperties.lang][1];
     camera.position.set(0, 15, 30);
     camera.rotation.set(0, 0, 0);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -385,9 +420,9 @@ phaseGeneration.push(()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        } else consoleElement.innerText += textVariations[sceneProperties.lang][3];
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -404,8 +439,8 @@ phaseGeneration.push(()=>{
 });
 //Phase 3
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 1 - Fase 3 de 8";
-    document.getElementById("phaseObjective").innerText = "Fa\xe7a o rob\xf4 chegar aos cristais, ap\xf3s isso, os colete.";
+    document.getElementById("phaseTitle").innerText = textVariations[sceneProperties.lang][0]();
+    document.getElementById("phaseObjective").innerText = textVariations[sceneProperties.lang][2];
     camera.position.set(0, 15, 30);
     camera.rotation.set(0, 0, 0);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -421,14 +456,14 @@ phaseGeneration.push(()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
         } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
-            consoleElement.innerText += "Cristal coletado.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
-        if (!objectives[0].visible && !objectives[1].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+        } else consoleElement.innerText += textVariations[sceneProperties.lang][3];
+        if (!objectives[0].visible && !objectives[1].visible) consoleElement.innerText += textVariations[sceneProperties.lang][6];
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -447,8 +482,8 @@ phaseGeneration.push(()=>{
 });
 //Phase 4
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 1 - Fase 4 de 8";
-    document.getElementById("phaseObjective").innerText = "Fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.";
+    document.getElementById("phaseTitle").innerText = textVariations[sceneProperties.lang][0]();
+    document.getElementById("phaseObjective").innerText = textVariations[sceneProperties.lang][1];
     camera.position.set(0, 15, 30);
     camera.rotation.set(0, 0, 0);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -470,9 +505,9 @@ phaseGeneration.push(()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        } else consoleElement.innerText += textVariations[sceneProperties.lang][3];
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -489,8 +524,8 @@ phaseGeneration.push(()=>{
 });
 //Phase 5
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 1 - Fase 5 de 8";
-    document.getElementById("phaseObjective").innerText = "Fa\xe7a o rob\xf4 chegar aos cristais, ap\xf3s isso, os colete.";
+    document.getElementById("phaseTitle").innerText = textVariations[sceneProperties.lang][0]();
+    document.getElementById("phaseObjective").innerText = textVariations[sceneProperties.lang][2];
     camera.position.set(0, 15, 30);
     camera.rotation.set(0, 0, 0);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -566,14 +601,14 @@ phaseGeneration.push(()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
         } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
-            consoleElement.innerText += "Cristal coletado.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
-        if (!objectives[0].visible && !objectives[1].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+        } else consoleElement.innerText += textVariations[sceneProperties.lang][3];
+        if (!objectives[0].visible && !objectives[1].visible) consoleElement.innerText += textVariations[sceneProperties.lang][6];
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -592,8 +627,8 @@ phaseGeneration.push(()=>{
 });
 //Phase 6
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 1 - Fase 6 de 8";
-    document.getElementById("phaseObjective").innerText = "Fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.";
+    document.getElementById("phaseTitle").innerText = textVariations[sceneProperties.lang][0]();
+    document.getElementById("phaseObjective").innerText = textVariations[sceneProperties.lang][1];
     camera.position.set(0, 15, 30);
     camera.rotation.set(0, 0, 0);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -694,9 +729,9 @@ phaseGeneration.push(()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        } else consoleElement.innerText += textVariations[sceneProperties.lang][3];
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -713,8 +748,8 @@ phaseGeneration.push(()=>{
 });
 //Phase 7
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 1 - Fase 7 de 8";
-    document.getElementById("phaseObjective").innerText = "Fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.";
+    document.getElementById("phaseTitle").innerText = textVariations[sceneProperties.lang][0]();
+    document.getElementById("phaseObjective").innerText = textVariations[sceneProperties.lang][1];
     camera.position.set(0, 15, 30);
     camera.rotation.set(0, 0, 0);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -824,9 +859,9 @@ phaseGeneration.push(()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado com sucesso.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
+        } else consoleElement.innerText += textVariations[sceneProperties.lang][3];
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -853,8 +888,8 @@ phaseGeneration.push(()=>{
 });
 //Phase 8
 phaseGeneration.push(()=>{
-    document.getElementById("phaseTitle").innerText = "N\xedvel 1 - Fase 8 de 8";
-    document.getElementById("phaseObjective").innerText = "Fa\xe7a o rob\xf4 chegar aos cristais, ap\xf3s isso, os colete.";
+    document.getElementById("phaseTitle").innerText = textVariations[sceneProperties.lang][0]();
+    document.getElementById("phaseObjective").innerText = textVariations[sceneProperties.lang][2];
     camera.position.set(0, 15, 30);
     camera.rotation.set(0, 0, 0);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -950,18 +985,18 @@ phaseGeneration.push(()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
-            consoleElement.innerText += "Cristal coletado.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
         } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
-            consoleElement.innerText += "Cristal coletado.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
         } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
             objectives[2].visible = false;
-            consoleElement.innerText += "Cristal coletado.\n";
+            consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[2].active = false;
-        } else consoleElement.innerText += "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n";
-        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+        } else consoleElement.innerText += textVariations[sceneProperties.lang][3];
+        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible) consoleElement.innerText += textVariations[sceneProperties.lang][6];
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -988,8 +1023,8 @@ phaseGeneration.push(()=>{
         spikeTrapState = (spikeTrapState + 1) % 2;
         setSpikeTrapState();
     }, 1000);
-    document.getElementById("winMessage").innerText = "N\xedvel Conclu\xeddo";
-    document.getElementById("advanceBtn").innerText = "Finalizar";
+    document.getElementById("winMessage").innerText = textVariations[sceneProperties.lang][7];
+    document.getElementById("advanceBtn").innerText = textVariations[sceneProperties.lang][8];
     timerUpadate = setInterval(updateTime, 1000);
 });
 //Defining function that remove objects, scene render and button's functions
@@ -1074,7 +1109,7 @@ advanceBtn.addEventListener("click", (e)=>{
     }
 });
 finishEarlierButton.addEventListener("click", (e)=>{
-    if (confirm("Deseja realmente finalizar a pr\xe1tica?")) {
+    if (confirm(textVariations[sceneProperties.lang][9])) {
         clearInterval(timerUpadate);
         (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 1/Fase ${sceneProperties.phase + 1}`);
         logModal.show();
@@ -1183,7 +1218,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 
 var $a78bf9e6f1193165$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.d637c833.js","64GOt":"stone_wallLvl1.e00cd434.jpg","19El7":"index.7813d165.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.eec98c8f.js","64GOt":"stone_wallLvl1.e00cd434.jpg","19El7":"index.e061a5d9.js"}'));
 
 
 parcelRequire("hO50i");

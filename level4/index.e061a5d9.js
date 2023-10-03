@@ -60485,10 +60485,11 @@ $parcel$export(module.exports, "displayTime", () => $8cf0fc8944b9cdfc$export$cba
 $parcel$export(module.exports, "configureDataAndUpload", () => $8cf0fc8944b9cdfc$export$ce33b877b675017a);
 const $8cf0fc8944b9cdfc$var$FORM_ACCESS = "https://docs.google.com/forms/d/e/1FAIpQLSeTbA3iFSmgcNeCaFKuXEKQ0mOBg74mow2ISXzESXOI4afhOQ/formResponse";
 function $8cf0fc8944b9cdfc$export$cbae8a5783c0845c(time, timerElement) {
+    let word = window.location.href.includes("english") ? "Time" : "Tempo";
     let hour = Math.floor(time / 3600);
     let min = Math.floor(time / 60) % 60;
     let seg = Math.floor(time % 60);
-    timerElement.innerText = `Tempo: ${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`;
+    timerElement.innerText = `${word}: ${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`;
 }
 async function $8cf0fc8944b9cdfc$var$uploadLog(data) {
     return new Promise((resolve, reject)=>{
@@ -60724,6 +60725,6 @@ function $c49ab76c1c184985$export$5d4bb8012760247a(traps) {
 
 var $15715989d14c5757$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"19El7":"index.7813d165.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"19El7":"index.e061a5d9.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
