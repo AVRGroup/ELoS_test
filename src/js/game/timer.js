@@ -2,10 +2,11 @@ const FORM_ACCESS = 'https://docs.google.com/forms/d/e/1FAIpQLSeTbA3iFSmgcNeCaFK
 
 export function displayTime(time,timerElement)
 {
+    let word = window.location.href.includes('english') ? 'Time' : 'Tempo'
     let hour = Math.floor(time / 3600);
     let min = Math.floor(time / 60) % 60;
     let seg = Math.floor(time % 60);
-    timerElement.innerText = `Tempo: ${hour < 10 ? '0' + hour : hour}:${(min < 10 ? '0' + min : min)}:${(seg < 10 ? '0' + seg : seg)}`;
+    timerElement.innerText = `${word}: ${hour < 10 ? '0' + hour : hour}:${(min < 10 ? '0' + min : min)}:${(seg < 10 ? '0' + seg : seg)}`;
 }
 
 async function uploadLog(data)
