@@ -33,6 +33,21 @@ async function uploadLog(data)
 
 export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,progExpRadioName,subBtn,time,redirectPath,level)
 {
+
+    let langSelector = window.location.href.includes('english') ? 1 : 0;
+    const warningVariations = [
+        [
+            "Ops! Algo deu errado!",
+            "Valor da idade incorreto.",
+            "É necessário preencher o formulário para avançar."
+        ],
+        [
+            "Oops! Something went wrong!",
+            "Age value incorrect.",
+            "You must fill out the form to advance."
+        ]
+    ];
+
     subBtn.addEventListener('click',async () => {
         let genderInput = document.querySelector(`input[name="${genderRadioName}"]:checked`);
         let progExpInput = document.querySelector(`input[name="${progExpRadioName}"]:checked`);
@@ -64,18 +79,18 @@ export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,
                 }
                 else
                 {
-                    alert("Ops! Algo deu errado!");
+                    alert(warningVariations[langSelector][0]);
                     subBtn.disabled = false;
                 }
             }
             else
             {
-                alert("Valor da idade incorreto.");
+                alert(warningVariations[langSelector][1]);
             }
         }
         else
         {
-            alert("É necessário preencher o formulário para avançar.");
+            alert(warningVariations[langSelector][2]);
         }
     });
 }
