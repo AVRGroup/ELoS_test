@@ -300,6 +300,22 @@ function getRandom(min, max) {
 
 export function translateActor(actor, amount, gridMapHelper, sceneProperties, consoleElement)
 {
+    let langSelector = window.location.href.includes('english') ? 1 : 0;
+    const messageVariations = [
+        [
+            "Aviso: Não é possível avançar mais por este caminho, seguindo para o próximo comando.\n",
+            "Aviso: Robô caiu na armadilha.\n",
+            "Aviso: Robô foi queimado!\n",
+            "Aviso: Robô foi queimado pelo laser!\n"  
+        ],
+        [
+            "Warning: It is not possible to advance further along this path, moving on to the next command.\n",
+            "Warning: Robot has fallen into the trap.\n",
+            "Warning: Robot was burned!\n",
+            "Warning: Robot was burned by the laser!\n"
+        ]
+    ];
+
     const objCopy = actor.clone(false);
     objCopy.translateZ(amount * gridMapHelper.getMultiplier());
     let finalPosition = objCopy.position;
@@ -452,12 +468,12 @@ export function translateActor(actor, amount, gridMapHelper, sceneProperties, co
             if(!positionAlmostEqual(finalPosition,newPosition))
             {
                 finalPosition = newPosition;
-                consoleElement.innerText += "Aviso: Não é possível avançar mais por este caminho, seguindo para o próximo comando.\n";
+                consoleElement.innerText += messageVariations[langSelector][0];
             }
             
             if(gridMapHelper.trapCollision(actor.position))
             {
-                consoleElement.innerText += "Aviso: Robô caiu na armadilha.\n";
+                consoleElement.innerText += messageVariations[langSelector][1];
                 sceneProperties.cancelExecution = true;
                 correctPositionOnDeath(gridMapHelper.trapCollision(actor.position), "trap");
                 //correctPositionOnCancel(gridMapHelper.trapCollision(actor.position));
@@ -465,7 +481,7 @@ export function translateActor(actor, amount, gridMapHelper, sceneProperties, co
 
             if(gridMapHelper.fireCollision(actor.position))
             {
-                consoleElement.innerText += "Aviso: Robô foi queimado!\n";
+                consoleElement.innerText += messageVariations[langSelector][2];
                 sceneProperties.cancelExecution = true;
                 correctPositionOnDeath(gridMapHelper.fireCollision(actor.position), "fire");
                 ///correctPositionOnCancel(gridMapHelper.fireCollision(actor.position));
@@ -473,7 +489,7 @@ export function translateActor(actor, amount, gridMapHelper, sceneProperties, co
 
             if(gridMapHelper.laserCollision(actor.position))
             {
-                consoleElement.innerText += "Aviso: Robô foi queimado pelo laser!\n";
+                consoleElement.innerText += messageVariations[langSelector][3];
                 sceneProperties.cancelExecution = true;
                 correctPositionOnDeath(gridMapHelper.laserCollision(actor.position), "laser");
             }
