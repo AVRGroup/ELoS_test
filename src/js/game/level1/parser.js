@@ -1,3 +1,16 @@
+const errorVariations = [
+    [
+        'Código inválido:',
+        'linha:'
+    ],
+    [
+        'Invalid code:',
+        'line:'
+    ]
+]
+
+let langSelector = window.location.href.includes('english') ? 1 : 0;
+
 const functionFilter = [
     {
         filter: new RegExp('^andarFrente(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$'),
@@ -28,7 +41,7 @@ const functionFilter = [
 function printError(text,line)
 {
     const consoleElement = document.getElementById('consoleArea');
-    consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
+    consoleElement.innerText += `${errorVariations[langSelector][0]} ${text} ${errorVariations[langSelector][1]} ${line}\n`;
 }
 
 export default function parseCode(code)

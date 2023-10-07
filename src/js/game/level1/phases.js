@@ -17,6 +17,7 @@ import parseCode from "./parser";
 import { displayTime, configureDataAndUpload } from "../timer";
 import { Modal } from "bootstrap";
 import {SpikeTrap, trapsActivation, trapsDeactivation} from "../three/SpikeTrap";
+import { convertCode } from "../multilangcode";
 
 //Defining Level 1 Scene's Properties
 
@@ -67,6 +68,25 @@ const textVariations = [
     ]
 ]
 
+const commandsVariations = [
+    [
+        'andarFrente(?)\n',
+        'andarTras(?)\n',
+        'girarEsquerda()\n',
+        'girarDireita()\n',
+        'darMeiaVolta()\n',
+        'coletarCristal()\n'
+    ],
+    [
+        'moveForward(?)\n',
+        'moveBackwards(?)\n',
+        'rotateLeft()\n',
+        'rotateRight()\n',
+        'turnBack()',
+        'collectCrystal()\n'
+    ]
+]
+
 //Generating default Level 1 Objects
 
 const logModal = new Modal(document.getElementById("logModal"));
@@ -89,11 +109,11 @@ andarFrenteBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "andarFrente(?)\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: commandsVariations[sceneProperties.lang][0]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "andarFrente(?)\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: commandsVariations[sceneProperties.lang][0]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -109,11 +129,11 @@ andarTrasBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "andarTras(?)\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: commandsVariations[sceneProperties.lang][1]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "andarTras(?)\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: commandsVariations[sceneProperties.lang][1]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -129,11 +149,11 @@ girarEsquerdaBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "girarEsquerda()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: commandsVariations[sceneProperties.lang][2]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "girarEsquerda()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: commandsVariations[sceneProperties.lang][2]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -149,11 +169,11 @@ girarDireitaBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "girarDireita()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: commandsVariations[sceneProperties.lang][3]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "girarDireita()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: commandsVariations[sceneProperties.lang][3]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -169,11 +189,11 @@ darMeiaVoltaBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "darMeiaVolta()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: commandsVariations[sceneProperties.lang][4]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "darMeiaVolta()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: commandsVariations[sceneProperties.lang][4]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -189,11 +209,11 @@ coletarCristalBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: "coletarCristal()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: commandsVariations[sceneProperties.lang][5]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: "coletarCristal()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: commandsVariations[sceneProperties.lang][5]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -1106,7 +1126,7 @@ const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
     cancelAnimationFrame(corrID);
     cancelAnimationFrame(requestID);
-    const codeParsed = parseCode(editor.state.doc.toString());
+    const codeParsed = parseCode(convertCode(sceneProperties.lang,editor.state.doc.toString()));
     sceneProperties.cancelExecution = false;
     actor.getObjectByName('eve').position.y = 0;
     if(traps != null)

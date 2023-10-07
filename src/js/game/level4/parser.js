@@ -1,3 +1,27 @@
+const errorVariations = [
+    [
+        'Código inválido:',
+        'linha:',
+        '(Condição inválida)',
+        '(Bloco é aberto mas nunca é fechado)',
+        '(Bloco é fechado mas nunca é aberto)',
+        'Aviso: O código tem mais linhas do que o robô pode processar. Tente rescrever seu código em',
+        'linhas ou menos.'
+
+    ],
+    [
+        'Invalid code:',
+        'line:',
+        '(Invalid condition)',
+        '(Block is opened but never closed)',
+        '(Block is closed but never opened)',
+        'Warning: The code has more lines than the robot can process. Try rewriting your code in',
+        'lines or less.'
+    ]
+]
+
+let langSelector = window.location.href.includes('english') ? 1 : 0;
+
 const functionFilter = [
     {
         filter: new RegExp('^andarFrente(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$'),
@@ -369,7 +393,7 @@ function predictFunction(lines,index)
 function printError(text,line)
 {
     const consoleElement = document.getElementById('consoleArea');
-    consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
+    consoleElement.innerText += `${errorVariations[langSelector][0]} ${text} ${errorVariations[langSelector][1]} ${line}\n`;
 }
 
 export default function parseCode(code,limit = 0)
@@ -420,12 +444,12 @@ export default function parseCode(code,limit = 0)
                         }
                         else
                         {
-                            printError(`${lines[i]} (Condição inválida)`,i+1);
+                            printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1);
                         }   
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1);   
+                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`,i+1);   
                     }
 
                     if(validConditional)
@@ -458,7 +482,7 @@ export default function parseCode(code,limit = 0)
                     }
                     else
                     {
-                        printError(`${lines[i]} (Condição inválida)`,i+1);
+                        printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1);
                         valid = false;
                         break;
                     }
@@ -473,7 +497,7 @@ export default function parseCode(code,limit = 0)
                     }
                     else
                     {
-                        printError(`${lines[i]} (Condição inválida)`,i+1)
+                        printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1)
                         valid = false
                         break
                     }
@@ -489,12 +513,12 @@ export default function parseCode(code,limit = 0)
                         }
                         else
                         {
-                            printError(`${lines[i]} (Condição inválida)`,i+1)
+                            printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1)
                         }
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1)
+                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`,i+1)
                     }
 
                     if(validElse)
@@ -519,7 +543,7 @@ export default function parseCode(code,limit = 0)
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1);
+                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`,i+1);
                         valid = false;
                         break;
                     }
@@ -534,7 +558,7 @@ export default function parseCode(code,limit = 0)
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é fechado mas nunca é aberto)`,i+1);
+                        printError(`${lines[i]} ${errorVariations[langSelector][4]}`,i+1);
                         valid = false;
                         break;   
                     }
@@ -577,7 +601,7 @@ export default function parseCode(code,limit = 0)
                     }
                     else
                     {
-                        printError(`${lines[i]} (Condição inválida)`,i+1);
+                        printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1);
                         valid = false;
                         break;
                     }
@@ -593,12 +617,12 @@ export default function parseCode(code,limit = 0)
                         }
                         else
                         {
-                            printError(`${lines[i]} (Condição inválida)`,i+1);
+                            printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1);
                         }   
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1);   
+                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`,i+1);   
                     }
 
                     if(validConditional)
@@ -636,7 +660,7 @@ export default function parseCode(code,limit = 0)
 
             if(limit > 0 && totalCommands > limit)
             {
-                document.getElementById('consoleArea').innerText += `Aviso: O código tem mais linhas do que o robô pode processar. Tente rescrever seu código em ${limit} linhas ou menos.\n`;
+                document.getElementById('consoleArea').innerText += `${errorVariations[langSelector][5]} ${limit} ${errorVariations[langSelector][6]}\n`;
                 valid = false;
                 break;
             }
