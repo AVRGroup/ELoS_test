@@ -5664,13 +5664,24 @@ var $253fcb0e048ab9b2$export$8f7491d57c8f97a9 = /*#__PURE__*/ (0, $jaIxV.popperG
 
 
 parcelRequire("1CqPx");
+let $65c94dd9398dc318$var$langSelector = window.location.href.includes("english") ? 1 : 0;
+const $65c94dd9398dc318$var$commandsVariantions = [
+    [
+        "Abrir",
+        "Fechar"
+    ],
+    [
+        "Open",
+        "Close"
+    ]
+];
 const $65c94dd9398dc318$var$collpaseFunctions = document.getElementById("collapseFunctions");
 const $65c94dd9398dc318$var$collapseBtn = document.getElementById("collapseBtn");
 $65c94dd9398dc318$var$collpaseFunctions.addEventListener("show.bs.collapse", (e)=>{
-    $65c94dd9398dc318$var$collapseBtn.innerText = "Fechar";
+    $65c94dd9398dc318$var$collapseBtn.innerText = $65c94dd9398dc318$var$commandsVariantions[$65c94dd9398dc318$var$langSelector][1];
 });
 $65c94dd9398dc318$var$collpaseFunctions.addEventListener("hide.bs.collapse", (e)=>{
-    $65c94dd9398dc318$var$collapseBtn.innerText = "Abrir";
+    $65c94dd9398dc318$var$collapseBtn.innerText = $65c94dd9398dc318$var$commandsVariantions[$65c94dd9398dc318$var$langSelector][0];
 });
 const $65c94dd9398dc318$var$consoleElement = document.getElementById("consoleArea");
 const $65c94dd9398dc318$var$clearBtn = document.getElementById("clsConsole");

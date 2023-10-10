@@ -78,6 +78,8 @@ var $c6e6z = parcelRequire("c6e6z");
 var $1CqPx = parcelRequire("1CqPx");
 
 var $gSwgq = parcelRequire("gSwgq");
+
+var $dYLhF = parcelRequire("dYLhF");
 //Defining Level 1 Scene's Properties
 const sceneProperties = {
     cancelExecution: false,
@@ -120,6 +122,24 @@ const textVariations = [
         "Do you really want to finish the practice?"
     ]
 ];
+const commandsVariations = [
+    [
+        "andarFrente(?)\n",
+        "andarTras(?)\n",
+        "girarEsquerda()\n",
+        "girarDireita()\n",
+        "darMeiaVolta()\n",
+        "coletarCristal()\n"
+    ],
+    [
+        "moveForward(?)\n",
+        "moveBackwards(?)\n",
+        "rotateLeft()\n",
+        "rotateRight()\n",
+        "turnBack()",
+        "collectCrystal()\n"
+    ]
+];
 //Generating default Level 1 Objects
 const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
 let timerUpadate;
@@ -140,7 +160,7 @@ andarFrenteBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "andarFrente(?)\n"
+                insert: commandsVariations[sceneProperties.lang][0]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -149,7 +169,7 @@ andarFrenteBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "andarFrente(?)\n"
+                insert: commandsVariations[sceneProperties.lang][0]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -174,7 +194,7 @@ andarTrasBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "andarTras(?)\n"
+                insert: commandsVariations[sceneProperties.lang][1]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -183,7 +203,7 @@ andarTrasBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "andarTras(?)\n"
+                insert: commandsVariations[sceneProperties.lang][1]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -208,7 +228,7 @@ girarEsquerdaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "girarEsquerda()\n"
+                insert: commandsVariations[sceneProperties.lang][2]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -217,7 +237,7 @@ girarEsquerdaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "girarEsquerda()\n"
+                insert: commandsVariations[sceneProperties.lang][2]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -242,7 +262,7 @@ girarDireitaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "girarDireita()\n"
+                insert: commandsVariations[sceneProperties.lang][3]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -251,7 +271,7 @@ girarDireitaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "girarDireita()\n"
+                insert: commandsVariations[sceneProperties.lang][3]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -276,7 +296,7 @@ darMeiaVoltaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "darMeiaVolta()\n"
+                insert: commandsVariations[sceneProperties.lang][4]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -285,7 +305,7 @@ darMeiaVoltaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "darMeiaVolta()\n"
+                insert: commandsVariations[sceneProperties.lang][4]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -310,7 +330,7 @@ coletarCristalBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "coletarCristal()\n"
+                insert: commandsVariations[sceneProperties.lang][5]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -319,7 +339,7 @@ coletarCristalBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "coletarCristal()\n"
+                insert: commandsVariations[sceneProperties.lang][5]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -1056,7 +1076,7 @@ const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
     cancelAnimationFrame((0, $6mhZf.corrID));
     cancelAnimationFrame((0, $6mhZf.requestID));
-    const codeParsed = (0, $4UvU9.default)(editor.state.doc.toString());
+    const codeParsed = (0, $4UvU9.default)((0, $dYLhF.convertCode)(sceneProperties.lang, editor.state.doc.toString()));
     sceneProperties.cancelExecution = false;
     actor.getObjectByName("eve").position.y = 0;
     if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
@@ -1136,6 +1156,17 @@ animate();
 parcelRequire.register("4UvU9", function(module, exports) {
 
 $parcel$export(module.exports, "default", () => $39352400bed78e43$export$2e2bcd8739ae039);
+const $39352400bed78e43$var$errorVariations = [
+    [
+        "C\xf3digo inv\xe1lido:",
+        "linha:"
+    ],
+    [
+        "Invalid code:",
+        "line:"
+    ]
+];
+let $39352400bed78e43$var$langSelector = window.location.href.includes("english") ? 1 : 0;
 const $39352400bed78e43$var$functionFilter = [
     {
         filter: new RegExp("^andarFrente(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$"),
@@ -1164,7 +1195,7 @@ const $39352400bed78e43$var$functionFilter = [
 ];
 function $39352400bed78e43$var$printError(text, line) {
     const consoleElement = document.getElementById("consoleArea");
-    consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
+    consoleElement.innerText += `${$39352400bed78e43$var$errorVariations[$39352400bed78e43$var$langSelector][0]} ${text} ${$39352400bed78e43$var$errorVariations[$39352400bed78e43$var$langSelector][1]} ${line}\n`;
 }
 function $39352400bed78e43$export$2e2bcd8739ae039(code) {
     let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
@@ -1216,9 +1247,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $a78bf9e6f1193165$exports = {};
+var $372fcc28cb624d81$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.eec98c8f.js","64GOt":"stone_wallLvl1.e00cd434.jpg","19El7":"index.e061a5d9.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.83e8e284.js","64GOt":"stone_wallLvl1.e00cd434.jpg","1udy9":"index.2752f56f.js"}'));
 
 
 parcelRequire("hO50i");

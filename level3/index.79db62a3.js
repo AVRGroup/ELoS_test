@@ -59,6 +59,8 @@ parcelRequire("7qmAS");
 var $c6e6z = parcelRequire("c6e6z");
 
 var $1CqPx = parcelRequire("1CqPx");
+
+var $dYLhF = parcelRequire("dYLhF");
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
@@ -105,6 +107,34 @@ const textVariations = [
         "The robot short-circuited after trying to deactivate a red laser that doesn't exist.\n"
     ]
 ];
+const commandsVariations = [
+    [
+        "andarFrente(?)\n",
+        "andarTras(?)\n",
+        "girarEsquerda()\n",
+        "girarDireita()\n",
+        "darMeiaVolta()\n",
+        "coletarCristal()\n",
+        "desativarLaserAzul()\n",
+        "desativarLaserVermelho()\n",
+        "laserAzulAtivo()",
+        "laserVermelhoAtivo()",
+        "se(?){\n\n}\nsen\xe3o{\n\n}\n"
+    ],
+    [
+        "moveForward(?)\n",
+        "moveBackwards(?)\n",
+        "rotateLeft()\n",
+        "rotateRight()\n",
+        "turnBack()",
+        "collectCrystal()\n",
+        "disableBlueLaser()\n",
+        "disableRedLaser()\n",
+        "isBlueLaserActive()",
+        "isRedLaserActive()",
+        "if(?){\n\n}\nelse{\n\n}\n"
+    ]
+];
 const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
 let timerUpadate;
 function updateTime() {
@@ -128,7 +158,7 @@ andarFrenteBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "andarFrente(?)\n"
+                insert: commandsVariations[sceneProperties.lang][0]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -137,7 +167,7 @@ andarFrenteBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "andarFrente(?)\n"
+                insert: commandsVariations[sceneProperties.lang][0]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -162,7 +192,7 @@ andarTrasBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "andarTras(?)\n"
+                insert: commandsVariations[sceneProperties.lang][1]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -171,7 +201,7 @@ andarTrasBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "andarTras(?)\n"
+                insert: commandsVariations[sceneProperties.lang][1]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -196,7 +226,7 @@ girarEsquerdaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "girarEsquerda()\n"
+                insert: commandsVariations[sceneProperties.lang][2]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -205,7 +235,7 @@ girarEsquerdaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "girarEsquerda()\n"
+                insert: commandsVariations[sceneProperties.lang][2]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -230,7 +260,7 @@ girarDireitaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "girarDireita()\n"
+                insert: commandsVariations[sceneProperties.lang][3]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -239,7 +269,7 @@ girarDireitaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "girarDireita()\n"
+                insert: commandsVariations[sceneProperties.lang][3]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -264,7 +294,7 @@ darMeiaVoltaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "darMeiaVolta()\n"
+                insert: commandsVariations[sceneProperties.lang][4]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -273,7 +303,7 @@ darMeiaVoltaBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "darMeiaVolta()\n"
+                insert: commandsVariations[sceneProperties.lang][4]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -298,7 +328,7 @@ desativarLaserAzulBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "desativarLaserAzul()\n"
+                insert: commandsVariations[sceneProperties.lang][6]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -307,7 +337,7 @@ desativarLaserAzulBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "desativarLaserAzul()\n"
+                insert: commandsVariations[sceneProperties.lang][6]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -332,7 +362,7 @@ desativarLaserVermelhoBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "desativarLaserVermelho()\n"
+                insert: commandsVariations[sceneProperties.lang][7]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -341,7 +371,7 @@ desativarLaserVermelhoBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "desativarLaserVermelho()\n"
+                insert: commandsVariations[sceneProperties.lang][7]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -366,7 +396,7 @@ coletarCristalBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "coletarCristal()\n"
+                insert: commandsVariations[sceneProperties.lang][5]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -375,7 +405,7 @@ coletarCristalBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "coletarCristal()\n"
+                insert: commandsVariations[sceneProperties.lang][5]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -400,7 +430,7 @@ laserAzulAtivoBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "laserAzulAtivo()"
+                insert: commandsVariations[sceneProperties.lang][8]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -409,7 +439,7 @@ laserAzulAtivoBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "laserAzulAtivo()"
+                insert: commandsVariations[sceneProperties.lang][8]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -434,7 +464,7 @@ laserVermelhoAtivoBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "laserVermelhoAtivo()"
+                insert: commandsVariations[sceneProperties.lang][9]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -443,7 +473,7 @@ laserVermelhoAtivoBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "laserVermelhoAtivo()"
+                insert: commandsVariations[sceneProperties.lang][9]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -468,7 +498,7 @@ condicaoFullBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: "se(?){\n\n}\nsen\xe3o{\n\n}\n"
+                insert: commandsVariations[sceneProperties.lang][10]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -477,7 +507,7 @@ condicaoFullBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: "se(?){\n\n}\nsen\xe3o{\n\n}\n"
+                insert: commandsVariations[sceneProperties.lang][10]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -2563,7 +2593,7 @@ window.addEventListener("resize", ()=>{
 const finishEarlierButton = document.getElementById("finishEarlier");
 const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
-    const codeParsed = (0, $3vWij.default)(editor.state.doc.toString());
+    const codeParsed = (0, $3vWij.default)((0, $dYLhF.convertCode)(sceneProperties.lang, editor.state.doc.toString()));
     console.log(codeParsed);
     cancelAnimationFrame((0, $6mhZf.corrID));
     cancelAnimationFrame((0, $6mhZf.requestID));
@@ -2657,6 +2687,27 @@ animate();
 parcelRequire.register("3vWij", function(module, exports) {
 
 $parcel$export(module.exports, "default", () => $28f17c62ce377190$export$2e2bcd8739ae039);
+const $28f17c62ce377190$var$errorVariations = [
+    [
+        "C\xf3digo inv\xe1lido:",
+        "linha:",
+        "(Condi\xe7\xe3o inv\xe1lida)",
+        "(Bloco \xe9 aberto mas nunca \xe9 fechado)",
+        "(Bloco \xe9 fechado mas nunca \xe9 aberto)",
+        "Aviso: O c\xf3digo tem mais linhas do que o rob\xf4 pode processar. Tente rescrever seu c\xf3digo em",
+        "linhas ou menos."
+    ],
+    [
+        "Invalid code:",
+        "line:",
+        "(Invalid condition)",
+        "(Block is opened but never closed)",
+        "(Block is closed but never opened)",
+        "Warning: The code has more lines than the robot can process. Try rewriting your code in",
+        "lines or less."
+    ]
+];
+let $28f17c62ce377190$var$langSelector = window.location.href.includes("english") ? 1 : 0;
 const $28f17c62ce377190$var$functionFilter = [
     {
         filter: new RegExp("^andarFrente(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$"),
@@ -2881,7 +2932,7 @@ function $28f17c62ce377190$var$predictFunction(lines, index) {
 }
 function $28f17c62ce377190$var$printError(text, line) {
     const consoleElement = document.getElementById("consoleArea");
-    consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
+    consoleElement.innerText += `${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][0]} ${text} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][1]} ${line}\n`;
 }
 function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
     let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
@@ -2911,8 +2962,8 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                     let validConditional = false;
                     if ($28f17c62ce377190$var$blockValidation(lines, i)) {
                         if ($28f17c62ce377190$var$ifValidation(lines[i])) validConditional = true;
-                        else $28f17c62ce377190$var$printError(`${lines[i]} (Condição inválida)`, i + 1);
-                    } else $28f17c62ce377190$var$printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`, i + 1);
+                        else $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][2]}`, i + 1);
+                    } else $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][3]}`, i + 1);
                     if (validConditional) {
                         let line = lines[i].trim();
                         let lineParsed1 = `editor.focus();
@@ -2935,7 +2986,7 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                         codeParsed += lineParsed2;
                         totalCommands++;
                     } else {
-                        $28f17c62ce377190$var$printError(`${lines[i]} (Condição inválida)`, i + 1);
+                        $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][2]}`, i + 1);
                         valid = false;
                         break;
                     }
@@ -2945,7 +2996,7 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                         codeParsed += lineParsed3;
                         totalCommands++;
                     } else {
-                        $28f17c62ce377190$var$printError(`${lines[i]} (Condição inválida)`, i + 1);
+                        $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][2]}`, i + 1);
                         valid = false;
                         break;
                     }
@@ -2953,8 +3004,8 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                     let validElse = false;
                     if ($28f17c62ce377190$var$blockValidation(lines, i)) {
                         if ($28f17c62ce377190$var$elseValidation(lines, i)) validElse = true;
-                        else $28f17c62ce377190$var$printError(`${lines[i]} (Condição inválida)`, i + 1);
-                    } else $28f17c62ce377190$var$printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`, i + 1);
+                        else $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][2]}`, i + 1);
+                    } else $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][3]}`, i + 1);
                     if (validElse) {
                         let lineParsed4 = "else{\n";
                         codeParsed += lineParsed4;
@@ -2969,7 +3020,7 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                         codeParsed += lineParsed5;
                         totalCommands++;
                     } else {
-                        $28f17c62ce377190$var$printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`, i + 1);
+                        $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][3]}`, i + 1);
                         valid = false;
                         break;
                     }
@@ -2979,7 +3030,7 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                         codeParsed += lineParsed6;
                         totalCommands++;
                     } else {
-                        $28f17c62ce377190$var$printError(`${lines[i]} (Bloco é fechado mas nunca é aberto)`, i + 1);
+                        $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][4]}`, i + 1);
                         valid = false;
                         break;
                     }
@@ -3016,7 +3067,7 @@ function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
                 break;
             }
             if (limit > 0 && totalCommands > limit) {
-                document.getElementById("consoleArea").innerText += `Aviso: O código tem mais linhas do que o robô pode processar. Tente rescrever seu código em ${limit} linhas ou menos.\n`;
+                document.getElementById("consoleArea").innerText += `${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][5]} ${limit} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][6]}\n`;
                 valid = false;
                 break;
             }
@@ -3188,9 +3239,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $642fe273a348a49a$exports = {};
+var $56feef47ecd40411$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.b2708013.js","hEG10":"metalWallLvl3.c6e3c749.png","19El7":"index.e061a5d9.js","jzc87":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.79db62a3.js","hEG10":"metalWallLvl3.c6e3c749.png","1udy9":"index.2752f56f.js","jzc87":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");

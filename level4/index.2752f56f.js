@@ -55965,6 +55965,21 @@ function $4a12bffc769d698d$var$getRandom(min, max) {
     return Math.random() * (max - min) + min;
 }
 function $4a12bffc769d698d$export$43ac269cfac29bfc(actor, amount, gridMapHelper, sceneProperties, consoleElement) {
+    let langSelector = window.location.href.includes("english") ? 1 : 0;
+    const messageVariations = [
+        [
+            "Aviso: N\xe3o \xe9 poss\xedvel avan\xe7ar mais por este caminho, seguindo para o pr\xf3ximo comando.\n",
+            "Aviso: Rob\xf4 caiu na armadilha.\n",
+            "Aviso: Rob\xf4 foi queimado!\n",
+            "Aviso: Rob\xf4 foi queimado pelo laser!\n"
+        ],
+        [
+            "Warning: It is not possible to advance further along this path, moving on to the next command.\n",
+            "Warning: Robot has fallen into the trap.\n",
+            "Warning: Robot was burned!\n",
+            "Warning: Robot was burned by the laser!\n"
+        ]
+    ];
     const objCopy = actor.clone(false);
     objCopy.translateZ(amount * gridMapHelper.getMultiplier());
     let finalPosition = objCopy.position;
@@ -56058,22 +56073,22 @@ function $4a12bffc769d698d$export$43ac269cfac29bfc(actor, amount, gridMapHelper,
             let newPosition = gridMapHelper.collisionTests(actor.position, finalPosition);
             if (!positionAlmostEqual(finalPosition, newPosition)) {
                 finalPosition = newPosition;
-                consoleElement.innerText += "Aviso: N\xe3o \xe9 poss\xedvel avan\xe7ar mais por este caminho, seguindo para o pr\xf3ximo comando.\n";
+                consoleElement.innerText += messageVariations[langSelector][0];
             }
             if (gridMapHelper.trapCollision(actor.position)) {
-                consoleElement.innerText += "Aviso: Rob\xf4 caiu na armadilha.\n";
+                consoleElement.innerText += messageVariations[langSelector][1];
                 sceneProperties.cancelExecution = true;
                 correctPositionOnDeath(gridMapHelper.trapCollision(actor.position), "trap");
             //correctPositionOnCancel(gridMapHelper.trapCollision(actor.position));
             }
             if (gridMapHelper.fireCollision(actor.position)) {
-                consoleElement.innerText += "Aviso: Rob\xf4 foi queimado!\n";
+                consoleElement.innerText += messageVariations[langSelector][2];
                 sceneProperties.cancelExecution = true;
                 correctPositionOnDeath(gridMapHelper.fireCollision(actor.position), "fire");
             ///correctPositionOnCancel(gridMapHelper.fireCollision(actor.position));
             }
             if (gridMapHelper.laserCollision(actor.position)) {
-                consoleElement.innerText += "Aviso: Rob\xf4 foi queimado pelo laser!\n";
+                consoleElement.innerText += messageVariations[langSelector][3];
                 sceneProperties.cancelExecution = true;
                 correctPositionOnDeath(gridMapHelper.laserCollision(actor.position), "laser");
             }
@@ -60504,6 +60519,19 @@ async function $8cf0fc8944b9cdfc$var$uploadLog(data) {
     });
 }
 async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, genderRadioName, progExpRadioName, subBtn, time, redirectPath, level) {
+    let langSelector = window.location.href.includes("english") ? 1 : 0;
+    const warningVariations = [
+        [
+            "Ops! Algo deu errado!",
+            "Valor da idade incorreto.",
+            "\xc9 necess\xe1rio preencher o formul\xe1rio para avan\xe7ar."
+        ],
+        [
+            "Oops! Something went wrong!",
+            "Age value incorrect.",
+            "You must fill out the form to advance."
+        ]
+    ];
     subBtn.addEventListener("click", async ()=>{
         let genderInput = document.querySelector(`input[name="${genderRadioName}"]:checked`);
         let progExpInput = document.querySelector(`input[name="${progExpRadioName}"]:checked`);
@@ -60548,11 +60576,11 @@ async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, ge
                     console.log(data);
                     window.location.href = redirectPath;
                 } else {
-                    alert("Ops! Algo deu errado!");
+                    alert(warningVariations[langSelector][0]);
                     subBtn.disabled = false;
                 }
-            } else alert("Valor da idade incorreto.");
-        } else alert("\xc9 necess\xe1rio preencher o formul\xe1rio para avan\xe7ar.");
+            } else alert(warningVariations[langSelector][1]);
+        } else alert(warningVariations[langSelector][2]);
     });
 }
 
@@ -60723,8 +60751,62 @@ function $c49ab76c1c184985$export$5d4bb8012760247a(traps) {
 
 });
 
-var $15715989d14c5757$exports = {};
+parcelRequire.register("dYLhF", function(module, exports) {
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"19El7":"index.e061a5d9.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+$parcel$export(module.exports, "convertCode", () => $a2d58e902e72a3c2$export$e6fe271705b4a981);
+const $a2d58e902e72a3c2$var$codeVariations = [
+    [
+        "andarFrente",
+        "andarTras",
+        "girarEsquerda",
+        "girarDireita",
+        "darMeiaVolta",
+        "apagarFogo",
+        "desativarLaserAzul",
+        "desativarLaserVermelho",
+        "girarManivela",
+        "coletarCristal",
+        "pegandoFogo",
+        "laserAzulAtivo",
+        "laserVermelhoAtivo",
+        "portaFechada",
+        "se",
+        "sen\xe3o",
+        "enquanto"
+    ],
+    [
+        "moveForward",
+        "moveBackwards",
+        "rotateLeft",
+        "rotateRight",
+        "turnBack",
+        "extinguishFire",
+        "disableBlueLaser",
+        "disableRedLaser",
+        "turnCrank",
+        "collectCrystal",
+        "isOnFire",
+        "isBlueLaserActive",
+        "isRedLaserActive",
+        "isDoorClosed",
+        "if",
+        "else",
+        "while"
+    ]
+];
+function $a2d58e902e72a3c2$export$e6fe271705b4a981(langSelector, code) {
+    if (langSelector == 0) return code;
+    else {
+        let codeConverted = code;
+        for(let i = 0; i < $a2d58e902e72a3c2$var$codeVariations[langSelector].length; i++)codeConverted = codeConverted.replaceAll($a2d58e902e72a3c2$var$codeVariations[langSelector][i], $a2d58e902e72a3c2$var$codeVariations[0][i]);
+        return codeConverted;
+    }
+}
+
+});
+
+var $1218ffb4699b55b0$exports = {};
+
+(parcelRequire("2JpsI")).register(JSON.parse('{"1udy9":"index.2752f56f.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
