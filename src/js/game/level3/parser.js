@@ -82,8 +82,6 @@ const functionFilter = [
 ];
 
 const conditionalParameters = [
-    new RegExp('true'),
-    new RegExp('false'),
     new RegExp('^laserAzulAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$'),
     new RegExp('^laserVermelhoAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$')
 ]
@@ -390,6 +388,7 @@ export default function parseCode(code,limit = 0)
     let lines = code.split('\n');
     let valid = true;
     let totalCommands = 0;
+    let nonblockcmd = false;
     for(let i = 0; i < lines.length;i++)
     {
         let validLine = false;
@@ -416,9 +415,10 @@ export default function parseCode(code,limit = 0)
                 {
                     let lineParsed = `editor.focus();
                     editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
-                    lineParsed += "await " + lines[i].trim() + "\n";
+                    lineParsed += "await " + lines[i].trim() + (nonblockcmd ? '}' : '') + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;
+                    nonblockcmd = false;
                 }
                 else if(lineType === 'conditional&&blockValidation')
                 {
@@ -463,9 +463,10 @@ export default function parseCode(code,limit = 0)
                         let lineParsed = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
                         await delay(250);\n`
-                        lineParsed += `if${line.substring(line.indexOf('('))}\n`;
+                        lineParsed += `if${line.substring(line.indexOf('('))}{\n`;
                         codeParsed += lineParsed;         
                         totalCommands++;
+                        nonblockcmd = true;
                     }
                     else
                     {
@@ -478,9 +479,10 @@ export default function parseCode(code,limit = 0)
                 {
                     if(elseValidation(lines,i))
                     {
-                        let lineParsed = 'else\n'
+                        let lineParsed = 'else{\n'
                         codeParsed += lineParsed
                         totalCommands++
+                        nonblockcmd = true;
                     }
                     else
                     {
@@ -557,9 +559,10 @@ export default function parseCode(code,limit = 0)
                         let lineParsed = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
                         await delay(250);\n`
-                        lineParsed += lines[i].trim() + "\n";
+                        lineParsed += lines[i].trim() + (nonblockcmd ? '}' : '') + "\n";
                         codeParsed += lineParsed;
                         totalCommands++;
+                        nonblockcmd = false;
                     }
                     else
                     {
@@ -569,9 +572,10 @@ export default function parseCode(code,limit = 0)
                         let lineParsed = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
                         await delay(250);\n`
-                        lineParsed += lines[i].trim() + "\n";
+                        lineParsed += lines[i].trim() + (nonblockcmd ? '}' : '') + "\n";
                         codeParsed += lineParsed;
                         totalCommands++;
+                        nonblockcmd = false;
                     }
                 }
                 else
@@ -579,9 +583,10 @@ export default function parseCode(code,limit = 0)
                     let lineParsed = `editor.focus();
                     editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
                     await delay(250);\n`
-                    lineParsed += lines[i].trim() + "\n";
+                    lineParsed += lines[i].trim() + (nonblockcmd ? '}' : '') + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;
+                    nonblockcmd = false;
                 }
             }
             else
