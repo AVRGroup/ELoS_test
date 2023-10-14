@@ -1,3 +1,16 @@
+const errorVariations = [
+    [
+        'Código inválido:',
+        'linha:'
+    ],
+    [
+        'Invalid code:',
+        'line:'
+    ]
+]
+
+let langSelector = window.location.href.includes('english') ? 1 : 0;
+
 const functionFilter = [
     {
         filter: new RegExp('^andarFrente(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$'),
@@ -28,12 +41,12 @@ const functionFilter = [
 function printError(text,line)
 {
     const consoleElement = document.getElementById('consoleArea');
-    consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
+    consoleElement.innerText += `${errorVariations[langSelector][0]} ${text} ${errorVariations[langSelector][1]} ${line}\n`;
 }
 
 export default function parseCode(code)
 {
-    let codeParsed = "async function runCode(){\n";
+    let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
     const lines = code.split('\n');
     let valid = true;
     for(let i = 0;i < lines.length;i++)
@@ -55,12 +68,17 @@ export default function parseCode(code)
             {
                 if(lineType === "sequential")
                 {
-                    let lineParsed = "await " + lines[i].trim() + "\n";
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                    lineParsed += "await " + lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                 }
                 else
                 {
-                    let lineParsed = lines[i].trim() + "\n";
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                    await delay(250);\n`
+                    lineParsed += lines[i].trim() + "\n";
                     codeParsed += lineParsed;
                 }
             }

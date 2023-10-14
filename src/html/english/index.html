@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial - ELoS</title>
+    <title>Homepage - ELoS</title>
 
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../scss/homepage/styles.scss">
-    <link rel="stylesheet" href="../scss/homepage/customSelect.scss">
+    <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../scss/homepage/styles.scss">
+    <link rel="stylesheet" href="../../scss/homepage/customSelect.scss">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -18,13 +18,13 @@
         <div class="controle">
             <div class="container">
                 <div class="esquerda">
-                    <img src="../img/homepage/botoesx.png" alt="">
+                    <img src="../../img/homepage/botoesx.png" alt="">
                 </div>
                 <div class="tela">
                    <h1><span class="wave">ELoS</span></h1>
                 </div>
                 <div class="direita">
-                    <img src="../img/homepage/botoes2x.png" alt="">
+                    <img src="../../img/homepage/botoes2x.png" alt="">
                 </div>
             </div>
         </div>
@@ -33,12 +33,12 @@
         <div class="niveis">
             <div class="first-column">
                 <div class="titulo">
-                    <h1>SELEÇÃO DE NÍVEIS</h1>
+                    <h1>LEVEL SELECTION</h1>
                 </div>
                 <div class="custom-select" style="width:160px;">
                     <select id="languageSelect" onchange="redirectToPage()">
                         <option value="1">BR</option>
-                        <option value="2">EN</option>
+                        <option value="2" selected>EN</option>
                     </select>
                 </div>
             </div>
@@ -49,11 +49,11 @@
                             <div class="botao">
                                 <button onclick="window.location.href='./level1/'">1</button>
                             </div>
-                            <h2>Sequência Simples</h2>
+                            <h2>Sequences</h2>
                         </li>
                         <li class="video">
                             <div class="botao_video">
-                                <button onclick="openModal('hAzeEs8AnU0')"><h2>Instruções</h2><ion-icon name="play"></ion-icon></button>
+                                <button onclick="openModal('hAzeEs8AnU0')"><h2>Instructions</h2><ion-icon name="play"></ion-icon></button>
                             </div>
                         </li>
                     </ul>
@@ -63,11 +63,11 @@
                             <div class="botao2">
                                 <button onclick="window.location.href='./level2/'">2</button>
                             </div>
-                            <h2>Condicionais Simples</h2>
+                            <h2>Single Selections</h2>
                         </li>
                         <li class="video">
                             <div class="botao_video">
-                                <button onclick="openModal('9GRdXKzFdD8')"><h2>Instruções</h2><ion-icon name="play"></ion-icon></button>
+                                <button onclick="openModal('9GRdXKzFdD8')"><h2>Instructions</h2><ion-icon name="play"></ion-icon></button>
                             </div>
                         </li>
                     </ul>
@@ -77,11 +77,11 @@
                             <div class="botao">
                                 <button onclick="window.location.href='./level3/'">3</button>
                             </div>
-                            <h2>Condicionais Duplas</h2>
+                            <h2>Double Selections</h2>
                         </li>
                         <li class="video">
                             <div class="botao_video">
-                                <button onclick="openModal('OlImH_i9mFs')"><h2>Instruções</h2><ion-icon name="play"></ion-icon></button>
+                                <button onclick="openModal('OlImH_i9mFs')"><h2>Instructions</h2><ion-icon name="play"></ion-icon></button>
                             </div>
                         </li>
                     </ul>
@@ -91,11 +91,11 @@
                             <div class="botao2">
                                 <button onclick="window.location.href='./level4/'">4</button>
                             </div>
-                            <h2>Repetições</h2>
+                            <h2>Repetitions</h2>
                         </li>
                         <li class="video">
                             <div class="botao_video">
-                                <button onclick="openModal('f3PnQYjyoP4')"><h2>Instruções</h2><ion-icon name="play"></ion-icon></button>
+                                <button onclick="openModal('f3PnQYjyoP4')"><h2>Instructions</h2><ion-icon name="play"></ion-icon></button>
                             </div>
                         </li>
                     </ul>
@@ -103,7 +103,7 @@
             </div>
         </div>
         <div class="robo">
-            <img src="../img/homepage/robo.gif" alt="">
+            <img src="../../img/homepage/robo.gif" alt="">
         </div>    
     </main>
 
@@ -113,10 +113,22 @@
             <iframe id="videoFrame" width="560" height="315" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
-    
+
+    <script>
+        function redirectToPage() {
+            var selectElement = document.getElementById("languageSelect");
+            var selectedValue = selectElement.value;
+
+            if (selectedValue === "1") {
+                window.location.href = 'index.html';
+            } else if (selectedValue === "2") {
+                window.location.href = './en/index.html';
+            }
+        }
+    </script> 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="../js/homepage/script.js"></script>
-    <script src="../js/homepage/customSelect.js"></script>
+    <script src="../../js/homepage/script.js"></script>
+    <script src="../../js/homepage/customSelect.js"></script>
 </body>
 </html>

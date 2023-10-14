@@ -1,3 +1,27 @@
+const errorVariations = [
+    [
+        'Código inválido:',
+        'linha:',
+        '(Condição inválida)',
+        '(Bloco é aberto mas nunca é fechado)',
+        '(Bloco é fechado mas nunca é aberto)',
+        'Aviso: O código tem mais linhas do que o robô pode processar. Tente rescrever seu código em',
+        'linhas ou menos.'
+
+    ],
+    [
+        'Invalid code:',
+        'line:',
+        '(Invalid condition)',
+        '(Block is opened but never closed)',
+        '(Block is closed but never opened)',
+        'Warning: The code has more lines than the robot can process. Try rewriting your code in',
+        'lines or less.'
+    ]
+]
+
+let langSelector = window.location.href.includes('english') ? 1 : 0;
+
 const functionFilter = [
     {
         filter: new RegExp('^andarFrente(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$'),
@@ -70,8 +94,6 @@ const functionFilter = [
 ];
 
 const conditionalParameters = [
-    new RegExp('true'),
-    new RegExp('false'),
     new RegExp('^laserAzulAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$'),
     new RegExp('^laserVermelhoAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$'),
     new RegExp('^portaFechada(\\s+)?\\((\\s+)?\\)(\\s+)?$')
@@ -369,16 +391,17 @@ function predictFunction(lines,index)
 function printError(text,line)
 {
     const consoleElement = document.getElementById('consoleArea');
-    consoleElement.innerText += `Código inválido: ${text} linha: ${line}\n`;
+    consoleElement.innerText += `${errorVariations[langSelector][0]} ${text} ${errorVariations[langSelector][1]} ${line}\n`;
 }
 
 export default function parseCode(code,limit = 0)
 {
-    let codeParsed = "async function runCode(){\n";
+    let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
     let badLuckFunctions = "\n";
     let lines = code.split('\n');
     let valid = true;
     let totalCommands = 0;
+    let nonblockcmd = false;
     for(let i = 0; i < lines.length;i++)
     {
         let validLine = false;
@@ -403,9 +426,12 @@ export default function parseCode(code,limit = 0)
             {
                 if(lineType === "sequential")
                 {
-                    let lineParsed = `await ${lines[i].trim()}\n`;
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});\n`
+                    lineParsed += "await " + lines[i].trim() + (nonblockcmd ? '}' : '') + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;
+                    nonblockcmd = false;
                 }
                 else if(lineType === 'conditional&&blockValidation')
                 {
@@ -418,18 +444,21 @@ export default function parseCode(code,limit = 0)
                         }
                         else
                         {
-                            printError(`${lines[i]} (Condição inválida)`,i+1);
+                            printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1);
                         }   
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1);   
+                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`,i+1);   
                     }
 
                     if(validConditional)
                     {
                         let line = lines[i].trim();
-                        let lineParsed = `if${line.substring(line.indexOf('('))}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
+                        lineParsed += `if${line.substring(line.indexOf('('))}\n`;
                         codeParsed += lineParsed;   
                         totalCommands++;
                     }
@@ -444,13 +473,17 @@ export default function parseCode(code,limit = 0)
                     if(ifValidation(lines[i]))
                     {
                         let line = lines[i].trim();
-                        let lineParsed = `if${line.substring(line.indexOf('('))}\n`;
-                        codeParsed += lineParsed;         
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
+                        lineParsed += `if${line.substring(line.indexOf('('))}{\n`;
+                        codeParsed += lineParsed;   
                         totalCommands++;
+                        nonblockcmd = true;
                     }
                     else
                     {
-                        printError(`${lines[i]} (Condição inválida)`,i+1);
+                        printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1);
                         valid = false;
                         break;
                     }
@@ -459,13 +492,14 @@ export default function parseCode(code,limit = 0)
                 {
                     if(elseValidation(lines,i))
                     {
-                        let lineParsed = 'else\n'
+                        let lineParsed = 'else{\n'
                         codeParsed += lineParsed
                         totalCommands++
+                        nonblockcmd = true;
                     }
                     else
                     {
-                        printError(`${lines[i]} (Condição inválida)`,i+1)
+                        printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1)
                         valid = false
                         break
                     }
@@ -481,12 +515,12 @@ export default function parseCode(code,limit = 0)
                         }
                         else
                         {
-                            printError(`${lines[i]} (Condição inválida)`,i+1)
+                            printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1)
                         }
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1)
+                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`,i+1)
                     }
 
                     if(validElse)
@@ -511,7 +545,7 @@ export default function parseCode(code,limit = 0)
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1);
+                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`,i+1);
                         valid = false;
                         break;
                     }
@@ -526,7 +560,7 @@ export default function parseCode(code,limit = 0)
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é fechado mas nunca é aberto)`,i+1);
+                        printError(`${lines[i]} ${errorVariations[langSelector][4]}`,i+1);
                         valid = false;
                         break;   
                     }
@@ -535,18 +569,26 @@ export default function parseCode(code,limit = 0)
                 {
                     if(mustConditionValidation(lines,i))
                     {
-                        let lineParsed = `${lines[i].trim()}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
+                        lineParsed += lines[i].trim() + (nonblockcmd ? '}' : '') + "\n";
                         codeParsed += lineParsed;
                         totalCommands++;
+                        nonblockcmd = false;
                     }
                     else
                     {
                         let state = functionFilter[6].filter.test(lines[i].trim()) ? 'blue' : 'red';
                         let pos = predictFunction(lines,i);
                         badLuckFunctions += `badLuck([${pos[0]},${pos[1]}],'${state}')\n`;
-                        let lineParsed = `${lines[i].trim()}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
+                        lineParsed += lines[i].trim() + (nonblockcmd ? '}' : '') + "\n";
                         codeParsed += lineParsed;
                         totalCommands++;
+                        nonblockcmd = false;
                     }
                 }
                 else if(lineType === "loop")
@@ -554,13 +596,17 @@ export default function parseCode(code,limit = 0)
                     if(ifValidation(lines[i]))
                     {
                         let line = lines[i].trim();
-                        let lineParsed = `while${line.substring(line.indexOf('('))}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
+                        lineParsed += `while${line.substring(line.indexOf('('))}{\n`;
                         codeParsed += lineParsed;         
                         totalCommands++;
+                        nonblockcmd = true;
                     }
                     else
                     {
-                        printError(`${lines[i]} (Condição inválida)`,i+1);
+                        printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1);
                         valid = false;
                         break;
                     }
@@ -576,18 +622,21 @@ export default function parseCode(code,limit = 0)
                         }
                         else
                         {
-                            printError(`${lines[i]} (Condição inválida)`,i+1);
+                            printError(`${lines[i]} ${errorVariations[langSelector][2]}`,i+1);
                         }   
                     }
                     else
                     {
-                        printError(`${lines[i]} (Bloco é aberto mas nunca é fechado)`,i+1);   
+                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`,i+1);   
                     }
 
                     if(validConditional)
                     {
                         let line = lines[i].trim();
-                        let lineParsed = `while${line.substring(line.indexOf('('))}\n`;
+                        let lineParsed = `editor.focus();
+                        editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                        await delay(250);\n`
+                        lineParsed += `while${line.substring(line.indexOf('('))}\n`;
                         codeParsed += lineParsed;   
                         totalCommands++;
                     }
@@ -599,9 +648,13 @@ export default function parseCode(code,limit = 0)
                 }
                 else
                 {
-                    let lineParsed = `${lines[i].trim()}\n`;
+                    let lineParsed = `editor.focus();
+                    editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
+                    await delay(250);\n`
+                    lineParsed += lines[i].trim() + (nonblockcmd ? '}' : '') + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;
+                    nonblockcmd = false;
                 }
             }
             else
@@ -613,7 +666,7 @@ export default function parseCode(code,limit = 0)
 
             if(limit > 0 && totalCommands > limit)
             {
-                document.getElementById('consoleArea').innerText += `Aviso: O código tem mais linhas do que o robô pode processar. Tente rescrever seu código em ${limit} linhas ou menos.\n`;
+                document.getElementById('consoleArea').innerText += `${errorVariations[langSelector][5]} ${limit} ${errorVariations[langSelector][6]}\n`;
                 valid = false;
                 break;
             }

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { generateDefaultEditor, readOnlyState, editState } from "../editor";
+import { generateDefaultEditor, readOnlyState, editState, updateTheme } from "../editor";
 import {
     generateDefaultSceneObjects,
     resizeCanvasToDisplaySize,
@@ -8,21 +8,104 @@ import {
     translateActor,
     rotateActor,
     checkCollision,
-    degreeToRadians
+    degreeToRadians,
+    resetRobotColor,
+    materialColor,
+    corrID,
+    requestID,
+    changColorID,
+    smokeAnimationFrame,
+    smoke
 } from "../three/util";
 import GridMapHelper from "../three/GridMapHelper";
 import parseCode from "./parser";
 import LaserFence from "../three/LaserFence";
 import {SpikeTrap, trapsActivation, trapsDeactivation} from "../three/SpikeTrap";
+import {Smoke} from "../three/Smoke";
 import { displayTime, configureDataAndUpload } from "../timer";
 import { Modal } from "bootstrap";
+import { convertCode } from "../multilangcode";
 
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
     phase: 0,
-    executing: false
+    executing: false,
+    mult: 1,
+    lang: window.location.href.includes('english') ? 1 : 0
 }
+
+function generatePhaseTitle()
+{
+    switch(sceneProperties.lang)
+    {
+        case 1:
+            return `Level 3 - Round ${sceneProperties.phase + 1} of 8`
+        default:
+            return `Nível 3 - Fase ${sceneProperties.phase + 1} de 8`
+
+    }
+}
+
+const textVariations = [
+    [
+        generatePhaseTitle,
+        "Faça o robô chegar ao cristal, após isso, o colete.",
+        "Faça o robô chegar aos cristais, após isso, os colete.",
+        "Robô não está em frente ao cristal.\n",
+        "Cristal coletado.",
+        "Cristal coletado com sucesso.\n",
+        "Todos os cristais coletados com sucesso!\n",
+        "Nível Concluído",
+        "Finalizar",
+        "Deseja realmente finalizar a prática?",
+        "O robô entrou em curto circuito por tentar desativar um laser azul que não existe.\n",
+        "O robô entrou em curto circuito por tentar desativar um laser vermelho que não existe.\n"
+    ],
+    [
+        generatePhaseTitle,
+        "Make the robot reach the crystal and collect it.",
+        "Make the robot reach the crystals and collect them.",
+        "Robot is not in front of the crystal.\n",
+        "Crystal collected.\n",
+        "Crystal successfully collected.\n",
+        "All crystals collected successfully!\n",
+        "Level Completed",
+        "Finish",
+        "Do you really want to finish the practice?",
+        "The robot short-circuited after trying to deactivate a blue laser that doesn't exist.\n",
+        "The robot short-circuited after trying to deactivate a red laser that doesn't exist.\n"
+    ]
+]
+
+const commandsVariations = [
+    [
+        'andarFrente(?)\n',
+        'andarTras(?)\n',
+        'girarEsquerda()\n',
+        'girarDireita()\n',
+        'darMeiaVolta()\n',
+        'coletarCristal()\n',
+        'desativarLaserAzul()\n',
+        'desativarLaserVermelho()\n',
+        'laserAzulAtivo()',
+        'laserVermelhoAtivo()',
+        'se(?){\n\n}\nsenão{\n\n}\n'
+    ],
+    [
+        'moveForward(?)\n',
+        'moveBackwards(?)\n',
+        'rotateLeft()\n',
+        'rotateRight()\n',
+        'turnBack()',
+        'collectCrystal()\n',
+        'disableBlueLaser()\n',
+        'disableRedLaser()\n',
+        'isBlueLaserActive()',
+        'isRedLaserActive()',
+        'if(?){\n\n}\nelse{\n\n}\n'
+    ]
+]
 
 const logModal = new Modal(document.getElementById("logModal"));
 
@@ -54,11 +137,11 @@ andarFrenteBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "andarFrente(?)\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][0]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "andarFrente(?)\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][0]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -74,11 +157,11 @@ andarTrasBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "andarTras(?)\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][1]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "andarTras(?)\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][1]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -94,11 +177,11 @@ girarEsquerdaBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "girarEsquerda()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][2]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "girarEsquerda()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][2]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -114,11 +197,11 @@ girarDireitaBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "girarDireita()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][3]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "girarDireita()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][3]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -134,11 +217,11 @@ darMeiaVoltaBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "darMeiaVolta()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][4]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "darMeiaVolta()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][4]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -154,11 +237,11 @@ desativarLaserAzulBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "desativarLaserAzul()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][6]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "desativarLaserAzul()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][6]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -174,11 +257,11 @@ desativarLaserVermelhoBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "desativarLaserVermelho()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][7]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "desativarLaserVermelho()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][7]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -194,11 +277,11 @@ coletarCristalBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "coletarCristal()\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][5]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "coletarCristal()\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][5]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -214,11 +297,11 @@ laserAzulAtivoBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "laserAzulAtivo()"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][8]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "laserAzulAtivo()"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][8]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -234,11 +317,11 @@ laserVermelhoAtivoBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "laserVermelhoAtivo()"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][9]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "laserVermelhoAtivo()"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][9]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -254,11 +337,11 @@ condicaoFullBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  "se(?){\n\n}\nsenão{\n\n}\n"}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][10]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  "se(?){\n\n}\nsenão{\n\n}\n"}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][10]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -399,7 +482,7 @@ function desativarLaserAzul()
     }
     else
     {
-        consoleElement.innerText += "O robô entrou em curto circuito por tentar desativar um laser azul que não existe.\n";
+        consoleElement.innerText += textVariations[sceneProperties.lang][10];
         sceneProperties.cancelExecution = true;
     }
 }
@@ -416,7 +499,7 @@ function desativarLaserVermelho()
     }
     else
     {
-        consoleElement.innerText += "O robô entrou em curto circuito por tentar desativar um laser vermelho que não existe.\n";
+        consoleElement.innerText += textVariations[sceneProperties.lang][11];
         sceneProperties.cancelExecution = true;
     }
 }
@@ -476,8 +559,8 @@ const phaseGeneration = [];
 //Phase 1
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 3 - Fase 1 de 8";
-        document.getElementById('phaseObjective').innerText = "Faça o robô chegar ao cristal, após isso, o colete.";
+        document.getElementById('phaseTitle').innerText = textVariations[sceneProperties.lang][0]();
+        document.getElementById('phaseObjective').innerText = textVariations[sceneProperties.lang][1];
         
         sceneProperties.executing = false;
         camera.position.set(0,15,30);
@@ -549,12 +632,12 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
-                consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][5];
                 gridMapHelper.obstacles[0].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][3];
             }
         }
 
@@ -596,8 +679,8 @@ phaseGeneration.push(
 //Phase 2
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 3 - Fase 2 de 8";
-        document.getElementById('phaseObjective').innerText = "Faça o robô chegar aos cristais, após isso, os colete.";
+        document.getElementById('phaseTitle').innerText = textVariations[sceneProperties.lang][0]();
+        document.getElementById('phaseObjective').innerText = textVariations[sceneProperties.lang][2];
         
         sceneProperties.executing = false;
         camera.position.set(0,15,30);
@@ -717,23 +800,23 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][3];
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
             {
-                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][6];
             }
         }
 
@@ -800,8 +883,8 @@ phaseGeneration.push(
 //Phase 3
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 3 - Fase 3 de 8";
-        document.getElementById('phaseObjective').innerText = "Faça o robô chegar aos cristais, após isso, os colete.";
+        document.getElementById('phaseTitle').innerText = textVariations[sceneProperties.lang][0]();
+        document.getElementById('phaseObjective').innerText = textVariations[sceneProperties.lang][2];
         
         sceneProperties.executing = false;
         camera.position.set(0,15,30);
@@ -1005,23 +1088,23 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][3];
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
             {
-                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][6];
             }
         }
 
@@ -1088,8 +1171,8 @@ phaseGeneration.push(
 //Phase 4
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 3 - Fase 4 de 8";
-        document.getElementById('phaseObjective').innerText = "Faça o robô chegar ao cristal, após isso, o colete.";
+        document.getElementById('phaseTitle').innerText = textVariations[sceneProperties.lang][0]();
+        document.getElementById('phaseObjective').innerText = textVariations[sceneProperties.lang][1];
         
         sceneProperties.executing = false;
         camera.position.set(0,15,30);
@@ -1279,12 +1362,12 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
-                consoleElement.innerText += "Cristal coletado com sucesso.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][5];
                 gridMapHelper.obstacles[0].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][3];
             }
         }
 
@@ -1349,8 +1432,8 @@ phaseGeneration.push(
 //Phase 5
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 3 - Fase 5 de 8";
-        document.getElementById('phaseObjective').innerText = "Faça o robô chegar aos cristais, após isso, os colete.";
+        document.getElementById('phaseTitle').innerText = textVariations[sceneProperties.lang][0]();
+        document.getElementById('phaseObjective').innerText = textVariations[sceneProperties.lang][2];
         
         sceneProperties.executing = false;
         camera.position.set(0,15,30);
@@ -1550,23 +1633,23 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][3];
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
             {
-                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][6];
             }
         }
 
@@ -1633,8 +1716,8 @@ phaseGeneration.push(
 //Phase 6
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 3 - Fase 6 de 8";
-        document.getElementById('phaseObjective').innerText = "Faça o robô chegar aos cristais, após isso, os colete.";
+        document.getElementById('phaseTitle').innerText = textVariations[sceneProperties.lang][0]();
+        document.getElementById('phaseObjective').innerText = textVariations[sceneProperties.lang][2];
         
         sceneProperties.executing = false;
         camera.position.set(0,15,30);
@@ -1879,23 +1962,23 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][3];
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
             {
-                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][6];
             }
         }
 
@@ -1962,8 +2045,8 @@ phaseGeneration.push(
 //Phase 7
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 3 - Fase 7 de 8";
-        document.getElementById('phaseObjective').innerText = "Faça o robô chegar aos cristais, após isso, os colete.";
+        document.getElementById('phaseTitle').innerText = textVariations[sceneProperties.lang][0]();
+        document.getElementById('phaseObjective').innerText = textVariations[sceneProperties.lang][2];
         
         sceneProperties.executing = false;
         camera.position.set(0,15,30);
@@ -2171,23 +2254,23 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][3];
             }
 
             if(!objectives[0].visible && !objectives[1].visible)
             {
-                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][6];
             }
         }
 
@@ -2254,8 +2337,8 @@ phaseGeneration.push(
 //Phase 8
 phaseGeneration.push(
     () => {
-        document.getElementById('phaseTitle').innerText = "Nível 3 - Fase 8 de 8";
-        document.getElementById('phaseObjective').innerText = "Faça o robô chegar aos cristais, após isso, os colete.";
+        document.getElementById('phaseTitle').innerText = textVariations[sceneProperties.lang][0]();
+        document.getElementById('phaseObjective').innerText = textVariations[sceneProperties.lang][2];
         
         sceneProperties.executing = false;
         camera.position.set(0,15,30);
@@ -2462,29 +2545,29 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 objectives[0].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 objectives[1].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[2],gridMapHelper))
             {
                 objectives[2].visible = false;
-                consoleElement.innerText += "Cristal coletado.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[2].active = false;
             }
             else
             {
-                consoleElement.innerText += "Robô não está em frente ao cristal.\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][3];
             }
 
             if(!objectives[0].visible && !objectives[1].visible && !objectives[2].visible)
             {
-                consoleElement.innerText += "Todos os cristais coletados com sucesso!\n";
+                consoleElement.innerText += textVariations[sceneProperties.lang][6];
             }
         }
 
@@ -2546,8 +2629,8 @@ phaseGeneration.push(
             spikeTrapState = (spikeTrapState + 1) % 2;
             setSpikeTrapState();
         },1000);
-        document.getElementById('winMessage').innerText = "Nível Concluído";
-        document.getElementById('advanceBtn').innerText = "Finalizar";
+        document.getElementById('winMessage').innerText = textVariations[sceneProperties.lang][7];
+        document.getElementById('advanceBtn').innerText = textVariations[sceneProperties.lang][8];
         timerUpadate = setInterval(updateTime,1000);
     }
 );
@@ -2611,13 +2694,20 @@ const finishEarlierButton = document.getElementById('finishEarlier');
 
 const execBtn = document.getElementById("execBtn")
 execBtn.addEventListener("click",async function() {
-    const codeParsed = parseCode(editor.state.doc.toString());
+    const codeParsed = parseCode(convertCode(sceneProperties.lang,editor.state.doc.toString()));
     console.log(codeParsed);
+    cancelAnimationFrame(corrID);    
+    cancelAnimationFrame(requestID);
+    cancelAnimationFrame(changColorID);
+    cancelAnimationFrame(smokeAnimationFrame);
+    smoke.deactiveSmokes()
     sceneProperties.cancelExecution = false;
+    actor.getObjectByName('eve').position.y = 0;
     if(traps != null)
         trapsDeactivation(traps)
     if(codeParsed != null)
     {
+        updateTheme(editor,1);
         resetLevel();
         sceneProperties.executing = true;
         this.disabled = true;
@@ -2638,6 +2728,7 @@ execBtn.addEventListener("click",async function() {
         }
         else
         {
+            updateTheme(editor,0);
             sceneProperties.executing = false;
             this.disabled = false;
         }
@@ -2646,7 +2737,16 @@ execBtn.addEventListener("click",async function() {
 
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click",() => {
+    cancelAnimationFrame(corrID);
+    cancelAnimationFrame(requestID);
+    cancelAnimationFrame(changColorID);
+    cancelAnimationFrame(smokeAnimationFrame);
+    smoke.deactiveSmokes();
+    updateTheme(editor,0);
     sceneProperties.cancelExecution = true;
+    actor.getObjectByName('eve').position.y = 0;
+    if(materialColor.length != 0)
+        resetRobotColor(actor);
     resetLevel();
 });
 
@@ -2678,12 +2778,26 @@ advanceBtn.addEventListener('click',(e) => {
 });
 
 finishEarlierButton.addEventListener('click', (e) => {
-    if(confirm("Deseja realmente finalizar a prática?"))
+    if(confirm(textVariations[sceneProperties.lang][9]))
     {
         clearInterval(timerUpadate);
         configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 3/Fase ${sceneProperties.phase + 1}`);
         logModal.show();
     }
+});
+
+let normalSpeedBtn = document.getElementById("normalSpeed");
+let fastSpeedBtn = document.getElementById("fastSpeed");
+normalSpeedBtn.addEventListener("click", function() {
+    this.disabled = true;
+    fastSpeedBtn.disabled = false;
+    sceneProperties.mult = 1; 
+});
+
+fastSpeedBtn.addEventListener("click", function() {
+    this.disabled = true;
+    normalSpeedBtn.disabled = false;
+    sceneProperties.mult = 6; 
 });
 
 resizeCanvasToDisplaySize(renderer,camera);
