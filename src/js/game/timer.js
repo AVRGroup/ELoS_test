@@ -2,10 +2,11 @@ const FORM_ACCESS = 'https://docs.google.com/forms/d/e/1FAIpQLSeTbA3iFSmgcNeCaFK
 
 export function displayTime(time,timerElement)
 {
+    let word = window.location.href.includes('english') ? 'Time' : 'Tempo'
     let hour = Math.floor(time / 3600);
     let min = Math.floor(time / 60) % 60;
     let seg = Math.floor(time % 60);
-    timerElement.innerText = `Tempo: ${hour < 10 ? '0' + hour : hour}:${(min < 10 ? '0' + min : min)}:${(seg < 10 ? '0' + seg : seg)}`;
+    timerElement.innerText = `${word}: ${hour < 10 ? '0' + hour : hour}:${(min < 10 ? '0' + min : min)}:${(seg < 10 ? '0' + seg : seg)}`;
 }
 
 async function uploadLog(data)
@@ -32,6 +33,21 @@ async function uploadLog(data)
 
 export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,progExpRadioName,subBtn,time,redirectPath,level)
 {
+
+    let langSelector = window.location.href.includes('english') ? 1 : 0;
+    const warningVariations = [
+        [
+            "Ops! Algo deu errado!",
+            "Valor da idade incorreto.",
+            "É necessário preencher o formulário para avançar."
+        ],
+        [
+            "Oops! Something went wrong!",
+            "Age value incorrect.",
+            "You must fill out the form to advance."
+        ]
+    ];
+
     subBtn.addEventListener('click',async () => {
         let genderInput = document.querySelector(`input[name="${genderRadioName}"]:checked`);
         let progExpInput = document.querySelector(`input[name="${progExpRadioName}"]:checked`);
@@ -63,18 +79,18 @@ export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,
                 }
                 else
                 {
-                    alert("Ops! Algo deu errado!");
+                    alert(warningVariations[langSelector][0]);
                     subBtn.disabled = false;
                 }
             }
             else
             {
-                alert("Valor da idade incorreto.");
+                alert(warningVariations[langSelector][1]);
             }
         }
         else
         {
-            alert("É necessário preencher o formulário para avançar.");
+            alert(warningVariations[langSelector][2]);
         }
     });
 }
