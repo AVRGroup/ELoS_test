@@ -4288,8 +4288,6 @@ const $63288163d0e35ed8$var$functionFilter = [
     }
 ];
 const $63288163d0e35ed8$var$conditionalParameters = [
-    new RegExp("true"),
-    new RegExp("false"),
     new RegExp("^laserAzulAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$"),
     new RegExp("^laserVermelhoAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$"),
     new RegExp("^portaFechada(\\s+)?\\((\\s+)?\\)(\\s+)?$")
@@ -4462,6 +4460,7 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
     let lines = code.split("\n");
     let valid = true;
     let totalCommands = 0;
+    let nonblockcmd = false;
     for(let i = 0; i < lines.length; i++){
         let validLine = false;
         let lineType;
@@ -4477,9 +4476,10 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                 if (lineType === "sequential") {
                     let lineParsed = `editor.focus();
                     editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});\n`;
-                    lineParsed += "await " + lines[i].trim() + "\n";
+                    lineParsed += "await " + lines[i].trim() + (nonblockcmd ? "}" : "") + "\n";
                     codeParsed += lineParsed;
                     totalCommands++;
+                    nonblockcmd = false;
                 } else if (lineType === "conditional&&blockValidation") {
                     let validConditional = false;
                     if ($63288163d0e35ed8$var$blockValidation(lines, i)) {
@@ -4504,9 +4504,10 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         let lineParsed2 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
-                        lineParsed2 += `if${line1.substring(line1.indexOf("("))}\n`;
+                        lineParsed2 += `if${line1.substring(line1.indexOf("("))}{\n`;
                         codeParsed += lineParsed2;
                         totalCommands++;
+                        nonblockcmd = true;
                     } else {
                         $63288163d0e35ed8$var$printError(`${lines[i]} ${$63288163d0e35ed8$var$errorVariations[$63288163d0e35ed8$var$langSelector][2]}`, i + 1);
                         valid = false;
@@ -4514,9 +4515,10 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                     }
                 } else if (lineType === "elseValidation") {
                     if ($63288163d0e35ed8$var$elseValidation(lines, i)) {
-                        let lineParsed3 = "else\n";
+                        let lineParsed3 = "else{\n";
                         codeParsed += lineParsed3;
                         totalCommands++;
+                        nonblockcmd = true;
                     } else {
                         $63288163d0e35ed8$var$printError(`${lines[i]} ${$63288163d0e35ed8$var$errorVariations[$63288163d0e35ed8$var$langSelector][2]}`, i + 1);
                         valid = false;
@@ -4561,9 +4563,10 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         let lineParsed7 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
-                        lineParsed7 += lines[i].trim() + "\n";
+                        lineParsed7 += lines[i].trim() + (nonblockcmd ? "}" : "") + "\n";
                         codeParsed += lineParsed7;
                         totalCommands++;
+                        nonblockcmd = false;
                     } else {
                         let state = $63288163d0e35ed8$var$functionFilter[6].filter.test(lines[i].trim()) ? "blue" : "red";
                         let pos = $63288163d0e35ed8$var$predictFunction(lines, i);
@@ -4571,9 +4574,10 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         let lineParsed8 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
-                        lineParsed8 += lines[i].trim() + "\n";
+                        lineParsed8 += lines[i].trim() + (nonblockcmd ? "}" : "") + "\n";
                         codeParsed += lineParsed8;
                         totalCommands++;
+                        nonblockcmd = false;
                     }
                 } else if (lineType === "loop") {
                     if ($63288163d0e35ed8$var$ifValidation(lines[i])) {
@@ -4581,9 +4585,10 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         let lineParsed9 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
-                        lineParsed9 += `while${line2.substring(line2.indexOf("("))}\n`;
+                        lineParsed9 += `while${line2.substring(line2.indexOf("("))}{\n`;
                         codeParsed += lineParsed9;
                         totalCommands++;
+                        nonblockcmd = true;
                     } else {
                         $63288163d0e35ed8$var$printError(`${lines[i]} ${$63288163d0e35ed8$var$errorVariations[$63288163d0e35ed8$var$langSelector][2]}`, i + 1);
                         valid = false;
@@ -4611,9 +4616,10 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                     let lineParsed11 = `editor.focus();
                     editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                     await delay(250);\n`;
-                    lineParsed11 += lines[i].trim() + "\n";
+                    lineParsed11 += lines[i].trim() + (nonblockcmd ? "}" : "") + "\n";
                     codeParsed += lineParsed11;
                     totalCommands++;
+                    nonblockcmd = false;
                 }
             } else {
                 $63288163d0e35ed8$var$printError(lines[i], i + 1);
@@ -4644,7 +4650,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 
 var $faec8555f9e631a4$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.75911167.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","1udy9":"index.2752f56f.js","jzc87":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.8aace9fe.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","1udy9":"index.2752f56f.js","jzc87":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
