@@ -3244,9 +3244,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $6e2bb2fa2e1ac4a1$exports = {};
+var $534711df3a16a798$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.d3dda561.js","hEG10":"metalWallLvl3.c6e3c749.png","aAYvO":"index.748c376a.js","4It1k":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.f915a1c2.js","hEG10":"metalWallLvl3.c6e3c749.png","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");

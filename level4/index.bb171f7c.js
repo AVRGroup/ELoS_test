@@ -60852,8 +60852,8 @@ function $a2d58e902e72a3c2$export$e6fe271705b4a981(langSelector, code) {
 
 });
 
-var $b72f814bb8ef6fdd$exports = {};
+var $e5ce45fa80855936$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"aAYvO":"index.748c376a.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"kJhXF":"index.bb171f7c.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
