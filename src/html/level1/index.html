@@ -102,7 +102,7 @@
                 </div>
             </div>
             <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="logModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 1, informe:</h5>
@@ -128,6 +128,31 @@
                                     <input type="radio" name="prog-exp" value="Tive uma pequena experiência no colégio." class="form-check-input"> Tive uma pequena experiência no colégio.<br>
                                     <input type="radio" name="prog-exp" value="Já programei pequenos projetos." class="form-check-input"> Já programei pequenos projetos.<br>
                                     <input type="radio" name="prog-exp" value="Sou um programador experiente." class="form-check-input"> Sou um programador experiente.
+                                </div>
+                                <div class="mb-2">
+                                    <input id="second-user" type="checkbox" name="second-user" class="form-check-input" onchange="if(!this.checked){document.getElementById('second-form').setAttribute('hidden',true)}else{document.getElementById('second-form').removeAttribute('hidden')}"> <label for="second-user" class="form-check-label"><b>Fiz esta atividade em dupla.</b></label>
+                                </div>
+                                <div id="second-form" hidden>
+                                    <div class="mb-2">
+                                        <label for="name2" class="form-label"><b>Nome:</b></label>
+                                        <input type="text" name="name2" id="name2" class="form-control">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="age2" class="form-label"><b>Idade:</b></label>
+                                        <input type="number" name="age2" id="age2" class="form-control" min="1" step="1">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="gender2" class="form-label"><b>Gênero:</b></label><br>
+                                        <input type="radio" name="gender2" value="Feminino" class="form-check-input"> Feminino
+                                        <input type="radio" name="gender2" value="Masculino" class="form-check-input"> Masculino
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="prog-exp2" class="form-label"><b>Qual sua experiência com programação?</b></label><br>
+                                        <input type="radio" name="prog-exp2" value="Este foi meu primeiro contato." class="form-check-input"> Este foi meu primeiro contato.<br>
+                                        <input type="radio" name="prog-exp2" value="Tive uma pequena experiência no colégio." class="form-check-input"> Tive uma pequena experiência no colégio.<br>
+                                        <input type="radio" name="prog-exp2" value="Já programei pequenos projetos." class="form-check-input"> Já programei pequenos projetos.<br>
+                                        <input type="radio" name="prog-exp2" value="Sou um programador experiente." class="form-check-input"> Sou um programador experiente.
+                                    </div>
                                 </div>
                             </form>
                         </div>
