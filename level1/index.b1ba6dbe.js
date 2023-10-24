@@ -1131,7 +1131,7 @@ advanceBtn.addEventListener("click", (e)=>{
 finishEarlierButton.addEventListener("click", (e)=>{
     if (confirm(textVariations[sceneProperties.lang][9])) {
         clearInterval(timerUpadate);
-        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 1/Fase ${sceneProperties.phase + 1}`);
+        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 1/Fase ${sceneProperties.phase + 1}`, document.getElementById("second-user"));
         logModal.show();
     }
 });
@@ -1247,9 +1247,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $372fcc28cb624d81$exports = {};
+var $726bd627188988a9$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.83e8e284.js","64GOt":"stone_wallLvl1.e00cd434.jpg","1udy9":"index.2752f56f.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.b1ba6dbe.js","64GOt":"stone_wallLvl1.e00cd434.jpg","aAYvO":"index.748c376a.js"}'));
 
 
 parcelRequire("hO50i");
