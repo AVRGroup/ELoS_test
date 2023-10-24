@@ -1149,7 +1149,7 @@ execBtn.addEventListener("click",async function() {
             clearInterval(timerUpadate);
             if(sceneProperties.phase == phaseGeneration.length - 1)
             {
-                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 1/Completo');
+                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 1/Completo', document.getElementById('second-user'));
             }
         }
         else
