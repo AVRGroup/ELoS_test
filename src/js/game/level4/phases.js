@@ -56,7 +56,7 @@ const textVariations = [
         "Faça o robô chegar ao cristal, após isso, o colete.",
         "Faça o robô chegar aos cristais, após isso, os colete.",
         "Robô não está em frente ao cristal.\n",
-        "Cristal coletado.",
+        "Cristal coletado.\n",
         "Cristal coletado com sucesso.\n",
         "Todos os cristais coletados com sucesso!\n",
         "Nível Concluído",
