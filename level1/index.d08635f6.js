@@ -102,7 +102,7 @@ const textVariations = [
         "Fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.",
         "Fa\xe7a o rob\xf4 chegar aos cristais, ap\xf3s isso, os colete.",
         "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n",
-        "Cristal coletado.",
+        "Cristal coletado.\n",
         "Cristal coletado com sucesso.\n",
         "Todos os cristais coletados com sucesso!\n",
         "N\xedvel Conclu\xeddo",
@@ -1247,9 +1247,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $5a19f8d6ee483d43$exports = {};
+var $726bd627188988a9$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.b7a255f8.js","64GOt":"stone_wallLvl1.e00cd434.jpg","kJhXF":"index.bb171f7c.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.d08635f6.js","64GOt":"stone_wallLvl1.e00cd434.jpg","aAYvO":"index.748c376a.js"}'));
 
 
 parcelRequire("hO50i");

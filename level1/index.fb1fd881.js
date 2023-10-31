@@ -5688,5 +5688,11 @@ const $65c94dd9398dc318$var$clearBtn = document.getElementById("clsConsole");
 $65c94dd9398dc318$var$clearBtn.addEventListener("click", ()=>{
     $65c94dd9398dc318$var$consoleElement.innerText = null;
 });
+const $65c94dd9398dc318$var$secForm = document.getElementById("second-form");
+const $65c94dd9398dc318$var$secUser = document.getElementById("second-user");
+$65c94dd9398dc318$var$secUser.addEventListener("change", (e)=>{
+    if (!$65c94dd9398dc318$var$secUser.checked) $65c94dd9398dc318$var$secForm.setAttribute("hidden", true);
+    else $65c94dd9398dc318$var$secForm.removeAttribute("hidden");
+});
 
 

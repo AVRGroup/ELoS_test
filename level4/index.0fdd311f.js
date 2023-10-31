@@ -89,7 +89,7 @@ const textVariations = [
         "Fa\xe7a o rob\xf4 chegar ao cristal, ap\xf3s isso, o colete.",
         "Fa\xe7a o rob\xf4 chegar aos cristais, ap\xf3s isso, os colete.",
         "Rob\xf4 n\xe3o est\xe1 em frente ao cristal.\n",
-        "Cristal coletado.",
+        "Cristal coletado.\n",
         "Cristal coletado com sucesso.\n",
         "Todos os cristais coletados com sucesso!\n",
         "N\xedvel Conclu\xeddo",
@@ -3679,7 +3679,7 @@ execBtn.addEventListener("click", async function() {
             document.getElementById("resetBtn").disabled = true;
             finishEarlierButton.disabled = true;
             clearInterval(timerUpadate);
-            if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 4/Completo");
+            if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 4/Completo", document.getElementById("second-user"));
         } else {
             (0, $jgsti.updateTheme)(editor, 0);
             sceneProperties.executing = false;
@@ -3725,7 +3725,7 @@ advanceBtn.addEventListener("click", (e)=>{
 finishEarlierButton.addEventListener("click", (e)=>{
     if (confirm(textVariations[sceneProperties.lang][9])) {
         clearInterval(timerUpadate);
-        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 4/Fase ${sceneProperties.phase + 1}`);
+        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 4/Fase ${sceneProperties.phase + 1}`, document.getElementById("second-user"));
         logModal.show();
     }
 });
@@ -4648,9 +4648,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $f513c3a1714014d3$exports = {};
+var $0c69771e8a6d5652$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.661227b0.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.0fdd311f.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","aAYvO":"index.748c376a.js","4It1k":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
