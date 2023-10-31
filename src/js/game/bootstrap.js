@@ -26,3 +26,16 @@ const clearBtn = document.getElementById('clsConsole');
 clearBtn.addEventListener('click',() =>{
     consoleElement.innerText = null;
 });
+
+const secForm = document.getElementById('second-form');
+const secUser = document.getElementById('second-user');
+secUser.addEventListener('change',(e) => {
+    if(!secUser.checked)
+    {
+        secForm.setAttribute('hidden',true);
+    }
+    else
+    {
+        secForm.removeAttribute('hidden');
+    }
+});

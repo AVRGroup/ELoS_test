@@ -52,7 +52,7 @@ const textVariations = [
         "Faça o robô chegar ao cristal, após isso, o colete.",
         "Faça o robô chegar aos cristais, após isso, os colete.",
         "Robô não está em frente ao cristal.\n",
-        "Cristal coletado.",
+        "Cristal coletado.\n",
         "Cristal coletado com sucesso.\n",
         "Todos os cristais coletados com sucesso!\n",
         "Nível Concluído",
@@ -2165,7 +2165,7 @@ execBtn.addEventListener("click",async function() {
             clearInterval(timerUpadate);
             if(sceneProperties.phase == phaseGeneration.length - 1)
             {
-                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 2/Completo');
+                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 2/Completo', document.getElementById('second-user'));
             }
         }
         else
@@ -2221,7 +2221,7 @@ finishEarlierButton.addEventListener('click', (e) => {
     if(confirm(textVariations[sceneProperties.lang][9]))
     {
         clearInterval(timerUpadate);
-        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 2/Fase ${sceneProperties.phase + 1}`);
+        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 2/Fase ${sceneProperties.phase + 1}`, document.getElementById('second-user'));
         logModal.show();
     }
 });

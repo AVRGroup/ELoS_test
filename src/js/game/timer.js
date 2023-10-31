@@ -31,7 +31,7 @@ async function uploadLog(data)
     });
 }
 
-export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,progExpRadioName,subBtn,time,redirectPath,level)
+export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,progExpRadioName,subBtn,time,redirectPath,level,secondForm)
 {
 
     let langSelector = window.location.href.includes('english') ? 1 : 0;
@@ -58,12 +58,13 @@ export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,
         let age = ageInput.value;
         let gender = genderInput != null ? genderInput.value : null;
         let progExp = progExpInput != null ? progExpInput.value : null;
+        let data = null;
+        let data2 = null;
         if((name != null && name != '') && (age != null && age!= '') && (gender != null && gender != '') && (progExp != null && progExp != ''))
         {
             if(parseFloat(age) >= 1)
             {
-                subBtn.disabled = true;
-                let data = [
+                data = [
                     ['entry.1867777838',level],
                     ['entry.746491928',name],
                     ['entry.1029337756',age],
@@ -71,17 +72,6 @@ export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,
                     ['entry.1585862028',progExp],
                     ['entry.2140863999',`${hour < 10 ? '0' + hour : hour}:${(min < 10 ? '0' + min : min)}:${(seg < 10 ? '0' + seg : seg)}`]
                 ];
-                let success = await uploadLog(data);
-                if(success)
-                {
-                    console.log(data);
-                    window.location.href = redirectPath;
-                }
-                else
-                {
-                    alert(warningVariations[langSelector][0]);
-                    subBtn.disabled = false;
-                }
             }
             else
             {
@@ -91,6 +81,72 @@ export async function configureDataAndUpload(nameInput,ageInput,genderRadioName,
         else
         {
             alert(warningVariations[langSelector][2]);
+        }
+
+        if(secondForm.checked)
+        {
+            let genderInput2 = document.querySelector(`input[name="${genderRadioName}2"]:checked`);
+            let progExpInput2 = document.querySelector(`input[name="${progExpRadioName}2"]:checked`);
+            let name2 = document.getElementById(nameInput.id + "2").value;
+            let age2 = document.getElementById(ageInput.id + "2").value;
+            let gender2 = genderInput2 != null ? genderInput2.value : null;
+            let progExp2 = progExpInput2 != null ? progExpInput2.value : null;
+
+            if((name2 != null && name2 != '') && (age2 != null && age2!= '') && (gender2 != null && gender2 != '') && (progExp2 != null && progExp2 != ''))
+            {
+                if(parseFloat(age2) >= 1)
+                {
+                    data2 = [
+                        ['entry.1867777838',level],
+                        ['entry.746491928',name2],
+                        ['entry.1029337756',age2],
+                        ['entry.1806882852',gender2],
+                        ['entry.1585862028',progExp2],
+                        ['entry.2140863999',`${hour < 10 ? '0' + hour : hour}:${(min < 10 ? '0' + min : min)}:${(seg < 10 ? '0' + seg : seg)}`]
+                    ];
+                }
+                else
+                {
+                    alert(warningVariations[langSelector][1]);
+                }
+            }
+            else
+            {
+                alert(warningVariations[langSelector][2]);
+            }
+
+            if(data != null && data2 != null)
+            {
+                subBtn.disabled = true;
+                let success = await uploadLog(data);
+                let success2 = await uploadLog(data2);
+                if(success && success2)
+                {
+                    window.location.href = redirectPath;
+                }
+                else
+                {
+                    alert(warningVariations[langSelector][0]);
+                    subBtn.disabled = false;
+                }
+            }
+        }
+        else
+        {
+            if(data != null)
+            {
+                subBtn.disabled = true;
+                let success = await uploadLog(data);
+                if(success)
+                {
+                    window.location.href = redirectPath;
+                }
+                else
+                {
+                    alert(warningVariations[langSelector][0]);
+                    subBtn.disabled = false;
+                }
+            }
         }
     });
 }
