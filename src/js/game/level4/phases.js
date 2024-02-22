@@ -410,11 +410,11 @@ enquantoBtn.addEventListener("click",() => {
     let transaction
     let actualLine
     if(cursorAnchor <= cursorHead){
-        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][12]}})
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert:  commandsVariations[sceneProperties.lang][13]}})
         actualLine = editor.state.doc.lineAt(cursorAnchor).number
     }
     else {
-        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][12]}})
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][13]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
