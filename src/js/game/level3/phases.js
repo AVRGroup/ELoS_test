@@ -90,7 +90,8 @@ const commandsVariations = [
         'desativarLaserVermelho()\n',
         'laserAzulAtivo()',
         'laserVermelhoAtivo()',
-        'se(?){\n\n}\nsenão{\n\n}\n'
+        'se(?){\n\n}\nsenão{\n\n}\n',
+        'se(?){\n\n}\n'
     ],
     [
         'moveForward(?)\n',
@@ -103,7 +104,8 @@ const commandsVariations = [
         'disableRedLaser()\n',
         'isBlueLaserActive()',
         'isRedLaserActive()',
-        'if(?){\n\n}\nelse{\n\n}\n'
+        'if(?){\n\n}\nelse{\n\n}\n',
+        'if(?){\n\n}\n'
     ]
 ]
 
@@ -322,6 +324,26 @@ laserVermelhoAtivoBtn.addEventListener("click",() => {
     }
     else {
         transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][9]}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const condicaoBtn = document.getElementById('condicao');
+condicaoBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: commandsVariations[sceneProperties.lang][11]}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: commandsVariations[sceneProperties.lang][11]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
@@ -2776,6 +2798,28 @@ advanceBtn.addEventListener('click',(e) => {
         logModal.show();
     }
 });
+
+const reloadBtn = document.getElementById('reloadBtn');
+reloadBtn.addEventListener('click',(e) => {
+
+    clearInterval(timerUpadate);
+    
+    if(sceneProperties.phase < phaseGeneration.length)
+    {
+        removeObjects(objectives,walls,traps);
+        phaseGeneration[sceneProperties.phase]();
+        editor.setState(editState);
+        consoleElement.innerText = null;
+        execBtn.disabled = false;
+        resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
+    }
+    else
+    {
+        sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
+    }
+});
+
 
 finishEarlierButton.addEventListener('click', (e) => {
     if(confirm(textVariations[sceneProperties.lang][9]))

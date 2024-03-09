@@ -4440,6 +4440,28 @@ advanceBtn.addEventListener('click',(e) => {
     }
 });
 
+const reloadBtn = document.getElementById('reloadBtn');
+reloadBtn.addEventListener('click',(e) => {
+
+    clearInterval(timerUpadate);
+    
+    if(sceneProperties.phase < phaseGeneration.length)
+    {
+        removeObjects(objectives,walls,traps);
+        phaseGeneration[sceneProperties.phase]();
+        editor.setState(editState);
+        consoleElement.innerText = null;
+        execBtn.disabled = false;
+        resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
+    }
+    else
+    {
+        sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
+    }
+});
+
+
 finishEarlierButton.addEventListener('click', (e) => {
     if(confirm(textVariations[sceneProperties.lang][9]))
     {
