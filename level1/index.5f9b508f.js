@@ -1128,6 +1128,19 @@ advanceBtn.addEventListener("click", (e)=>{
         logModal.show();
     }
 });
+const reloadBtn = document.getElementById("reloadBtn");
+reloadBtn.addEventListener("click", (e)=>{
+    clearInterval(timerUpadate);
+    if (sceneProperties.phase < phaseGeneration.length) {
+        removeObjects(objectives, walls, traps);
+        phaseGeneration[sceneProperties.phase]();
+        editor.setState((0, $jgsti.editState));
+        consoleElement.innerText = null;
+        execBtn.disabled = false;
+        resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
+    } else sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
+});
 finishEarlierButton.addEventListener("click", (e)=>{
     if (confirm(textVariations[sceneProperties.lang][9])) {
         clearInterval(timerUpadate);
@@ -1247,9 +1260,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $726bd627188988a9$exports = {};
+var $7792557be271a463$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.d08635f6.js","64GOt":"stone_wallLvl1.e00cd434.jpg","aAYvO":"index.748c376a.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.5f9b508f.js","64GOt":"stone_wallLvl1.e00cd434.jpg","gelHm":"index.66534029.js"}'));
 
 
 parcelRequire("hO50i");

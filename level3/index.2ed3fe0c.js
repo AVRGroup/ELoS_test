@@ -119,7 +119,8 @@ const commandsVariations = [
         "desativarLaserVermelho()\n",
         "laserAzulAtivo()",
         "laserVermelhoAtivo()",
-        "se(?){\n\n}\nsen\xe3o{\n\n}\n"
+        "se(?){\n\n}\nsen\xe3o{\n\n}\n",
+        "se(?){\n\n}\n"
     ],
     [
         "moveForward(?)\n",
@@ -132,7 +133,8 @@ const commandsVariations = [
         "disableRedLaser()\n",
         "isBlueLaserActive()",
         "isRedLaserActive()",
-        "if(?){\n\n}\nelse{\n\n}\n"
+        "if(?){\n\n}\nelse{\n\n}\n",
+        "if(?){\n\n}\n"
     ]
 ];
 const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
@@ -474,6 +476,40 @@ laserVermelhoAtivoBtn.addEventListener("click", ()=>{
                 from: cursorHead,
                 to: cursorAnchor,
                 insert: commandsVariations[sceneProperties.lang][9]
+            }
+        });
+        actualLine = editor.state.doc.lineAt(cursorHead).number;
+    }
+    editor.dispatch(transaction);
+    editor.focus();
+    let nextLinePos = editor.state.doc.line(actualLine + 1).to;
+    editor.dispatch({
+        selection: {
+            anchor: nextLinePos
+        }
+    });
+});
+const condicaoBtn = document.getElementById("condicao");
+condicaoBtn.addEventListener("click", ()=>{
+    let cursorAnchor = editor.state.selection.main.anchor;
+    let cursorHead = editor.state.selection.main.head;
+    let transaction;
+    let actualLine;
+    if (cursorAnchor <= cursorHead) {
+        transaction = editor.state.update({
+            changes: {
+                from: cursorAnchor,
+                to: cursorHead,
+                insert: commandsVariations[sceneProperties.lang][11]
+            }
+        });
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number;
+    } else {
+        transaction = editor.state.update({
+            changes: {
+                from: cursorHead,
+                to: cursorAnchor,
+                insert: commandsVariations[sceneProperties.lang][11]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -2660,6 +2696,19 @@ advanceBtn.addEventListener("click", (e)=>{
         logModal.show();
     }
 });
+const reloadBtn = document.getElementById("reloadBtn");
+reloadBtn.addEventListener("click", (e)=>{
+    clearInterval(timerUpadate);
+    if (sceneProperties.phase < phaseGeneration.length) {
+        removeObjects(objectives, walls, traps);
+        phaseGeneration[sceneProperties.phase]();
+        editor.setState((0, $jgsti.editState));
+        consoleElement.innerText = null;
+        execBtn.disabled = false;
+        resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
+    } else sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
+});
 finishEarlierButton.addEventListener("click", (e)=>{
     if (confirm(textVariations[sceneProperties.lang][9])) {
         clearInterval(timerUpadate);
@@ -3244,9 +3293,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $6e2bb2fa2e1ac4a1$exports = {};
+var $cc96519343a34e77$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.859f60c8.js","hEG10":"metalWallLvl3.c6e3c749.png","aAYvO":"index.748c376a.js","4It1k":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.2ed3fe0c.js","hEG10":"metalWallLvl3.c6e3c749.png","gelHm":"index.66534029.js","z8y1l":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");

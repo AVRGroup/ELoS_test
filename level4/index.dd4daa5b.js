@@ -616,7 +616,7 @@ enquantoBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorAnchor,
                 to: cursorHead,
-                insert: commandsVariations[sceneProperties.lang][12]
+                insert: commandsVariations[sceneProperties.lang][13]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorAnchor).number;
@@ -625,7 +625,7 @@ enquantoBtn.addEventListener("click", ()=>{
             changes: {
                 from: cursorHead,
                 to: cursorAnchor,
-                insert: commandsVariations[sceneProperties.lang][12]
+                insert: commandsVariations[sceneProperties.lang][13]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -3722,6 +3722,19 @@ advanceBtn.addEventListener("click", (e)=>{
         logModal.show();
     }
 });
+const reloadBtn = document.getElementById("reloadBtn");
+reloadBtn.addEventListener("click", (e)=>{
+    clearInterval(timerUpadate);
+    if (sceneProperties.phase < phaseGeneration.length) {
+        removeObjects(objectives, walls, traps);
+        phaseGeneration[sceneProperties.phase]();
+        editor.setState((0, $jgsti.editState));
+        consoleElement.innerText = null;
+        execBtn.disabled = false;
+        resetBtn.disabled = false;
+        finishEarlierButton.disabled = false;
+    } else sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
+});
 finishEarlierButton.addEventListener("click", (e)=>{
     if (confirm(textVariations[sceneProperties.lang][9])) {
         clearInterval(timerUpadate);
@@ -4648,9 +4661,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $0c69771e8a6d5652$exports = {};
+var $08f280aebbd491a7$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.0fdd311f.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","aAYvO":"index.748c376a.js","4It1k":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.dd4daa5b.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","gelHm":"index.66534029.js","z8y1l":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
