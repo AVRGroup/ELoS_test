@@ -100,7 +100,8 @@ const commandsVariations = [
         'se(?){\n\n}\nsenão{\n\n}\n',
         'girarManivela()\n',
         'portaFechada()',
-        'enquanto(?){\n\n}\n'
+        'enquanto(?){\n\n}\n',
+        'se(?){\n\n}\n'
     ],
     [
         'moveForward(?)\n',
@@ -116,7 +117,8 @@ const commandsVariations = [
         'if(?){\n\n}\nelse{\n\n}\n',
         'turnCrank()\n',
         'isDoorClosed()',
-        'while(?){\n\n}\n'
+        'while(?){\n\n}\n',
+        'if(?){\n\n}\n'
     ]
 ]
 
@@ -375,6 +377,26 @@ portaFechadaBtn.addEventListener("click",() => {
     }
     else {
         transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert:  commandsVariations[sceneProperties.lang][12]}})
+        actualLine = editor.state.doc.lineAt(cursorHead).number
+    }
+    editor.dispatch(transaction)
+    editor.focus()
+    let nextLinePos = editor.state.doc.line(actualLine+1).to
+    editor.dispatch({selection:{anchor: nextLinePos}})
+});
+
+const condicaoBtn = document.getElementById('condicao');
+condicaoBtn.addEventListener("click",() => { 
+    let cursorAnchor = editor.state.selection.main.anchor
+    let cursorHead = editor.state.selection.main.head
+    let transaction
+    let actualLine
+    if(cursorAnchor <= cursorHead){
+        transaction = editor.state.update({changes: {from: cursorAnchor, to: cursorHead, insert: commandsVariations[sceneProperties.lang][11]}})
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number
+    }
+    else {
+        transaction = editor.state.update({changes: {from: cursorHead, to: cursorAnchor, insert: commandsVariations[sceneProperties.lang][11]}})
         actualLine = editor.state.doc.lineAt(cursorHead).number
     }
     editor.dispatch(transaction)
