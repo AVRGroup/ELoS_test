@@ -132,7 +132,8 @@ const commandsVariations = [
         "se(?){\n\n}\nsen\xe3o{\n\n}\n",
         "girarManivela()\n",
         "portaFechada()",
-        "enquanto(?){\n\n}\n"
+        "enquanto(?){\n\n}\n",
+        "se(?){\n\n}\n"
     ],
     [
         "moveForward(?)\n",
@@ -148,7 +149,8 @@ const commandsVariations = [
         "if(?){\n\n}\nelse{\n\n}\n",
         "turnCrank()\n",
         "isDoorClosed()",
-        "while(?){\n\n}\n"
+        "while(?){\n\n}\n",
+        "if(?){\n\n}\n"
     ]
 ];
 const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
@@ -558,6 +560,40 @@ portaFechadaBtn.addEventListener("click", ()=>{
                 from: cursorHead,
                 to: cursorAnchor,
                 insert: commandsVariations[sceneProperties.lang][12]
+            }
+        });
+        actualLine = editor.state.doc.lineAt(cursorHead).number;
+    }
+    editor.dispatch(transaction);
+    editor.focus();
+    let nextLinePos = editor.state.doc.line(actualLine + 1).to;
+    editor.dispatch({
+        selection: {
+            anchor: nextLinePos
+        }
+    });
+});
+const condicaoBtn = document.getElementById("condicao");
+condicaoBtn.addEventListener("click", ()=>{
+    let cursorAnchor = editor.state.selection.main.anchor;
+    let cursorHead = editor.state.selection.main.head;
+    let transaction;
+    let actualLine;
+    if (cursorAnchor <= cursorHead) {
+        transaction = editor.state.update({
+            changes: {
+                from: cursorAnchor,
+                to: cursorHead,
+                insert: commandsVariations[sceneProperties.lang][14]
+            }
+        });
+        actualLine = editor.state.doc.lineAt(cursorAnchor).number;
+    } else {
+        transaction = editor.state.update({
+            changes: {
+                from: cursorHead,
+                to: cursorAnchor,
+                insert: commandsVariations[sceneProperties.lang][14]
             }
         });
         actualLine = editor.state.doc.lineAt(cursorHead).number;
@@ -4618,8 +4654,15 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         let lineParsed10 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
-                        lineParsed10 += `while${line3.substring(line3.indexOf("("))}\n`;
-                        codeParsed += lineParsed10;
+                        for(let j1 = i + 2; j1 < lines.length; j1++)if (lines[j1] != "}" && lines[j1] != "") {
+                            lineParsed10 += `while${line3.substring(line3.indexOf("("))}\n`;
+                            codeParsed += lineParsed10;
+                            break;
+                        } else {
+                            lineParsed10 += `while(true){break`;
+                            codeParsed += lineParsed10;
+                            break;
+                        }
                         totalCommands++;
                     } else {
                         valid = false;
@@ -4661,9 +4704,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $08f280aebbd491a7$exports = {};
+var $f513c3a1714014d3$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.dd4daa5b.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","gelHm":"index.66534029.js","z8y1l":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.8a4efe15.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
