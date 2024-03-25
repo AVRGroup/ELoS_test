@@ -599,7 +599,15 @@ export default function parseCode(code,limit = 0)
                         let lineParsed = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
                         await delay(250);\n`
-                        lineParsed += `while${line.substring(line.indexOf('('))}{\n`;
+                        for(j = i; i < j; j++){
+                            if(lines[j] != '' && lines[j] != '}'){
+                                lineParsed += `while${line.substring(line.indexOf('('))}{\n`;
+                                break;
+                            } else {
+                                lineParsed += `while(true){break;\n`;
+                                break;
+                            }
+                        }
                         codeParsed += lineParsed;         
                         totalCommands++;
                         nonblockcmd = true;
