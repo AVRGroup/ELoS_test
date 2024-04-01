@@ -639,7 +639,7 @@ export default function parseCode(code,limit = 0)
                         await delay(250);\n`
                         console.log('tste');
                         
-                        isEmpty = true;
+                        let isEmpty = true;
                         for(let j = i; j < lines.length && !lines[j].includes('}'); j++){
                             if((lines[j] != '' && j!= i)){
                                 isEmpty = false;
