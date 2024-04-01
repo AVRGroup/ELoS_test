@@ -4635,6 +4635,7 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
                         lineParsed9 += `while${line2.substring(line2.indexOf("("))}{\n`;
+                        lineParsed9 += `while(true){break;\n`;
                         codeParsed += lineParsed9;
                         totalCommands++;
                         nonblockcmd = true;
@@ -4654,15 +4655,15 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         let lineParsed10 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
-                        for(let j1 = i + 2; j1 < lines.length; j1++)if (lines[j1] != "}" && lines[j1] != "") {
-                            lineParsed10 += `while${line3.substring(line3.indexOf("("))}\n`;
-                            codeParsed += lineParsed10;
-                            break;
-                        } else {
-                            lineParsed10 += `while(true){break`;
-                            codeParsed += lineParsed10;
+                        console.log("tste");
+                        isEmpty = true;
+                        for(let j1 = i; j1 < lines.length && !lines[j1].includes("}"); j1++)if (lines[j1] != "" && j1 != i) {
+                            isEmpty = false;
                             break;
                         }
+                        if (isEmpty) lineParsed10 += `while(true){break;`;
+                        else lineParsed10 += `while${line3.substring(line3.indexOf("("))}\n`;
+                        codeParsed += lineParsed10;
                         totalCommands++;
                     } else {
                         valid = false;
@@ -4706,7 +4707,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 
 var $f513c3a1714014d3$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.8a4efe15.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.f897a40d.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
