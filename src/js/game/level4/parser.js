@@ -598,16 +598,9 @@ export default function parseCode(code,limit = 0)
                         let line = lines[i].trim();
                         let lineParsed = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
-                        await delay(250);\n`
-                        for(j = i; i < j; j++){
-                            if(lines[j] != '' && lines[j] != '}'){
-                                lineParsed += `while${line.substring(line.indexOf('('))}{\n`;
-                                break;
-                            } else {
-                                lineParsed += `while(true){break;\n`;
-                                break;
-                            }
-                        }
+                        await delay(250);\n`            
+                        lineParsed += `while${line.substring(line.indexOf('('))}{\n`;
+                        lineParsed += `while(true){break;\n`;       
                         codeParsed += lineParsed;         
                         totalCommands++;
                         nonblockcmd = true;
@@ -644,17 +637,22 @@ export default function parseCode(code,limit = 0)
                         let lineParsed = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
                         await delay(250);\n`
-                        for(let j = i+2; j < lines.length; j++){
-                            if(lines[j] != '}' && lines[j] != ''){
-                                lineParsed += `while${line.substring(line.indexOf('('))}\n`;
-                                codeParsed += lineParsed;  
-                                break;
-                            }else{
-                                lineParsed += `while(true){break`;
-                                codeParsed += lineParsed;  
+                        console.log('tste');
+                        
+                        isEmpty = true;
+                        for(let j = i; j < lines.length && !lines[j].includes('}'); j++){
+                            if((lines[j] != '' && j!= i)){
+                                isEmpty = false;
                                 break;
                             }
                         }
+
+                        if(isEmpty){
+                            lineParsed += `while(true){break;`;
+                        } else {
+                            lineParsed += `while${line.substring(line.indexOf('('))}\n`;
+                        }
+                        codeParsed += lineParsed;  
                         totalCommands++;
                     }
                     else
