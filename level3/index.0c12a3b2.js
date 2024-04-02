@@ -1,552 +1,66 @@
-// modules are defined as an array
-// [ module function, map of requires ]
-//
-// map of requires is short require name -> numeric require
-//
-// anything defined in a previous bundle is accessed via the
-// orig method which is the require for previous bundles
+function $parcel$export(e, n, v, s) {
+  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
+}
+var $parcel$global =
+typeof globalThis !== 'undefined'
+  ? globalThis
+  : typeof self !== 'undefined'
+  ? self
+  : typeof window !== 'undefined'
+  ? window
+  : typeof global !== 'undefined'
+  ? global
+  : {};
+var $parcel$modules = {};
+var $parcel$inits = {};
 
-(function (modules, entry, mainEntry, parcelRequireName, globalName) {
-  /* eslint-disable no-undef */
-  var globalObject =
-    typeof globalThis !== 'undefined'
-      ? globalThis
-      : typeof self !== 'undefined'
-      ? self
-      : typeof window !== 'undefined'
-      ? window
-      : typeof global !== 'undefined'
-      ? global
-      : {};
-  /* eslint-enable no-undef */
-
-  // Save the require from previous bundle to this closure if any
-  var previousRequire =
-    typeof globalObject[parcelRequireName] === 'function' &&
-    globalObject[parcelRequireName];
-
-  var cache = previousRequire.cache || {};
-  // Do not use `require` to prevent Webpack from trying to bundle this call
-  var nodeRequire =
-    typeof module !== 'undefined' &&
-    typeof module.require === 'function' &&
-    module.require.bind(module);
-
-  function newRequire(name, jumped) {
-    if (!cache[name]) {
-      if (!modules[name]) {
-        // if we cannot find the module within our internal map or
-        // cache jump to the current global require ie. the last bundle
-        // that was added to the page.
-        var currentRequire =
-          typeof globalObject[parcelRequireName] === 'function' &&
-          globalObject[parcelRequireName];
-        if (!jumped && currentRequire) {
-          return currentRequire(name, true);
-        }
-
-        // If there are other bundles on this page the require from the
-        // previous one is saved to 'previousRequire'. Repeat this as
-        // many times as there are bundles until the module is found or
-        // we exhaust the require chain.
-        if (previousRequire) {
-          return previousRequire(name, true);
-        }
-
-        // Try the node require function if it exists.
-        if (nodeRequire && typeof name === 'string') {
-          return nodeRequire(name);
-        }
-
-        var err = new Error("Cannot find module '" + name + "'");
-        err.code = 'MODULE_NOT_FOUND';
-        throw err;
-      }
-
-      localRequire.resolve = resolve;
-      localRequire.cache = {};
-
-      var module = (cache[name] = new newRequire.Module(name));
-
-      modules[name][0].call(
-        module.exports,
-        localRequire,
-        module,
-        module.exports,
-        this
-      );
+var parcelRequire = $parcel$global["parcelRequiredf3e"];
+if (parcelRequire == null) {
+  parcelRequire = function(id) {
+    if (id in $parcel$modules) {
+      return $parcel$modules[id].exports;
     }
-
-    return cache[name].exports;
-
-    function localRequire(x) {
-      var res = localRequire.resolve(x);
-      return res === false ? {} : newRequire(res);
+    if (id in $parcel$inits) {
+      var init = $parcel$inits[id];
+      delete $parcel$inits[id];
+      var module = {id: id, exports: {}};
+      $parcel$modules[id] = module;
+      init.call(module.exports, module, module.exports);
+      return module.exports;
     }
-
-    function resolve(x) {
-      var id = modules[name][1][x];
-      return id != null ? id : x;
-    }
-  }
-
-  function Module(moduleName) {
-    this.id = moduleName;
-    this.bundle = newRequire;
-    this.exports = {};
-  }
-
-  newRequire.isParcelRequire = true;
-  newRequire.Module = Module;
-  newRequire.modules = modules;
-  newRequire.cache = cache;
-  newRequire.parent = previousRequire;
-  newRequire.register = function (id, exports) {
-    modules[id] = [
-      function (require, module) {
-        module.exports = exports;
-      },
-      {},
-    ];
+    var err = new Error("Cannot find module '" + id + "'");
+    err.code = 'MODULE_NOT_FOUND';
+    throw err;
   };
 
-  Object.defineProperty(newRequire, 'root', {
-    get: function () {
-      return globalObject[parcelRequireName];
-    },
-  });
+  parcelRequire.register = function register(id, init) {
+    $parcel$inits[id] = init;
+  };
 
-  globalObject[parcelRequireName] = newRequire;
+  $parcel$global["parcelRequiredf3e"] = parcelRequire;
+}
+parcelRequire.register("2RZ2r", function(module, exports) {
 
-  for (var i = 0; i < entry.length; i++) {
-    newRequire(entry[i]);
-  }
+var $49pUz = parcelRequire("49pUz");
 
-  if (mainEntry) {
-    // Expose entry point to Node, AMD or browser globals
-    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
-    var mainExports = newRequire(mainEntry);
+var $jgsti = parcelRequire("jgsti");
 
-    // CommonJS
-    if (typeof exports === 'object' && typeof module !== 'undefined') {
-      module.exports = mainExports;
+var $6mhZf = parcelRequire("6mhZf");
 
-      // RequireJS
-    } else if (typeof define === 'function' && define.amd) {
-      define(function () {
-        return mainExports;
-      });
+var $2Y9dv = parcelRequire("2Y9dv");
 
-      // <script>
-    } else if (globalName) {
-      this[globalName] = mainExports;
-    }
-  }
-})({"4qBz3":[function(require,module,exports) {
-var global = arguments[3];
-var HMR_HOST = null;
-var HMR_PORT = null;
-var HMR_SECURE = false;
-var HMR_ENV_HASH = "42036d7a98ade5a7";
-module.bundle.HMR_BUNDLE_ID = "d4cf07e4c786b455";
-"use strict";
-/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
-import type {
-  HMRAsset,
-  HMRMessage,
-} from '@parcel/reporter-dev-server/src/HMRServer.js';
-interface ParcelRequire {
-  (string): mixed;
-  cache: {|[string]: ParcelModule|};
-  hotData: mixed;
-  Module: any;
-  parent: ?ParcelRequire;
-  isParcelRequire: true;
-  modules: {|[string]: [Function, {|[string]: string|}]|};
-  HMR_BUNDLE_ID: string;
-  root: ParcelRequire;
-}
-interface ParcelModule {
-  hot: {|
-    data: mixed,
-    accept(cb: (Function) => void): void,
-    dispose(cb: (mixed) => void): void,
-    // accept(deps: Array<string> | string, cb: (Function) => void): void,
-    // decline(): void,
-    _acceptCallbacks: Array<(Function) => void>,
-    _disposeCallbacks: Array<(mixed) => void>,
-  |};
-}
-interface ExtensionContext {
-  runtime: {|
-    reload(): void,
-    getURL(url: string): string;
-    getManifest(): {manifest_version: number, ...};
-  |};
-}
-declare var module: {bundle: ParcelRequire, ...};
-declare var HMR_HOST: string;
-declare var HMR_PORT: string;
-declare var HMR_ENV_HASH: string;
-declare var HMR_SECURE: boolean;
-declare var chrome: ExtensionContext;
-declare var browser: ExtensionContext;
-declare var __parcel__import__: (string) => Promise<void>;
-declare var __parcel__importScripts__: (string) => Promise<void>;
-declare var globalThis: typeof self;
-declare var ServiceWorkerGlobalScope: Object;
-*/ var OVERLAY_ID = "__parcel__error__overlay__";
-var OldModule = module.bundle.Module;
-function Module(moduleName) {
-    OldModule.call(this, moduleName);
-    this.hot = {
-        data: module.bundle.hotData,
-        _acceptCallbacks: [],
-        _disposeCallbacks: [],
-        accept: function(fn) {
-            this._acceptCallbacks.push(fn || function() {});
-        },
-        dispose: function(fn) {
-            this._disposeCallbacks.push(fn);
-        }
-    };
-    module.bundle.hotData = undefined;
-}
-module.bundle.Module = Module;
-var checkedAssets, acceptedAssets, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
-function getHostname() {
-    return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
-}
-function getPort() {
-    return HMR_PORT || location.port;
-} // eslint-disable-next-line no-redeclare
-var parent = module.bundle.parent;
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
-    var hostname = getHostname();
-    var port = getPort();
-    var protocol = HMR_SECURE || location.protocol == "https:" && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? "wss" : "ws";
-    var ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/"); // Web extension context
-    var extCtx = typeof chrome === "undefined" ? typeof browser === "undefined" ? null : browser : chrome; // Safari doesn't support sourceURL in error stacks.
-    // eval may also be disabled via CSP, so do a quick check.
-    var supportsSourceURL = false;
-    try {
-        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
-    } catch (err) {
-        supportsSourceURL = err.stack.includes("test.js");
-    } // $FlowFixMe
-    ws.onmessage = async function(event) {
-        checkedAssets = {} /*: {|[string]: boolean|} */ ;
-        acceptedAssets = {} /*: {|[string]: boolean|} */ ;
-        assetsToAccept = [];
-        var data = JSON.parse(event.data);
-        if (data.type === "update") {
-            // Remove error overlay if there is one
-            if (typeof document !== "undefined") removeErrorOverlay();
-            let assets = data.assets.filter((asset)=>asset.envHash === HMR_ENV_HASH); // Handle HMR Update
-            let handled = assets.every((asset)=>{
-                return asset.type === "css" || asset.type === "js" && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
-            });
-            if (handled) {
-                console.clear(); // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
-                if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
-                await hmrApplyUpdates(assets);
-                for(var i = 0; i < assetsToAccept.length; i++){
-                    var id = assetsToAccept[i][1];
-                    if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
-                }
-            } else fullReload();
-        }
-        if (data.type === "error") {
-            // Log parcel errors to console
-            for (let ansiDiagnostic of data.diagnostics.ansi){
-                let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
-                console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + "\n" + stack + "\n\n" + ansiDiagnostic.hints.join("\n"));
-            }
-            if (typeof document !== "undefined") {
-                // Render the fancy html overlay
-                removeErrorOverlay();
-                var overlay = createErrorOverlay(data.diagnostics.html); // $FlowFixMe
-                document.body.appendChild(overlay);
-            }
-        }
-    };
-    ws.onerror = function(e) {
-        console.error(e.message);
-    };
-    ws.onclose = function() {
-        console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
-    };
-}
-function removeErrorOverlay() {
-    var overlay = document.getElementById(OVERLAY_ID);
-    if (overlay) {
-        overlay.remove();
-        console.log("[parcel] ✨ Error resolved");
-    }
-}
-function createErrorOverlay(diagnostics) {
-    var overlay = document.createElement("div");
-    overlay.id = OVERLAY_ID;
-    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
-    for (let diagnostic of diagnostics){
-        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
-            return `${p}
-<a href="/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
-${frame.code}`;
-        }, "") : diagnostic.stack;
-        errorHTML += `
-      <div>
-        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
-          🚨 ${diagnostic.message}
-        </div>
-        <pre>${stack}</pre>
-        <div>
-          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + "</div>").join("")}
-        </div>
-        ${diagnostic.documentation ? `<div>📝 <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ""}
-      </div>
-    `;
-    }
-    errorHTML += "</div>";
-    overlay.innerHTML = errorHTML;
-    return overlay;
-}
-function fullReload() {
-    if ("reload" in location) location.reload();
-    else if (extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
-}
-function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
-    var modules = bundle.modules;
-    if (!modules) return [];
-    var parents = [];
-    var k, d, dep;
-    for(k in modules)for(d in modules[k][1]){
-        dep = modules[k][1][d];
-        if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) parents.push([
-            bundle,
-            k
-        ]);
-    }
-    if (bundle.parent) parents = parents.concat(getParents(bundle.parent, id));
-    return parents;
-}
-function updateLink(link) {
-    var newLink = link.cloneNode();
-    newLink.onload = function() {
-        if (link.parentNode !== null) // $FlowFixMe
-        link.parentNode.removeChild(link);
-    };
-    newLink.setAttribute("href", link.getAttribute("href").split("?")[0] + "?" + Date.now()); // $FlowFixMe
-    link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-var cssTimeout = null;
-function reloadCSS() {
-    if (cssTimeout) return;
-    cssTimeout = setTimeout(function() {
-        var links = document.querySelectorAll('link[rel="stylesheet"]');
-        for(var i = 0; i < links.length; i++){
-            // $FlowFixMe[incompatible-type]
-            var href = links[i].getAttribute("href");
-            var hostname = getHostname();
-            var servedFromHMRServer = hostname === "localhost" ? new RegExp("^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):" + getPort()).test(href) : href.indexOf(hostname + ":" + getPort());
-            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
-            if (!absolute) updateLink(links[i]);
-        }
-        cssTimeout = null;
-    }, 50);
-}
-function hmrDownload(asset) {
-    if (asset.type === "js") {
-        if (typeof document !== "undefined") {
-            let script = document.createElement("script");
-            script.src = asset.url + "?t=" + Date.now();
-            if (asset.outputFormat === "esmodule") script.type = "module";
-            return new Promise((resolve, reject)=>{
-                var _document$head;
-                script.onload = ()=>resolve(script);
-                script.onerror = reject;
-                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
-            });
-        } else if (typeof importScripts === "function") {
-            // Worker scripts
-            if (asset.outputFormat === "esmodule") return import(asset.url + "?t=" + Date.now());
-            else return new Promise((resolve, reject)=>{
-                try {
-                    importScripts(asset.url + "?t=" + Date.now());
-                    resolve();
-                } catch (err) {
-                    reject(err);
-                }
-            });
-        }
-    }
-}
-async function hmrApplyUpdates(assets) {
-    global.parcelHotUpdate = Object.create(null);
-    let scriptsToRemove;
-    try {
-        // If sourceURL comments aren't supported in eval, we need to load
-        // the update from the dev server over HTTP so that stack traces
-        // are correct in errors/logs. This is much slower than eval, so
-        // we only do it if needed (currently just Safari).
-        // https://bugs.webkit.org/show_bug.cgi?id=137297
-        // This path is also taken if a CSP disallows eval.
-        if (!supportsSourceURL) {
-            let promises = assets.map((asset)=>{
-                var _hmrDownload;
-                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
-                    // Web extension bugfix for Chromium
-                    // https://bugs.chromium.org/p/chromium/issues/detail?id=1255412#c12
-                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3) {
-                        if (typeof ServiceWorkerGlobalScope != "undefined" && global instanceof ServiceWorkerGlobalScope) {
-                            extCtx.runtime.reload();
-                            return;
-                        }
-                        asset.url = extCtx.runtime.getURL("/__parcel_hmr_proxy__?url=" + encodeURIComponent(asset.url + "?t=" + Date.now()));
-                        return hmrDownload(asset);
-                    }
-                    throw err;
-                });
-            });
-            scriptsToRemove = await Promise.all(promises);
-        }
-        assets.forEach(function(asset) {
-            hmrApply(module.bundle.root, asset);
-        });
-    } finally{
-        delete global.parcelHotUpdate;
-        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
-            if (script) {
-                var _document$head2;
-                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
-            }
-        });
-    }
-}
-function hmrApply(bundle, asset) {
-    var modules = bundle.modules;
-    if (!modules) return;
-    if (asset.type === "css") reloadCSS();
-    else if (asset.type === "js") {
-        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
-        if (deps) {
-            if (modules[asset.id]) {
-                // Remove dependencies that are removed and will become orphaned.
-                // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
-                let oldDeps = modules[asset.id][1];
-                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
-                    let id = oldDeps[dep];
-                    let parents = getParents(module.bundle.root, id);
-                    if (parents.length === 1) hmrDelete(module.bundle.root, id);
-                }
-            }
-            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
-            // support for source maps is better with eval.
-            (0, eval)(asset.output);
-             // $FlowFixMe
-            let fn = global.parcelHotUpdate[asset.id];
-            modules[asset.id] = [
-                fn,
-                deps
-            ];
-        } else if (bundle.parent) hmrApply(bundle.parent, asset);
-    }
-}
-function hmrDelete(bundle, id) {
-    let modules = bundle.modules;
-    if (!modules) return;
-    if (modules[id]) {
-        // Collect dependencies that will become orphaned when this module is deleted.
-        let deps = modules[id][1];
-        let orphans = [];
-        for(let dep in deps){
-            let parents = getParents(module.bundle.root, deps[dep]);
-            if (parents.length === 1) orphans.push(deps[dep]);
-        } // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
-        delete modules[id];
-        delete bundle.cache[id]; // Now delete the orphans.
-        orphans.forEach((id)=>{
-            hmrDelete(module.bundle.root, id);
-        });
-    } else if (bundle.parent) hmrDelete(bundle.parent, id);
-}
-function hmrAcceptCheck(bundle, id, depsByBundle) {
-    if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
-     // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
-    let parents = getParents(module.bundle.root, id);
-    let accepted = false;
-    while(parents.length > 0){
-        let v = parents.shift();
-        let a = hmrAcceptCheckOne(v[0], v[1], null);
-        if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
-        accepted = true;
-        else {
-            // Otherwise, queue the parents in the next level upward.
-            let p = getParents(module.bundle.root, v[1]);
-            if (p.length === 0) {
-                // If there are no parents, then we've reached an entry without accepting. Reload.
-                accepted = false;
-                break;
-            }
-            parents.push(...p);
-        }
-    }
-    return accepted;
-}
-function hmrAcceptCheckOne(bundle, id, depsByBundle) {
-    var modules = bundle.modules;
-    if (!modules) return;
-    if (depsByBundle && !depsByBundle[bundle.HMR_BUNDLE_ID]) {
-        // If we reached the root bundle without finding where the asset should go,
-        // there's nothing to do. Mark as "accepted" so we don't reload the page.
-        if (!bundle.parent) return true;
-        return hmrAcceptCheck(bundle.parent, id, depsByBundle);
-    }
-    if (checkedAssets[id]) return true;
-    checkedAssets[id] = true;
-    var cached = bundle.cache[id];
-    assetsToAccept.push([
-        bundle,
-        id
-    ]);
-    if (!cached || cached.hot && cached.hot._acceptCallbacks.length) return true;
-}
-function hmrAcceptRun(bundle, id) {
-    var cached = bundle.cache[id];
-    bundle.hotData = {};
-    if (cached && cached.hot) cached.hot.data = bundle.hotData;
-    if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
-        cb(bundle.hotData);
-    });
-    delete bundle.cache[id];
-    bundle(id);
-    cached = bundle.cache[id];
-    if (cached && cached.hot && cached.hot._acceptCallbacks.length) cached.hot._acceptCallbacks.forEach(function(cb) {
-        var assetsToAlsoAccept = cb(function() {
-            return getParents(module.bundle.root, id);
-        });
-        if (assetsToAlsoAccept && assetsToAccept.length) // $FlowFixMe[method-unbinding]
-        assetsToAccept.push.apply(assetsToAccept, assetsToAlsoAccept);
-    });
-    acceptedAssets[id] = true;
-}
+var $3vWij = parcelRequire("3vWij");
 
-},{}],"1LUQY":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _three = require("three");
-var _editor = require("../editor");
-var _util = require("../three/util");
-var _gridMapHelper = require("../three/GridMapHelper");
-var _gridMapHelperDefault = parcelHelpers.interopDefault(_gridMapHelper);
-var _parser = require("./parser");
-var _parserDefault = parcelHelpers.interopDefault(_parser);
-var _laserFence = require("../three/LaserFence");
-var _laserFenceDefault = parcelHelpers.interopDefault(_laserFence);
-var _spikeTrap = require("../three/SpikeTrap");
-var _smoke = require("../three/Smoke");
-var _timer = require("../timer");
-var _bootstrap = require("bootstrap");
-var _multilangcode = require("../multilangcode");
+var $3tzMw = parcelRequire("3tzMw");
+
+var $gSwgq = parcelRequire("gSwgq");
+parcelRequire("7qmAS");
+
+var $c6e6z = parcelRequire("c6e6z");
+
+var $1CqPx = parcelRequire("1CqPx");
+
+var $dYLhF = parcelRequire("dYLhF");
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
@@ -623,7 +137,7 @@ const commandsVariations = [
         "if(?){\n\n}\n"
     ]
 ];
-const logModal = new (0, _bootstrap.Modal)(document.getElementById("logModal"));
+const logModal = new (0, $1CqPx.Modal)(document.getElementById("logModal"));
 let timerUpadate;
 function updateTime() {
     sceneProperties.timer++;
@@ -634,7 +148,7 @@ let setLaserStatesInterval;
 let spikeTrapState;
 let setSpikeTrapState;
 let setSpikeTrapStateInterval;
-const editor = (0, _editor.generateDefaultEditor)(document.getElementById("editorArea"));
+const editor = (0, $jgsti.generateDefaultEditor)(document.getElementById("editorArea"));
 const andarFrenteBtn = document.getElementById("andarFrente");
 andarFrenteBtn.addEventListener("click", ()=>{
     let cursorAnchor = editor.state.selection.main.anchor;
@@ -1044,13 +558,14 @@ condicaoFullBtn.addEventListener("click", ()=>{
     });
 });
 const consoleElement = document.getElementById("consoleArea");
-const { renderer , scene , camera , controls  } = (0, _util.generateDefaultSceneObjects)(document.getElementById("phaseView"));
-const gridMapHelper = new (0, _gridMapHelperDefault.default)();
+const { renderer , scene , camera , controls  } = (0, $6mhZf.generateDefaultSceneObjects)(document.getElementById("phaseView"));
+const gridMapHelper = new (0, $2Y9dv.default)();
 const plane = gridMapHelper.createGridPlane();
-const actor = (0, _util.loadDefaultActor)();
-const wallTexture = new _three.TextureLoader().load(new URL(require("ec1958e171389a9")).toString());
-wallTexture.wrapS = _three.RepeatWrapping;
-wallTexture.wrapT = _three.RepeatWrapping;
+const actor = (0, $6mhZf.loadDefaultActor)();
+
+const wallTexture = new $49pUz.TextureLoader().load(new URL((parcelRequire("g2SY0"))).toString());
+wallTexture.wrapS = $49pUz.RepeatWrapping;
+wallTexture.wrapT = $49pUz.RepeatWrapping;
 let objectives;
 let walls;
 let traps;
@@ -1085,35 +600,35 @@ scene.add(plane);
 scene.add(actor);
 async function andarFrente(amount) {
     let correctedAmount = amount > 10 ? 10 : amount;
-    await (0, _util.translateActor)(actor, correctedAmount, gridMapHelper, sceneProperties, consoleElement);
+    await (0, $6mhZf.translateActor)(actor, correctedAmount, gridMapHelper, sceneProperties, consoleElement);
 }
 async function andarTras(amount) {
     let correctedAmount = amount > 10 ? 10 : amount;
-    await (0, _util.translateActor)(actor, -correctedAmount, gridMapHelper, sceneProperties, consoleElement);
+    await (0, $6mhZf.translateActor)(actor, -correctedAmount, gridMapHelper, sceneProperties, consoleElement);
 }
 async function girarEsquerda() {
-    await (0, _util.rotateActor)(actor, 90, sceneProperties, 1);
+    await (0, $6mhZf.rotateActor)(actor, 90, sceneProperties, 1);
 }
 async function girarDireita() {
-    await (0, _util.rotateActor)(actor, 90, sceneProperties, -1);
+    await (0, $6mhZf.rotateActor)(actor, 90, sceneProperties, -1);
 }
 async function darMeiaVolta() {
-    await (0, _util.rotateActor)(actor, 180, sceneProperties, 1);
+    await (0, $6mhZf.rotateActor)(actor, 180, sceneProperties, 1);
 }
 function laserAzulAtivo() {
-    const vec = new _three.Vector3();
+    const vec = new $49pUz.Vector3();
     actor.getObjectByName("interactionReference").getWorldPosition(vec);
     if (gridMapHelper.detectLaser(vec, "blue") != null) return true;
     else return false;
 }
 function laserVermelhoAtivo() {
-    const vec = new _three.Vector3();
+    const vec = new $49pUz.Vector3();
     actor.getObjectByName("interactionReference").getWorldPosition(vec);
     if (gridMapHelper.detectLaser(vec, "red") != null) return true;
     else return false;
 }
 function desativarLaserAzul() {
-    const vec = new _three.Vector3();
+    const vec = new $49pUz.Vector3();
     actor.getObjectByName("interactionReference").getWorldPosition(vec);
     let laserIndex = gridMapHelper.detectLaser(vec, "blue");
     if (laserIndex != null) changeLaserActiveStatus(laserIndex, false);
@@ -1123,7 +638,7 @@ function desativarLaserAzul() {
     }
 }
 function desativarLaserVermelho() {
-    const vec = new _three.Vector3();
+    const vec = new $49pUz.Vector3();
     actor.getObjectByName("interactionReference").getWorldPosition(vec);
     let laserIndex = gridMapHelper.detectLaser(vec, "red");
     if (laserIndex != null) changeLaserActiveStatus(laserIndex, false);
@@ -1133,7 +648,7 @@ function desativarLaserVermelho() {
     }
 }
 function badLuck(position, state) {
-    const vector = new _three.Vector3(gridMapHelper.getGlobalXPositionFromCoord(position[0]), 0, gridMapHelper.getGlobalZPositionFromCoord(position[1]));
+    const vector = new $49pUz.Vector3(gridMapHelper.getGlobalXPositionFromCoord(position[0]), 0, gridMapHelper.getGlobalZPositionFromCoord(position[1]));
     let newLaserState = state == "blue" ? "red" : "blue";
     let laserIndex = gridMapHelper.detectLaser(vector, state);
     if (laserIndex != null) {
@@ -1163,30 +678,30 @@ phaseGeneration.push(()=>{
     sceneProperties.executing = false;
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
-    objectives = (0, _util.loadDefaultObjectives)(1);
+    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(1);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     gridMapHelper.addObstacle(9, 9, 5, 5);
     scene.add(objectives[0]);
     walls = [];
-    const boxGeometry = new _three.BoxGeometry(18, 2, 2);
+    const boxGeometry = new $49pUz.BoxGeometry(18, 2, 2);
     const boxMaterial = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1194,8 +709,8 @@ phaseGeneration.push(()=>{
     boxMaterial[3].map.repeat.set(9, 1);
     boxMaterial[4].map.repeat.set(9, 1);
     boxMaterial[5].map.repeat.set(9, 1);
-    walls.push(new _three.Mesh(boxGeometry, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     scene.add(walls[0]);
@@ -1203,7 +718,7 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(1, 9, 4, 4);
     gridMapHelper.addObstacle(1, 9, 6, 6);
     laserFences = [];
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
     gridMapHelper.addLaser(7, 5, laserFences[0]);
     scene.add(laserFences[0]);
@@ -1222,7 +737,7 @@ phaseGeneration.push(()=>{
     // scene.add(lasers[0]);
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
-        if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
@@ -1230,7 +745,7 @@ phaseGeneration.push(()=>{
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         gridMapHelper.obstacles[0].active = true;
@@ -1256,8 +771,8 @@ phaseGeneration.push(()=>{
     sceneProperties.executing = false;
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
-    objectives = (0, _util.loadDefaultObjectives)(2);
+    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(2);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 0.0, gridMapHelper.getGlobalZPositionFromCoord(7));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 0.0, gridMapHelper.getGlobalZPositionFromCoord(3));
     gridMapHelper.addObstacle(4, 4, 7, 7);
@@ -1265,30 +780,30 @@ phaseGeneration.push(()=>{
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     traps = [];
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
     traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 0, gridMapHelper.getGlobalZPositionFromCoord(5));
     gridMapHelper.addTrap(3, 5, traps[0]);
     scene.add(traps[0]);
-    (0, _spikeTrap.trapsActivation)(traps);
+    (0, $gSwgq.trapsActivation)(traps);
     walls = [];
-    const boxGeometry1 = new _three.BoxGeometry(6, 2, 2);
+    const boxGeometry1 = new $49pUz.BoxGeometry(6, 2, 2);
     const boxMaterial = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1296,16 +811,16 @@ phaseGeneration.push(()=>{
     boxMaterial[3].map.repeat.set(3, 1);
     boxMaterial[4].map.repeat.set(3, 1);
     boxMaterial[5].map.repeat.set(3, 1);
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
@@ -1341,8 +856,8 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(6, 7, 6, 6);
     gridMapHelper.addObstacle(6, 7, 4, 4);
     laserFences = [];
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
-    laserFences.push(new (0, _laserFenceDefault.default)("red"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("red"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
     laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     gridMapHelper.addLaser(4, 4, laserFences[0]);
@@ -1363,11 +878,11 @@ phaseGeneration.push(()=>{
     };
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
-        if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
-        } else if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
@@ -1376,7 +891,7 @@ phaseGeneration.push(()=>{
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         objectives[1].visible = true;
@@ -1397,8 +912,8 @@ phaseGeneration.push(()=>{
     }, 1000);
     spikeTrapState = 0;
     setSpikeTrapState = ()=>{
-        if (spikeTrapState == 0) (0, _spikeTrap.trapsDeactivation)(traps);
-        else (0, _spikeTrap.trapsActivation)(traps);
+        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
+        else (0, $gSwgq.trapsActivation)(traps);
     };
     setSpikeTrapStateInterval = setInterval(()=>{
         if (sceneProperties.executing) return;
@@ -1414,8 +929,8 @@ phaseGeneration.push(()=>{
     sceneProperties.executing = false;
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
-    objectives = (0, _util.loadDefaultObjectives)(2);
+    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(2);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(3));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(6));
     gridMapHelper.addObstacle(9, 9, 3, 3);
@@ -1423,16 +938,16 @@ phaseGeneration.push(()=>{
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     traps = [];
-    const trapGeometry = new _three.BoxGeometry(2, 1, 2);
-    const trapMaterial = new _three.MeshLambertMaterial({
+    const trapGeometry = new $49pUz.BoxGeometry(2, 1, 2);
+    const trapMaterial = new $49pUz.MeshLambertMaterial({
         color: "rgb(255,0,0)"
     });
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
     traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 0, gridMapHelper.getGlobalZPositionFromCoord(2));
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 0, gridMapHelper.getGlobalZPositionFromCoord(7));
     traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 0, gridMapHelper.getGlobalZPositionFromCoord(4));
@@ -1452,28 +967,28 @@ phaseGeneration.push(()=>{
     scene.add(traps[4]);
     scene.add(traps[5]);
     walls = [];
-    const boxGeometry1 = new _three.BoxGeometry(10, 2, 2);
-    const boxGeometry2 = new _three.BoxGeometry(12, 2, 2);
-    const boxGeometry3 = new _three.BoxGeometry(4, 2, 2);
-    const boxGeometry4 = new _three.BoxGeometry(6, 2, 2);
-    const boxGeometry5 = new _three.BoxGeometry(2, 2, 2);
+    const boxGeometry1 = new $49pUz.BoxGeometry(10, 2, 2);
+    const boxGeometry2 = new $49pUz.BoxGeometry(12, 2, 2);
+    const boxGeometry3 = new $49pUz.BoxGeometry(4, 2, 2);
+    const boxGeometry4 = new $49pUz.BoxGeometry(6, 2, 2);
+    const boxGeometry5 = new $49pUz.BoxGeometry(2, 2, 2);
     const boxMaterial = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1482,22 +997,22 @@ phaseGeneration.push(()=>{
     boxMaterial[4].map.repeat.set(5, 1);
     boxMaterial[5].map.repeat.set(5, 1);
     const boxMaterial2 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1506,22 +1021,22 @@ phaseGeneration.push(()=>{
     boxMaterial2[4].map.repeat.set(6, 1);
     boxMaterial2[5].map.repeat.set(6, 1);
     const boxMaterial3 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1530,22 +1045,22 @@ phaseGeneration.push(()=>{
     boxMaterial3[4].map.repeat.set(2, 1);
     boxMaterial3[5].map.repeat.set(2, 1);
     const boxMaterial4 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1553,19 +1068,19 @@ phaseGeneration.push(()=>{
     boxMaterial4[3].map.repeat.set(3, 1);
     boxMaterial4[4].map.repeat.set(3, 1);
     boxMaterial4[5].map.repeat.set(3, 1);
-    const boxMaterial5 = new _three.MeshLambertMaterial({
+    const boxMaterial5 = new $49pUz.MeshLambertMaterial({
         map: wallTexture.clone()
     });
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(4.5));
@@ -1599,12 +1114,12 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(7, 9, 4, 4);
     gridMapHelper.addObstacle(7, 9, 5, 5);
     laserFences = [];
-    laserFences.push(new (0, _laserFenceDefault.default)("red"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
-    laserFences.push(new (0, _laserFenceDefault.default)("red"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("red"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("red"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
     laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
@@ -1641,11 +1156,11 @@ phaseGeneration.push(()=>{
     };
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
-        if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
-        } else if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
@@ -1654,7 +1169,7 @@ phaseGeneration.push(()=>{
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         objectives[1].visible = true;
@@ -1675,8 +1190,8 @@ phaseGeneration.push(()=>{
     }, 1000);
     spikeTrapState = 0;
     setSpikeTrapState = ()=>{
-        if (spikeTrapState == 0) (0, _spikeTrap.trapsDeactivation)(traps);
-        else (0, _spikeTrap.trapsActivation)(traps);
+        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
+        else (0, $gSwgq.trapsActivation)(traps);
     };
     setSpikeTrapStateInterval = setInterval(()=>{
         if (sceneProperties.executing) return;
@@ -1692,16 +1207,16 @@ phaseGeneration.push(()=>{
     sceneProperties.executing = false;
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
-    objectives = (0, _util.loadDefaultObjectives)(1);
+    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(1);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
     gridMapHelper.addObstacle(8, 8, 9, 9);
     scene.add(objectives[0]);
     traps = [];
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
     traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0, gridMapHelper.getGlobalZPositionFromCoord(4));
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 0, gridMapHelper.getGlobalZPositionFromCoord(5));
     traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 0, gridMapHelper.getGlobalZPositionFromCoord(1));
@@ -1715,28 +1230,28 @@ phaseGeneration.push(()=>{
     scene.add(traps[2]);
     scene.add(traps[3]);
     walls = [];
-    const boxGeometry1 = new _three.BoxGeometry(12, 2, 2);
-    const boxGeometry2 = new _three.BoxGeometry(6, 2, 2);
-    const boxGeometry3 = new _three.BoxGeometry(10, 2, 2);
-    const boxGeometry4 = new _three.BoxGeometry(8, 2, 2);
-    const boxGeometry5 = new _three.BoxGeometry(20, 2, 2);
+    const boxGeometry1 = new $49pUz.BoxGeometry(12, 2, 2);
+    const boxGeometry2 = new $49pUz.BoxGeometry(6, 2, 2);
+    const boxGeometry3 = new $49pUz.BoxGeometry(10, 2, 2);
+    const boxGeometry4 = new $49pUz.BoxGeometry(8, 2, 2);
+    const boxGeometry5 = new $49pUz.BoxGeometry(20, 2, 2);
     const boxMaterial = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1745,22 +1260,22 @@ phaseGeneration.push(()=>{
     boxMaterial[4].map.repeat.set(6, 1);
     boxMaterial[5].map.repeat.set(6, 1);
     const boxMaterial2 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1769,22 +1284,22 @@ phaseGeneration.push(()=>{
     boxMaterial2[4].map.repeat.set(3, 1);
     boxMaterial2[5].map.repeat.set(3, 1);
     const boxMaterial3 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1793,22 +1308,22 @@ phaseGeneration.push(()=>{
     boxMaterial3[4].map.repeat.set(5, 1);
     boxMaterial3[5].map.repeat.set(5, 1);
     const boxMaterial4 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1817,22 +1332,22 @@ phaseGeneration.push(()=>{
     boxMaterial4[4].map.repeat.set(4, 1);
     boxMaterial4[5].map.repeat.set(4, 1);
     const boxMaterial5 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -1840,16 +1355,16 @@ phaseGeneration.push(()=>{
     boxMaterial5[3].map.repeat.set(10, 1);
     boxMaterial5[4].map.repeat.set(10, 1);
     boxMaterial5[5].map.repeat.set(10, 1);
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2.5), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -1889,9 +1404,9 @@ phaseGeneration.push(()=>{
     scene.add(walls[8]);
     scene.add(walls[9]);
     laserFences = [];
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
-    laserFences.push(new (0, _laserFenceDefault.default)("red"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("red"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
     laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
@@ -1916,7 +1431,7 @@ phaseGeneration.push(()=>{
     };
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
-        if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
@@ -1924,7 +1439,7 @@ phaseGeneration.push(()=>{
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         gridMapHelper.obstacles[0].active = true;
@@ -1943,8 +1458,8 @@ phaseGeneration.push(()=>{
     }, 1000);
     spikeTrapState = 0;
     setSpikeTrapState = ()=>{
-        if (spikeTrapState == 0) (0, _spikeTrap.trapsDeactivation)(traps);
-        else (0, _spikeTrap.trapsActivation)(traps);
+        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
+        else (0, $gSwgq.trapsActivation)(traps);
     };
     setSpikeTrapStateInterval = setInterval(()=>{
         if (sceneProperties.executing) return;
@@ -1960,8 +1475,8 @@ phaseGeneration.push(()=>{
     sceneProperties.executing = false;
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
-    objectives = (0, _util.loadDefaultObjectives)(2);
+    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(2);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(7));
     gridMapHelper.addObstacle(0, 0, 0, 0);
@@ -1969,8 +1484,8 @@ phaseGeneration.push(()=>{
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     traps = [];
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
     traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0, gridMapHelper.getGlobalZPositionFromCoord(6));
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 0, gridMapHelper.getGlobalZPositionFromCoord(6));
     gridMapHelper.addTrap(0, 6, traps[0]);
@@ -1978,29 +1493,29 @@ phaseGeneration.push(()=>{
     scene.add(traps[0]);
     scene.add(traps[1]);
     walls = [];
-    const boxGeometry1 = new _three.BoxGeometry(6, 2, 2);
-    const boxGeometry2 = new _three.BoxGeometry(14, 2, 2);
-    const boxGeometry3 = new _three.BoxGeometry(2, 2, 2);
-    const boxGeometry4 = new _three.BoxGeometry(10, 2, 2);
-    const boxGeometry5 = new _three.BoxGeometry(4, 2, 2);
-    const boxGeometry6 = new _three.BoxGeometry(12, 2, 2);
+    const boxGeometry1 = new $49pUz.BoxGeometry(6, 2, 2);
+    const boxGeometry2 = new $49pUz.BoxGeometry(14, 2, 2);
+    const boxGeometry3 = new $49pUz.BoxGeometry(2, 2, 2);
+    const boxGeometry4 = new $49pUz.BoxGeometry(10, 2, 2);
+    const boxGeometry5 = new $49pUz.BoxGeometry(4, 2, 2);
+    const boxGeometry6 = new $49pUz.BoxGeometry(12, 2, 2);
     const boxMaterial = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2009,22 +1524,22 @@ phaseGeneration.push(()=>{
     boxMaterial[4].map.repeat.set(3, 1);
     boxMaterial[5].map.repeat.set(3, 1);
     const boxMaterial2 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2032,26 +1547,26 @@ phaseGeneration.push(()=>{
     boxMaterial2[3].map.repeat.set(7, 1);
     boxMaterial2[4].map.repeat.set(7, 1);
     boxMaterial2[5].map.repeat.set(7, 1);
-    const boxMaterial3 = new _three.MeshLambertMaterial({
+    const boxMaterial3 = new $49pUz.MeshLambertMaterial({
         map: wallTexture.clone()
     });
     const boxMaterial5 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2060,22 +1575,22 @@ phaseGeneration.push(()=>{
     boxMaterial5[4].map.repeat.set(2, 1);
     boxMaterial5[5].map.repeat.set(2, 1);
     const boxMaterial6 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2083,17 +1598,17 @@ phaseGeneration.push(()=>{
     boxMaterial6[3].map.repeat.set(6, 1);
     boxMaterial6[4].map.repeat.set(6, 1);
     boxMaterial6[5].map.repeat.set(6, 1);
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry6, boxMaterial6));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry6, boxMaterial6));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial6));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial6));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
@@ -2130,11 +1645,11 @@ phaseGeneration.push(()=>{
     scene.add(walls[9]);
     scene.add(walls[10]);
     laserFences = [];
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("red"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("red"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
     laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
@@ -2166,11 +1681,11 @@ phaseGeneration.push(()=>{
     };
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
-        if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
-        } else if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
@@ -2179,7 +1694,7 @@ phaseGeneration.push(()=>{
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         objectives[1].visible = true;
@@ -2200,8 +1715,8 @@ phaseGeneration.push(()=>{
     }, 1000);
     spikeTrapState = 0;
     setSpikeTrapState = ()=>{
-        if (spikeTrapState == 0) (0, _spikeTrap.trapsDeactivation)(traps);
-        else (0, _spikeTrap.trapsActivation)(traps);
+        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
+        else (0, $gSwgq.trapsActivation)(traps);
     };
     setSpikeTrapStateInterval = setInterval(()=>{
         if (sceneProperties.executing) return;
@@ -2217,8 +1732,8 @@ phaseGeneration.push(()=>{
     sceneProperties.executing = false;
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
-    objectives = (0, _util.loadDefaultObjectives)(2);
+    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(2);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     gridMapHelper.addObstacle(9, 9, 9, 9);
@@ -2226,11 +1741,11 @@ phaseGeneration.push(()=>{
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     traps = [];
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
     traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 0, gridMapHelper.getGlobalZPositionFromCoord(4));
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 0, gridMapHelper.getGlobalZPositionFromCoord(5));
     traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 0, gridMapHelper.getGlobalZPositionFromCoord(3));
@@ -2247,29 +1762,29 @@ phaseGeneration.push(()=>{
     scene.add(traps[3]);
     scene.add(traps[4]);
     walls = [];
-    const boxGeometry1 = new _three.BoxGeometry(10, 2, 2);
-    const boxGeometry2 = new _three.BoxGeometry(2, 2, 2);
-    const boxGeometry3 = new _three.BoxGeometry(4, 2, 2);
-    const boxGeometry4 = new _three.BoxGeometry(6, 2, 2);
-    const boxGeometry5 = new _three.BoxGeometry(12, 2, 2);
-    const boxGeometry6 = new _three.BoxGeometry(14, 2, 2);
+    const boxGeometry1 = new $49pUz.BoxGeometry(10, 2, 2);
+    const boxGeometry2 = new $49pUz.BoxGeometry(2, 2, 2);
+    const boxGeometry3 = new $49pUz.BoxGeometry(4, 2, 2);
+    const boxGeometry4 = new $49pUz.BoxGeometry(6, 2, 2);
+    const boxGeometry5 = new $49pUz.BoxGeometry(12, 2, 2);
+    const boxGeometry6 = new $49pUz.BoxGeometry(14, 2, 2);
     const boxMaterial = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2277,26 +1792,26 @@ phaseGeneration.push(()=>{
     boxMaterial[3].map.repeat.set(5, 1);
     boxMaterial[4].map.repeat.set(5, 1);
     boxMaterial[5].map.repeat.set(5, 1);
-    const boxMaterial2 = new _three.MeshLambertMaterial({
+    const boxMaterial2 = new $49pUz.MeshLambertMaterial({
         map: wallTexture.clone()
     });
     const boxMaterial3 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2305,22 +1820,22 @@ phaseGeneration.push(()=>{
     boxMaterial3[4].map.repeat.set(2, 1);
     boxMaterial3[5].map.repeat.set(2, 1);
     const boxMaterial4 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2329,22 +1844,22 @@ phaseGeneration.push(()=>{
     boxMaterial4[4].map.repeat.set(3, 1);
     boxMaterial4[5].map.repeat.set(3, 1);
     const boxMaterial5 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2353,22 +1868,22 @@ phaseGeneration.push(()=>{
     boxMaterial5[4].map.repeat.set(6, 1);
     boxMaterial5[5].map.repeat.set(6, 1);
     const boxMaterial6 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2376,22 +1891,22 @@ phaseGeneration.push(()=>{
     boxMaterial6[3].map.repeat.set(7, 1);
     boxMaterial6[4].map.repeat.set(7, 1);
     boxMaterial6[5].map.repeat.set(7, 1);
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry6, boxMaterial6));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry6, boxMaterial6));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
@@ -2444,12 +1959,12 @@ phaseGeneration.push(()=>{
     scene.add(walls[14]);
     scene.add(walls[15]);
     laserFences = [];
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
     laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
@@ -2485,11 +2000,11 @@ phaseGeneration.push(()=>{
     };
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
-        if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
-        } else if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
@@ -2498,7 +2013,7 @@ phaseGeneration.push(()=>{
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         objectives[1].visible = true;
@@ -2519,8 +2034,8 @@ phaseGeneration.push(()=>{
     }, 1000);
     spikeTrapState = 0;
     setSpikeTrapState = ()=>{
-        if (spikeTrapState == 0) (0, _spikeTrap.trapsDeactivation)(traps);
-        else (0, _spikeTrap.trapsActivation)(traps);
+        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
+        else (0, $gSwgq.trapsActivation)(traps);
     };
     setSpikeTrapStateInterval = setInterval(()=>{
         if (sceneProperties.executing) return;
@@ -2536,8 +2051,8 @@ phaseGeneration.push(()=>{
     sceneProperties.executing = false;
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
-    objectives = (0, _util.loadDefaultObjectives)(2);
+    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(2);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 0.0, gridMapHelper.getGlobalZPositionFromCoord(6));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 0.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     gridMapHelper.addObstacle(2, 2, 6, 6);
@@ -2545,9 +2060,9 @@ phaseGeneration.push(()=>{
     scene.add(objectives[0]);
     scene.add(objectives[1]);
     traps = [];
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
     traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 0, gridMapHelper.getGlobalZPositionFromCoord(6));
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 0, gridMapHelper.getGlobalZPositionFromCoord(5));
     traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -2558,28 +2073,28 @@ phaseGeneration.push(()=>{
     scene.add(traps[1]);
     scene.add(traps[2]);
     walls = [];
-    const boxGeometry1 = new _three.BoxGeometry(6, 2, 2);
-    const boxGeometry2 = new _three.BoxGeometry(12, 2, 2);
-    const boxGeometry3 = new _three.BoxGeometry(4, 2, 2);
-    const boxGeometry4 = new _three.BoxGeometry(2, 2, 2);
-    const boxGeometry5 = new _three.BoxGeometry(8, 2, 2);
+    const boxGeometry1 = new $49pUz.BoxGeometry(6, 2, 2);
+    const boxGeometry2 = new $49pUz.BoxGeometry(12, 2, 2);
+    const boxGeometry3 = new $49pUz.BoxGeometry(4, 2, 2);
+    const boxGeometry4 = new $49pUz.BoxGeometry(2, 2, 2);
+    const boxGeometry5 = new $49pUz.BoxGeometry(8, 2, 2);
     const boxMaterial = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2588,22 +2103,22 @@ phaseGeneration.push(()=>{
     boxMaterial[4].map.repeat.set(3, 1);
     boxMaterial[5].map.repeat.set(3, 1);
     const boxMaterial2 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2612,22 +2127,22 @@ phaseGeneration.push(()=>{
     boxMaterial2[4].map.repeat.set(6, 1);
     boxMaterial2[5].map.repeat.set(6, 1);
     const boxMaterial3 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2635,26 +2150,26 @@ phaseGeneration.push(()=>{
     boxMaterial3[3].map.repeat.set(2, 1);
     boxMaterial3[4].map.repeat.set(2, 1);
     boxMaterial3[5].map.repeat.set(2, 1);
-    const boxMaterial4 = new _three.MeshLambertMaterial({
+    const boxMaterial4 = new $49pUz.MeshLambertMaterial({
         map: wallTexture.clone()
     });
     const boxMaterial5 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2662,19 +2177,19 @@ phaseGeneration.push(()=>{
     boxMaterial5[3].map.repeat.set(4, 1);
     boxMaterial5[4].map.repeat.set(4, 1);
     boxMaterial5[5].map.repeat.set(4, 1);
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -2723,11 +2238,11 @@ phaseGeneration.push(()=>{
     scene.add(walls[11]);
     scene.add(walls[12]);
     laserFences = [];
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
-    laserFences.push(new (0, _laserFenceDefault.default)("red"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("red"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
     laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
@@ -2759,11 +2274,11 @@ phaseGeneration.push(()=>{
     };
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
-        if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
-        } else if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
@@ -2772,7 +2287,7 @@ phaseGeneration.push(()=>{
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         objectives[1].visible = true;
@@ -2793,8 +2308,8 @@ phaseGeneration.push(()=>{
     }, 1000);
     spikeTrapState = 0;
     setSpikeTrapState = ()=>{
-        if (spikeTrapState == 0) (0, _spikeTrap.trapsDeactivation)(traps);
-        else (0, _spikeTrap.trapsActivation)(traps);
+        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
+        else (0, $gSwgq.trapsActivation)(traps);
     };
     setSpikeTrapStateInterval = setInterval(()=>{
         if (sceneProperties.executing) return;
@@ -2810,8 +2325,8 @@ phaseGeneration.push(()=>{
     sceneProperties.executing = false;
     camera.position.set(0, 15, 30);
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-    actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
-    objectives = (0, _util.loadDefaultObjectives)(3);
+    actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+    objectives = (0, $6mhZf.loadDefaultObjectives)(3);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(1));
     objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(3));
@@ -2822,9 +2337,9 @@ phaseGeneration.push(()=>{
     scene.add(objectives[1]);
     scene.add(objectives[2]);
     traps = [];
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
-    traps.push(new (0, _spikeTrap.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
+    traps.push(new (0, $gSwgq.SpikeTrap)());
     traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0, gridMapHelper.getGlobalZPositionFromCoord(1));
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 0, gridMapHelper.getGlobalZPositionFromCoord(3));
     traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0, gridMapHelper.getGlobalZPositionFromCoord(2));
@@ -2835,28 +2350,28 @@ phaseGeneration.push(()=>{
     scene.add(traps[1]);
     scene.add(traps[2]);
     walls = [];
-    const boxGeometry1 = new _three.BoxGeometry(14, 2, 2);
-    const boxGeometry2 = new _three.BoxGeometry(10, 2, 2);
-    const boxGeometry3 = new _three.BoxGeometry(6, 2, 2);
-    const boxGeometry4 = new _three.BoxGeometry(4, 2, 2);
-    const boxGeometry5 = new _three.BoxGeometry(2, 2, 2);
+    const boxGeometry1 = new $49pUz.BoxGeometry(14, 2, 2);
+    const boxGeometry2 = new $49pUz.BoxGeometry(10, 2, 2);
+    const boxGeometry3 = new $49pUz.BoxGeometry(6, 2, 2);
+    const boxGeometry4 = new $49pUz.BoxGeometry(4, 2, 2);
+    const boxGeometry5 = new $49pUz.BoxGeometry(2, 2, 2);
     const boxMaterial = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2865,22 +2380,22 @@ phaseGeneration.push(()=>{
     boxMaterial[4].map.repeat.set(7, 1);
     boxMaterial[5].map.repeat.set(7, 1);
     const boxMaterial2 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2889,22 +2404,22 @@ phaseGeneration.push(()=>{
     boxMaterial2[4].map.repeat.set(5, 1);
     boxMaterial2[5].map.repeat.set(5, 1);
     const boxMaterial3 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2913,22 +2428,22 @@ phaseGeneration.push(()=>{
     boxMaterial3[4].map.repeat.set(3, 1);
     boxMaterial3[5].map.repeat.set(3, 1);
     const boxMaterial4 = [
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         }),
-        new _three.MeshLambertMaterial({
+        new $49pUz.MeshLambertMaterial({
             map: wallTexture.clone()
         })
     ];
@@ -2936,19 +2451,19 @@ phaseGeneration.push(()=>{
     boxMaterial4[3].map.repeat.set(2, 1);
     boxMaterial4[4].map.repeat.set(2, 1);
     boxMaterial4[5].map.repeat.set(2, 1);
-    const boxMaterial5 = new _three.MeshLambertMaterial({
+    const boxMaterial5 = new $49pUz.MeshLambertMaterial({
         map: wallTexture.clone()
     });
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new _three.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new _three.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
-    walls.push(new _three.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
+    walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
@@ -2983,13 +2498,13 @@ phaseGeneration.push(()=>{
     scene.add(walls[8]);
     scene.add(walls[9]);
     laserFences = [];
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
-    laserFences.push(new (0, _laserFenceDefault.default)("blue"));
-    laserFences.push(new (0, _laserFenceDefault.default)("red"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
-    laserFences.push(new (0, _laserFenceDefault.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
+    laserFences.push(new (0, $3tzMw.default)("red"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("multiColor"));
     laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
@@ -3031,15 +2546,15 @@ phaseGeneration.push(()=>{
     };
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
-        if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+        if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
-        } else if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
-        } else if ((0, _util.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
+        } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
             objectives[2].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[2].active = false;
@@ -3048,7 +2563,7 @@ phaseGeneration.push(()=>{
     };
     resetLevel = ()=>{
         actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-        actor.rotation.set(0, (0, _util.degreeToRadians)(90), 0);
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
         actor.getObjectByName("eve").rotation.set(0, 0, 0);
         objectives[0].visible = true;
         objectives[1].visible = true;
@@ -3071,8 +2586,8 @@ phaseGeneration.push(()=>{
     }, 1000);
     spikeTrapState = 0;
     setSpikeTrapState = ()=>{
-        if (spikeTrapState == 0) (0, _spikeTrap.trapsDeactivation)(traps);
-        else (0, _spikeTrap.trapsActivation)(traps);
+        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
+        else (0, $gSwgq.trapsActivation)(traps);
     };
     setSpikeTrapStateInterval = setInterval(()=>{
         if (sceneProperties.executing) return;
@@ -3106,41 +2621,41 @@ function animate() {
     renderer.render(scene, camera);
     controls.update();
     requestAnimationFrame(animate);
-    (0, _timer.displayTime)(sceneProperties.timer, document.getElementById("timer"));
+    (0, $c6e6z.displayTime)(sceneProperties.timer, document.getElementById("timer"));
 }
 window.addEventListener("resize", ()=>{
-    (0, _util.resizeCanvasToDisplaySize)(renderer, camera);
+    (0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
 });
 const finishEarlierButton = document.getElementById("finishEarlier");
 const execBtn = document.getElementById("execBtn");
 execBtn.addEventListener("click", async function() {
-    const codeParsed = (0, _parserDefault.default)((0, _multilangcode.convertCode)(sceneProperties.lang, editor.state.doc.toString()));
+    const codeParsed = (0, $3vWij.default)((0, $dYLhF.convertCode)(sceneProperties.lang, editor.state.doc.toString()));
     console.log(codeParsed);
-    cancelAnimationFrame((0, _util.corrID));
-    cancelAnimationFrame((0, _util.requestID));
-    cancelAnimationFrame((0, _util.changColorID));
-    cancelAnimationFrame((0, _util.smokeAnimationFrame));
-    (0, _util.smoke).deactiveSmokes();
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
+    cancelAnimationFrame((0, $6mhZf.changColorID));
+    cancelAnimationFrame((0, $6mhZf.smokeAnimationFrame));
+    (0, $6mhZf.smoke).deactiveSmokes();
     sceneProperties.cancelExecution = false;
     actor.getObjectByName("eve").position.y = 0;
-    if (traps != null) (0, _spikeTrap.trapsDeactivation)(traps);
+    if (traps != null) (0, $gSwgq.trapsDeactivation)(traps);
     if (codeParsed != null) {
-        (0, _editor.updateTheme)(editor, 1);
+        (0, $jgsti.updateTheme)(editor, 1);
         resetLevel();
         sceneProperties.executing = true;
         this.disabled = true;
         await eval(codeParsed);
         if (winCondition()) {
-            (0, _editor.readOnlyState).doc = editor.state.doc;
-            editor.setState((0, _editor.readOnlyState));
+            (0, $jgsti.readOnlyState).doc = editor.state.doc;
+            editor.setState((0, $jgsti.readOnlyState));
             document.getElementById("winMessage").classList.remove("invisible");
             document.getElementById("advanceBtn").classList.remove("invisible");
             document.getElementById("resetBtn").disabled = true;
             finishEarlierButton.disabled = true;
             clearInterval(timerUpadate);
-            if (sceneProperties.phase == phaseGeneration.length - 1) (0, _timer.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 3/Completo", document.getElementById("second-user"));
+            if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 3/Completo", document.getElementById("second-user"));
         } else {
-            (0, _editor.updateTheme)(editor, 0);
+            (0, $jgsti.updateTheme)(editor, 0);
             sceneProperties.executing = false;
             this.disabled = false;
         }
@@ -3148,15 +2663,15 @@ execBtn.addEventListener("click", async function() {
 });
 const resetBtn = document.getElementById("resetBtn");
 resetBtn.addEventListener("click", ()=>{
-    cancelAnimationFrame((0, _util.corrID));
-    cancelAnimationFrame((0, _util.requestID));
-    cancelAnimationFrame((0, _util.changColorID));
-    cancelAnimationFrame((0, _util.smokeAnimationFrame));
-    (0, _util.smoke).deactiveSmokes();
-    (0, _editor.updateTheme)(editor, 0);
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
+    cancelAnimationFrame((0, $6mhZf.changColorID));
+    cancelAnimationFrame((0, $6mhZf.smokeAnimationFrame));
+    (0, $6mhZf.smoke).deactiveSmokes();
+    (0, $jgsti.updateTheme)(editor, 0);
     sceneProperties.cancelExecution = true;
     actor.getObjectByName("eve").position.y = 0;
-    if ((0, _util.materialColor).length != 0) (0, _util.resetRobotColor)(actor);
+    if ((0, $6mhZf.materialColor).length != 0) (0, $6mhZf.resetRobotColor)(actor);
     resetLevel();
 });
 const advanceBtn = document.getElementById("advanceBtn");
@@ -3169,7 +2684,7 @@ advanceBtn.addEventListener("click", (e)=>{
         }
         removeObjects(objectives, walls, traps, laserFences);
         phaseGeneration[sceneProperties.phase]();
-        editor.setState((0, _editor.editState));
+        editor.setState((0, $jgsti.editState));
         consoleElement.innerText = null;
         document.getElementById("winMessage").classList.add("invisible");
         document.getElementById("advanceBtn").classList.add("invisible");
@@ -3187,7 +2702,7 @@ reloadBtn.addEventListener("click", (e)=>{
     if (sceneProperties.phase < phaseGeneration.length) {
         removeObjects(objectives, walls, traps);
         phaseGeneration[sceneProperties.phase]();
-        editor.setState((0, _editor.editState));
+        editor.setState((0, $jgsti.editState));
         consoleElement.innerText = null;
         execBtn.disabled = false;
         resetBtn.disabled = false;
@@ -3197,7 +2712,7 @@ reloadBtn.addEventListener("click", (e)=>{
 finishEarlierButton.addEventListener("click", (e)=>{
     if (confirm(textVariations[sceneProperties.lang][9])) {
         clearInterval(timerUpadate);
-        (0, _timer.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 3/Fase ${sceneProperties.phase + 1}`, document.getElementById("second-user"));
+        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 3/Fase ${sceneProperties.phase + 1}`, document.getElementById("second-user"));
         logModal.show();
     }
 });
@@ -3213,14 +2728,15 @@ fastSpeedBtn.addEventListener("click", function() {
     normalSpeedBtn.disabled = false;
     sceneProperties.mult = 6;
 });
-(0, _util.resizeCanvasToDisplaySize)(renderer, camera);
+(0, $6mhZf.resizeCanvasToDisplaySize)(renderer, camera);
 phaseGeneration[sceneProperties.phase]();
 animate();
 
-},{"three":"3XrwE","../editor":"l6wfL","../three/util":"fiv5b","../three/GridMapHelper":"1niVU","./parser":"6MMdt","../three/LaserFence":"jGUvy","../three/SpikeTrap":"eDrLo","../three/Smoke":"lrVPR","../timer":"iJc7h","bootstrap":"10mMR","../multilangcode":"jHYlP","ec1958e171389a9":"51Gzc","@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh"}],"6MMdt":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const errorVariations = [
+});
+parcelRequire.register("3vWij", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $28f17c62ce377190$export$2e2bcd8739ae039);
+const $28f17c62ce377190$var$errorVariations = [
     [
         "C\xf3digo inv\xe1lido:",
         "linha:",
@@ -3240,8 +2756,8 @@ const errorVariations = [
         "lines or less."
     ]
 ];
-let langSelector = window.location.href.includes("english") ? 1 : 0;
-const functionFilter = [
+let $28f17c62ce377190$var$langSelector = window.location.href.includes("english") ? 1 : 0;
+const $28f17c62ce377190$var$functionFilter = [
     {
         filter: new RegExp("^andarFrente(\\s+)?\\((\\s+)?(0|[1-9][0-9]*)(\\s+)?\\)(\\s+)?(;)?$"),
         type: "sequential"
@@ -3299,20 +2815,20 @@ const functionFilter = [
         type: "blockValidation"
     }
 ];
-const conditionalParameters = [
+const $28f17c62ce377190$var$conditionalParameters = [
     new RegExp("^laserAzulAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$"),
     new RegExp("^laserVermelhoAtivo(\\s+)?\\((\\s+)?\\)(\\s+)?$")
 ];
-function ifValidation(line) {
+function $28f17c62ce377190$var$ifValidation(line) {
     let trimLine = line.trim();
     let condition = line.substring(trimLine.indexOf("(") + 1, trimLine.lastIndexOf(")"));
-    for(let i = 0; i < conditionalParameters.length; i++){
-        if (conditionalParameters[i].test(condition.trim())) return true;
+    for(let i = 0; i < $28f17c62ce377190$var$conditionalParameters.length; i++){
+        if ($28f17c62ce377190$var$conditionalParameters[i].test(condition.trim())) return true;
         else continue;
     }
     return false;
 }
-function blockValidation(lines, index) {
+function $28f17c62ce377190$var$blockValidation(lines, index) {
     let valid = false;
     let ignoreClosure = 0;
     for(let i = index + 1; i < lines.length; i++){
@@ -3326,7 +2842,7 @@ function blockValidation(lines, index) {
     }
     return valid;
 }
-function closeBlockValidation(lines, index) {
+function $28f17c62ce377190$var$closeBlockValidation(lines, index) {
     let valid = false;
     for(let i = index - 1; i >= 0; i--){
         if (lines[i].includes("{")) {
@@ -3336,7 +2852,7 @@ function closeBlockValidation(lines, index) {
     }
     return valid;
 }
-function mustConditionValidation(lines, index) {
+function $28f17c62ce377190$var$mustConditionValidation(lines, index) {
     let valid = false;
     let completeCommonIf = new RegExp("^se(\\s+)?\\((\\s+)?.+\\)(\\s+)?(\\s+)?$");
     let commonIf = new RegExp("^se(\\s+)?\\((\\s+)?.+\\)$");
@@ -3362,7 +2878,7 @@ function mustConditionValidation(lines, index) {
         } else return valid;
     } else return valid;
 }
-function elseValidation(lines, index) {
+function $28f17c62ce377190$var$elseValidation(lines, index) {
     let valid = false;
     let completeCommonIf = new RegExp("^se(\\s+)?\\((\\s+)?.+\\)(\\s+)?.+(\\s+)?$");
     let commonIf = new RegExp("^se(\\s+)?\\((\\s+)?.+\\)$");
@@ -3384,7 +2900,7 @@ function elseValidation(lines, index) {
         } else return valid;
     } else return valid;
 }
-function predictFunction(lines, index) {
+function $28f17c62ce377190$var$predictFunction(lines, index) {
     const directionFilter = [
         new RegExp("^andarFrente(\\s+)?\\((\\s+)?\\d+(\\s+)?\\)(\\s+)?(;)?$"),
         new RegExp("^andarTras(\\s+)?\\((\\s+)?\\d+(\\s+)?\\)(\\s+)?(;)?$"),
@@ -3461,11 +2977,11 @@ function predictFunction(lines, index) {
     else position[axis]--;
     return position;
 }
-function printError(text, line) {
+function $28f17c62ce377190$var$printError(text, line) {
     const consoleElement = document.getElementById("consoleArea");
-    consoleElement.innerText += `${errorVariations[langSelector][0]} ${text} ${errorVariations[langSelector][1]} ${line}\n`;
+    consoleElement.innerText += `${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][0]} ${text} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][1]} ${line}\n`;
 }
-function parseCode(code, limit = 0) {
+function $28f17c62ce377190$export$2e2bcd8739ae039(code, limit = 0) {
     let codeParsed = "const delay = (milisecs) => {return new Promise((resolve) => setTimeout(resolve,milisecs));}\nasync function runCode(){\n";
     let badLuckFunctions = "\n";
     let lines = code.split("\n");
@@ -3476,10 +2992,10 @@ function parseCode(code, limit = 0) {
         let validLine = false;
         let lineType;
         if (lines[i].trim() != "") {
-            for(let j = 0; j < functionFilter.length; j++){
-                validLine = functionFilter[j].filter.test(lines[i].trim());
+            for(let j = 0; j < $28f17c62ce377190$var$functionFilter.length; j++){
+                validLine = $28f17c62ce377190$var$functionFilter[j].filter.test(lines[i].trim());
                 if (validLine) {
-                    lineType = functionFilter[j].type;
+                    lineType = $28f17c62ce377190$var$functionFilter[j].type;
                     break;
                 } else continue;
             }
@@ -3493,10 +3009,10 @@ function parseCode(code, limit = 0) {
                     nonblockcmd = false;
                 } else if (lineType === "conditional&&blockValidation") {
                     let validConditional = false;
-                    if (blockValidation(lines, i)) {
-                        if (ifValidation(lines[i])) validConditional = true;
-                        else printError(`${lines[i]} ${errorVariations[langSelector][2]}`, i + 1);
-                    } else printError(`${lines[i]} ${errorVariations[langSelector][3]}`, i + 1);
+                    if ($28f17c62ce377190$var$blockValidation(lines, i)) {
+                        if ($28f17c62ce377190$var$ifValidation(lines[i])) validConditional = true;
+                        else $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][2]}`, i + 1);
+                    } else $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][3]}`, i + 1);
                     if (validConditional) {
                         let line = lines[i].trim();
                         let lineParsed1 = `editor.focus();
@@ -3510,7 +3026,7 @@ function parseCode(code, limit = 0) {
                         break;
                     }
                 } else if (lineType === "conditional") {
-                    if (ifValidation(lines[i])) {
+                    if ($28f17c62ce377190$var$ifValidation(lines[i])) {
                         let line1 = lines[i].trim();
                         let lineParsed2 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
@@ -3520,27 +3036,27 @@ function parseCode(code, limit = 0) {
                         totalCommands++;
                         nonblockcmd = true;
                     } else {
-                        printError(`${lines[i]} ${errorVariations[langSelector][2]}`, i + 1);
+                        $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][2]}`, i + 1);
                         valid = false;
                         break;
                     }
                 } else if (lineType === "elseValidation") {
-                    if (elseValidation(lines, i)) {
+                    if ($28f17c62ce377190$var$elseValidation(lines, i)) {
                         let lineParsed3 = "else{\n";
                         codeParsed += lineParsed3;
                         totalCommands++;
                         nonblockcmd = true;
                     } else {
-                        printError(`${lines[i]} ${errorVariations[langSelector][2]}`, i + 1);
+                        $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][2]}`, i + 1);
                         valid = false;
                         break;
                     }
                 } else if (lineType === "elseValidation&&blockValidation") {
                     let validElse = false;
-                    if (blockValidation(lines, i)) {
-                        if (elseValidation(lines, i)) validElse = true;
-                        else printError(`${lines[i]} ${errorVariations[langSelector][2]}`, i + 1);
-                    } else printError(`${lines[i]} ${errorVariations[langSelector][3]}`, i + 1);
+                    if ($28f17c62ce377190$var$blockValidation(lines, i)) {
+                        if ($28f17c62ce377190$var$elseValidation(lines, i)) validElse = true;
+                        else $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][2]}`, i + 1);
+                    } else $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][3]}`, i + 1);
                     if (validElse) {
                         let lineParsed4 = "else{\n";
                         codeParsed += lineParsed4;
@@ -3550,27 +3066,27 @@ function parseCode(code, limit = 0) {
                         break;
                     }
                 } else if (lineType === "blockValidation") {
-                    if (blockValidation(lines, i)) {
+                    if ($28f17c62ce377190$var$blockValidation(lines, i)) {
                         let lineParsed5 = `${lines[i].trim()}\n`;
                         codeParsed += lineParsed5;
                         totalCommands++;
                     } else {
-                        printError(`${lines[i]} ${errorVariations[langSelector][3]}`, i + 1);
+                        $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][3]}`, i + 1);
                         valid = false;
                         break;
                     }
                 } else if (lineType === "closeBlockValidation") {
-                    if (closeBlockValidation(lines, i)) {
+                    if ($28f17c62ce377190$var$closeBlockValidation(lines, i)) {
                         let lineParsed6 = `${lines[i].trim()}\n`;
                         codeParsed += lineParsed6;
                         totalCommands++;
                     } else {
-                        printError(`${lines[i]} ${errorVariations[langSelector][4]}`, i + 1);
+                        $28f17c62ce377190$var$printError(`${lines[i]} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][4]}`, i + 1);
                         valid = false;
                         break;
                     }
                 } else if (lineType === "mustCondition") {
-                    if (mustConditionValidation(lines, i)) {
+                    if ($28f17c62ce377190$var$mustConditionValidation(lines, i)) {
                         let lineParsed7 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
@@ -3579,8 +3095,8 @@ function parseCode(code, limit = 0) {
                         totalCommands++;
                         nonblockcmd = false;
                     } else {
-                        let state = functionFilter[6].filter.test(lines[i].trim()) ? "blue" : "red";
-                        let pos = predictFunction(lines, i);
+                        let state = $28f17c62ce377190$var$functionFilter[6].filter.test(lines[i].trim()) ? "blue" : "red";
+                        let pos = $28f17c62ce377190$var$predictFunction(lines, i);
                         badLuckFunctions += `badLuck([${pos[0]},${pos[1]}],'${state}')\n`;
                         let lineParsed8 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
@@ -3600,12 +3116,12 @@ function parseCode(code, limit = 0) {
                     nonblockcmd = false;
                 }
             } else {
-                printError(lines[i], i + 1);
+                $28f17c62ce377190$var$printError(lines[i], i + 1);
                 valid = false;
                 break;
             }
             if (limit > 0 && totalCommands > limit) {
-                document.getElementById("consoleArea").innerText += `${errorVariations[langSelector][5]} ${limit} ${errorVariations[langSelector][6]}\n`;
+                document.getElementById("consoleArea").innerText += `${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][5]} ${limit} ${$28f17c62ce377190$var$errorVariations[$28f17c62ce377190$var$langSelector][6]}\n`;
                 valid = false;
                 break;
             }
@@ -3616,37 +3132,39 @@ function parseCode(code, limit = 0) {
         return codeParsed;
     } else return null;
 }
-exports.default = parseCode;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh"}],"jGUvy":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _three = require("three");
-var _csgmesh = require("../FireBase/CSGMesh");
-class Fence extends _three.Mesh {
+});
+
+parcelRequire.register("3tzMw", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $287fd608de0fa8e7$export$2e2bcd8739ae039);
+
+var $49pUz = parcelRequire("49pUz");
+parcelRequire("eKab5");
+class $287fd608de0fa8e7$var$Fence extends $49pUz.Mesh {
     constructor(){
-        super(new _three.BoxGeometry(0.5, 2, 0.15), new _three.MeshPhongMaterial({
+        super(new $49pUz.BoxGeometry(0.5, 2, 0.15), new $49pUz.MeshPhongMaterial({
             color: "white"
         }));
     }
 }
-class FenceTorus extends _three.Mesh {
+class $287fd608de0fa8e7$var$FenceTorus extends $49pUz.Mesh {
     constructor(){
-        super(new _three.TorusGeometry(0.15, 0.05, 10, 20), new _three.MeshPhongMaterial({
+        super(new $49pUz.TorusGeometry(0.15, 0.05, 10, 20), new $49pUz.MeshPhongMaterial({
             color: "black"
         }));
     }
 }
-class FenceBase extends _three.Mesh {
+class $287fd608de0fa8e7$var$FenceBase extends $49pUz.Mesh {
     constructor(){
-        super(new _three.BoxGeometry(0.5, 2, 0.1), new _three.MeshPhongMaterial({
+        super(new $49pUz.BoxGeometry(0.5, 2, 0.1), new $49pUz.MeshPhongMaterial({
             color: "white"
         }));
     }
 }
-class Laser extends _three.Mesh {
+class $287fd608de0fa8e7$var$Laser extends $49pUz.Mesh {
     constructor(color){
-        super(new _three.CylinderGeometry(0.1, 0.1, 2, 64, 64), new _three.MeshPhongMaterial({
+        super(new $49pUz.CylinderGeometry(0.1, 0.1, 2, 64, 64), new $49pUz.MeshPhongMaterial({
             emissive: color,
             color: color,
             emissiveIntensity: 1,
@@ -3655,7 +3173,7 @@ class Laser extends _three.Mesh {
         }));
     }
 }
-class LaserFence extends _three.Object3D {
+class $287fd608de0fa8e7$var$LaserFence extends $49pUz.Object3D {
     constructor(type){
         super();
         this.index = 0;
@@ -3665,35 +3183,35 @@ class LaserFence extends _three.Object3D {
         this.active = true;
         this.type = type;
         // fence base
-        let fenceBase = new FenceBase;
+        let fenceBase = new $287fd608de0fa8e7$var$FenceBase;
         fenceBase.rotateX(-Math.PI / 2);
         fenceBase.position.set(0, -0.95, 0);
         // fences
-        let laserFence1 = new Fence;
+        let laserFence1 = new $287fd608de0fa8e7$var$Fence;
         laserFence1.position.set(0, 0, -0.93);
-        let laserFence2 = new Fence;
+        let laserFence2 = new $287fd608de0fa8e7$var$Fence;
         laserFence2.position.set(0, 0, 0.93);
         // fence torus
-        let fenceTorus1A = new FenceTorus;
+        let fenceTorus1A = new $287fd608de0fa8e7$var$FenceTorus;
         fenceTorus1A.position.set(0, 0.6, 0.85);
-        let fenceTorus1B = new FenceTorus;
+        let fenceTorus1B = new $287fd608de0fa8e7$var$FenceTorus;
         fenceTorus1B.position.set(0, 0.6, -0.85);
-        let fenceTorus2A = new FenceTorus;
+        let fenceTorus2A = new $287fd608de0fa8e7$var$FenceTorus;
         fenceTorus2A.position.set(0, 0, 0.85);
-        let fenceTorus2B = new FenceTorus;
+        let fenceTorus2B = new $287fd608de0fa8e7$var$FenceTorus;
         fenceTorus2B.position.set(0, 0, -0.85);
-        let fenceTorus3A = new FenceTorus;
+        let fenceTorus3A = new $287fd608de0fa8e7$var$FenceTorus;
         fenceTorus3A.position.set(0, -0.6, 0.85);
-        let fenceTorus3B = new FenceTorus;
+        let fenceTorus3B = new $287fd608de0fa8e7$var$FenceTorus;
         fenceTorus3B.position.set(0, -0.6, -0.85);
         // blue lasers
-        let laserBlue1 = new Laser("blue");
+        let laserBlue1 = new $287fd608de0fa8e7$var$Laser("blue");
         laserBlue1.rotateX(-Math.PI / 2);
         laserBlue1.position.set(0, 0.6, 0);
-        let laserBlue2 = new Laser("blue");
+        let laserBlue2 = new $287fd608de0fa8e7$var$Laser("blue");
         laserBlue2.rotateX(-Math.PI / 2);
         laserBlue2.position.set(0, 0, 0);
-        let laserBlue3 = new Laser("blue");
+        let laserBlue3 = new $287fd608de0fa8e7$var$Laser("blue");
         laserBlue3.rotateX(-Math.PI / 2);
         laserBlue3.position.set(0, -0.6, 0);
         this.blueLasers = [
@@ -3702,13 +3220,13 @@ class LaserFence extends _three.Object3D {
             laserBlue3
         ];
         // red lasers
-        let laserRed1 = new Laser("red");
+        let laserRed1 = new $287fd608de0fa8e7$var$Laser("red");
         laserRed1.rotateX(-Math.PI / 2);
         laserRed1.position.set(0, 0.6, 0);
-        let laserRed2 = new Laser("red");
+        let laserRed2 = new $287fd608de0fa8e7$var$Laser("red");
         laserRed2.rotateX(-Math.PI / 2);
         laserRed2.position.set(0, 0, 0);
-        let laserRed3 = new Laser("red");
+        let laserRed3 = new $287fd608de0fa8e7$var$Laser("red");
         laserRed3.rotateX(-Math.PI / 2);
         laserRed3.position.set(0, -0.6, 0);
         this.redLasers = [
@@ -3764,10 +3282,21 @@ class LaserFence extends _three.Object3D {
         }
     }
 }
-exports.default = LaserFence;
+var $287fd608de0fa8e7$export$2e2bcd8739ae039 = $287fd608de0fa8e7$var$LaserFence;
 
-},{"three":"3XrwE","../FireBase/CSGMesh":"g1O9j","@parcel/transformer-js/src/esmodule-helpers.js":"j7FRh"}],"51Gzc":[function(require,module,exports) {
-module.exports = require("aba4dba2b69bb132").getBundleURL("igM68") + "../metalWallLvl3.73658d4f.png" + "?" + Date.now();
+});
 
-},{"aba4dba2b69bb132":"hPpBg"}]},["4qBz3","1LUQY"], "1LUQY", "parcelRequiredf3e")
+parcelRequire.register("g2SY0", function(module, exports) {
+
+module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), import.meta.url).toString();
+
+});
+
+
+var $534711df3a16a798$exports = {};
+
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.0c12a3b2.js","hEG10":"metalWallLvl3.c6e3c749.png","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
+
+
+parcelRequire("2RZ2r");
 
