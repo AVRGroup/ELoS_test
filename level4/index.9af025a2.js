@@ -4656,7 +4656,7 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
                         console.log("tste");
-                        isEmpty = true;
+                        let isEmpty = true;
                         for(let j1 = i; j1 < lines.length && !lines[j1].includes("}"); j1++)if (lines[j1] != "" && j1 != i) {
                             isEmpty = false;
                             break;
@@ -4707,7 +4707,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 
 var $f513c3a1714014d3$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.f897a40d.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.9af025a2.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
