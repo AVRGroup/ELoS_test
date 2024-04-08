@@ -2806,7 +2806,7 @@ reloadBtn.addEventListener('click',(e) => {
     
     if(sceneProperties.phase < phaseGeneration.length)
     {
-        removeObjects(objectives,walls,traps);
+        removeObjects(objectives,walls,traps,laserFences);
         phaseGeneration[sceneProperties.phase]();
         editor.setState(editState);
         consoleElement.innerText = null;
