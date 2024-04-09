@@ -2700,7 +2700,7 @@ const reloadBtn = document.getElementById("reloadBtn");
 reloadBtn.addEventListener("click", (e)=>{
     clearInterval(timerUpadate);
     if (sceneProperties.phase < phaseGeneration.length) {
-        removeObjects(objectives, walls, traps);
+        removeObjects(objectives, walls, traps, laserFences);
         phaseGeneration[sceneProperties.phase]();
         editor.setState((0, $jgsti.editState));
         consoleElement.innerText = null;
@@ -3293,9 +3293,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $534711df3a16a798$exports = {};
+var $cc96519343a34e77$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.0c12a3b2.js","hEG10":"metalWallLvl3.c6e3c749.png","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.e6ee608a.js","hEG10":"metalWallLvl3.c6e3c749.png","gelHm":"index.66534029.js","z8y1l":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");
