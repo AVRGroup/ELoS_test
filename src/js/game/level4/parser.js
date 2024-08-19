@@ -599,8 +599,7 @@ export default function parseCode(code,limit = 0)
                         let lineParsed = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
                         await delay(250);\n`            
-                        lineParsed += `while${line.substring(line.indexOf('('))}{\n`;
-                        lineParsed += `while(true){break;\n`;       
+                        lineParsed += `while${line.substring(line.indexOf('('))}{\n`;      
                         codeParsed += lineParsed;         
                         totalCommands++;
                         nonblockcmd = true;
@@ -637,7 +636,6 @@ export default function parseCode(code,limit = 0)
                         let lineParsed = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i+1}).from}});
                         await delay(250);\n`
-                        console.log('tste');
                         
                         let isEmpty = true;
                         for(let j = i; j < lines.length && !lines[j].includes('}'); j++){
