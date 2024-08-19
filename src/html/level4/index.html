@@ -187,4 +187,22 @@
     </body>
     <script type="module" src="../../js/game/bootstrap.js"></script>
     <script type="module" src="../../js/game/level4/phases.js"></script>
+
+    <script>
+
+        function checkClose() {
+            if (ok) {
+                return "Tem certeza que deseja sair?";
+            }
+        }
+
+        var ok = true; 
+
+        function okToLeave() { 
+            ok = false;
+        }
+
+        window.onbeforeunload = checkClose;
+        window.onunload = checkClose;
+    </script>
 </html>
