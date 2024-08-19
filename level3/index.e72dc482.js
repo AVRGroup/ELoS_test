@@ -64,7 +64,7 @@ var $dYLhF = parcelRequire("dYLhF");
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 5,
+    phase: 0,
     executing: false,
     mult: 1,
     lang: window.location.href.includes("english") ? 1 : 0
@@ -2695,7 +2695,6 @@ reloadBtn.addEventListener("click", (e)=>{
     if (sceneProperties.phase < phaseGeneration.length) {
         removeObjects(objectives, walls, traps, laserFences);
         phaseGeneration[sceneProperties.phase]();
-        console.log(sceneProperties);
         editor.setState((0, $jgsti.editState));
         consoleElement.innerText = null;
         execBtn.disabled = false;
@@ -3292,9 +3291,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $6e2bb2fa2e1ac4a1$exports = {};
+var $cc96519343a34e77$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.39d1a89d.js","hEG10":"metalWallLvl3.c6e3c749.png","aAYvO":"index.748c376a.js","4It1k":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.e72dc482.js","hEG10":"metalWallLvl3.c6e3c749.png","gelHm":"index.66534029.js","z8y1l":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");

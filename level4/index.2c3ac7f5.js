@@ -70,7 +70,7 @@ var $dYLhF = parcelRequire("dYLhF");
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 6,
+    phase: 0,
     executing: false,
     mult: 1,
     lang: window.location.href.includes("english") ? 1 : 0
@@ -2614,54 +2614,52 @@ phaseGeneration.push(()=>{
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    // walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    // walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1.5), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(1.5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-    walls[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    walls[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(3.5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    walls[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
-    walls[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    walls[12].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-    walls[13].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(6.5));
-    walls[14].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    walls[15].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
+    // walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(0));
+    walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+    walls[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(3.5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    walls[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
+    walls[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    walls[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
+    walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    // walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),1,gridMapHelper.getGlobalZPositionFromCoord(0));
+    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(6.5));
+    walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    walls[12].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
     gridMapHelper.addObstacle(1, 1, 9, 9);
     gridMapHelper.addObstacle(1, 2, 7, 7);
     gridMapHelper.addObstacle(1, 2, 2, 2);
-    gridMapHelper.addObstacle(1, 1, 0, 0);
+    // gridMapHelper.addObstacle(1,1,0,0);
     gridMapHelper.addObstacle(3, 3, 6, 8);
     gridMapHelper.addObstacle(3, 4, 4, 4);
     gridMapHelper.addObstacle(3, 3, 1, 2);
-    gridMapHelper.addObstacle(4, 4, 8, 8);
     gridMapHelper.addObstacle(5, 6, 6, 6);
     gridMapHelper.addObstacle(5, 6, 2, 2);
     gridMapHelper.addObstacle(6, 6, 7, 9);
     gridMapHelper.addObstacle(6, 6, 3, 5);
-    gridMapHelper.addObstacle(6, 6, 0, 0);
+    // gridMapHelper.addObstacle(6,6,0,0);
     gridMapHelper.addObstacle(8, 8, 6, 7);
     gridMapHelper.addObstacle(8, 8, 4, 4);
     gridMapHelper.addObstacle(8, 8, 1, 2);
     scene.add(walls[0]);
     scene.add(walls[1]);
     scene.add(walls[2]);
+    // scene.add(walls[3]);
     scene.add(walls[3]);
     scene.add(walls[4]);
     scene.add(walls[5]);
@@ -2669,12 +2667,10 @@ phaseGeneration.push(()=>{
     scene.add(walls[7]);
     scene.add(walls[8]);
     scene.add(walls[9]);
+    // scene.add(walls[11]);
     scene.add(walls[10]);
     scene.add(walls[11]);
     scene.add(walls[12]);
-    scene.add(walls[13]);
-    scene.add(walls[14]);
-    scene.add(walls[15]);
     portaFechada = ()=>{
         if (sceneProperties.cancelExecution) return false;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
@@ -2796,12 +2792,12 @@ phaseGeneration.push(()=>{
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
     objectives = (0, $6mhZf.loadDefaultObjectives)(4);
     objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(8));
-    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
+    objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(1));
     objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
     //objectives[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(4));
     objectives[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     gridMapHelper.addObstacle(0, 0, 8, 8);
-    gridMapHelper.addObstacle(0, 0, 0, 0);
+    gridMapHelper.addObstacle(0, 0, 1, 1);
     gridMapHelper.addObstacle(7, 7, 9, 9);
     //gridMapHelper.addObstacle(9,9,4,4);
     gridMapHelper.addObstacle(9, 9, 0, 0);
@@ -2813,23 +2809,23 @@ phaseGeneration.push(()=>{
     traps = [];
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
-    traps.push(new (0, $gSwgq.SpikeTrap)());
+    // traps.push(new SpikeTrap());
     traps.push(new (0, $gSwgq.SpikeTrap)());
     //traps.push(new SpikeTrap());
-    traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0, gridMapHelper.getGlobalZPositionFromCoord(7));
+    traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 0, gridMapHelper.getGlobalZPositionFromCoord(9));
     traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0, gridMapHelper.getGlobalZPositionFromCoord(2));
-    traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 0, gridMapHelper.getGlobalZPositionFromCoord(8));
-    traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 0, gridMapHelper.getGlobalZPositionFromCoord(5));
+    // traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0,gridMapHelper.getGlobalZPositionFromCoord(8));
+    traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 0, gridMapHelper.getGlobalZPositionFromCoord(2));
     //traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(3));
     gridMapHelper.addTrap(0, 2, traps[0]);
-    gridMapHelper.addTrap(0, 7, traps[1]);
-    gridMapHelper.addTrap(6, 8, traps[2]);
-    gridMapHelper.addTrap(8, 5, traps[3]);
+    gridMapHelper.addTrap(1, 9, traps[1]);
+    // gridMapHelper.addTrap(6,8, traps[2]);
+    gridMapHelper.addTrap(8, 2, traps[2]);
     //gridMapHelper.addTrap(9,3, traps[4]);
     scene.add(traps[0]);
     scene.add(traps[1]);
+    // scene.add(traps[2]);
     scene.add(traps[2]);
-    scene.add(traps[3]);
     //scene.add(traps[4]);
     openDoors = [];
     doors = [];
@@ -2876,14 +2872,15 @@ phaseGeneration.push(()=>{
     scene.add(crancks[2]);
     scene.add(crancks[3]);
     //scene.add(crancks[4]);
-    doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
     doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
     //doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(2));
+    doors[0].rotateY(Math.PI / 2);
     doors[2].rotateY(Math.PI / 2);
     //doors[3].rotateY(Math.PI / 2);
-    gridMapHelper.addObstacle(1, 1, 9, 9);
+    gridMapHelper.addObstacle(0, 0, 7, 7);
     gridMapHelper.addObstacle(1, 1, 1, 1);
     gridMapHelper.addObstacle(4, 4, 8, 8);
     gridMapHelper.addObstacle(8, 8, 7, 7);
@@ -2899,23 +2896,23 @@ phaseGeneration.push(()=>{
     openDoors.push(false);
     //openDoors.push(false);
     laserFences = [];
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    // laserFences.push(new LaserFence("multiColor"));
     laserFences.push(new (0, $3tzMw.default)("blue"));
     //laserFences.push(new LaserFence("multiColor"));
     //laserFences.push(new LaserFence("multiColor"));
-    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    // laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     //laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     //laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    laserFences[1].rotateY(Math.PI / 2);
+    laserFences[0].rotateY(Math.PI / 2);
     //laserFences[2].rotateY(Math.PI / 2);
     //laserFences[3].rotateY(Math.PI / 2);
-    gridMapHelper.addLaser(5, 9, laserFences[0]);
-    gridMapHelper.addLaser(6, 6, laserFences[1]);
+    // gridMapHelper.addLaser(5,9, laserFences[0]);
+    gridMapHelper.addLaser(6, 6, laserFences[0]);
     //gridMapHelper.addLaser(9,6, laserFences[2]);
     //gridMapHelper.addLaser(9,1, laserFences[3]);
+    // scene.add(laserFences[0]);
     scene.add(laserFences[0]);
-    scene.add(laserFences[1]);
     //scene.add(laserFences[2]);
     //scene.add(laserFences[3]);
     walls = [];
@@ -2982,7 +2979,7 @@ phaseGeneration.push(()=>{
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    // walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
@@ -3004,16 +3001,16 @@ phaseGeneration.push(()=>{
     walls[6].rotateY(Math.PI / 2);
     walls[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    walls[10].rotateY(Math.PI / 2);
-    walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    walls[12].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
-    walls[13].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    walls[14].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
-    walls[15].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
-    walls[16].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    walls[17].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+    // walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),1,gridMapHelper.getGlobalZPositionFromCoord(2));
+    walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    walls[9].rotateY(Math.PI / 2);
+    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
+    walls[12].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
+    walls[13].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
+    walls[14].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
+    walls[15].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    walls[16].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
     gridMapHelper.addObstacle(1, 1, 7, 8);
     gridMapHelper.addObstacle(3, 3, 8, 9);
     gridMapHelper.addObstacle(1, 1, 2, 4);
@@ -3023,7 +3020,7 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(5, 5, 6, 8);
     gridMapHelper.addObstacle(1, 3, 0, 0);
     gridMapHelper.addObstacle(4, 4, 2, 2);
-    gridMapHelper.addObstacle(6, 6, 2, 2);
+    // gridMapHelper.addObstacle(6,6,2,2);
     gridMapHelper.addObstacle(5, 5, 1, 3);
     gridMapHelper.addObstacle(8, 8, 9, 9);
     gridMapHelper.addObstacle(7, 9, 8, 8);
@@ -3041,6 +3038,7 @@ phaseGeneration.push(()=>{
     scene.add(walls[6]);
     scene.add(walls[7]);
     scene.add(walls[8]);
+    // scene.add(walls[9]);
     scene.add(walls[9]);
     scene.add(walls[10]);
     scene.add(walls[11]);
@@ -3049,13 +3047,13 @@ phaseGeneration.push(()=>{
     scene.add(walls[14]);
     scene.add(walls[15]);
     scene.add(walls[16]);
-    scene.add(walls[17]);
     portaFechada = ()=>{
         if (sceneProperties.cancelExecution) return false;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[1], gridMapHelper)) return !openDoors[1];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[2], gridMapHelper)) return !openDoors[2];
         else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[3], gridMapHelper)) return !openDoors[3];
+        else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[4], gridMapHelper)) return !openDoors[4];
         else {
             consoleElement.innerText += textVariations[sceneProperties.lang][13];
             return false;
@@ -3136,49 +3134,44 @@ phaseGeneration.push(()=>{
             consoleElement.innerText += textVariations[sceneProperties.lang][3];
             if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible) consoleElement.innerText += textVariations[sceneProperties.lang][6];
         }
-        resetLevel = ()=>{
-            actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
-            actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
-            actor.getObjectByName("eve").rotation.set(0, 0, 0);
-            for(let i = 0; i < objectives.length; i++)objectives[i].visible = true;
-            for(let i1 = 0; i1 < openDoors.length; i1++)openDoors[i1] = false;
-            doors.forEach((door)=>door.resetPos());
-            gridMapHelper.obstacles.forEach((obstacle)=>obstacle.active = true);
-            gridMapHelper.restartLasers();
-            lasersVisualRestart();
-            setLaserStates();
-        };
-        winCondition = ()=>{
-            if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible) return true;
-            else return false;
-        };
-        laserState = 0;
-        setLaserStates = ()=>{
-            if (laserState == 0) {
-                changeLaserStateStatus(0, "blue");
-                changeLaserActiveStatus(1, true);
-            } else {
-                changeLaserStateStatus(0, "red");
-                changeLaserActiveStatus(1, false);
-            }
-        };
-        setLaserStatesInterval = setInterval(()=>{
-            if (sceneProperties.executing) return;
-            laserState = (laserState + 1) % 2;
-            setLaserStates();
-        }, 1000);
-        spikeTrapState = 0;
-        setSpikeTrapState = ()=>{
-            if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
-            else (0, $gSwgq.trapsActivation)(traps);
-        };
-        setSpikeTrapStateInterval = setInterval(()=>{
-            if (sceneProperties.executing) return;
-            spikeTrapState = (spikeTrapState + 1) % 2;
-            setSpikeTrapState();
-        }, 1000);
-        timerUpadate = setInterval(updateTime, 1000);
     };
+    resetLevel = ()=>{
+        actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
+        actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
+        actor.getObjectByName("eve").rotation.set(0, 0, 0);
+        for(let i = 0; i < objectives.length; i++)objectives[i].visible = true;
+        for(let i1 = 0; i1 < openDoors.length; i1++)openDoors[i1] = false;
+        doors.forEach((door)=>door.resetPos());
+        gridMapHelper.obstacles.forEach((obstacle)=>obstacle.active = true);
+        gridMapHelper.restartLasers();
+        lasersVisualRestart();
+        setLaserStates();
+    };
+    winCondition = ()=>{
+        if (!objectives[0].visible && !objectives[1].visible && !objectives[2].visible && !objectives[3].visible) return true;
+        else return false;
+    };
+    laserState = 0;
+    setLaserStates = ()=>{
+        if (laserState == 0) changeLaserStateStatus(0, "blue");
+        else changeLaserStateStatus(0, "red");
+    };
+    setLaserStatesInterval = setInterval(()=>{
+        if (sceneProperties.executing) return;
+        laserState = (laserState + 1) % 2;
+        setLaserStates();
+    }, 1000);
+    spikeTrapState = 0;
+    setSpikeTrapState = ()=>{
+        if (spikeTrapState == 0) (0, $gSwgq.trapsDeactivation)(traps);
+        else (0, $gSwgq.trapsActivation)(traps);
+    };
+    setSpikeTrapStateInterval = setInterval(()=>{
+        if (sceneProperties.executing) return;
+        spikeTrapState = (spikeTrapState + 1) % 2;
+        setSpikeTrapState();
+    }, 1000);
+    timerUpadate = setInterval(updateTime, 1000);
 });
 //Phase 8
 phaseGeneration.push(()=>{
@@ -3189,11 +3182,11 @@ phaseGeneration.push(()=>{
     actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1.0, gridMapHelper.getGlobalZPositionFromCoord(5));
     actor.rotation.set(0, (0, $6mhZf.degreeToRadians)(90), 0);
     objectives = (0, $6mhZf.loadDefaultObjectives)(4);
-    objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
+    objectives[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     objectives[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(0));
     objectives[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 0.0, gridMapHelper.getGlobalZPositionFromCoord(6));
     objectives[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(9), 0.0, gridMapHelper.getGlobalZPositionFromCoord(9));
-    gridMapHelper.addObstacle(0, 0, 0, 0);
+    gridMapHelper.addObstacle(0, 0, 1, 1);
     gridMapHelper.addObstacle(9, 9, 0, 0);
     gridMapHelper.addObstacle(5, 5, 6, 6);
     gridMapHelper.addObstacle(9, 9, 9, 9);
@@ -3202,26 +3195,26 @@ phaseGeneration.push(()=>{
     scene.add(objectives[2]);
     scene.add(objectives[3]);
     traps = [];
+    // traps.push(new SpikeTrap());
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
-    traps.push(new (0, $gSwgq.SpikeTrap)());
-    traps.push(new (0, $gSwgq.SpikeTrap)());
-    traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 0, gridMapHelper.getGlobalZPositionFromCoord(3));
-    traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 0, gridMapHelper.getGlobalZPositionFromCoord(3));
-    traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 0, gridMapHelper.getGlobalZPositionFromCoord(0));
-    traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 0, gridMapHelper.getGlobalZPositionFromCoord(7));
-    traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 0, gridMapHelper.getGlobalZPositionFromCoord(4));
-    gridMapHelper.addTrap(1, 3, traps[0]);
-    gridMapHelper.addTrap(2, 3, traps[1]);
-    gridMapHelper.addTrap(2, 0, traps[2]);
-    gridMapHelper.addTrap(5, 7, traps[3]);
-    gridMapHelper.addTrap(8, 4, traps[4]);
+    // traps.push(new SpikeTrap());
+    // traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),0,gridMapHelper.getGlobalZPositionFromCoord(3));
+    traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 0, gridMapHelper.getGlobalZPositionFromCoord(3));
+    traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 0, gridMapHelper.getGlobalZPositionFromCoord(0));
+    traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 0, gridMapHelper.getGlobalZPositionFromCoord(7));
+    // traps[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0,gridMapHelper.getGlobalZPositionFromCoord(4));
+    // gridMapHelper.addTrap(1,3, traps[0]);
+    gridMapHelper.addTrap(2, 3, traps[0]);
+    gridMapHelper.addTrap(2, 0, traps[1]);
+    gridMapHelper.addTrap(5, 7, traps[2]);
+    // gridMapHelper.addTrap(8,4, traps[3]);
+    // scene.add(traps[0]);
     scene.add(traps[0]);
     scene.add(traps[1]);
     scene.add(traps[2]);
-    scene.add(traps[3]);
-    scene.add(traps[4]);
+    // scene.add(traps[3]);
     openDoors = [];
     doors = [];
     crancks = [];
@@ -3295,7 +3288,7 @@ phaseGeneration.push(()=>{
     //laserFences.push(new LaserFence("multiColor"));
     //laserFences.push(new LaserFence("blue"));
     //laserFences.push(new LaserFence("blue"));
-    laserFences.push(new (0, $3tzMw.default)("multiColor"));
+    laserFences.push(new (0, $3tzMw.default)("blue"));
     laserFences.push(new (0, $3tzMw.default)("red"));
     //laserFences.push(new LaserFence("multiColor"));
     //laserFences.push(new LaserFence("red"));
@@ -3446,7 +3439,7 @@ phaseGeneration.push(()=>{
     boxMaterial5[5].map.repeat.set(5, 1);
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
     walls.push(new $49pUz.Mesh(boxGeometry3, boxMaterial3));
-    walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
+    // walls.push(new THREE.Mesh(boxGeometry1,boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry5, boxMaterial5));
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
@@ -3458,33 +3451,33 @@ phaseGeneration.push(()=>{
     walls.push(new $49pUz.Mesh(boxGeometry1, boxMaterial));
     walls.push(new $49pUz.Mesh(boxGeometry4, boxMaterial4));
     walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
-    walls.push(new $49pUz.Mesh(boxGeometry2, boxMaterial2));
+    // walls.push(new THREE.Mesh(boxGeometry2,boxMaterial2));
     walls[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
     walls[0].rotateY(Math.PI / 2);
     walls[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
     walls[1].rotateY(Math.PI / 2);
-    walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(1), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
+    // walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(5));
+    // walls[2].rotateY(Math.PI / 2);
+    walls[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
     walls[2].rotateY(Math.PI / 2);
-    walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
-    walls[3].rotateY(Math.PI / 2);
-    walls[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-    walls[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(6.5));
-    walls[5].rotateY(Math.PI / 2);
-    walls[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
-    walls[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-    walls[7].rotateY(Math.PI / 2);
-    walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-    walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(5.5));
-    walls[9].rotateY(Math.PI / 2);
-    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-    walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
-    walls[12].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
-    walls[12].rotateY(Math.PI / 2);
-    walls[13].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
-    walls[14].position.set(gridMapHelper.getGlobalXPositionFromCoord(8.5), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    walls[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+    walls[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(6.5));
+    walls[4].rotateY(Math.PI / 2);
+    walls[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(3), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
+    walls[6].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+    walls[6].rotateY(Math.PI / 2);
+    walls[7].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+    walls[8].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(5.5));
+    walls[8].rotateY(Math.PI / 2);
+    walls[9].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+    walls[10].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(5));
+    walls[11].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(1.5));
+    walls[11].rotateY(Math.PI / 2);
+    walls[12].position.set(gridMapHelper.getGlobalXPositionFromCoord(7.5), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
+    // walls[13].position.set(gridMapHelper.getGlobalXPositionFromCoord(8.5),1,gridMapHelper.getGlobalZPositionFromCoord(1));
     gridMapHelper.addObstacle(0, 0, 7, 9);
     gridMapHelper.addObstacle(0, 0, 1, 3);
-    gridMapHelper.addObstacle(1, 1, 5, 5);
+    // gridMapHelper.addObstacle(1,1,5,5);
     gridMapHelper.addObstacle(2, 2, 4, 8);
     gridMapHelper.addObstacle(2, 2, 1, 1);
     gridMapHelper.addObstacle(3, 3, 3, 3);
@@ -3496,9 +3489,10 @@ phaseGeneration.push(()=>{
     gridMapHelper.addObstacle(8, 8, 5, 5);
     gridMapHelper.addObstacle(6, 6, 0, 3);
     gridMapHelper.addObstacle(7, 8, 3, 3);
-    gridMapHelper.addObstacle(8, 9, 1, 1);
+    // gridMapHelper.addObstacle(8,9,1,1);
     scene.add(walls[0]);
     scene.add(walls[1]);
+    // scene.add(walls[2]);
     scene.add(walls[2]);
     scene.add(walls[3]);
     scene.add(walls[4]);
@@ -3510,8 +3504,7 @@ phaseGeneration.push(()=>{
     scene.add(walls[10]);
     scene.add(walls[11]);
     scene.add(walls[12]);
-    scene.add(walls[13]);
-    scene.add(walls[14]);
+    // scene.add(walls[13]);
     portaFechada = ()=>{
         if (sceneProperties.cancelExecution) return false;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), cranckInteractionReferences[0], gridMapHelper)) return !openDoors[0];
@@ -3760,15 +3753,35 @@ advanceBtn.addEventListener("click", (e)=>{
 });
 const reloadBtn = document.getElementById("reloadBtn");
 reloadBtn.addEventListener("click", (e)=>{
-    clearInterval(timerUpadate);
+    if (typeof setLaserStatesInterval !== "undefined") {
+        clearInterval(setLaserStatesInterval);
+        setLaserStatesInterval = undefined;
+    }
+    if (typeof setSpikeTrapStateInterval !== "undefined") {
+        clearInterval(setSpikeTrapStateInterval);
+        setSpikeTrapStateInterval = undefined;
+    }
+    if (typeof timerUpadate !== "undefined") {
+        clearInterval(timerUpadate);
+        timerUpadate = undefined;
+    }
+    cancelAnimationFrame((0, $6mhZf.corrID));
+    cancelAnimationFrame((0, $6mhZf.requestID));
+    cancelAnimationFrame((0, $6mhZf.changColorID));
+    cancelAnimationFrame((0, $6mhZf.smokeAnimationFrame));
     if (sceneProperties.phase < phaseGeneration.length) {
-        removeObjects(objectives, walls, traps, laserFences, doors, crancks, cranckBases, cranckInteractionReferences);
+        removeObjects(objectives, walls, traps, laserFences);
         phaseGeneration[sceneProperties.phase]();
         editor.setState((0, $jgsti.editState));
         consoleElement.innerText = null;
         execBtn.disabled = false;
         resetBtn.disabled = false;
         finishEarlierButton.disabled = false;
+        (0, $6mhZf.smoke).deactiveSmokes();
+        (0, $jgsti.updateTheme)(editor, 0);
+        sceneProperties.cancelExecution = true;
+        actor.getObjectByName("eve").position.y = 0;
+        resetLevel();
     } else sceneProperties.phase = sceneProperties.phase > phaseGeneration.length ? phaseGeneration.length : sceneProperties.phase;
 });
 finishEarlierButton.addEventListener("click", (e)=>{
@@ -4635,7 +4648,6 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
                         lineParsed9 += `while${line2.substring(line2.indexOf("("))}{\n`;
-                        lineParsed9 += `while(true){break;\n`;
                         codeParsed += lineParsed9;
                         totalCommands++;
                         nonblockcmd = true;
@@ -4655,7 +4667,6 @@ function $63288163d0e35ed8$export$2e2bcd8739ae039(code, limit = 0) {
                         let lineParsed10 = `editor.focus();
                         editor.dispatch({selection:{anchor:editor.state.doc.line(${i + 1}).from}});
                         await delay(250);\n`;
-                        console.log("tste");
                         let isEmpty = true;
                         for(let j1 = i; j1 < lines.length && !lines[j1].includes("}"); j1++)if (lines[j1] != "" && j1 != i) {
                             isEmpty = false;
@@ -4705,9 +4716,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $0c69771e8a6d5652$exports = {};
+var $08f280aebbd491a7$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.e7e8d164.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","aAYvO":"index.748c376a.js","4It1k":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.2c3ac7f5.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","gelHm":"index.66534029.js","z8y1l":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
