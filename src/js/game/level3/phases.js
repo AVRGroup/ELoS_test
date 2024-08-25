@@ -787,7 +787,7 @@ phaseGeneration.push(
         gridMapHelper.addObstacle(6,7,4,4);
 
         laserFences = [];
-        laserFences.push(new LaserFence("blue"));
+        laserFences.push(new LaserFence("multiColor"));
         laserFences.push(new LaserFence("red"));
         laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(4));
         laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(4), 1, gridMapHelper.getGlobalZPositionFromCoord(6));
@@ -799,17 +799,17 @@ phaseGeneration.push(
         scene.add(laserFences[0]);
         scene.add(laserFences[1]);
 
-         laserState = 0;
+        laserState = 0;
         setLaserStates = () => {
             if(laserState == 0)
             {
-                changeLaserActiveStatus(0,true);
-                changeLaserActiveStatus(1,false);
+                changeLaserStateStatus(0, 'blue');
+                changeLaserActiveStatus(1,true);
             }
             else
             {
-                changeLaserActiveStatus(0,false);
-                changeLaserActiveStatus(1,true);
+                changeLaserStateStatus(0, 'red');
+                changeLaserActiveStatus(1,false);
             }
         }
 
@@ -1604,30 +1604,30 @@ phaseGeneration.push(
 
         laserFences = [];
         laserFences.push(new LaserFence("multiColor"));
-        laserFences.push(new LaserFence("multiColor"));
+        // laserFences.push(new LaserFence("multiColor"));
         laserFences.push(new LaserFence("red"));
         laserFences.push(new LaserFence("multiColor"));
         laserFences.push(new LaserFence("blue"));
 
         laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-        laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
-        laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-        laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
-        laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
+        // laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+        laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(5), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+        laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(1));
+        laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(8));
 
         gridMapHelper.addLaser(0,2, laserFences[0]);
-        gridMapHelper.addLaser(2,0, laserFences[1]);
-        gridMapHelper.addLaser(5,9, laserFences[2]);
-        gridMapHelper.addLaser(8,1, laserFences[3]);
-        gridMapHelper.addLaser(8,8, laserFences[4]);
+        // gridMapHelper.addLaser(2,0, laserFences[1]);
+        gridMapHelper.addLaser(5,9, laserFences[1]);
+        gridMapHelper.addLaser(8,1, laserFences[2]);
+        gridMapHelper.addLaser(8,8, laserFences[3]);
 
         laserFences[0].rotateY(Math.PI/2)
-        laserFences[3].rotateY(Math.PI/2)
+        laserFences[2].rotateY(Math.PI/2)
         scene.add(laserFences[0]);
+        // scene.add(laserFences[1]);
         scene.add(laserFences[1]);
         scene.add(laserFences[2]);
         scene.add(laserFences[3]);
-        scene.add(laserFences[4]);
 
 
          laserState = 0;
@@ -1635,14 +1635,14 @@ phaseGeneration.push(
             if(laserState == 0)
             {
                 changeLaserStateStatus(0, 'blue');
-                changeLaserActiveStatus(2,true);
-                changeLaserActiveStatus(4,false);
+                changeLaserActiveStatus(1,true);
+                changeLaserActiveStatus(3,false);
             }
             else
             {
                 changeLaserStateStatus(0, 'red');
-                changeLaserActiveStatus(2,false);
-                changeLaserActiveStatus(4,true);
+                changeLaserActiveStatus(1,false);
+                changeLaserActiveStatus(3,true);
             }
         }
 
@@ -1925,36 +1925,36 @@ phaseGeneration.push(
 
         laserFences = [];
         laserFences.push(new LaserFence("multiColor"));
-        laserFences.push(new LaserFence("multiColor"));
+        // laserFences.push(new LaserFence("multiColor"));
         laserFences.push(new LaserFence("blue"));
         laserFences.push(new LaserFence("blue"));
         laserFences.push(new LaserFence("multiColor"));
         laserFences.push(new LaserFence("multiColor"));
 
         laserFences[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(2), 1, gridMapHelper.getGlobalZPositionFromCoord(3));
-        laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-        laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
-        laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
-        laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
-        laserFences[5].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
+        // laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(6), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+        laserFences[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(7));
+        laserFences[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 1, gridMapHelper.getGlobalZPositionFromCoord(2));
+        laserFences[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(9));
+        laserFences[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8), 1, gridMapHelper.getGlobalZPositionFromCoord(0));
 
         gridMapHelper.addLaser(2,3, laserFences[0]);
-        gridMapHelper.addLaser(6,9, laserFences[1]);
-        gridMapHelper.addLaser(7,7, laserFences[2]);
-        gridMapHelper.addLaser(7,2, laserFences[3]);
-        gridMapHelper.addLaser(8,9, laserFences[4]);
-        gridMapHelper.addLaser(8,0, laserFences[5]);
+        // gridMapHelper.addLaser(6,9, laserFences[1]);
+        gridMapHelper.addLaser(7,7, laserFences[1]);
+        gridMapHelper.addLaser(7,2, laserFences[2]);
+        gridMapHelper.addLaser(8,9, laserFences[3]);
+        gridMapHelper.addLaser(8,0, laserFences[4]);
 
         laserFences[0].rotateY(Math.PI/2)
+        laserFences[1].rotateY(Math.PI/2)
         laserFences[2].rotateY(Math.PI/2)
-        laserFences[3].rotateY(Math.PI/2)
         
         scene.add(laserFences[0]);
+        // scene.add(laserFences[1]);
         scene.add(laserFences[1]);
         scene.add(laserFences[2]);
         scene.add(laserFences[3]);
         scene.add(laserFences[4]);
-        scene.add(laserFences[5]);
 
 
          laserState = 0;
@@ -1962,14 +1962,14 @@ phaseGeneration.push(
             if(laserState == 0)
             {
                 changeLaserStateStatus(0, 'blue');
-                changeLaserActiveStatus(2,true);
-                changeLaserActiveStatus(3,false);
+                changeLaserActiveStatus(1,true);
+                changeLaserActiveStatus(2,false);
             }
             else
             {
                 changeLaserStateStatus(0, 'red');
-                changeLaserActiveStatus(2,false);
-                changeLaserActiveStatus(3,true);
+                changeLaserActiveStatus(1,false);
+                changeLaserActiveStatus(2,true);
             }
         }
 
