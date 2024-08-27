@@ -32,7 +32,7 @@ import { convertCode } from "../multilangcode";
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 0,
+    phase: 6,
     executing: false,
     mult: 1,
     lang: window.location.href.includes('english') ? 1 : 0
@@ -3222,17 +3222,17 @@ phaseGeneration.push(
         traps[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),0,gridMapHelper.getGlobalZPositionFromCoord(9));
         traps[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(0),0,gridMapHelper.getGlobalZPositionFromCoord(2));
         // traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0,gridMapHelper.getGlobalZPositionFromCoord(8));
-        traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0,gridMapHelper.getGlobalZPositionFromCoord(2));
+        // traps[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0,gridMapHelper.getGlobalZPositionFromCoord(2));
         //traps[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0,gridMapHelper.getGlobalZPositionFromCoord(3));
         gridMapHelper.addTrap(0,2, traps[0]);
         gridMapHelper.addTrap(1,9, traps[1]);
         // gridMapHelper.addTrap(6,8, traps[2]);
-        gridMapHelper.addTrap(8,2, traps[2]);
+        // gridMapHelper.addTrap(8,2, traps[2]);
         //gridMapHelper.addTrap(9,3, traps[4]);
         scene.add(traps[0]);
         scene.add(traps[1]);
         // scene.add(traps[2]);
-        scene.add(traps[2]);
+        // scene.add(traps[2]);
         //scene.add(traps[4]);
 
         openDoors = [];
@@ -3242,38 +3242,38 @@ phaseGeneration.push(
         cranckInteractionReferences = [];
         crancks.push(new Cranck());
         crancks.push(new Cranck());
-        crancks.push(new Cranck());
-        crancks.push(new Cranck());
+        // crancks.push(new Cranck());
+        // crancks.push(new Cranck());
         //crancks.push(new Cranck());
         cranckBases.push(new CranckBase());
         cranckBases.push(new CranckBase());
         cranckBases.push(new CranckBase());
-        cranckBases.push(new CranckBase());
+        // cranckBases.push(new CranckBase());
         //cranckBases.push(new CranckBase());
         cranckInteractionReferences.push(new THREE.Object3D());
         cranckInteractionReferences.push(new THREE.Object3D());
         cranckInteractionReferences.push(new THREE.Object3D());
-        cranckInteractionReferences.push(new THREE.Object3D());
+        // cranckInteractionReferences.push(new THREE.Object3D());
         //cranckInteractionReferences.push(new THREE.Object3D());
         doors.push(new CranckDoor(crancks[0]));
         doors.push(new CranckDoor(crancks[1]));
         doors.push(new CranckDoor(crancks[2]));
-        doors.push(new CranckDoor(crancks[3]));
+        // doors.push(new CranckDoor(crancks[3]));
         //doors.push(new CranckDoor(crancks[4]));
         crancks[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(6));
         crancks[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1,gridMapHelper.getGlobalZPositionFromCoord(1));
-        crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(7));
-        crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(7));
+        // crancks[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(7));
+        // crancks[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(7));
         //crancks[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1,gridMapHelper.getGlobalZPositionFromCoord(3));
         crancks[0].correctPos("left", cranckInteractionReferences[0], cranckBases[0]);
         crancks[1].correctPos("right", cranckInteractionReferences[1], cranckBases[1]);
-        crancks[2].correctPos("down", cranckInteractionReferences[2], cranckBases[2]);
-        crancks[3].correctPos("right", cranckInteractionReferences[3], cranckBases[3]);
+        // crancks[2].correctPos("down", cranckInteractionReferences[2], cranckBases[2]);
+        // crancks[3].correctPos("right", cranckInteractionReferences[3], cranckBases[3]);
         //crancks[4].correctPos("down", cranckInteractionReferences[4], cranckBases[4]);
         scene.add(cranckBases[0]);
         scene.add(cranckBases[1]);
-        scene.add(cranckBases[2]);
-        scene.add(cranckBases[3]);
+        // scene.add(cranckBases[2]);
+        // scene.add(cranckBases[3]);
         //scene.add(cranckBases[4]);
         scene.add(crancks[0]);
         scene.add(crancks[1]);
@@ -3282,26 +3282,26 @@ phaseGeneration.push(
         //scene.add(crancks[4]);
         doors[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1,gridMapHelper.getGlobalZPositionFromCoord(7));
         doors[1].position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1,gridMapHelper.getGlobalZPositionFromCoord(1));
-        doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(8));
-        doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(7));
+        // doors[2].position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1,gridMapHelper.getGlobalZPositionFromCoord(8));
+        // doors[3].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(7));
         //doors[4].position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1,gridMapHelper.getGlobalZPositionFromCoord(2));
         doors[0].rotateY(Math.PI / 2);
-        doors[2].rotateY(Math.PI / 2);
+        // doors[2].rotateY(Math.PI / 2);
         //doors[3].rotateY(Math.PI / 2);
         gridMapHelper.addObstacle(0,0,7,7);
         gridMapHelper.addObstacle(1,1,1,1);
-        gridMapHelper.addObstacle(4,4,8,8);
-        gridMapHelper.addObstacle(8,8,7,7);
+        // gridMapHelper.addObstacle(4,4,8,8);
+        // gridMapHelper.addObstacle(8,8,7,7);
         //gridMapHelper.addObstacle(8,8,2,2);
         scene.add(doors[0]);
         scene.add(doors[1]);
-        scene.add(doors[2]);
-        scene.add(doors[3]);
+        // scene.add(doors[2]);
+        // scene.add(doors[3]);
         //scene.add(doors[4]);
         openDoors.push(false);
         openDoors.push(false);
-        openDoors.push(false);
-        openDoors.push(false);
+        // openDoors.push(false);
+        // openDoors.push(false);
         //openDoors.push(false);
 
         laserFences = [];
