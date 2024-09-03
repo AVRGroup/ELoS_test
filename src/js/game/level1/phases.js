@@ -1149,7 +1149,7 @@ execBtn.addEventListener("click",async function() {
             clearInterval(timerUpadate);
             if(sceneProperties.phase == phaseGeneration.length - 1)
             {
-                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 1/Completo', document.getElementById('second-user'));
+                configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender',document.getElementById("subBtn"),sceneProperties.timer,'../','Nível 1/Completo', document.getElementById('second-user'));
             }
         }
         else
@@ -1217,7 +1217,7 @@ finishEarlierButton.addEventListener('click', (e) => {
     if(confirm(textVariations[sceneProperties.lang][9]))
     {
         clearInterval(timerUpadate);
-        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender','prog-exp',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 1/Fase ${sceneProperties.phase + 1}`, document.getElementById('second-user'));
+        configureDataAndUpload(document.getElementById("name"),document.getElementById("age"),'gender',document.getElementById("subBtn"),sceneProperties.timer,'../',`Nível 1/Fase ${sceneProperties.phase + 1}`, document.getElementById('second-user'));
         logModal.show();
     }
 });
