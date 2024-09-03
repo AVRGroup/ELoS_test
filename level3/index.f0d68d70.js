@@ -2631,7 +2631,7 @@ execBtn.addEventListener("click", async function() {
             document.getElementById("resetBtn").disabled = true;
             finishEarlierButton.disabled = true;
             clearInterval(timerUpadate);
-            if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 3/Completo", document.getElementById("second-user"));
+            if (sceneProperties.phase == phaseGeneration.length - 1) (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", document.getElementById("subBtn"), sceneProperties.timer, "../", "N\xedvel 3/Completo", document.getElementById("second-user"));
         } else {
             (0, $jgsti.updateTheme)(editor, 0);
             sceneProperties.executing = false;
@@ -2710,7 +2710,7 @@ reloadBtn.addEventListener("click", (e)=>{
 finishEarlierButton.addEventListener("click", (e)=>{
     if (confirm(textVariations[sceneProperties.lang][9])) {
         clearInterval(timerUpadate);
-        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", "prog-exp", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 3/Fase ${sceneProperties.phase + 1}`, document.getElementById("second-user"));
+        (0, $c6e6z.configureDataAndUpload)(document.getElementById("name"), document.getElementById("age"), "gender", document.getElementById("subBtn"), sceneProperties.timer, "../", `Nível 3/Fase ${sceneProperties.phase + 1}`, document.getElementById("second-user"));
         logModal.show();
     }
 });
@@ -3293,7 +3293,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 
 var $534711df3a16a798$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.e36de6dc.js","hEG10":"metalWallLvl3.c6e3c749.png","kJhXF":"index.bb171f7c.js","cOLmr":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.f0d68d70.js","hEG10":"metalWallLvl3.c6e3c749.png","kJhXF":"index.4b1cd71c.js","cOLmr":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");

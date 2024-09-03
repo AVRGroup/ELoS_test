@@ -60518,7 +60518,7 @@ async function $8cf0fc8944b9cdfc$var$uploadLog(data) {
         xhr.send(formData);
     });
 }
-async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, genderRadioName, progExpRadioName, subBtn, time, redirectPath, level, secondForm) {
+async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, genderRadioName, subBtn, time, redirectPath, level, secondForm) {
     let langSelector = window.location.href.includes("english") ? 1 : 0;
     const warningVariations = [
         [
@@ -60534,17 +60534,15 @@ async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, ge
     ];
     subBtn.addEventListener("click", async ()=>{
         let genderInput = document.querySelector(`input[name="${genderRadioName}"]:checked`);
-        let progExpInput = document.querySelector(`input[name="${progExpRadioName}"]:checked`);
         let hour = Math.floor(time / 3600);
         let min = Math.floor(time / 60) % 60;
         let seg = Math.floor(time % 60);
         let name = nameInput.value;
         let age = ageInput.value;
         let gender = genderInput != null ? genderInput.value : null;
-        let progExp = progExpInput != null ? progExpInput.value : null;
         let data = null;
         let data2 = null;
-        if (name != null && name != "" && age != null && age != "" && gender != null && gender != "" && progExp != null && progExp != "") {
+        if (name != null && name != "" && age != null && age != "" && gender != null && gender != "") {
             if (parseFloat(age) >= 1) data = [
                 [
                     "entry.1867777838",
@@ -60563,10 +60561,6 @@ async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, ge
                     gender
                 ],
                 [
-                    "entry.1585862028",
-                    progExp
-                ],
-                [
                     "entry.2140863999",
                     `${hour < 10 ? "0" + hour : hour}:${min < 10 ? "0" + min : min}:${seg < 10 ? "0" + seg : seg}`
                 ]
@@ -60575,12 +60569,10 @@ async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, ge
         } else alert(warningVariations[langSelector][2]);
         if (secondForm.checked) {
             let genderInput2 = document.querySelector(`input[name="${genderRadioName}2"]:checked`);
-            let progExpInput2 = document.querySelector(`input[name="${progExpRadioName}2"]:checked`);
             let name2 = document.getElementById(nameInput.id + "2").value;
             let age2 = document.getElementById(ageInput.id + "2").value;
             let gender2 = genderInput2 != null ? genderInput2.value : null;
-            let progExp2 = progExpInput2 != null ? progExpInput2.value : null;
-            if (name2 != null && name2 != "" && age2 != null && age2 != "" && gender2 != null && gender2 != "" && progExp2 != null && progExp2 != "") {
+            if (name2 != null && name2 != "" && age2 != null && age2 != "" && gender2 != null && gender2 != "") {
                 if (parseFloat(age2) >= 1) data2 = [
                     [
                         "entry.1867777838",
@@ -60597,10 +60589,6 @@ async function $8cf0fc8944b9cdfc$export$ce33b877b675017a(nameInput, ageInput, ge
                     [
                         "entry.1806882852",
                         gender2
-                    ],
-                    [
-                        "entry.1585862028",
-                        progExp2
                     ],
                     [
                         "entry.2140863999",
@@ -60854,6 +60842,6 @@ function $a2d58e902e72a3c2$export$e6fe271705b4a981(langSelector, code) {
 
 var $e5ce45fa80855936$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"kJhXF":"index.bb171f7c.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"kJhXF":"index.4b1cd71c.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
