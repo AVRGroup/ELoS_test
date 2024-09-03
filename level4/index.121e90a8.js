@@ -70,7 +70,7 @@ var $dYLhF = parcelRequire("dYLhF");
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 7,
+    phase: 0,
     executing: false,
     mult: 1,
     lang: window.location.href.includes("english") ? 1 : 0
@@ -4718,7 +4718,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 
 var $f513c3a1714014d3$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.83ea5c75.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kJhXF":"index.4b1cd71c.js","cOLmr":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.121e90a8.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.dd3a34a6.jpg","kJhXF":"index.4b1cd71c.js","cOLmr":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
