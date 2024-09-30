@@ -32,7 +32,7 @@ import { convertCode } from "../multilangcode";
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 7,
+    phase: 0,
     executing: false,
     mult: 1,
     lang: window.location.href.includes('english') ? 1 : 0
@@ -1407,7 +1407,6 @@ phaseGeneration.push(
         gridMapHelper.addObstacle(5,8,6,6);
         gridMapHelper.addObstacle(5,8,4,4);
         gridMapHelper.addObstacle(5,5,2,3);
-        gridMapHelper.addObstacle(3,4,3,3);
         gridMapHelper.addObstacle(3,3,1,1);
         gridMapHelper.addObstacle(7,7,0,2);
         gridMapHelper.addObstacle(8,8,1,2);
