@@ -73,4 +73,150 @@ $utilities: (
     }
 }
 
+.modal-body{
+    background-color: #31598e !important;
+    color: white;
+}
+.modal-footer{
+    background-color: #31598e !important;
+    color: white;
+}
+.modal-header{
+    background-color: #31598e !important;
+    color: white;
+}
+
+.robo-final{
+    width: auto !important;
+    height: 80vh !important;
+}
+
+// .titulo {
+//     margin: 0 auto;
+//    
+//     height: 7%;
+//     justify-content: center;
+//     align-items: center;
+//     display: flex;
+   
+//    
+//     
+//     border: 2px solid #b06bff;
+  
+//   }
+  
+  .titulo {
+    padding: 0.5%;
+    font-size: x-large;
+    font-style: bold;
+    font-family: 'VT323', monospace;
+    color: #15b6e6;
+    background-color: #7647aa;
+    text-align: center;
+    border: 2px solid #b06bff;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 60px;
+  }
+
+
+  
+.controle {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    background-color: #0298c6;
+    height: 140px;
+    width: 30%;
+    border-radius: 140px;
+    justify-content: center;
+    box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #14c8ff;
+    z-index: 2;
+  }
+  
+  .container-logo {
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    width: 100%;
+    height: 85%;
+    display: flex;
+  }
+  
+  .esquerda {
+    flex: 1;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+  }
+  
+  .esquerda img {
+    width: 80%;
+  }
+  
+  .tela {
+    flex: 2;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border: 0.1px solid white;
+  }
+  
+  .tela h1 {
+    font-size: 40px;
+    font-family: 'Press Start 2P', cursive;
+    color: rgb(218, 217, 217);
+  }
+  
+  .direita {
+    flex: 1;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+  }
+  
+  .direita img {
+    width: 80%;
+  }
+
+  .wave {
+    display: inline-block;
+    animation: wave-animation 1s infinite;
+    font-family: 'Press Start 2P', cursive;
+  }
+  
+
+
+  @keyframes wave-animation {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+
+  @media only screen and (max-width: 550px) {
+    .controle {
+        width: 70%;
+    }
+    .robo-final img {
+        width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 530px) {
+    .controle {
+        width: 90%;
+    }
+  }
+  
+
 @import "~bootstrap/scss/bootstrap";
