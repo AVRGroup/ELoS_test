@@ -12035,6 +12035,134 @@ textarea.form-control-lg {
   cursor: pointer;
 }
 
+.modal-body, .modal-footer, .modal-header {
+  color: #fff;
+  background-color: #31598e !important;
+}
+
+.robo-final {
+  width: auto !important;
+  height: 80vh !important;
+}
+
+.titulo {
+  font-size: x-large;
+  font-style: bold;
+  color: #15b6e6;
+  text-align: center;
+  background-color: #7647aa;
+  border: 2px solid #b06bff;
+  border-radius: 60px;
+  padding: .5%;
+  font-family: VT323, monospace;
+  box-shadow: 0 9px 15px #0000004d;
+}
+
+.controle {
+  height: 140px;
+  width: 30%;
+  z-index: 2;
+  background-color: #0298c6;
+  border: 1px solid #14c8ff;
+  border-radius: 140px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  box-shadow: 0 9px 15px #0000004d;
+}
+
+.container-logo {
+  width: 100%;
+  height: 85%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  display: flex;
+}
+
+.esquerda {
+  text-align: center;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.esquerda img {
+  width: 80%;
+}
+
+.tela {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  border: .1px solid #fff;
+  flex-direction: column;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.tela h1, .tela .h1 {
+  color: #dad9d9;
+  font-family: "Press Start 2P", cursive;
+  font-size: 40px;
+}
+
+.direita {
+  text-align: center;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.direita img {
+  width: 80%;
+}
+
+.wave {
+  font-family: "Press Start 2P", cursive;
+  animation: 1s infinite wave-animation;
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .controle {
+    width: 70%;
+  }
+
+  .robo-final img {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .controle {
+    width: 90%;
+  }
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

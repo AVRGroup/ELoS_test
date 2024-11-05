@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head><script type="module" src="https://avrgroup.github.io/ELoS_test/level2/index.cfae0724.js"></script><script type="module" src="https://avrgroup.github.io/ELoS_test/level2/index.8c12255d.js"></script>
+    <head><script type="module" src="https://avrgroup.github.io/ELoS_test/level4/index.d822baca.js"></script><script type="module" src="https://avrgroup.github.io/ELoS_test/level4/index.8c12255d.js"></script>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="https://avrgroup.github.io/ELoS_test/favicon.ae8f28de.ico" type="image/x-icon">
-        <link rel="stylesheet" href="https://avrgroup.github.io/ELoS_test/level1/index.6d852252.css">
+        <link rel="stylesheet" href="https://avrgroup.github.io/ELoS_test/level1/index.479da9a0.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
         <title>ELoS - Nível 3</title>
     </head>
     <body>
@@ -118,62 +119,83 @@
                 </div>
             </div>
             <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="logModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-fullscreen ">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 3, informe:</h5>
-                        </div>
+        
                         <div class="modal-body">
-                            <form id="dataLog">
-                                <div class="mb-2">
-                                    <label for="name" class="form-label"><b>Nome:</b></label>
-                                    <input type="text" name="name" id="name" class="form-control">
-                                </div>
-                                <div class="mb-2">
-                                    <label for="age" class="form-label"><b>Idade:</b></label>
-                                    <input type="number" name="age" id="age" class="form-control" min="1" step="1">
-                                </div>
-                                <div class="mb-2">
-                                    <label for="gender" class="form-label"><b>Gênero:</b></label><br>
-                                    <input type="radio" name="gender" value="Feminino" class="form-check-input"> Feminino
-                                    <input type="radio" name="gender" value="Masculino" class="form-check-input"> Masculino
-                                </div>
-                                <!-- <div class="mb-2">
-                                    <label for="prog-exp" class="form-label"><b>Qual sua experiência com programação?</b></label><br>
-                                    <input type="radio" name="prog-exp" value="Este foi meu primeiro contato." class="form-check-input"> Este foi meu primeiro contato.<br>
-                                    <input type="radio" name="prog-exp" value="Tive uma pequena experiência no colégio." class="form-check-input"> Tive uma pequena experiência no colégio.<br>
-                                    <input type="radio" name="prog-exp" value="Já programei pequenos projetos." class="form-check-input"> Já programei pequenos projetos.<br>
-                                    <input type="radio" name="prog-exp" value="Sou um programador experiente." class="form-check-input"> Sou um programador experiente.
-                                </div> -->
-                                <div class="mb-2">
-                                    <input id="second-user" type="checkbox" name="second-user" class="form-check-input"> <label for="second-user" class="form-check-label"><b>Fiz esta atividade em dupla.</b></label>
-                                </div>
-                                <div id="second-form" hidden="">
-                                    <div class="mb-2">
-                                        <label for="name2" class="form-label"><b>Nome:</b></label>
-                                        <input type="text" name="name2" id="name2" class="form-control">
+
+                            <div class="container-fluid h-100">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                
+                                <div class="controle mb-2">
+                                    <div class="container-logo">
+                                        <div class="esquerda">
+                                            <img src="https://avrgroup.github.io/ELoS_test/botoesx.a3c020bc.png" alt="">
+                                        </div>
+                                        <div class="tela">
+                                           <h1><span class="wave">Level UP</span></h1>
+                                        </div>
+                                        <div class="direita">
+                                            <img src="https://avrgroup.github.io/ELoS_test/botoes2x.15b45265.png" alt="">
+                                        </div>
                                     </div>
-                                    <div class="mb-2">
-                                        <label for="age2" class="form-label"><b>Idade:</b></label>
-                                        <input type="number" name="age2" id="age2" class="form-control" min="1" step="1">
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="gender2" class="form-label"><b>Gênero:</b></label><br>
-                                        <input type="radio" name="gender2" value="Feminino" class="form-check-input"> Feminino
-                                        <input type="radio" name="gender2" value="Masculino" class="form-check-input"> Masculino
-                                    </div>
-                                    <!-- <div class="mb-2">
-                                        <label for="prog-exp2" class="form-label"><b>Qual sua experiência com programação?</b></label><br>
-                                        <input type="radio" name="prog-exp2" value="Este foi meu primeiro contato." class="form-check-input"> Este foi meu primeiro contato.<br>
-                                        <input type="radio" name="prog-exp2" value="Tive uma pequena experiência no colégio." class="form-check-input"> Tive uma pequena experiência no colégio.<br>
-                                        <input type="radio" name="prog-exp2" value="Já programei pequenos projetos." class="form-check-input"> Já programei pequenos projetos.<br>
-                                        <input type="radio" name="prog-exp2" value="Sou um programador experiente." class="form-check-input"> Sou um programador experiente.
-                                    </div> -->
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button id="subBtn" type="button" class="btn btn-primary">Avançar</button>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-6 mb-4">
+                                        <div class="row d-flex justify-content-center mt-4">
+                                            <div class="row justify-content-center w-75">
+                                                <h1 class="titulo">PARABÉNS, VOCÊ COLETOU TODOS OS DIAMANTES!</h1>
+                                            </div>
+
+                                            <div class="row formulario">
+
+                                                <form id="dataLog">
+                                                    <div class="mb-2">
+                                                        <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 3, informe:</h5>
+                                                        <label for="name" class="form-label"><b>Nome:</b></label>
+                                                        <input type="text" name="name" id="name" class="form-control">
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="age" class="form-label"><b>Idade:</b></label>
+                                                        <input type="number" name="age" id="age" class="form-control" min="1" step="1">
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="gender" class="form-label"><b>Gênero:</b></label><br>
+                                                        <input type="radio" name="gender" value="Feminino" class="form-check-input"> Feminino
+                                                        <input type="radio" name="gender" value="Masculino" class="form-check-input"> Masculino
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <input id="second-user" type="checkbox" name="second-user" class="form-check-input"> <label for="second-user" class="form-check-label"><b>Fiz esta atividade em dupla.</b></label>
+                                                    </div>
+                                                    <div id="second-form" hidden="">
+                                                        <div class="mb-2">
+                                                            <label for="name2" class="form-label"><b>Nome:</b></label>
+                                                            <input type="text" name="name2" id="name2" class="form-control">
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label for="age2" class="form-label"><b>Idade:</b></label>
+                                                            <input type="number" name="age2" id="age2" class="form-control" min="1" step="1">
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <label for="gender2" class="form-label"><b>Gênero:</b></label><br>
+                                                            <input type="radio" name="gender2" value="Feminino" class="form-check-input"> Feminino
+                                                            <input type="radio" name="gender2" value="Masculino" class="form-check-input"> Masculino
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <button id="subBtn" type="button" class="btn btn-primary">Avançar</button>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="col-6 w-100 d-flex justify-content-center">
+                                            <img class="robo-final mt-3" src="https://avrgroup.github.io/ELoS_test/robo-final.27e46525.gif" alt="">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -181,5 +203,5 @@
         </div>        
     </body>
     <script type="module" src="https://avrgroup.github.io/ELoS_test/level1/index.fb1fd881.js"></script>
-    <script type="module" src="https://avrgroup.github.io/ELoS_test/level3/index.bda9585c.js"></script>
+    <script type="module" src="https://avrgroup.github.io/ELoS_test/level3/index.3e356991.js"></script>
 </html>
