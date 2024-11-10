@@ -2,9 +2,13 @@ var imgarr = [
     ' <img src="https://avrgroup.github.io/vrtools/img/flags/br-icon.png" width="20" height="20" style="vertical-align:middle;margin-bottom:3px">',
     ' <img src="https://avrgroup.github.io/vrtools/img/flags/us-icon.png" width="20" height="20" style="vertical-align:middle;margin-bottom:3px">'
 ];
+const currentURL = window.location.href;
+const urlObj = new URL(currentURL);
+const repoName = urlObj.pathname.split("/")[1];
+console.log(repoName);
 var hrefs = [
-    "/",
-    "/english"
+    `/${repoName}/`,
+    `/${repoName}/english`
 ];
 var x, i, j, l, ll, selElmnt, a, b, c;
 /* Look for any elements with the class "custom-select": */ x = document.getElementsByClassName("custom-select");
