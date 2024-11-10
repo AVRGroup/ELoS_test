@@ -39,6 +39,28 @@ if (parcelRequire == null) {
 
   $parcel$global["parcelRequiredf3e"] = parcelRequire;
 }
+parcelRequire.register("2JpsI", function(module, exports) {
+
+$parcel$export(module.exports, "register", () => $1fd388fe1a0c2157$export$6503ec6e8aabbaf, (v) => $1fd388fe1a0c2157$export$6503ec6e8aabbaf = v);
+$parcel$export(module.exports, "resolve", () => $1fd388fe1a0c2157$export$f7ad0328861e2f03, (v) => $1fd388fe1a0c2157$export$f7ad0328861e2f03 = v);
+var $1fd388fe1a0c2157$export$6503ec6e8aabbaf;
+var $1fd388fe1a0c2157$export$f7ad0328861e2f03;
+"use strict";
+var $1fd388fe1a0c2157$var$mapping = {};
+function $1fd388fe1a0c2157$var$register(pairs) {
+    var keys = Object.keys(pairs);
+    for(var i = 0; i < keys.length; i++)$1fd388fe1a0c2157$var$mapping[keys[i]] = pairs[keys[i]];
+}
+function $1fd388fe1a0c2157$var$resolve(id) {
+    var resolved = $1fd388fe1a0c2157$var$mapping[id];
+    if (resolved == null) throw new Error("Could not resolve bundle with id " + id);
+    return resolved;
+}
+$1fd388fe1a0c2157$export$6503ec6e8aabbaf = $1fd388fe1a0c2157$var$register;
+$1fd388fe1a0c2157$export$f7ad0328861e2f03 = $1fd388fe1a0c2157$var$resolve;
+
+});
+
 parcelRequire.register("2RZ2r", function(module, exports) {
 
 var $49pUz = parcelRequire("49pUz");
@@ -3291,9 +3313,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $824f5ad32b791fe7$exports = {};
+var $b0e8ad1102d4992c$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.3e356991.js","hEG10":"metalWallLvl3.c6e3c749.png","kvFwt":"index.d822baca.js","gejU7":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.805b8a0c.js","hEG10":"metalWallLvl3.c6e3c749.png","3696j":"index.7d47637c.js","59BzC":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");
