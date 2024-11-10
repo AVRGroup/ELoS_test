@@ -60840,8 +60840,8 @@ function $a2d58e902e72a3c2$export$e6fe271705b4a981(langSelector, code) {
 
 });
 
-var $e0d71d01d7039f8d$exports = {};
+var $7b427debc41d6e0a$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"3696j":"index.7d47637c.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"loWGP":"index.2c0a07da.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 

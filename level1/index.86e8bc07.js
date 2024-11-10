@@ -1238,9 +1238,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $e3cf6753065cb3ef$exports = {};
+var $07d9f6c5c60f22e8$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.d300a7e5.js","64GOt":"stone_wallLvl1.e00cd434.jpg","3696j":"index.7d47637c.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.86e8bc07.js","64GOt":"stone_wallLvl1.e00cd434.jpg","loWGP":"index.2c0a07da.js"}'));
 
 
 parcelRequire("hO50i");
