@@ -4,8 +4,8 @@ var imgarr = [
 ]
 
 var hrefs = [
-  './',
-  './english'
+  '/',
+  '/english'
 ]
 
 var x, i, j, l, ll, selElmnt, a, b, c;

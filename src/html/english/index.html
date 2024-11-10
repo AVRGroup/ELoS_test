@@ -36,7 +36,7 @@
                     <h1>LEVEL SELECTION</h1>
                 </div>
                 <div class="custom-select" style="width:160px;">
-                    <select id="languageSelect" onchange="redirectToPage()">
+                    <select id="languageSelect">
                         <option value="1">BR</option>
                         <option value="2" selected>EN</option>
                     </select>
@@ -114,18 +114,7 @@
         </div>
     </div>
 
-    <script>
-        function redirectToPage() {
-            var selectElement = document.getElementById("languageSelect");
-            var selectedValue = selectElement.value;
 
-            if (selectedValue === "1") {
-                window.location.href = './index.html';
-            } else if (selectedValue === "2") {
-                window.location.href = './en/index.html';
-            }
-        }
-    </script> 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="../../js/homepage/script.js"></script>
