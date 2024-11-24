@@ -20,6 +20,22 @@ export default class GridMapHelper
         this.doors = [];
     }
 
+    playAudio(fileName) {
+        const listener = new THREE.AudioListener();
+        const audio = new THREE.Audio(listener);
+        const audioLoader = new THREE.AudioLoader();
+        const audioPath = new URL(`../../../assets/audios/${fileName}.wav`, import.meta.url).toString();
+
+        audioLoader.load(audioPath, function(buffer) {
+            audio.setBuffer(buffer);
+            audio.setLoop(false);
+            audio.setVolume(0.5);
+            audio.play();
+        }, undefined, function(error) {
+           return;
+        });
+    }
+
     createGridPlane()
     {
         const planeGeometry = new THREE.PlaneGeometry(this.getMultiplier()*this.divisions,this.getMultiplier()*this.divisions,this.divisions,this.divisions);
@@ -229,6 +245,7 @@ export default class GridMapHelper
                 let alpha2 = 0.1
                 let thisTrap = this.traps[i].obj
                 activateTrap()
+                this.playAudio('trap');
                 function activateTrap(){
                     if(thisTrap.spikes[4].position.y.toFixed(1) < 1)
                     {
@@ -273,6 +290,7 @@ export default class GridMapHelper
         {
             if(this.getXCoordFromGlobalPosition(position.x) == activeFires[i].x && this.getZCoordFromGlobalPosition(position.z) == activeFires[i].z)
             {
+                this.playAudio('fire');
                 return new THREE.Vector3(this.getGlobalXPositionFromCoord(activeFires[i].x),position.y,this.getGlobalZPositionFromCoord(activeFires[i].z));
             }
             else
@@ -335,6 +353,7 @@ export default class GridMapHelper
         {
             if(this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z)
             {
+                this.playAudio('laser');
                 return new THREE.Vector3(this.getGlobalXPositionFromCoord(laserFiltered[i].x),position.y,this.getGlobalZPositionFromCoord(laserFiltered[i].z));
             }
             else
