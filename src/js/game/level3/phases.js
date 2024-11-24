@@ -25,6 +25,7 @@ import {Smoke} from "../three/Smoke";
 import { displayTime, configureDataAndUpload } from "../timer";
 import { Modal } from "bootstrap";
 import { convertCode } from "../multilangcode";
+import crystalSound from "../three/Crystal/crystalSound";
 
 const sceneProperties = {
     cancelExecution: false,
@@ -653,6 +654,8 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
                 gridMapHelper.obstacles[0].active = false;
@@ -821,12 +824,16 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -1109,12 +1116,16 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -1383,6 +1394,8 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
                 gridMapHelper.obstacles[0].active = false;
@@ -1654,12 +1667,16 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -1981,12 +1998,16 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -2264,12 +2285,16 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -2543,12 +2568,16 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
+                const som = new crystalSound();
+                som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;

@@ -20,13 +20,20 @@ export default class GridMapHelper
         this.doors = [];
     }
 
+
     playAudio(fileName) {
         const listener = new THREE.AudioListener();
         const audio = new THREE.Audio(listener);
         const audioLoader = new THREE.AudioLoader();
-        const audioPath = new URL(`../../../assets/audios/${fileName}.wav`, import.meta.url).toString();
 
-        audioLoader.load(audioPath, function(buffer) {
+        const audioPath = {
+            'fire' : new URL(`../../../assets/audios/fire.wav`, import.meta.url).toString(),
+            'trap' : new URL(`../../../assets/audios/trap.wav`, import.meta.url).toString(),
+            'laser' : new URL(`../../../assets/audios/laser.wav`, import.meta.url).toString(),
+            'crystal' : new URL(`../../../assets/audios/crystal.wav`, import.meta.url).toString(),
+        }
+
+        audioLoader.load(audioPath[fileName], function(buffer) {
             audio.setBuffer(buffer);
             audio.setLoop(false);
             audio.setVolume(0.5);
@@ -272,6 +279,7 @@ export default class GridMapHelper
 
     addFire(x,z)
     {
+
         const fire = {
             id: this.fires.length,
             x:x,
