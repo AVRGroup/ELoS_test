@@ -80,6 +80,8 @@ var $1CqPx = parcelRequire("1CqPx");
 var $gSwgq = parcelRequire("gSwgq");
 
 var $dYLhF = parcelRequire("dYLhF");
+
+var $2qnjy = parcelRequire("2qnjy");
 //Defining Level 1 Scene's Properties
 const sceneProperties = {
     cancelExecution: false,
@@ -406,6 +408,8 @@ phaseGeneration.push(()=>{
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+            const som = new (0, $2qnjy.default)();
+            som.playAudio("crystal");
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
@@ -439,6 +443,8 @@ phaseGeneration.push(()=>{
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+            const som = new (0, $2qnjy.default)();
+            som.playAudio("crystal");
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
@@ -475,10 +481,14 @@ phaseGeneration.push(()=>{
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+            const som = new (0, $2qnjy.default)();
+            som.playAudio("crystal");
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
         } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+            const som1 = new (0, $2qnjy.default)();
+            som1.playAudio("crystal");
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
@@ -524,6 +534,8 @@ phaseGeneration.push(()=>{
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+            const som = new (0, $2qnjy.default)();
+            som.playAudio("crystal");
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
@@ -620,10 +632,14 @@ phaseGeneration.push(()=>{
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+            const som = new (0, $2qnjy.default)();
+            som.playAudio("crystal");
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
         } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+            const som1 = new (0, $2qnjy.default)();
+            som1.playAudio("crystal");
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
@@ -748,6 +764,8 @@ phaseGeneration.push(()=>{
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+            const som = new (0, $2qnjy.default)();
+            som.playAudio("crystal");
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
@@ -878,6 +896,8 @@ phaseGeneration.push(()=>{
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+            const som = new (0, $2qnjy.default)();
+            som.playAudio("crystal");
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][5];
             gridMapHelper.obstacles[0].active = false;
@@ -1004,14 +1024,20 @@ phaseGeneration.push(()=>{
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
+            const som = new (0, $2qnjy.default)();
+            som.playAudio("crystal");
             objectives[0].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[0].active = false;
         } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[1], gridMapHelper)) {
+            const som1 = new (0, $2qnjy.default)();
+            som1.playAudio("crystal");
             objectives[1].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[1].active = false;
         } else if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[2], gridMapHelper)) {
+            const som2 = new (0, $2qnjy.default)();
+            som2.playAudio("crystal");
             objectives[2].visible = false;
             consoleElement.innerText += textVariations[sceneProperties.lang][4];
             gridMapHelper.obstacles[2].active = false;
@@ -1260,9 +1286,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $13dd7c15c1a9b0d1$exports = {};
+var $409e3ff4ee206cd3$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.c94e5fda.js","64GOt":"stone_wallLvl1.e00cd434.jpg","6oRwV":"index.e186b64d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.837fe608.js","64GOt":"stone_wallLvl1.e00cd434.jpg","jDdCP":"index.38864d86.js"}'));
 
 
 parcelRequire("hO50i");
