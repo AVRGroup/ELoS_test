@@ -1262,7 +1262,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 
 var $13dd7c15c1a9b0d1$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.ad630993.js","64GOt":"stone_wallLvl1.e00cd434.jpg","6oRwV":"index.2112a226.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.c94e5fda.js","64GOt":"stone_wallLvl1.e00cd434.jpg","6oRwV":"index.e186b64d.js"}'));
 
 
 parcelRequire("hO50i");

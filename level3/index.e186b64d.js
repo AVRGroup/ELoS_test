@@ -145,7 +145,10 @@ $parcel$export(module.exports, "PointLight", () => $305c1a2873b5da70$export$4c9c
 $parcel$export(module.exports, "DirectionalLight", () => $305c1a2873b5da70$export$3fea33cc9972c868);
 $parcel$export(module.exports, "LoaderUtils", () => $305c1a2873b5da70$export$b5d2dc08d867e41a);
 $parcel$export(module.exports, "ImageBitmapLoader", () => $305c1a2873b5da70$export$52286b55c4a9b51f);
+$parcel$export(module.exports, "AudioLoader", () => $305c1a2873b5da70$export$d8d5fccfbf47714e);
 $parcel$export(module.exports, "Clock", () => $305c1a2873b5da70$export$9735c82c4bae3302);
+$parcel$export(module.exports, "AudioListener", () => $305c1a2873b5da70$export$8a1b810c6fde8951);
+$parcel$export(module.exports, "Audio", () => $305c1a2873b5da70$export$153755f98d9861de);
 $parcel$export(module.exports, "PropertyBinding", () => $305c1a2873b5da70$export$7bf70fcf9f891893);
 $parcel$export(module.exports, "Spherical", () => $305c1a2873b5da70$export$d712cd887b4a00f7);
 $parcel$export(module.exports, "GridHelper", () => $305c1a2873b5da70$export$3875d39926561055);
@@ -60300,6 +60303,20 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
         this.crystals = [];
         this.doors = [];
     }
+    playAudio(fileName) {
+        const listener = new $49pUz.AudioListener();
+        const audio = new $49pUz.Audio(listener);
+        const audioLoader = new $49pUz.AudioLoader();
+        const audioPath = new URL(`../../../assets/audios/${fileName}.wav`, "file:///src/js/game/three/GridMapHelper.js").toString();
+        audioLoader.load(audioPath, function(buffer) {
+            audio.setBuffer(buffer);
+            audio.setLoop(false);
+            audio.setVolume(0.5);
+            audio.play();
+        }, undefined, function(error) {
+            return;
+        });
+    }
     createGridPlane() {
         const planeGeometry = new $49pUz.PlaneGeometry(this.getMultiplier() * this.divisions, this.getMultiplier() * this.divisions, this.divisions, this.divisions);
         const grid = new $49pUz.GridHelper(this.getMultiplier() * this.divisions, this.divisions, this.divisionsColor, this.divisionsColor);
@@ -60411,6 +60428,7 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
                 let alpha2 = 0.1;
                 let thisTrap = this.traps[i].obj;
                 activateTrap();
+                this.playAudio("trap");
                 function activateTrap() {
                     if (thisTrap.spikes[4].position.y.toFixed(1) < 1) {
                         alpha2 += 0.05;
@@ -60438,8 +60456,10 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
     fireCollision(position) {
         const activeFires = this.fires.filter((fire)=>fire.active == true);
         for(let i = 0; i < activeFires.length; i++){
-            if (this.getXCoordFromGlobalPosition(position.x) == activeFires[i].x && this.getZCoordFromGlobalPosition(position.z) == activeFires[i].z) return new $49pUz.Vector3(this.getGlobalXPositionFromCoord(activeFires[i].x), position.y, this.getGlobalZPositionFromCoord(activeFires[i].z));
-            else continue;
+            if (this.getXCoordFromGlobalPosition(position.x) == activeFires[i].x && this.getZCoordFromGlobalPosition(position.z) == activeFires[i].z) {
+                this.playAudio("fire");
+                return new $49pUz.Vector3(this.getGlobalXPositionFromCoord(activeFires[i].x), position.y, this.getGlobalZPositionFromCoord(activeFires[i].z));
+            } else continue;
         }
         return false;
     }
@@ -60468,8 +60488,10 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
     laserCollision(position) {
         const laserFiltered = this.lasers.filter((laser)=>laser.active == true);
         for(let i = 0; i < laserFiltered.length; i++){
-            if (this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z) return new $49pUz.Vector3(this.getGlobalXPositionFromCoord(laserFiltered[i].x), position.y, this.getGlobalZPositionFromCoord(laserFiltered[i].z));
-            else continue;
+            if (this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z) {
+                this.playAudio("laser");
+                return new $49pUz.Vector3(this.getGlobalXPositionFromCoord(laserFiltered[i].x), position.y, this.getGlobalZPositionFromCoord(laserFiltered[i].z));
+            } else continue;
         }
         return false;
     }
@@ -60842,6 +60864,6 @@ function $a2d58e902e72a3c2$export$e6fe271705b4a981(langSelector, code) {
 
 var $23e05de2726fa510$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"6oRwV":"index.2112a226.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"6oRwV":"index.e186b64d.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj"}'));
 
 
