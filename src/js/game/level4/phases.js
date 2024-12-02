@@ -28,7 +28,7 @@ import parseCode from "./parser";
 import { displayTime, configureDataAndUpload } from "../timer";
 import { Modal } from "bootstrap";
 import { convertCode } from "../multilangcode";
-import crystalSound from "../three/Crystal/crystalSound";
+import Sound from "../three/Sound/sound";
 
 const sceneProperties = {
     cancelExecution: false,
@@ -622,31 +622,42 @@ function badLuck(position,state)
     }
 }
 
+let movingSound = new Sound();
 async function andarFrente(amount)
 {
     let correctedAmount = amount > 10 ? 10 : amount;
+    movingSound.playAudio('moving', 0.08, true);
     await translateActor(actor,correctedAmount,gridMapHelper,sceneProperties,consoleElement);
+    movingSound.stopAudio();
 }
 
 async function andarTras(amount)
 {
     let correctedAmount = amount > 10 ? 10 : amount;
+    movingSound.playAudio('moving', 0.08, true);
     await translateActor(actor,-correctedAmount,gridMapHelper,sceneProperties,consoleElement);
+    movingSound.stopAudio();
 }
 
 async function girarEsquerda()
 {
+    movingSound.playAudio('moving', 0.08, true);
     await rotateActor(actor,90,sceneProperties,1);
+    movingSound.stopAudio();
 }
 
 async function girarDireita()
 {
+    movingSound.playAudio('moving', 0.08, true);
     await rotateActor(actor,90,sceneProperties,-1);
+    movingSound.stopAudio();
 }
 
 async function darMeiaVolta()
 {
+    movingSound.playAudio('moving', 0.08, true);
     await rotateActor(actor,180,sceneProperties,1);
+    movingSound.stopAudio();
 }
 
 let girarManivela;
@@ -695,6 +706,7 @@ phaseGeneration.push(
         scene.add(cranckBases[0]);
         scene.add(doors[0]);
         openDoors.push(false);
+        som = new Sound();
 
         walls = [];
         const boxGeometry = new THREE.BoxGeometry(18,2,2);
@@ -737,6 +749,8 @@ phaseGeneration.push(
         }
 
         girarManivela = () => {
+
+
             
             return new Promise((resolve) =>{
 
@@ -749,6 +763,9 @@ phaseGeneration.push(
                     function translateDoor()
                     {
                         doors[0].lerpDoor(0, -2)
+                                
+                        som.playAudio('door', 0.05);  
+
                         doors[0].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -779,7 +796,7 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -1041,6 +1058,7 @@ phaseGeneration.push(
                     function translateDoor()
                     {
                         doors[0].lerpDoor(0, -2)
+                        som.playAudio('door', 0.05);  
                         doors[0].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -1059,6 +1077,7 @@ phaseGeneration.push(
                     function translateDoor()
                     {
                         doors[1].lerpDoor(0, -2)
+                        som.playAudio('door', 0.05);  
                         doors[1].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -1089,7 +1108,7 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -1097,7 +1116,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -1455,7 +1474,8 @@ phaseGeneration.push(
                 {
                     function translateDoor()
                     {
-                        doors[0].lerpDoor(0, -2)
+                        doors[0].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05);  
                         doors[0].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -1473,7 +1493,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[1].lerpDoor(0, -2)
+                        doors[1].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05);  
                         doors[1].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -1491,7 +1512,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[2].lerpDoor(0, -2)
+                        doors[2].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[2].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -1522,7 +1544,7 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -1530,7 +1552,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -1942,7 +1964,8 @@ phaseGeneration.push(
                 {
                     function translateDoor()
                     {
-                        doors[0].lerpDoor(0, -2)
+                        doors[0].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[0].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -1960,7 +1983,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[1].lerpDoor(0, -2)
+                        doors[1].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[1].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -1978,7 +2002,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[2].lerpDoor(0, -2)
+                        doors[2].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[2].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -2027,7 +2052,7 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -2035,7 +2060,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -2462,7 +2487,8 @@ phaseGeneration.push(
                 {
                     function translateDoor()
                     {
-                        doors[0].lerpDoor(0, -2)
+                        doors[0].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[0].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -2480,7 +2506,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[1].lerpDoor(0, -2)
+                        doors[1].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[1].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -2498,7 +2525,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[2].lerpDoor(0, -2)
+                        doors[2].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[2].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -2565,7 +2593,7 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -2573,7 +2601,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -2997,7 +3025,8 @@ phaseGeneration.push(
                 {
                     function translateDoor()
                     {
-                        doors[0].lerpDoor(0, -2)
+                        doors[0].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[0].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -3015,7 +3044,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[1].lerpDoor(0, -2)
+                        doors[1].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[1].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -3033,7 +3063,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[2].lerpDoor(0, -2)
+                        doors[2].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[2].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -3100,7 +3131,7 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -3108,7 +3139,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -3507,7 +3538,8 @@ phaseGeneration.push(
                 {
                     function translateDoor()
                     {
-                        doors[0].lerpDoor(0, -2)
+                        doors[0].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[0].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -3525,7 +3557,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[1].lerpDoor(0, -2)
+                        doors[1].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[1].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -3543,7 +3576,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[2].lerpDoor(0, -2)
+                        doors[2].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[2].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -3561,7 +3595,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[3],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[3].lerpDoor(0, -2)
+                        doors[3].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[3].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -3610,7 +3645,7 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -3618,7 +3653,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -3626,7 +3661,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[2],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[2].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -3634,7 +3669,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[3],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[3].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -4083,7 +4118,8 @@ phaseGeneration.push(
                 {
                     function translateDoor()
                     {
-                        doors[0].lerpDoor(0, -2)
+                        doors[0].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[0].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -4101,7 +4137,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[1],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[1].lerpDoor(0, -2)
+                        doors[1].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[1].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -4119,7 +4156,8 @@ phaseGeneration.push(
                 else if(checkCollision(actor.getObjectByName("interactionReference"),cranckInteractionReferences[2],gridMapHelper)){
                     function translateDoor()
                     {
-                        doors[2].lerpDoor(0, -2)
+                        doors[2].lerpDoor(0, -2);
+                        som.playAudio('door', 0.05); 
                         doors[2].rotateCranckZ(degreeToRadians(-5));
                         resolve();
                     }
@@ -4186,7 +4224,7 @@ phaseGeneration.push(
 
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -4194,7 +4232,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -4202,7 +4240,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[2],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[2].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
@@ -4210,7 +4248,7 @@ phaseGeneration.push(
             }
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[3],gridMapHelper))
             {
-                const som = new crystalSound();
+                const som = new Sound();
                 som.playAudio('crystal');  
                 objectives[3].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];

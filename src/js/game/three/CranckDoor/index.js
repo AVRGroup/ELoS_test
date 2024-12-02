@@ -145,9 +145,9 @@ class CranckDoor extends THREE.Object3D {
     this.crancks.forEach(cranck => cranck.rotateZ(angle))
    }
    lerpDoor(mode, height){
-    if(mode == 0)    
+    if(mode == 0) 
         this.doors.forEach(door => door.position.lerp(new THREE.Vector3(door.position.x, height, door.position.z), 0.03))
-    else 
+    else
         this.doors.forEach(door => door.position.lerp(new THREE.Vector3(door.position.x, height, door.position.z), 0.03))
    }
    getDoorY(){

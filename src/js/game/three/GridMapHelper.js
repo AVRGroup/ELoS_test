@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { degreeToRadians } from "./util";
+import Sound from "./Sound/sound";
 
 export default class GridMapHelper 
 {
@@ -18,29 +19,7 @@ export default class GridMapHelper
         this.lasers = [];
         this.crystals = [];
         this.doors = [];
-    }
-
-
-    playAudio(fileName) {
-        const listener = new THREE.AudioListener();
-        const audio = new THREE.Audio(listener);
-        const audioLoader = new THREE.AudioLoader();
-
-        const audioPath = {
-            'fire' : new URL(`../../../assets/audios/fire.wav`, import.meta.url).toString(),
-            'trap' : new URL(`../../../assets/audios/trap.wav`, import.meta.url).toString(),
-            'laser' : new URL(`../../../assets/audios/laser.wav`, import.meta.url).toString(),
-            'crystal' : new URL(`../../../assets/audios/crystal.wav`, import.meta.url).toString(),
-        }
-
-        audioLoader.load(audioPath[fileName], function(buffer) {
-            audio.setBuffer(buffer);
-            audio.setLoop(false);
-            audio.setVolume(0.5);
-            audio.play();
-        }, undefined, function(error) {
-           return;
-        });
+        this.audio = new Sound();
     }
 
     createGridPlane()
@@ -252,7 +231,7 @@ export default class GridMapHelper
                 let alpha2 = 0.1
                 let thisTrap = this.traps[i].obj
                 activateTrap()
-                this.playAudio('trap');
+                this.audio.playAudio('trap');
                 function activateTrap(){
                     if(thisTrap.spikes[4].position.y.toFixed(1) < 1)
                     {
@@ -298,7 +277,7 @@ export default class GridMapHelper
         {
             if(this.getXCoordFromGlobalPosition(position.x) == activeFires[i].x && this.getZCoordFromGlobalPosition(position.z) == activeFires[i].z)
             {
-                this.playAudio('fire');
+                this.audio.playAudio('fire');
                 return new THREE.Vector3(this.getGlobalXPositionFromCoord(activeFires[i].x),position.y,this.getGlobalZPositionFromCoord(activeFires[i].z));
             }
             else
@@ -361,7 +340,7 @@ export default class GridMapHelper
         {
             if(this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z)
             {
-                this.playAudio('laser');
+                this.audio.playAudio('laser');
                 return new THREE.Vector3(this.getGlobalXPositionFromCoord(laserFiltered[i].x),position.y,this.getGlobalZPositionFromCoord(laserFiltered[i].z));
             }
             else
