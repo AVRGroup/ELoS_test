@@ -149,6 +149,7 @@ $parcel$export(module.exports, "AudioLoader", () => $305c1a2873b5da70$export$d8d
 $parcel$export(module.exports, "Clock", () => $305c1a2873b5da70$export$9735c82c4bae3302);
 $parcel$export(module.exports, "AudioListener", () => $305c1a2873b5da70$export$8a1b810c6fde8951);
 $parcel$export(module.exports, "Audio", () => $305c1a2873b5da70$export$153755f98d9861de);
+$parcel$export(module.exports, "PositionalAudio", () => $305c1a2873b5da70$export$4b3e397ef1832507);
 $parcel$export(module.exports, "PropertyBinding", () => $305c1a2873b5da70$export$7bf70fcf9f891893);
 $parcel$export(module.exports, "Spherical", () => $305c1a2873b5da70$export$d712cd887b4a00f7);
 $parcel$export(module.exports, "GridHelper", () => $305c1a2873b5da70$export$3875d39926561055);
@@ -60288,9 +60289,7 @@ var $49pUz = parcelRequire("49pUz");
 
 var $6mhZf = parcelRequire("6mhZf");
 
-
-
-
+var $d5kID = parcelRequire("d5kID");
 class $229855a44a9d0678$export$2e2bcd8739ae039 {
     constructor(divisions = 10, divisionsColor = "rgb(0,0,0)", planeColor = "rgb(200,200,200)"){
         this.divisions = divisions;
@@ -60306,25 +60305,7 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
         this.lasers = [];
         this.crystals = [];
         this.doors = [];
-    }
-    playAudio(fileName) {
-        const listener = new $49pUz.AudioListener();
-        const audio = new $49pUz.Audio(listener);
-        const audioLoader = new $49pUz.AudioLoader();
-        const audioPath = {
-            "fire": new URL((parcelRequire("9Sa84"))).toString(),
-            "trap": new URL((parcelRequire("8mxor"))).toString(),
-            "laser": new URL((parcelRequire("8ItdW"))).toString(),
-            "crystal": new URL((parcelRequire("fRpcy"))).toString()
-        };
-        audioLoader.load(audioPath[fileName], function(buffer) {
-            audio.setBuffer(buffer);
-            audio.setLoop(false);
-            audio.setVolume(0.5);
-            audio.play();
-        }, undefined, function(error) {
-            return;
-        });
+        this.audio = new (0, $d5kID.default)();
     }
     createGridPlane() {
         const planeGeometry = new $49pUz.PlaneGeometry(this.getMultiplier() * this.divisions, this.getMultiplier() * this.divisions, this.divisions, this.divisions);
@@ -60437,7 +60418,7 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
                 let alpha2 = 0.1;
                 let thisTrap = this.traps[i].obj;
                 activateTrap();
-                this.playAudio("trap");
+                this.audio.playAudio("trap");
                 function activateTrap() {
                     if (thisTrap.spikes[4].position.y.toFixed(1) < 1) {
                         alpha2 += 0.05;
@@ -60466,7 +60447,7 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
         const activeFires = this.fires.filter((fire)=>fire.active == true);
         for(let i = 0; i < activeFires.length; i++){
             if (this.getXCoordFromGlobalPosition(position.x) == activeFires[i].x && this.getZCoordFromGlobalPosition(position.z) == activeFires[i].z) {
-                this.playAudio("fire");
+                this.audio.playAudio("fire");
                 return new $49pUz.Vector3(this.getGlobalXPositionFromCoord(activeFires[i].x), position.y, this.getGlobalZPositionFromCoord(activeFires[i].z));
             } else continue;
         }
@@ -60498,7 +60479,7 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
         const laserFiltered = this.lasers.filter((laser)=>laser.active == true);
         for(let i = 0; i < laserFiltered.length; i++){
             if (this.getXCoordFromGlobalPosition(position.x) == laserFiltered[i].x && this.getZCoordFromGlobalPosition(position.z) == laserFiltered[i].z) {
-                this.playAudio("laser");
+                this.audio.playAudio("laser");
                 return new $49pUz.Vector3(this.getGlobalXPositionFromCoord(laserFiltered[i].x), position.y, this.getGlobalZPositionFromCoord(laserFiltered[i].z));
             } else continue;
         }
@@ -60524,6 +60505,61 @@ class $229855a44a9d0678$export$2e2bcd8739ae039 {
 }
 
 });
+parcelRequire.register("d5kID", function(module, exports) {
+
+$parcel$export(module.exports, "default", () => $986bd0545e86c0d8$export$2e2bcd8739ae039);
+
+var $49pUz = parcelRequire("49pUz");
+
+
+
+
+
+
+
+class $986bd0545e86c0d8$export$2e2bcd8739ae039 {
+    constructor(){
+        this.listener = new $49pUz.AudioListener();
+        this.audio = new $49pUz.Audio(this.listener);
+        this.audioLoader = new $49pUz.AudioLoader();
+    }
+    playAudio(fileName, volume = 0.1, loop = false) {
+        const audioPath = {
+            "crystal": new URL((parcelRequire("fRpcy"))).toString(),
+            "door": new URL((parcelRequire("kTTNh"))).toString(),
+            "fire": new URL((parcelRequire("9Sa84"))).toString(),
+            "trap": new URL((parcelRequire("8mxor"))).toString(),
+            "laser": new URL((parcelRequire("8ItdW"))).toString(),
+            "crystal": new URL((parcelRequire("fRpcy"))).toString(),
+            "moving": new URL((parcelRequire("lz0GM"))).toString()
+        };
+        this.audioLoader.load(audioPath[fileName], (buffer)=>{
+            this.audio.setBuffer(buffer);
+            this.audio.setLoop(loop);
+            this.audio.setVolume(volume);
+            this.audio.play();
+        }, undefined, (error)=>{
+            console.error(error);
+        });
+    }
+    stopAudio() {
+        this.audio.stop();
+    }
+}
+
+});
+parcelRequire.register("fRpcy", function(module, exports) {
+
+module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("4Sf43"), import.meta.url).toString();
+
+});
+
+parcelRequire.register("kTTNh", function(module, exports) {
+
+module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("5l5fC"), import.meta.url).toString();
+
+});
+
 parcelRequire.register("9Sa84", function(module, exports) {
 
 module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("2vqO0"), import.meta.url).toString();
@@ -60542,11 +60578,12 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("2eSin"), impo
 
 });
 
-parcelRequire.register("fRpcy", function(module, exports) {
+parcelRequire.register("lz0GM", function(module, exports) {
 
-module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("4Sf43"), import.meta.url).toString();
+module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("2VYHI"), import.meta.url).toString();
 
 });
+
 
 
 parcelRequire.register("c6e6z", function(module, exports) {
@@ -60895,35 +60932,8 @@ function $a2d58e902e72a3c2$export$e6fe271705b4a981(langSelector, code) {
 
 });
 
-parcelRequire.register("2qnjy", function(module, exports) {
+var $072d62d55a0f691a$exports = {};
 
-$parcel$export(module.exports, "default", () => $1c40183fe42af7e6$export$2e2bcd8739ae039);
-
-var $49pUz = parcelRequire("49pUz");
-
-class $1c40183fe42af7e6$export$2e2bcd8739ae039 {
-    playAudio(fileName) {
-        const listener = new $49pUz.AudioListener();
-        const audio = new $49pUz.Audio(listener);
-        const audioLoader = new $49pUz.AudioLoader();
-        const audioPath = {
-            "crystal": new URL((parcelRequire("fRpcy"))).toString()
-        };
-        audioLoader.load(audioPath[fileName], function(buffer) {
-            audio.setBuffer(buffer);
-            audio.setLoop(false);
-            audio.setVolume(0.5);
-            audio.play();
-        }, undefined, function(error) {
-            return;
-        });
-    }
-}
-
-});
-
-var $a9871fb2d84ca198$exports = {};
-
-(parcelRequire("2JpsI")).register(JSON.parse('{"jDdCP":"index.38864d86.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj","2vqO0":"fire.271e49e7.wav","eQQJG":"trap.9a771a2a.wav","2eSin":"laser.4b9621c7.wav","4Sf43":"crystal.acf58063.wav"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"188nx":"index.6eaf62f9.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj","4Sf43":"crystal.acf58063.wav","5l5fC":"door.9a9b2361.wav","2vqO0":"fire.271e49e7.wav","eQQJG":"trap.9a771a2a.wav","2eSin":"laser.4b9621c7.wav","2VYHI":"moving.02ff60b4.wav"}'));
 
 
