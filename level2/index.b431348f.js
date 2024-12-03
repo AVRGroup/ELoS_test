@@ -39,28 +39,6 @@ if (parcelRequire == null) {
 
   $parcel$global["parcelRequiredf3e"] = parcelRequire;
 }
-parcelRequire.register("2JpsI", function(module, exports) {
-
-$parcel$export(module.exports, "register", () => $1fd388fe1a0c2157$export$6503ec6e8aabbaf, (v) => $1fd388fe1a0c2157$export$6503ec6e8aabbaf = v);
-$parcel$export(module.exports, "resolve", () => $1fd388fe1a0c2157$export$f7ad0328861e2f03, (v) => $1fd388fe1a0c2157$export$f7ad0328861e2f03 = v);
-var $1fd388fe1a0c2157$export$6503ec6e8aabbaf;
-var $1fd388fe1a0c2157$export$f7ad0328861e2f03;
-"use strict";
-var $1fd388fe1a0c2157$var$mapping = {};
-function $1fd388fe1a0c2157$var$register(pairs) {
-    var keys = Object.keys(pairs);
-    for(var i = 0; i < keys.length; i++)$1fd388fe1a0c2157$var$mapping[keys[i]] = pairs[keys[i]];
-}
-function $1fd388fe1a0c2157$var$resolve(id) {
-    var resolved = $1fd388fe1a0c2157$var$mapping[id];
-    if (resolved == null) throw new Error("Could not resolve bundle with id " + id);
-    return resolved;
-}
-$1fd388fe1a0c2157$export$6503ec6e8aabbaf = $1fd388fe1a0c2157$var$register;
-$1fd388fe1a0c2157$export$f7ad0328861e2f03 = $1fd388fe1a0c2157$var$resolve;
-
-});
-
 parcelRequire.register("apYFO", function(module, exports) {
 
 var $49pUz = parcelRequire("49pUz");
@@ -2277,7 +2255,7 @@ class $f1f540a33eb49566$var$FireBase extends $49pUz.Object3D {
             this.audio.setBuffer(buffer);
             this.audio.setRefDistance(1);
             this.audio.setLoop(true);
-            this.audio.setVolume(0.3);
+            this.audio.setVolume(1.5);
             this.audio.play();
         });
         this.add(this.audio);
@@ -2882,9 +2860,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hIuM1"), impo
 });
 
 
-var $91d241714315d940$exports = {};
+var $587db4407791cefc$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.45f27a0d.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","6vSzN":"campfire.73aedae3.wav","hIuM1":"stoneWallLvl2.bde5c6a1.png","i4DlS":"index.ece4957f.js","8XPPa":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.b431348f.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","6vSzN":"campfire.73aedae3.wav","hIuM1":"stoneWallLvl2.bde5c6a1.png","5JMI9":"index.cc625fc8.js","gRhAK":"index.8c12255d.js"}'));
 
 
 parcelRequire("apYFO");
