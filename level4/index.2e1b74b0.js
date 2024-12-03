@@ -69,6 +69,7 @@ var $1CqPx = parcelRequire("1CqPx");
 var $dYLhF = parcelRequire("dYLhF");
 
 var $d5kID = parcelRequire("d5kID");
+let som = new (0, $d5kID.default)();
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
@@ -4789,9 +4790,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $109fb5b656c1a45e$exports = {};
+var $308977b3a1b7b274$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.6e088293.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.75a18037.jpg","188nx":"index.6eaf62f9.js","fV9pb":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.2e1b74b0.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.75a18037.jpg","i4DlS":"index.ece4957f.js","8XPPa":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");
