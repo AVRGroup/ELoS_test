@@ -63,12 +63,12 @@ class FireBase extends THREE.Object3D {
       const audioLoader = new THREE.AudioLoader();
 
       const audioPath = new URL(`../../../../assets/audios/campfire.wav`, import.meta.url).toString();
-      
+
       audioLoader.load(audioPath, (buffer) => {
           this.audio.setBuffer(buffer);
           this.audio.setRefDistance(1);
           this.audio.setLoop(true);
-          this.audio.setVolume(0.3);
+          this.audio.setVolume(1.5);
           this.audio.play();
       });
 
