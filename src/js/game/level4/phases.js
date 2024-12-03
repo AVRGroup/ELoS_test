@@ -30,6 +30,8 @@ import { Modal } from "bootstrap";
 import { convertCode } from "../multilangcode";
 import Sound from "../three/Sound/sound";
 
+let som = new Sound();
+
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
