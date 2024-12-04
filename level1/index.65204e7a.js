@@ -83,6 +83,12 @@ var $dYLhF = parcelRequire("dYLhF");
 
 var $d5kID = parcelRequire("d5kID");
 const som = new (0, $d5kID.default)();
+let muteSoundBtn = document.getElementById("muteSound");
+let muted = "unmuted";
+document.addEventListener(muteSoundBtn, ()=>{
+    muted = muted === "muted" ? "muted" : "unmuted";
+    console.log(muted);
+});
 //Defining Level 1 Scene's Properties
 const sceneProperties = {
     cancelExecution: false,
@@ -1299,7 +1305,7 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 
 var $d5e45012470a1712$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.4c677b30.js","64GOt":"stone_wallLvl1.e00cd434.jpg","5JMI9":"index.cc625fc8.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.65204e7a.js","64GOt":"stone_wallLvl1.e00cd434.jpg","5JMI9":"index.ec56f790.js"}'));
 
 
 parcelRequire("hO50i");

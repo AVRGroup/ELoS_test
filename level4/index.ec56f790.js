@@ -60934,6 +60934,6 @@ function $a2d58e902e72a3c2$export$e6fe271705b4a981(langSelector, code) {
 
 var $fecabfe2831de5c0$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"5JMI9":"index.cc625fc8.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj","4Sf43":"crystal.acf58063.wav","5l5fC":"door.9a9b2361.wav","2vqO0":"fire.d2395130.wav","eQQJG":"trap.9a771a2a.wav","2eSin":"laser.4b9621c7.wav","2VYHI":"moving.02ff60b4.wav"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"5JMI9":"index.ec56f790.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj","4Sf43":"crystal.acf58063.wav","5l5fC":"door.89f9710b.wav","2vqO0":"fire.b4563014.wav","eQQJG":"trap.9a771a2a.wav","2eSin":"laser.4b9621c7.wav","2VYHI":"moving.02ff60b4.wav"}'));
 
 

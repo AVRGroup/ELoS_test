@@ -5688,6 +5688,11 @@ const $65c94dd9398dc318$var$clearBtn = document.getElementById("clsConsole");
 $65c94dd9398dc318$var$clearBtn.addEventListener("click", ()=>{
     $65c94dd9398dc318$var$consoleElement.innerText = null;
 });
+let $65c94dd9398dc318$var$muteSoundBtn = document.getElementById("muteSound");
+$65c94dd9398dc318$var$muteSoundBtn.addEventListener("click", function() {
+    this.innerHTML = this.innerHTML === "\uD83D\uDD0A" ? "&#128263;" : "&#128266;";
+    this.ariaLabel = this.innerHTML === "\uD83D\uDD0A" ? "unmuted" : "muted";
+});
 const $65c94dd9398dc318$var$secForm = document.getElementById("second-form");
 const $65c94dd9398dc318$var$secUser = document.getElementById("second-user");
 $65c94dd9398dc318$var$secUser.addEventListener("change", (e)=>{

@@ -63,11 +63,16 @@ var $dYLhF = parcelRequire("dYLhF");
 
 var $d5kID = parcelRequire("d5kID");
 const som = new (0, $d5kID.default)();
+let muteSoundBtn = document.getElementById("muteSound");
+let muted = "unmuted";
+document.addEventListener("click", ()=>{
+    muted = muted === "muted" ? "unmuted" : "muted";
+});
 //Defining Level 2 Scene's Properties
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 0,
+    phase: 1,
     executing: false,
     mult: 1,
     lang: window.location.href.includes("english") ? 1 : 0
@@ -463,6 +468,25 @@ const actor = (0, $6mhZf.loadDefaultActor)();
 const wallTexture = new $49pUz.TextureLoader().load(new URL((parcelRequire("aGNFv"))).toString());
 wallTexture.wrapS = $49pUz.RepeatWrapping;
 wallTexture.wrapT = $49pUz.RepeatWrapping;
+let fireAudios = [];
+
+function setFireAudio(count) {
+    for(let i = 0; i < count; i++){
+        const listener = new $49pUz.AudioListener();
+        camera.add(listener);
+        const fireAudio = new $49pUz.PositionalAudio(listener);
+        const audioLoader = new $49pUz.AudioLoader();
+        const audioPath = new URL((parcelRequire("lDqq4"))).toString();
+        audioLoader.load(audioPath, (buffer)=>{
+            fireAudio.setBuffer(buffer);
+            fireAudio.setRefDistance(10);
+            fireAudio.setLoop(true);
+            fireAudio.setVolume(1.5);
+            fireAudio.play();
+        });
+        fireAudios.push(fireAudio);
+    }
+}
 let objectives;
 let walls;
 let traps;
@@ -471,6 +495,8 @@ let fires;
 function changeFireActiveStatus(index, status) {
     gridMapHelper.fires[index].active = status;
     fires[index].setFireVisibility(status);
+    if (!status) fireAudios[index].stop();
+    else fireAudios[index].play();
 }
 function firesVisualRestart() {
     for(let i = 0; i < fires.length; i++)fires[i].setFireVisibility(true);
@@ -580,7 +606,9 @@ phaseGeneration.push(()=>{
     fires.push(new (0, $kLW5f.default)());
     fires[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(7), 0.1, gridMapHelper.getGlobalZPositionFromCoord(5));
     gridMapHelper.addFire(7, 5);
+    setFireAudio(1);
     scene.add(fires[0]);
+    fires[0].add(fireAudios[0]);
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
@@ -695,11 +723,13 @@ phaseGeneration.push(()=>{
             changeFireActiveStatus(4, false);
         }
     };
+    setFireAudio(5);
     scene.add(fires[0]);
     scene.add(fires[1]);
     scene.add(fires[2]);
     scene.add(fires[3]);
     scene.add(fires[4]);
+    for(let index in fires)fires[index].add(fireAudios[index]);
     traps = [];
     traps.push(new (0, $gSwgq.SpikeTrap)());
     traps.push(new (0, $gSwgq.SpikeTrap)());
@@ -865,9 +895,11 @@ phaseGeneration.push(()=>{
             changeFireActiveStatus(2, false);
         }
     };
+    setFireAudio(3);
     scene.add(fires[0]);
     scene.add(fires[1]);
     scene.add(fires[2]);
+    for(let index in fires)fires[index].add(fireAudios[index]);
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
@@ -1037,8 +1069,10 @@ phaseGeneration.push(()=>{
             changeFireActiveStatus(1, false);
         }
     };
+    setFireAudio(2);
     scene.add(fires[0]);
     scene.add(fires[1]);
+    for(let index in fires)fires[index].add(fireAudios[index]);
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
@@ -1261,11 +1295,13 @@ phaseGeneration.push(()=>{
             changeFireActiveStatus(2, false);
         }
     };
+    setFireAudio(5);
     scene.add(fires[0]);
     scene.add(fires[1]);
     scene.add(fires[2]);
     scene.add(fires[3]);
     scene.add(fires[4]);
+    for(let index in fires)fires[index].add(fireAudios[index]);
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
@@ -1494,10 +1530,12 @@ phaseGeneration.push(()=>{
             changeFireActiveStatus(3, false);
         }
     };
+    setFireAudio(4);
     scene.add(fires[0]);
     scene.add(fires[1]);
     scene.add(fires[2]);
     scene.add(fires[3]);
+    for(let index in fires)fires[index].add(fireAudios[index]);
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
@@ -1739,12 +1777,14 @@ phaseGeneration.push(()=>{
             changeFireActiveStatus(5, false);
         }
     };
+    setFireAudio(6);
     scene.add(fires[0]);
     scene.add(fires[1]);
     scene.add(fires[2]);
     scene.add(fires[3]);
     scene.add(fires[4]);
     scene.add(fires[5]);
+    for(let index in fires)fires[index].add(fireAudios[index]);
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
@@ -1983,6 +2023,7 @@ phaseGeneration.push(()=>{
             changeFireActiveStatus(6, false);
         }
     };
+    setFireAudio(7);
     scene.add(fires[0]);
     scene.add(fires[1]);
     scene.add(fires[2]);
@@ -1990,6 +2031,7 @@ phaseGeneration.push(()=>{
     scene.add(fires[4]);
     scene.add(fires[5]);
     scene.add(fires[6]);
+    for(let index in fires)fires[index].add(fireAudios[index]);
     coletarCristal = ()=>{
         if (sceneProperties.cancelExecution) return;
         if ((0, $6mhZf.checkCollision)(actor.getObjectByName("interactionReference"), objectives[0], gridMapHelper)) {
@@ -2197,7 +2239,6 @@ var $30T0W = parcelRequire("30T0W");
 var $eKab5 = parcelRequire("eKab5");
 
 
-
 class $f1f540a33eb49566$var$FireBase extends $49pUz.Object3D {
     constructor(){
         super();
@@ -2247,18 +2288,6 @@ class $f1f540a33eb49566$var$FireBase extends $49pUz.Object3D {
         this.add(cover);
         this.add(cylindersSubtractMesh);
         this.add(cylindersSubtractMesh1);
-        const listener = new $49pUz.AudioListener();
-        this.audio = new $49pUz.PositionalAudio(listener);
-        const audioLoader = new $49pUz.AudioLoader();
-        const audioPath = new URL((parcelRequire("lDqq4"))).toString();
-        audioLoader.load(audioPath, (buffer)=>{
-            this.audio.setBuffer(buffer);
-            this.audio.setRefDistance(1);
-            this.audio.setLoop(true);
-            this.audio.setVolume(1.5);
-            this.audio.play();
-        });
-        this.add(this.audio);
         return this;
     }
     setFilters(t1, t2, t3) {
@@ -2272,7 +2301,6 @@ class $f1f540a33eb49566$var$FireBase extends $49pUz.Object3D {
     }
     setFireVisibility(visibility) {
         this.fire.visible = visibility;
-        if (!visibility) this.audio.pause();
     }
 }
 var $f1f540a33eb49566$export$2e2bcd8739ae039 = $f1f540a33eb49566$var$FireBase;
@@ -2506,12 +2534,6 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("GGIiK"), impo
 parcelRequire.register("eYxJM", function(module, exports) {
 
 module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("2x2Z6"), import.meta.url).toString();
-
-});
-
-parcelRequire.register("lDqq4", function(module, exports) {
-
-module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6vSzN"), import.meta.url).toString();
 
 });
 
@@ -2859,10 +2881,16 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hIuM1"), impo
 
 });
 
+parcelRequire.register("lDqq4", function(module, exports) {
 
-var $587db4407791cefc$exports = {};
+module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6vSzN"), import.meta.url).toString();
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.b431348f.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","6vSzN":"campfire.73aedae3.wav","hIuM1":"stoneWallLvl2.bde5c6a1.png","5JMI9":"index.cc625fc8.js","gRhAK":"index.8c12255d.js"}'));
+});
+
+
+var $a73abd67dca9ce29$exports = {};
+
+(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.b707de17.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","6vSzN":"campfire.73aedae3.wav","5JMI9":"index.ec56f790.js","gRhAK":"index.8c12255d.js"}'));
 
 
 parcelRequire("apYFO");
