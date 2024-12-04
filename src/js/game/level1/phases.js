@@ -21,6 +21,13 @@ import { convertCode } from "../multilangcode";
 import Sound from "../three/Sound/sound";
 
 const som = new Sound();
+let muteSoundBtn = document.getElementById("muteSound");
+let muted = 'unmuted';
+document.addEventListener(muteSoundBtn, () => {
+    muted = muted === 'muted' ? 'muted' : 'unmuted';
+    console.log(muted);
+})
+
 //Defining Level 1 Scene's Properties
 const sceneProperties = {
     cancelExecution: false,

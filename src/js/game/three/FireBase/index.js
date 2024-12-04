@@ -58,22 +58,7 @@ class FireBase extends THREE.Object3D {
       this.add(cover);
       this.add(cylindersSubtractMesh);
       this.add(cylindersSubtractMesh1);
-      const listener = new THREE.AudioListener();
-      this.audio = new THREE.PositionalAudio(listener);
-      const audioLoader = new THREE.AudioLoader();
-
-      const audioPath = new URL(`../../../../assets/audios/campfire.wav`, import.meta.url).toString();
-
-      audioLoader.load(audioPath, (buffer) => {
-          this.audio.setBuffer(buffer);
-          this.audio.setRefDistance(1);
-          this.audio.setLoop(true);
-          this.audio.setVolume(1.5);
-          this.audio.play();
-      });
-
-      this.add(this.audio);
-      
+     
       return this;
    }
  
@@ -92,10 +77,6 @@ class FireBase extends THREE.Object3D {
    setFireVisibility(visibility)
    {
       this.fire.visible = visibility
-
-      if(!visibility){
-         this.audio.pause();
-      } 
    }
 }
 

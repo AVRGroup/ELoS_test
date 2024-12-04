@@ -27,6 +27,12 @@ clearBtn.addEventListener('click',() =>{
     consoleElement.innerText = null;
 });
 
+let muteSoundBtn = document.getElementById("muteSound");
+muteSoundBtn.addEventListener("click", function() {
+    this.innerHTML = this.innerHTML === "🔊" ? "&#128263;" : "&#128266;";
+    this.ariaLabel = this.innerHTML === "🔊" ? "unmuted" : "muted";
+});
+
 const secForm = document.getElementById('second-form');
 const secUser = document.getElementById('second-user');
 secUser.addEventListener('change',(e) => {

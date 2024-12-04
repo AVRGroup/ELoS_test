@@ -26,16 +26,24 @@ import Sound from "../three/Sound/sound";
 
 const som = new Sound();
 
+let muteSoundBtn = document.getElementById("muteSound");
+let muted = 'unmuted';
+document.addEventListener('click', () => {
+    muted = muted === 'muted' ? 'unmuted' : 'muted';
+})
+
+
 //Defining Level 2 Scene's Properties
 
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 0,
+    phase: 1,
     executing: false,
     mult: 1,
     lang: window.location.href.includes('english') ? 1 : 0
 }
+
 
 function generatePhaseTitle()
 {
@@ -326,6 +334,31 @@ const wallTexture = new THREE.TextureLoader().load(new URL('../../../assets/text
 wallTexture.wrapS = THREE.RepeatWrapping;
 wallTexture.wrapT = THREE.RepeatWrapping;
 
+let fireAudios = [];
+
+function setFireAudio(count){
+
+    for(let i = 0; i < count; i++){
+        const listener = new THREE.AudioListener();
+        camera.add(listener)
+        const fireAudio = new THREE.PositionalAudio(listener);
+        const audioLoader = new THREE.AudioLoader();
+    
+        const audioPath = new URL(`../../../assets/audios/campfire.wav`, import.meta.url).toString();
+    
+        audioLoader.load(audioPath, (buffer) => {
+            fireAudio.setBuffer(buffer);
+            fireAudio.setRefDistance(10);
+            fireAudio.setLoop(true);
+            fireAudio.setVolume(1.5);
+            fireAudio.play();
+        });
+
+
+        fireAudios.push(fireAudio);
+    }
+}
+
 let objectives;
 let walls;
 let traps;
@@ -335,6 +368,12 @@ function changeFireActiveStatus(index,status)
 {
     gridMapHelper.fires[index].active = status;
     fires[index].setFireVisibility(status);
+
+    if(!status){
+        fireAudios[index].stop();
+    } else {
+        fireAudios[index].play();
+    }
 }
 function firesVisualRestart()
 {
@@ -365,21 +404,21 @@ async function andarTras(amount)
 
 async function girarEsquerda()
 {
-    som.playAudio('moving', 0.08, true);
+    som.playAudio('moving',0.08, true);
     await rotateActor(actor,90,sceneProperties,1);
     som.stopAudio();
 }
 
 async function girarDireita()
 {
-    som.playAudio('moving', 0.08, true);
+    som.playAudio('moving',0.08, true);
     await rotateActor(actor,90,sceneProperties,-1);
     som.stopAudio();
 }
 
 async function darMeiaVolta()
 {
-    som.playAudio('moving', 0.08, true);
+    som.playAudio('moving',0.08, true);
     await rotateActor(actor,180,sceneProperties,1);
     som.stopAudio();
 }
@@ -485,7 +524,11 @@ phaseGeneration.push(
         fires.push(new FireBase());
         fires[0].position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0.1,gridMapHelper.getGlobalZPositionFromCoord(5));
         gridMapHelper.addFire(7,5);
+        setFireAudio(1);
         scene.add(fires[0]);
+
+        fires[0].add(fireAudios[0]);
+        
 
         coletarCristal = () => {
 
@@ -620,11 +663,17 @@ phaseGeneration.push(
                 changeFireActiveStatus(4,false);
             }
         }
+        setFireAudio(5);
+
         scene.add(fires[0]);
         scene.add(fires[1]);
         scene.add(fires[2]);
         scene.add(fires[3]);
         scene.add(fires[4]);
+
+       for (let index in fires) {
+            fires[index].add(fireAudios[index]);
+        }
 
         traps = [];
         traps.push(new SpikeTrap());
@@ -815,9 +864,14 @@ phaseGeneration.push(
                 changeFireActiveStatus(2,false);
             }
         }
+        setFireAudio(3);
         scene.add(fires[0]);
         scene.add(fires[1]);
         scene.add(fires[2]);
+
+       for (let index in fires) {
+            fires[index].add(fireAudios[index]);
+        }
 
         coletarCristal = () => {
             if(sceneProperties.cancelExecution)
@@ -994,8 +1048,13 @@ phaseGeneration.push(
                 changeFireActiveStatus(1,false);
             }
         }
+        setFireAudio(2);
         scene.add(fires[0]);
         scene.add(fires[1]);
+
+       for (let index in fires) {
+            fires[index].add(fireAudios[index]);
+        }
 
         coletarCristal = () => {
             if(sceneProperties.cancelExecution)
@@ -1212,11 +1271,16 @@ phaseGeneration.push(
                 changeFireActiveStatus(2,false);
             }
         }
+        setFireAudio(5);
         scene.add(fires[0]);
         scene.add(fires[1]);
         scene.add(fires[2]);
         scene.add(fires[3]);
         scene.add(fires[4]);
+
+       for (let index in fires) {
+            fires[index].add(fireAudios[index]);
+        }
 
         coletarCristal = () => {
             if(sceneProperties.cancelExecution)
@@ -1463,10 +1527,15 @@ phaseGeneration.push(
                 changeFireActiveStatus(3,false);
             }
         }
+        setFireAudio(4);
         scene.add(fires[0]);
         scene.add(fires[1]);
         scene.add(fires[2]);
         scene.add(fires[3]);
+
+       for (let index in fires) {
+            fires[index].add(fireAudios[index]);
+        }
 
         coletarCristal = () => {
             if(sceneProperties.cancelExecution)
@@ -1726,12 +1795,17 @@ phaseGeneration.push(
                 changeFireActiveStatus(5,false);
             }
         }
+        setFireAudio(6);
         scene.add(fires[0]);
         scene.add(fires[1]);
         scene.add(fires[2]);
         scene.add(fires[3]);
         scene.add(fires[4]);
         scene.add(fires[5]);
+
+       for (let index in fires) {
+            fires[index].add(fireAudios[index]);
+        }
 
         coletarCristal = () => {
             if(sceneProperties.cancelExecution)
@@ -1998,6 +2072,7 @@ phaseGeneration.push(
                 changeFireActiveStatus(6,false);
             }
         }
+        setFireAudio(7);
         scene.add(fires[0]);
         scene.add(fires[1]);
         scene.add(fires[2]);
@@ -2005,6 +2080,10 @@ phaseGeneration.push(
         scene.add(fires[4]);
         scene.add(fires[5]);
         scene.add(fires[6]);
+
+        for (let index in fires) {
+            fires[index].add(fireAudios[index]);
+        }
 
         coletarCristal = () => {
             if(sceneProperties.cancelExecution)
