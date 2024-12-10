@@ -28,9 +28,12 @@ clearBtn.addEventListener('click',() =>{
 });
 
 let muteSoundBtn = document.getElementById("muteSound");
+let muteSoundIcon = document.getElementById("muteSoundIcon");
 muteSoundBtn.addEventListener("click", function() {
-    this.innerHTML = this.innerHTML === "🔊" ? "&#128263;" : "&#128266;";
-    this.ariaLabel = this.innerHTML === "🔊" ? "unmuted" : "muted";
+
+    muteSoundIcon.classList.toggle("bi-volume-mute-fill");
+    muteSoundIcon.classList.toggle("bi-volume-down-fill");
+    muteSoundBtn.ariaLabel = muteSoundIcon.classList.contains("bi-volume-mute-fill") ? "muted" : "unmuted";
 });
 
 const secForm = document.getElementById('second-form');

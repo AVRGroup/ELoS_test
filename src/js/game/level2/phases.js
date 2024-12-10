@@ -26,11 +26,39 @@ import Sound from "../three/Sound/sound";
 
 const som = new Sound();
 
-let muteSoundBtn = document.getElementById("muteSound");
-let muted = 'unmuted';
-document.addEventListener('click', () => {
-    muted = muted === 'muted' ? 'unmuted' : 'muted';
+const music = new Sound();
+music.playMusic('background', 0.2, true);
+
+
+const muteMusicBtn = document.getElementById('muteMusic');
+muteMusicBtn.addEventListener('click', () => {
+    if (music.audio.isPlaying) {
+        music.stopMusic();
+        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i> <span class="position-absolute center" style="margin-left: -10px">/</span>';
+    } else {
+        music.playMusic('background', 0.2, true);
+        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i>';
+    }
 })
+
+let isMuted = false;
+const muteSoundBtn = document.getElementById('muteSound');
+muteSoundBtn.addEventListener('click', () => {
+    if (muteSoundBtn.getAttribute('aria-label') === 'unmuted') {
+        isMuted = true;
+    } else {
+        isMuted = false;
+        som.stopAudio();
+    }
+
+    fireAudios.forEach(fireAudio => {
+        if (!isMuted) {
+            fireAudio.setVolume(0);
+        } else {
+            fireAudio.setVolume(1.5);
+        }
+    });
+});
 
 
 //Defining Level 2 Scene's Properties
@@ -38,7 +66,7 @@ document.addEventListener('click', () => {
 const sceneProperties = {
     cancelExecution: false,
     timer: 0,
-    phase: 1,
+    phase: 0,
     executing: false,
     mult: 1,
     lang: window.location.href.includes('english') ? 1 : 0
@@ -336,23 +364,28 @@ wallTexture.wrapT = THREE.RepeatWrapping;
 
 let fireAudios = [];
 
-function setFireAudio(count){
+function setFireAudio(count, mutedFire){
 
     for(let i = 0; i < count; i++){
         const listener = new THREE.AudioListener();
         camera.add(listener)
         const fireAudio = new THREE.PositionalAudio(listener);
         const audioLoader = new THREE.AudioLoader();
+        let mutedFire = false;
     
         const audioPath = new URL(`../../../assets/audios/campfire.wav`, import.meta.url).toString();
     
-        audioLoader.load(audioPath, (buffer) => {
-            fireAudio.setBuffer(buffer);
-            fireAudio.setRefDistance(10);
-            fireAudio.setLoop(true);
-            fireAudio.setVolume(1.5);
-            fireAudio.play();
-        });
+        if(!mutedFire){
+            audioLoader.load(audioPath, (buffer) => {
+                fireAudio.setBuffer(buffer);
+                fireAudio.setRefDistance(10);
+                fireAudio.setLoop(true);
+                fireAudio.setVolume(1.5);
+                fireAudio.play();
+            });
+        }else{
+            fireAudio.setVolume(0);
+        }
 
 
         fireAudios.push(fireAudio);
@@ -389,7 +422,7 @@ scene.add(actor);
 async function andarFrente(amount)
 {
     let correctedAmount = amount > 10 ? 10 : amount;
-    som.playAudio('moving', 0.08, true);
+    som.playAudio('moving', isMuted, 0.08, true);
     await translateActor(actor,correctedAmount,gridMapHelper,sceneProperties,consoleElement);
     som.stopAudio();
 }
@@ -397,28 +430,28 @@ async function andarFrente(amount)
 async function andarTras(amount)
 {
     let correctedAmount = amount > 10 ? 10 : amount;
-    som.playAudio('moving', 0.08, true);
+    som.playAudio('moving', isMuted, 0.08, true);
     await translateActor(actor,-correctedAmount,gridMapHelper,sceneProperties,consoleElement);
     som.stopAudio();
 }
 
 async function girarEsquerda()
 {
-    som.playAudio('moving',0.08, true);
+    som.playAudio('moving', isMuted,0.08, true);
     await rotateActor(actor,90,sceneProperties,1);
     som.stopAudio();
 }
 
 async function girarDireita()
 {
-    som.playAudio('moving',0.08, true);
+    som.playAudio('moving', isMuted,0.08, true);
     await rotateActor(actor,90,sceneProperties,-1);
     som.stopAudio();
 }
 
 async function darMeiaVolta()
 {
-    som.playAudio('moving',0.08, true);
+    som.playAudio('moving', isMuted,0.08, true);
     await rotateActor(actor,180,sceneProperties,1);
     som.stopAudio();
 }
@@ -439,15 +472,14 @@ function pegandoFogo()
 
 function apagarFogo()
 {
-    if(extinguisherUses > 0)
-    {
+    if (extinguisherUses > 0) {
         const vec = new THREE.Vector3();
         actor.getObjectByName('interactionReference').getWorldPosition(vec);
         let fireIndex = gridMapHelper.detectFire(vec);
 
-        if(fireIndex != null)
-        {
-            changeFireActiveStatus(fireIndex,false);
+        if (fireIndex != null) {
+            changeFireActiveStatus(fireIndex, false);
+            som.playAudio('extinguisher', isMuted,0.08, false);
         }
         extinguisherUses--;
         displayExtinguisherUses();
@@ -540,7 +572,7 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
                 gridMapHelper.obstacles[0].active = false;
@@ -648,6 +680,7 @@ phaseGeneration.push(
         setFireStates = () => {
             if(fireState == 0)
             {
+
                 changeFireActiveStatus(0,false);
                 changeFireActiveStatus(3,false);
 
@@ -656,6 +689,8 @@ phaseGeneration.push(
             }
             else
             {
+
+
                 changeFireActiveStatus(0,true);
                 changeFireActiveStatus(3,true);
 
@@ -698,7 +733,7 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][5];
                 gridMapHelper.obstacles[0].active = false;
@@ -882,7 +917,7 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
@@ -890,7 +925,7 @@ phaseGeneration.push(
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -1065,7 +1100,7 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
@@ -1073,7 +1108,7 @@ phaseGeneration.push(
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -1291,7 +1326,7 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
@@ -1299,7 +1334,7 @@ phaseGeneration.push(
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -1546,7 +1581,7 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
@@ -1554,7 +1589,7 @@ phaseGeneration.push(
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -1816,7 +1851,7 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
@@ -1824,7 +1859,7 @@ phaseGeneration.push(
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -2094,7 +2129,7 @@ phaseGeneration.push(
             if(checkCollision(actor.getObjectByName('interactionReference'),objectives[0],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[0].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[0].active = false;
@@ -2102,7 +2137,7 @@ phaseGeneration.push(
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[1],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[1].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[1].active = false;
@@ -2110,7 +2145,7 @@ phaseGeneration.push(
             else if(checkCollision(actor.getObjectByName('interactionReference'),objectives[2],gridMapHelper))
             {
                 const som = new Sound();
-                som.playAudio('crystal');  
+                som.playAudio('crystal', isMuted);  
                 objectives[2].visible = false;
                 consoleElement.innerText += textVariations[sceneProperties.lang][4];
                 gridMapHelper.obstacles[2].active = false;
