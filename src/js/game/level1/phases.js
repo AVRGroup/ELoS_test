@@ -37,18 +37,15 @@ muteMusicBtn.addEventListener('click', () => {
     }
 })
 
-let isMuted = false;
+let isMuted = true;
 const muteSoundBtn = document.getElementById('muteSound');
 muteSoundBtn.addEventListener('click', () => {
-
     if (muteSoundBtn.getAttribute('aria-label') === 'unmuted') {
         isMuted = true;
     } else {
         isMuted = false;
-        som.stopAudio();
     }
 });
-
 
 
 //Defining Level 1 Scene's Properties

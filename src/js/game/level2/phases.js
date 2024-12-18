@@ -41,7 +41,7 @@ muteMusicBtn.addEventListener('click', () => {
     }
 })
 
-let isMuted = false;
+let isMuted = true;
 const muteSoundBtn = document.getElementById('muteSound');
 muteSoundBtn.addEventListener('click', () => {
     if (muteSoundBtn.getAttribute('aria-label') === 'unmuted') {
