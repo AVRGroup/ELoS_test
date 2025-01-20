@@ -66,21 +66,16 @@ var $d5kID = parcelRequire("d5kID");
 const som = new (0, $d5kID.default)();
 const music = new (0, $d5kID.default)();
 music.playMusic("background", 0.2, true);
-const muteMusicBtn = document.getElementById("muteMusic");
-muteMusicBtn.addEventListener("click", ()=>{
-    if (music.audio.isPlaying) {
-        music.stopMusic();
-        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i> <span class="position-absolute center" style="margin-left: -10px">/</span>';
-    } else {
-        music.playMusic("background", 0.2, true);
-        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i>';
-    }
+const muteMusic = document.getElementById("muteMusic");
+muteMusic.addEventListener("change", ()=>{
+    if (music.audio.isPlaying) music.stopMusic();
+    else music.playMusic("background", 0.2, true);
 });
 let isMuted = true;
-const muteSoundBtn = document.getElementById("muteSound");
-muteSoundBtn.addEventListener("click", ()=>{
-    if (muteSoundBtn.getAttribute("aria-label") === "unmuted") isMuted = true;
-    else isMuted = false;
+const muteSound = document.getElementById("muteSound");
+muteSound.addEventListener("change", ()=>{
+    if (muteSound.checked) isMuted = false;
+    else isMuted = true;
 });
 const sceneProperties = {
     cancelExecution: false,
@@ -3350,9 +3345,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $5ef5c63ef1abd1be$exports = {};
+var $42348e54bb8cc6fa$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.a4809118.js","hEG10":"metalWallLvl3.c6e3c749.png","7VaKA":"index.07cf3d6a.js","kiig6":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.61722537.js","hEG10":"metalWallLvl3.c6e3c749.png","7xUY2":"index.997d87e2.js","1yHj4":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");

@@ -60964,8 +60964,8 @@ function $a2d58e902e72a3c2$export$e6fe271705b4a981(langSelector, code) {
 
 });
 
-var $66c8b76325d5c8f9$exports = {};
+var $d9cb6864db3cb0da$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"7VaKA":"index.07cf3d6a.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj","4Sf43":"crystal.acf58063.wav","5l5fC":"door.89f9710b.wav","2vqO0":"fire.b4563014.wav","eQQJG":"trap.9a771a2a.wav","2eSin":"laser.4b9621c7.wav","2VYHI":"moving.02ff60b4.wav","9Zrgd":"extinguisher.2ad55f2a.wav","26UBi":"background_music.db4bac95.wav"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"7xUY2":"index.997d87e2.js","gkOf2":"eve.1d379c98.glb","hpjRp":"crystal.06b47171.jpg","9XNcj":"crystal.b012d479.obj","4Sf43":"crystal.acf58063.wav","5l5fC":"door.89f9710b.wav","2vqO0":"fire.b4563014.wav","eQQJG":"trap.9a771a2a.wav","2eSin":"laser.4b9621c7.wav","2VYHI":"moving.ba25bc6f.wav","9Zrgd":"extinguisher.2ad55f2a.wav","26UBi":"background_music.db4bac95.wav"}'));
 
 

@@ -85,24 +85,16 @@ var $d5kID = parcelRequire("d5kID");
 const som = new (0, $d5kID.default)();
 const music = new (0, $d5kID.default)();
 music.playMusic("background", 0.2, true);
-const muteMusicBtn = document.getElementById("muteMusic");
-muteMusicBtn.addEventListener("click", ()=>{
-    if (music.audio.isPlaying) {
-        music.stopMusic();
-        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i> <span class="position-absolute center" style="margin-left: -10px">/</span>';
-    } else {
-        music.playMusic("background", 0.2, true);
-        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i>';
-    }
+const muteMusic = document.getElementById("muteMusic");
+muteMusic.addEventListener("change", ()=>{
+    if (music.audio.isPlaying) music.stopMusic();
+    else music.playMusic("background", 0.2, true);
 });
-let isMuted = false;
-const muteSoundBtn = document.getElementById("muteSound");
-muteSoundBtn.addEventListener("click", ()=>{
-    if (muteSoundBtn.getAttribute("aria-label") === "unmuted") isMuted = true;
-    else {
-        isMuted = false;
-        som.stopAudio();
-    }
+let isMuted = true;
+const muteSound = document.getElementById("muteSound");
+muteSound.addEventListener("change", ()=>{
+    if (muteSound.checked) isMuted = false;
+    else isMuted = true;
 });
 //Defining Level 1 Scene's Properties
 const sceneProperties = {
@@ -1318,9 +1310,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $9175a9ba0eddcd4a$exports = {};
+var $b768fc4cadff9dec$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.2c2b37d7.js","64GOt":"stone_wallLvl1.e00cd434.jpg","7VaKA":"index.07cf3d6a.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.ec0da079.js","64GOt":"stone_wallLvl1.e00cd434.jpg","7xUY2":"index.997d87e2.js"}'));
 
 
 parcelRequire("hO50i");

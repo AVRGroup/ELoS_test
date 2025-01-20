@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head><script type="module" src="https://avrgroup.github.io/ELoS_test/level3/index.07cf3d6a.js"></script><script type="module" src="https://avrgroup.github.io/ELoS_test/level3/index.8c12255d.js"></script>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="https://avrgroup.github.io/ELoS_test/favicon.ae8f28de.ico" type="image/x-icon">
-        <link rel="stylesheet" href="https://avrgroup.github.io/ELoS_test/level1/index.f467efa9.css">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-        <title>ELoS - Nível 2</title>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12 col-md-6 vh-50 vh-md-100">
-                    <canvas id="phaseView" style="width: 100%; height: 100%">
 
-                    </canvas>
-                    <div class="position-absolute top-0 start-0 ms-3">
-                        <h2 id="phaseTitle" class="bg-warning mb-0">Nível 2 - Fase x de X</h2>
-                        <p id="phaseObjective" class="bg-info mt-0 mb-0">Faça algo</p>
-                        <h2 id="winMessage" class="bg-success mt-0 invisible">Fase Concluída</h2>
-                        <button id="advanceBtn" type="button" class="btn btn-primary invisible">Avançar</button>
-                    </div>
-                    <div class="position-absolute top-0 end-md-50 end-0 me-3">
-                        <button id="muteSound" type="button" class="btn btn-primary"><i id="muteSoundIcon" class="bi bi-volume-down-fill"></i></button>
-                        <button id="muteMusic" type="button" class="btn btn-primary"><i id="muteMusicIcon" class="bi bi bi-music-note "></i></button>
-                        <button id="normalSpeed" type="button" class="btn btn-primary" disabled="">&#10148;</button>
-                        <button id="fastSpeed" type="button" class="btn btn-primary">&#10148;&#10148;</button>
-                    </div>
-                    <div class="position-absolute bottom-50 bottom-md-0 start-0 ms-3">
-                        <div class="d-flex">
-                            <img src="https://avrgroup.github.io/ELoS_test/fire-extinguisher.a9d80553.png" alt="Extintor de Incêndio" width="40" height="40">
-                            <h2 id="extinguisherUses" class="text-light">xN</h2>
-                        </div>
-                        <h3 id="timer" class="text-white">Tempo:</h3>
-                    </div>
+<head><script type="module" src="https://avrgroup.github.io/ELoS_test/level4/index.997d87e2.js"></script><script type="module" src="https://avrgroup.github.io/ELoS_test/level4/index.8c12255d.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://avrgroup.github.io/ELoS_test/favicon.ae8f28de.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://avrgroup.github.io/ELoS_test/level1/index.f467efa9.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <title>ELoS - Nível 2</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 vh-50 vh-md-100">
+                <canvas id="phaseView" style="width: 100%; height: 100%">
+
+                </canvas>
+                <div class="position-absolute top-0 start-0 ms-3">
+                    <h2 id="phaseTitle" class="bg-warning mb-0">Nível 2 - Fase x de X</h2>
+                    <p id="phaseObjective" class="bg-info mt-0 mb-0">Faça algo</p>
+                    <h2 id="winMessage" class="bg-success mt-0 invisible">Fase Concluída</h2>
+                    <button id="advanceBtn" type="button" class="btn btn-primary invisible">Avançar</button>
                 </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="row">
-                        <div class="col-12 order-last order-md-first py-1">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title">Funções Disponíveis:</h5>
-                                </div>
-                                <div class="collapse" id="collapseFunctions">
-                                    <div class="card-body">
-                                        <code>
+                <div class="position-absolute top-0 end-md-50 end-0 me-3">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#options">
+                        <i class="bi bi-gear"></i>
+                    </button>
+
+                    <button id="normalSpeed" type="button" class="btn btn-primary" disabled="">&#10148;</button>
+                    <button id="fastSpeed" type="button" class="btn btn-primary">&#10148;&#10148;</button>
+                </div>
+                <div class="position-absolute bottom-50 bottom-md-0 start-0 ms-3">
+                    <div class="d-flex">
+                        <img src="https://avrgroup.github.io/ELoS_test/fire-extinguisher.a9d80553.png" alt="Extintor de Incêndio" width="40" height="40">
+                        <h2 id="extinguisherUses" class="text-light">xN</h2>
+                    </div>
+                    <h3 id="timer" class="text-white">Tempo:</h3>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="row">
+                    <div class="col-12 order-last order-md-first py-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Funções Disponíveis:</h5>
+                            </div>
+                            <div class="collapse" id="collapseFunctions">
+                                <div class="card-body">
+                                    <code>
                                             <div class="row">
                                                 <div class="col-5">
                                                     <span><b>Ações:</b></span>
@@ -75,133 +79,166 @@
                                                 </div>
                                             </div>
                                         </code>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <button id="collapseBtn" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFunctions" aria-expanded="false" aria-controls="collapseFunctions">
-                                        Abrir
-                                    </button>
                                 </div>
                             </div>
+                            <div class="card-footer">
+                                <button id="collapseBtn" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFunctions" aria-expanded="false" aria-controls="collapseFunctions">
+                                    Abrir
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-12 order-first order-md-2 py-1">
-                            <div class="card min-vh-md-30 max-vh-25 max-vh-md-40">
-                                <div class="card-header">
-                                    <h5 class="card-title">Digite seu código aqui:</h5>
-                                </div>
-                                <div id="editorArea" class="card-body overflow-auto">
+                    </div>
+                    <div class="col-12 order-first order-md-2 py-1">
+                        <div class="card min-vh-md-30 max-vh-25 max-vh-md-40">
+                            <div class="card-header">
+                                <h5 class="card-title">Digite seu código aqui:</h5>
+                            </div>
+                            <div id="editorArea" class="card-body overflow-auto">
 
-                                </div>
-                                <div class="card-footer">
-                                    <button id="execBtn" type="button" class="btn btn-primary">Executar</button>
-                                    <button id="resetBtn" type="button" class="btn btn-secondary">Reset</button>
-                                    <button id="reloadBtn" type="button" class="btn btn-danger">Reload</button>
-                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button id="execBtn" type="button" class="btn btn-primary">Executar</button>
+                                <button id="resetBtn" type="button" class="btn btn-secondary">Reset</button>
+                                <button id="reloadBtn" type="button" class="btn btn-danger">Reload</button>
                             </div>
                         </div>
-                        <div class="col-12 order-2 order-md-last py-1">
-                            <div class="card max-vh-24 max-vh-md-40">
-                                <div class="card-header">
-                                    <h5 class="card-title">Console:</h5>
-                                </div>
-                                <div class="card-body overflow-auto">
-                                    <code id="consoleArea">
+                    </div>
+                    <div class="col-12 order-2 order-md-last py-1">
+                        <div class="card max-vh-24 max-vh-md-40">
+                            <div class="card-header">
+                                <h5 class="card-title">Console:</h5>
+                            </div>
+                            <div class="card-body overflow-auto">
+                                <code id="consoleArea">
 
                                     </code>
-                                </div>
-                                <div class="card-footer">
-                                    <button id="clsConsole" type="button" class="btn btn-secondary">Limpar Console</button>
+                            </div>
+                            <div class="card-footer">
+                                <button id="clsConsole" type="button" class="btn btn-secondary">Limpar Console</button>
+                            </div>
+                        </div>
+                        <button id="finishEarlier" type="button" class="btn btn-danger ms-3 my-2">Finalizar
+                            Atividade</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="logModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen ">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                        <div class="container-fluid h-100">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                            <div class="controle mb-2">
+                                <div class="container-logo">
+                                    <div class="esquerda">
+                                        <img src="https://avrgroup.github.io/ELoS_test/botoesx.a3c020bc.png" alt="">
+                                    </div>
+                                    <div class="tela">
+                                        <h1><span class="wave">Level UP</span></h1>
+                                    </div>
+                                    <div class="direita">
+                                        <img src="https://avrgroup.github.io/ELoS_test/botoes2x.15b45265.png" alt="">
+                                    </div>
                                 </div>
                             </div>
-                            <button id="finishEarlier" type="button" class="btn btn-danger ms-3 my-2">Finalizar Atividade</button>
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6 mb-4">
+                                    <div class="row d-flex justify-content-center mt-4">
+                                        <div class="row justify-content-center w-75">
+                                            <h1 class="titulo">PARABÉNS, VOCÊ COLETOU TODOS OS DIAMANTES!</h1>
+                                        </div>
+
+                                        <div class="row formulario">
+
+                                            <form id="dataLog">
+                                                <div class="mb-2">
+                                                    <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 2,
+                                                        informe:</h5>
+                                                    <label for="name" class="form-label"><b>Nome:</b></label>
+                                                    <input type="text" name="name" id="name" class="form-control">
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="age" class="form-label"><b>Idade:</b></label>
+                                                    <input type="number" name="age" id="age" class="form-control" min="1" step="1">
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="gender" class="form-label"><b>Gênero:</b></label><br>
+                                                    <input type="radio" name="gender" value="Feminino" class="form-check-input"> Feminino
+                                                    <input type="radio" name="gender" value="Masculino" class="form-check-input"> Masculino
+                                                </div>
+                                                <div class="mb-2">
+                                                    <input id="second-user" type="checkbox" name="second-user" class="form-check-input"> <label for="second-user" class="form-check-label"><b>Fiz esta atividade em
+                                                            dupla.</b></label>
+                                                </div>
+                                                <div id="second-form" hidden="">
+                                                    <div class="mb-2">
+                                                        <label for="name2" class="form-label"><b>Nome:</b></label>
+                                                        <input type="text" name="name2" id="name2" class="form-control">
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="age2" class="form-label"><b>Idade:</b></label>
+                                                        <input type="number" name="age2" id="age2" class="form-control" min="1" step="1">
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="gender2" class="form-label"><b>Gênero:</b></label><br>
+                                                        <input type="radio" name="gender2" value="Feminino" class="form-check-input"> Feminino
+                                                        <input type="radio" name="gender2" value="Masculino" class="form-check-input"> Masculino
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <button id="subBtn" type="button" class="btn btn-primary">Avançar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="col-6 w-100 d-flex justify-content-center">
+                                        <img class="robo-final mt-3" src="https://avrgroup.github.io/ELoS_test/robo-final.27e46525.gif" alt="">
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="logModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="logModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-fullscreen ">
-                    <div class="modal-content">
-        
-                        <div class="modal-body">
+        </div>
+        <div class="modal fade" id="options" tabindex="-1" aria-labelledby="optionsLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #fff">
+                    <div class="modal-header bg-body">
+                        <h1 class="modal-title fs-5 text-dark" id="optionsModalLabel">Configurações</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body bg-body">
 
-                            <div class="container-fluid h-100">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                
-                                <div class="controle mb-2">
-                                    <div class="container-logo">
-                                        <div class="esquerda">
-                                            <img src="https://avrgroup.github.io/ELoS_test/botoesx.a3c020bc.png" alt="">
-                                        </div>
-                                        <div class="tela">
-                                           <h1><span class="wave">Level UP</span></h1>
-                                        </div>
-                                        <div class="direita">
-                                            <img src="https://avrgroup.github.io/ELoS_test/botoes2x.15b45265.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-6 mb-4">
-                                        <div class="row d-flex justify-content-center mt-4">
-                                            <div class="row justify-content-center w-75">
-                                                <h1 class="titulo">PARABÉNS, VOCÊ COLETOU TODOS OS DIAMANTES!</h1>
-                                            </div>
-
-                                            <div class="row formulario">
-
-                                                <form id="dataLog">
-                                                    <div class="mb-2">
-                                                        <h5 class="modal-title" id="logModalLabel">Para finalizar o Nível 2, informe:</h5>
-                                                        <label for="name" class="form-label"><b>Nome:</b></label>
-                                                        <input type="text" name="name" id="name" class="form-control">
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <label for="age" class="form-label"><b>Idade:</b></label>
-                                                        <input type="number" name="age" id="age" class="form-control" min="1" step="1">
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <label for="gender" class="form-label"><b>Gênero:</b></label><br>
-                                                        <input type="radio" name="gender" value="Feminino" class="form-check-input"> Feminino
-                                                        <input type="radio" name="gender" value="Masculino" class="form-check-input"> Masculino
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <input id="second-user" type="checkbox" name="second-user" class="form-check-input"> <label for="second-user" class="form-check-label"><b>Fiz esta atividade em dupla.</b></label>
-                                                    </div>
-                                                    <div id="second-form" hidden="">
-                                                        <div class="mb-2">
-                                                            <label for="name2" class="form-label"><b>Nome:</b></label>
-                                                            <input type="text" name="name2" id="name2" class="form-control">
-                                                        </div>
-                                                        <div class="mb-2">
-                                                            <label for="age2" class="form-label"><b>Idade:</b></label>
-                                                            <input type="number" name="age2" id="age2" class="form-control" min="1" step="1">
-                                                        </div>
-                                                        <div class="mb-2">
-                                                            <label for="gender2" class="form-label"><b>Gênero:</b></label><br>
-                                                            <input type="radio" name="gender2" value="Feminino" class="form-check-input"> Feminino
-                                                            <input type="radio" name="gender2" value="Masculino" class="form-check-input"> Masculino
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                <button id="subBtn" type="button" class="btn btn-primary">Avançar</button>
-                                            </div>
-                                        </div>    
-                                    </div>
-                                    <div class="col-md-12 col-lg-6">
-                                        <div class="col-6 w-100 d-flex justify-content-center">
-                                            <img class="robo-final mt-3" src="https://avrgroup.github.io/ELoS_test/robo-final.27e46525.gif" alt="">
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row mb-2">
+                            <span>
+                                <input type="checkbox" id="muteSound" name="muteSound">
+                                <label for="muteSound" class="text-body">Desativar Sons</label>
+                            </span>
                         </div>
+
+                        <div class="row d-flex">
+                            <span>
+                                <input type="checkbox" id="muteMusic" name="muteMusic" class="me-1">
+                                <label for="muteMusic" class="text-body">Desativar Musica</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-body">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
                     </div>
                 </div>
             </div>
-        </div>        
-    </body>
-    <script type="module" src="https://avrgroup.github.io/ELoS_test/level1/index.c00c68e1.js"></script>
-    <script type="module" src="https://avrgroup.github.io/ELoS_test/level2/index.82a3c7e0.js"></script>
+        </div>
+    </div>
+</body>
+<script type="module" src="https://avrgroup.github.io/ELoS_test/level1/index.fb1fd881.js"></script>
+<script type="module" src="https://avrgroup.github.io/ELoS_test/level2/index.9908081a.js"></script>
+
 </html>

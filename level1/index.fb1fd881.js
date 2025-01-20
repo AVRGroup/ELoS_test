@@ -5688,13 +5688,6 @@ const $65c94dd9398dc318$var$clearBtn = document.getElementById("clsConsole");
 $65c94dd9398dc318$var$clearBtn.addEventListener("click", ()=>{
     $65c94dd9398dc318$var$consoleElement.innerText = null;
 });
-let $65c94dd9398dc318$var$muteSoundBtn = document.getElementById("muteSound");
-let $65c94dd9398dc318$var$muteSoundIcon = document.getElementById("muteSoundIcon");
-$65c94dd9398dc318$var$muteSoundBtn.addEventListener("click", function() {
-    $65c94dd9398dc318$var$muteSoundIcon.classList.toggle("bi-volume-mute-fill");
-    $65c94dd9398dc318$var$muteSoundIcon.classList.toggle("bi-volume-down-fill");
-    $65c94dd9398dc318$var$muteSoundBtn.ariaLabel = $65c94dd9398dc318$var$muteSoundIcon.classList.contains("bi-volume-mute-fill") ? "muted" : "unmuted";
-});
 const $65c94dd9398dc318$var$secForm = document.getElementById("second-form");
 const $65c94dd9398dc318$var$secUser = document.getElementById("second-user");
 $65c94dd9398dc318$var$secUser.addEventListener("change", (e)=>{

@@ -65,24 +65,18 @@ var $d5kID = parcelRequire("d5kID");
 const som = new (0, $d5kID.default)();
 const music = new (0, $d5kID.default)();
 music.playMusic("background", 0.2, true);
-const muteMusicBtn = document.getElementById("muteMusic");
-muteMusicBtn.addEventListener("click", ()=>{
-    if (music.audio.isPlaying) {
-        music.stopMusic();
-        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i> <span class="position-absolute center" style="margin-left: -10px">/</span>';
-    } else {
-        music.playMusic("background", 0.2, true);
-        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i>';
-    }
+const muteMusic = document.getElementById("muteMusic");
+muteMusic.addEventListener("change", ()=>{
+    if (music.audio.isPlaying) music.stopMusic();
+    else music.playMusic("background", 0.2, true);
 });
-let isMuted = false;
-const muteSoundBtn = document.getElementById("muteSound");
-muteSoundBtn.addEventListener("click", ()=>{
-    if (muteSoundBtn.getAttribute("aria-label") === "unmuted") isMuted = true;
-    else {
+let isMuted = true;
+const muteSound = document.getElementById("muteSound");
+muteSound.addEventListener("change", ()=>{
+    if (muteSound.checked) {
         isMuted = false;
         som.stopAudio();
-    }
+    } else isMuted = true;
     fireAudios.forEach((fireAudio)=>{
         if (!isMuted) fireAudio.setVolume(0);
         else fireAudio.setVolume(1.5);
@@ -2913,9 +2907,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6vSzN"), impo
 });
 
 
-var $ab5ffdf90c4e8e90$exports = {};
+var $cd2fdacba4c14ac5$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.82a3c7e0.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","6vSzN":"campfire.73aedae3.wav","7VaKA":"index.07cf3d6a.js","kiig6":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"gktNi":"index.9908081a.js","GGIiK":"fire.e088cc30.png","2x2Z6":"stone.543880d2.jpg","hIuM1":"stoneWallLvl2.bde5c6a1.png","6vSzN":"campfire.73aedae3.wav","7xUY2":"index.997d87e2.js","1yHj4":"index.8c12255d.js"}'));
 
 
 parcelRequire("apYFO");
