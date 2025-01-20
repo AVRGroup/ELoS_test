@@ -27,15 +27,6 @@ clearBtn.addEventListener('click',() =>{
     consoleElement.innerText = null;
 });
 
-let muteSoundBtn = document.getElementById("muteSound");
-let muteSoundIcon = document.getElementById("muteSoundIcon");
-muteSoundBtn.addEventListener("click", function() {
-
-    muteSoundIcon.classList.toggle("bi-volume-mute-fill");
-    muteSoundIcon.classList.toggle("bi-volume-down-fill");
-    muteSoundBtn.ariaLabel = muteSoundIcon.classList.contains("bi-volume-mute-fill") ? "muted" : "unmuted";
-});
-
 const secForm = document.getElementById('second-form');
 const secUser = document.getElementById('second-user');
 secUser.addEventListener('change',(e) => {

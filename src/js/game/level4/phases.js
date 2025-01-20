@@ -35,24 +35,22 @@ let som = new Sound();
 const music = new Sound();
 music.playMusic('background', 0.2, true);
 
-const muteMusicBtn = document.getElementById('muteMusic');
-muteMusicBtn.addEventListener('click', () => {
+const muteMusic = document.getElementById('muteMusic');
+muteMusic.addEventListener('change', () => {
     if (music.audio.isPlaying) {
         music.stopMusic();
-        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i> <span class="position-absolute center" style="margin-left: -10px">/</span>';
     } else {
         music.playMusic('background', 0.2, true);
-        muteMusicBtn.innerHTML = '<i class="bi bi-music-note"></i>';
     }
 })
 
 let isMuted = true;
-const muteSoundBtn = document.getElementById('muteSound');
-muteSoundBtn.addEventListener('click', () => {
-    if (muteSoundBtn.getAttribute('aria-label') === 'unmuted') {
-        isMuted = true;
-    } else {
+const muteSound = document.getElementById('muteSound');
+muteSound.addEventListener('change', () => {
+    if (muteSound.checked) {
         isMuted = false;
+    } else {
+        isMuted = true;
     }
 });
 
