@@ -435,23 +435,17 @@ async function andarTras(amount)
 
 async function girarEsquerda()
 {
-    som.playAudio('moving', isMuted,0.08, true);
     await rotateActor(actor,90,sceneProperties,1);
-    som.stopAudio();
 }
 
 async function girarDireita()
 {
-    som.playAudio('moving', isMuted,0.08, true);
     await rotateActor(actor,90,sceneProperties,-1);
-    som.stopAudio();
 }
 
 async function darMeiaVolta()
 {
-    som.playAudio('moving', isMuted,0.08, true);
     await rotateActor(actor,180,sceneProperties,1);
-    som.stopAudio();
 }
 
 function pegandoFogo()

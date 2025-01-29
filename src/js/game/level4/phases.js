@@ -665,23 +665,17 @@ async function andarTras(amount)
 
 async function girarEsquerda()
 {
-    movingSound.playAudio('moving', isMuted, 0.08, true);
     await rotateActor(actor,90,sceneProperties,1);
-    movingSound.stopAudio();
 }
 
 async function girarDireita()
 {
-    movingSound.playAudio('moving', isMuted, 0.08, true);
     await rotateActor(actor,90,sceneProperties,-1);
-    movingSound.stopAudio();
 }
 
 async function darMeiaVolta()
 {
-    movingSound.playAudio('moving', isMuted, 0.08, true);
     await rotateActor(actor,180,sceneProperties,1);
-    movingSound.stopAudio();
 }
 
 let girarManivela;
