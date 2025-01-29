@@ -627,19 +627,13 @@ async function andarTras(amount) {
     som.stopAudio();
 }
 async function girarEsquerda() {
-    som.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 90, sceneProperties, 1);
-    som.stopAudio();
 }
 async function girarDireita() {
-    som.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 90, sceneProperties, -1);
-    som.stopAudio();
 }
 async function darMeiaVolta() {
-    som.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 180, sceneProperties, 1);
-    som.stopAudio();
 }
 function laserAzulAtivo() {
     const vec = new $49pUz.Vector3();
@@ -3345,9 +3339,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("hEG10"), impo
 });
 
 
-var $42348e54bb8cc6fa$exports = {};
+var $56f197b3b07415f3$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.61722537.js","hEG10":"metalWallLvl3.c6e3c749.png","7xUY2":"index.997d87e2.js","1yHj4":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"77jqI":"index.fcd927a6.js","hEG10":"metalWallLvl3.c6e3c749.png","hSvGM":"index.890a46f7.js","krUeL":"index.8c12255d.js"}'));
 
 
 parcelRequire("2RZ2r");

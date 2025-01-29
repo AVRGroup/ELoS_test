@@ -803,19 +803,13 @@ async function andarTras(amount) {
     movingSound.stopAudio();
 }
 async function girarEsquerda() {
-    movingSound.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 90, sceneProperties, 1);
-    movingSound.stopAudio();
 }
 async function girarDireita() {
-    movingSound.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 90, sceneProperties, -1);
-    movingSound.stopAudio();
 }
 async function darMeiaVolta() {
-    movingSound.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 180, sceneProperties, 1);
-    movingSound.stopAudio();
 }
 let girarManivela;
 let portaFechada;
@@ -4803,9 +4797,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("6itYu"), impo
 });
 
 
-var $ff42fd70db32a7b6$exports = {};
+var $3fc3c6950c40e562$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.f79271ab.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.75a18037.jpg","7xUY2":"index.997d87e2.js","1yHj4":"index.8c12255d.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"jv3CK":"index.61ed980c.js","cWmqK":"door2.e849dc7b.jpg","6itYu":"metalWallLvl4.75a18037.jpg","hSvGM":"index.890a46f7.js","krUeL":"index.8c12255d.js"}'));
 
 
 parcelRequire("1mCsO");

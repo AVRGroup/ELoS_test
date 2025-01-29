@@ -399,19 +399,13 @@ async function andarTras(amount) {
     som.stopAudio();
 }
 async function girarEsquerda() {
-    som.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 90, sceneProperties, 1);
-    som.stopAudio();
 }
 async function girarDireita() {
-    som.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 90, sceneProperties, -1);
-    som.stopAudio();
 }
 async function darMeiaVolta() {
-    som.playAudio("moving", isMuted, 0.08, true);
     await (0, $6mhZf.rotateActor)(actor, 180, sceneProperties, 1);
-    som.stopAudio();
 }
 let coletarCristal;
 let resetLevel;
@@ -1310,9 +1304,9 @@ module.exports = new URL("../" + (parcelRequire("2JpsI")).resolve("64GOt"), impo
 });
 
 
-var $b768fc4cadff9dec$exports = {};
+var $5139f16615de466e$exports = {};
 
-(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.ec0da079.js","64GOt":"stone_wallLvl1.e00cd434.jpg","7xUY2":"index.997d87e2.js"}'));
+(parcelRequire("2JpsI")).register(JSON.parse('{"ii9Sb":"index.41f2eb99.js","64GOt":"stone_wallLvl1.e00cd434.jpg","hSvGM":"index.890a46f7.js"}'));
 
 
 parcelRequire("hO50i");
